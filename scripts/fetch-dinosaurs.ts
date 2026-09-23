@@ -188,7 +188,9 @@ async function fetchCountriesByGenus(genusNames: Set<string>): Promise<Map<strin
 
 interface WikidataMatch {
   wikidataId: string;
-  commonsFile: string | null;
+  /** All P18 images for the item — a taxon often has several, and the first one Wikidata
+   * happens to return is not necessarily the best (see fetchBestImagePerGenus). */
+  commonsFiles: string[];
 }
 
 interface SparqlBinding {
@@ -205,10 +207,13 @@ async function fetchWikidataMatches(genusNames: string[]): Promise<Map<string, W
   for (let i = 0; i < batches.length; i++) {
     const batch = batches[i];
     const values = batch.map((n) => `"${n.replace(/"/g, '\\"')}"`).join(" ");
+    // p:P18/ps:P18 (the full statement path) rather than wdt:P18 (the "truthy" shorthand),
+    // because wdt:P18 silently returns only the single "preferred rank" image when one is
+    // set, hiding every other "normal rank" image — which is often the better one.
     const query = `SELECT ?taxonName ?item ?image WHERE {
       VALUES ?taxonName { ${values} }
       ?item wdt:P225 ?taxonName.
-      OPTIONAL { ?item wdt:P18 ?image }
+      OPTIONAL { ?item p:P18/ps:P18 ?image }
     }`;
     const url = "https://query.wikidata.org/sparql?format=json&query=" + encodeURIComponent(query);
     const data = await fetchJson<{ results: { bindings: SparqlBinding[] } }>(url, {
@@ -217,15 +222,17 @@ async function fetchWikidataMatches(genusNames: string[]): Promise<Map<string, W
 
     for (const b of data.results.bindings) {
       const name = b.taxonName?.value;
-      if (!name || result.has(name)) continue; // keep first match+image only
+      if (!name) continue;
       const itemUri: string = b.item.value;
       const wikidataId = itemUri.substring(itemUri.lastIndexOf("/") + 1);
-      let commonsFile: string | null = null;
+      const existing = result.get(name);
+      const commonsFiles = existing?.commonsFiles ?? [];
       if (b.image?.value) {
         const decoded = decodeURIComponent(b.image.value);
-        commonsFile = decoded.substring(decoded.lastIndexOf("/") + 1).replace(/_/g, " ");
+        const file = decoded.substring(decoded.lastIndexOf("/") + 1).replace(/_/g, " ");
+        if (!commonsFiles.includes(file)) commonsFiles.push(file);
       }
-      result.set(name, { wikidataId, commonsFile });
+      result.set(name, { wikidataId, commonsFiles });
     }
     console.log(`  batch ${i + 1}/${batches.length} -> ${result.size} matches so far`);
     await sleep(500);
@@ -243,9 +250,15 @@ async function fetchWikidataMatches(genusNames: string[]): Promise<Map<string, W
 // ---------------------------------------------------------------------------
 
 const BAD_IMAGE_RE =
-  /\b(skull|skeleton|holotype|specimen|fossil|jaw|mandible|maxilla|tooth|teeth|vertebra|vertebrae|femur|tibia|humerus|radius|ulna|cranium|cranial|fragment|bone|material|cast|distribution|range|size|comparison|compared|silhouette|chart|scalebar|infobox|taxobox|head)\b|\bmap\b|diagram|location/i;
-const GOOD_IMAGE_RE = /(life[\s_-]?restoration|reconstruction|illustration|_nt\.|_bw\.|_db\d*\.|_pg\.|paleoart)/i;
-const UNUSABLE_FORMAT_RE = /\.(svg|pdf|ogv|webm|tif|tiff)$/i;
+  /\b(skull|skeleton|holotype|specimen|fossil|jaw|dentary|mandible|maxilla|tooth|teeth|vertebra|vertebrae|femur|tibia|fibula|humerus|radius|ulna|pelvis|pelvic|ilium|ischium|pubis|scapula|sacrum|sacral|coracoid|clavicle|phalanx|phalanges|claw|cranium|cranial|fragment|bone|material|cast|distribution|range|size|scale|comparison|compared|silhouette|chart|scalebar|infobox|taxobox|head|excavation|quarry|dig|site|expedition|team|crew|worker|museum|display|exhibit|con|convention|cosplay|costume|toy|figure|figurine|prop|merchandise|parade|festival|paleoareal|palaeoareal|areal)\b|\bmap\b|diagram|location/i;
+const GOOD_IMAGE_RE = /(restoration|reconstruction|illustration|_nt\.|_bw\.|_db\d*\.|_pg\.|paleoart)/i;
+/**
+ * A Commons category can contain anything with the genus name attached — audio
+ * (pronunciation clips), video, PDFs, distribution-map SVGs. Whitelisting actual
+ * raster image formats is far more robust than trying to blacklist every format
+ * that isn't a photo/illustration (a blacklist previously let a .wav sound file win).
+ */
+const VALID_IMAGE_EXT_RE = /\.(jpe?g|png|gif|webp)$/i;
 
 /**
  * Category membership on Commons isn't a fully reliable "this file depicts this genus"
@@ -259,7 +272,6 @@ function scoreImageFilename(filename: string, genusName: string): number {
   if (!filename.toLowerCase().includes(genusName.toLowerCase())) score -= 8;
   if (GOOD_IMAGE_RE.test(filename)) score += 3;
   if (BAD_IMAGE_RE.test(filename)) score -= 3;
-  if (UNUSABLE_FORMAT_RE.test(filename)) score -= 10;
   return score;
 }
 
@@ -286,8 +298,11 @@ async function fetchBestImagePerGenus(
   for (let i = 0; i < genusNames.length; i++) {
     const name = genusNames[i];
     const categoryFiles = await fetchCategoryFiles(name);
-    const wikidataFile = wikidataMatches.get(name)?.commonsFile;
-    const candidates = [...new Set([...categoryFiles, ...(wikidataFile ? [wikidataFile] : [])])];
+    const wikidataFiles = wikidataMatches.get(name)?.commonsFiles ?? [];
+    // Wikidata images are curated specifically as taxon depictions; a raw Commons category
+    // scan is noisier (can include sound clips, convention photos, distribution maps). Listing
+    // Wikidata's files first means ties in scoreImageFilename favor them via the stable sort.
+    const candidates = [...new Set([...wikidataFiles, ...categoryFiles])].filter((f) => VALID_IMAGE_EXT_RE.test(f));
 
     if (candidates.length > 0) {
       candidates.sort((a, b) => scoreImageFilename(b, name) - scoreImageFilename(a, name));

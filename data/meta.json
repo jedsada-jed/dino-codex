@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-09-23T05:40:21.356Z",
+  "generatedAt": "2026-09-23T13:14:50.230Z",
   "dinosaurCount": 1531,
-  "withImageCount": 1246,
+  "withImageCount": 1306,
   "thailandCount": 15,
   "sources": {
     "pbdb": {
@@ -17,7 +17,7 @@
     "wikimediaCommons": {
       "name": "Wikimedia Commons",
       "url": "https://commons.wikimedia.org",
-      "license": "Per-file, see each image's attribution"
+      "license": "Per-file, see each image attribution"
     }
   }
 }
