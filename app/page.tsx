@@ -1,69 +1,97 @@
-import Image from "next/image";
+import Link from "next/link";
+import { getFeaturedDinosaurs, getThailandDinosaurs, getMeta, getAllDinosaurs } from "@/lib/dinosaurs";
+import { PERIOD_LABELS_TH } from "@/lib/labels";
+import { DinosaurCard } from "@/components/DinosaurCard";
 
 export default function Home() {
+  const featured = getFeaturedDinosaurs(6);
+  const thailandDinosaurs = getThailandDinosaurs().slice(0, 6);
+  const meta = getMeta();
+  const all = getAllDinosaurs();
+
+  const periodCounts = { Triassic: 0, Jurassic: 0, Cretaceous: 0, unknown: 0 } as Record<string, number>;
+  for (const d of all) {
+    const mid = (d.ageRangeMa[0] + d.ageRangeMa[1]) / 2;
+    if (mid >= 201.4) periodCounts.Triassic++;
+    else if (mid >= 145) periodCounts.Jurassic++;
+    else periodCounts.Cretaceous++;
+  }
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <div>
+      <section className="bg-gradient-to-b from-emerald-50 to-stone-50 py-14">
+        <div className="mx-auto max-w-4xl px-4 text-center sm:px-6">
+          <h1 className="text-4xl font-extrabold text-stone-900 sm:text-5xl">สารานุกรมไดโนเสาร์</h1>
+          <p className="mt-4 text-lg text-stone-600">
+            สำรวจไดโนเสาร์ {meta.dinosaurCount.toLocaleString("th-TH")} สายพันธุ์ พร้อมภาพประกอบและข้อมูลไดโนเสาร์ที่พบในประเทศไทย
           </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
+          <form action="/dinosaurs" className="mx-auto mt-6 flex max-w-md gap-2">
+            <input
+              type="text"
+              name="q"
+              placeholder="ค้นหาชื่อไดโนเสาร์ เช่น ไทแรนโนซอรัส"
+              className="w-full rounded-lg border border-stone-300 px-4 py-2.5 text-sm focus:border-emerald-500 focus:outline-none"
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            <button
+              type="submit"
+              className="shrink-0 rounded-lg bg-emerald-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-emerald-800"
+            >
+              ค้นหา
+            </button>
+          </form>
         </div>
-      </main>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
+        <h2 className="text-xl font-bold text-stone-900">เรียกดูตามยุค</h2>
+        <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-3">
+          {(["Triassic", "Jurassic", "Cretaceous"] as const).map((p) => (
+            <Link
+              key={p}
+              href={`/timeline#${p.toLowerCase()}`}
+              className="rounded-xl border border-stone-200 bg-white p-5 text-center shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+            >
+              <p className="text-2xl font-bold text-emerald-800">{PERIOD_LABELS_TH[p]}</p>
+              <p className="mt-1 text-sm text-stone-500">{periodCounts[p].toLocaleString("th-TH")} สายพันธุ์</p>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {featured.length > 0 && (
+        <section className="mx-auto max-w-6xl px-4 py-6 sm:px-6">
+          <div className="flex items-center justify-between">
+            <h2 className="text-xl font-bold text-stone-900">ไดโนเสาร์แนะนำ</h2>
+            <Link href="/dinosaurs" className="text-sm font-medium text-emerald-700 hover:underline">
+              ดูทั้งหมด →
+            </Link>
+          </div>
+          <div className="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
+            {featured.map((d) => (
+              <DinosaurCard key={d.slug} dinosaur={d} />
+            ))}
+          </div>
+        </section>
+      )}
+
+      <section className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
+        <div className="rounded-2xl bg-amber-50 p-6">
+          <div className="flex items-center justify-between">
+            <h2 className="text-xl font-bold text-stone-900">🇹🇭 ไดโนเสาร์ในประเทศไทย</h2>
+            <Link href="/thailand" className="text-sm font-medium text-amber-700 hover:underline">
+              ดูทั้งหมด →
+            </Link>
+          </div>
+          <p className="mt-2 text-stone-700">
+            ประเทศไทยพบซากดึกดำบรรพ์ไดโนเสาร์แล้วอย่างน้อย {getThailandDinosaurs().length} สายพันธุ์ ส่วนใหญ่พบที่ภาคอีสาน
+          </p>
+          <div className="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
+            {thailandDinosaurs.map((d) => (
+              <DinosaurCard key={d.slug} dinosaur={d} />
+            ))}
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

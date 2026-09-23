@@ -13,9 +13,14 @@ export interface DinosaurImage {
   licenseUrl: string;
   width: number | null;
   height: number | null;
-  /** Populated by scripts/fetch-images.ts once the image has been downloaded and converted. */
-  local400: string | null;
-  local1000: string | null;
+  /**
+   * Populated by scripts/fetch-images.ts once the image has been downloaded and
+   * converted. Widths are 330 and 960 — the closest Wikimedia "standard" thumbnail
+   * steps to a small/large pair, since Wikimedia now rejects thumbnail requests for
+   * arbitrary widths (see scripts/fetch-images.ts for details).
+   */
+  localSmall: string | null;
+  localLarge: string | null;
 }
 
 export interface Dinosaur {

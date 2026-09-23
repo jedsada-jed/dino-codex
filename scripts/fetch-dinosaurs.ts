@@ -11,7 +11,7 @@
  */
 import { writeFile, mkdir } from "node:fs/promises";
 import path from "node:path";
-import type { Clade, Diet, Dinosaur, DinosaurImage, PipelineMeta } from "../src/types/dinosaur";
+import type { Clade, Diet, Dinosaur, DinosaurImage, PipelineMeta } from "../types/dinosaur";
 
 const WIKIMEDIA_UA =
   process.env.WIKIMEDIA_UA ??
@@ -191,6 +191,12 @@ interface WikidataMatch {
   commonsFile: string | null;
 }
 
+interface SparqlBinding {
+  taxonName?: { value: string };
+  item: { value: string };
+  image?: { value: string };
+}
+
 async function fetchWikidataMatches(genusNames: string[]): Promise<Map<string, WikidataMatch>> {
   console.log("Querying Wikidata for taxon matches + images...");
   const result = new Map<string, WikidataMatch>();
@@ -205,7 +211,9 @@ async function fetchWikidataMatches(genusNames: string[]): Promise<Map<string, W
       OPTIONAL { ?item wdt:P18 ?image }
     }`;
     const url = "https://query.wikidata.org/sparql?format=json&query=" + encodeURIComponent(query);
-    const data = await fetchJson<{ results: { bindings: any[] } }>(url, { Accept: "application/sparql-results+json" });
+    const data = await fetchJson<{ results: { bindings: SparqlBinding[] } }>(url, {
+      Accept: "application/sparql-results+json",
+    });
 
     for (const b of data.results.bindings) {
       const name = b.taxonName?.value;
@@ -226,6 +234,73 @@ async function fetchWikidataMatches(genusNames: string[]): Promise<Map<string, W
 }
 
 // ---------------------------------------------------------------------------
+// Step 3b: Wikimedia Commons category listing — Wikidata's P18 (image) property
+// often references only one image (sometimes a skull/bone photo) even when the
+// Commons category for the same genus has a proper life-restoration illustration
+// that Wikidata was simply never updated to link. So for each genus we also list
+// its Commons category directly and rank every candidate (from the category and
+// from Wikidata) by filename, preferring restorations over fossil/skull photos.
+// ---------------------------------------------------------------------------
+
+const BAD_IMAGE_RE =
+  /\b(skull|skeleton|holotype|specimen|fossil|jaw|mandible|maxilla|tooth|teeth|vertebra|vertebrae|femur|tibia|humerus|radius|ulna|cranium|cranial|fragment|bone|material|cast|distribution|range|size|comparison|compared|silhouette|chart|scalebar|infobox|taxobox|head)\b|\bmap\b|diagram|location/i;
+const GOOD_IMAGE_RE = /(life[\s_-]?restoration|reconstruction|illustration|_nt\.|_bw\.|_db\d*\.|_pg\.|paleoart)/i;
+const UNUSABLE_FORMAT_RE = /\.(svg|pdf|ogv|webm|tif|tiff)$/i;
+
+/**
+ * Category membership on Commons isn't a fully reliable "this file depicts this genus"
+ * signal — multi-subject files (e.g. a size-comparison chart across many dinosaurs) can
+ * end up categorized under an individual genus too. Requiring the genus name to actually
+ * appear in the filename filters those out; anything that fails this check is almost
+ * certainly not a dedicated picture of the animal.
+ */
+function scoreImageFilename(filename: string, genusName: string): number {
+  let score = 0;
+  if (!filename.toLowerCase().includes(genusName.toLowerCase())) score -= 8;
+  if (GOOD_IMAGE_RE.test(filename)) score += 3;
+  if (BAD_IMAGE_RE.test(filename)) score -= 3;
+  if (UNUSABLE_FORMAT_RE.test(filename)) score -= 10;
+  return score;
+}
+
+async function fetchCategoryFiles(genusName: string): Promise<string[]> {
+  const url =
+    "https://commons.wikimedia.org/w/api.php?action=query&list=categorymembers&cmtype=file&cmlimit=50&format=json&cmtitle=" +
+    encodeURIComponent(`Category:${genusName}`);
+  try {
+    const data = await fetchJson<{ query?: { categorymembers: { title: string }[] } }>(url, {}, 2);
+    return (data.query?.categorymembers ?? []).map((m) => m.title.replace(/^File:/, ""));
+  } catch {
+    return [];
+  }
+}
+
+/** Picks the best lead-image candidate per genus from its Commons category plus its Wikidata image. */
+async function fetchBestImagePerGenus(
+  genusNames: string[],
+  wikidataMatches: Map<string, WikidataMatch>
+): Promise<Map<string, string>> {
+  console.log("Scanning Wikimedia Commons categories for the best lead image per genus...");
+  const best = new Map<string, string>();
+
+  for (let i = 0; i < genusNames.length; i++) {
+    const name = genusNames[i];
+    const categoryFiles = await fetchCategoryFiles(name);
+    const wikidataFile = wikidataMatches.get(name)?.commonsFile;
+    const candidates = [...new Set([...categoryFiles, ...(wikidataFile ? [wikidataFile] : [])])];
+
+    if (candidates.length > 0) {
+      candidates.sort((a, b) => scoreImageFilename(b, name) - scoreImageFilename(a, name));
+      best.set(name, candidates[0]);
+    }
+
+    if ((i + 1) % 200 === 0) console.log(`  ${i + 1}/${genusNames.length} genera checked`);
+    await sleep(150);
+  }
+  return best;
+}
+
+// ---------------------------------------------------------------------------
 // Step 4: Wikimedia Commons — attribution metadata for each candidate image
 // ---------------------------------------------------------------------------
 
@@ -239,6 +314,19 @@ interface CommonsInfo {
   height: number | null;
 }
 
+interface CommonsImageInfo {
+  url: string;
+  descriptionurl: string;
+  width?: number;
+  height?: number;
+  extmetadata?: Record<string, { value: string }>;
+}
+
+interface CommonsPage {
+  title: string;
+  imageinfo?: CommonsImageInfo[];
+}
+
 async function fetchCommonsInfo(fileTitles: string[]): Promise<Map<string, CommonsInfo>> {
   console.log("Fetching Wikimedia Commons attribution metadata...");
   const result = new Map<string, CommonsInfo>();
@@ -250,7 +338,7 @@ async function fetchCommonsInfo(fileTitles: string[]): Promise<Map<string, Commo
     const url =
       "https://commons.wikimedia.org/w/api.php?action=query&prop=imageinfo&iiprop=extmetadata%7Curl%7Csize&format=json&titles=" +
       encodeURIComponent(titles);
-    const data = await fetchJson<{ query?: { pages: Record<string, any> } }>(url);
+    const data = await fetchJson<{ query?: { pages: Record<string, CommonsPage> } }>(url);
     const pages = data.query?.pages ?? {};
 
     for (const page of Object.values(pages)) {
@@ -285,18 +373,20 @@ async function main() {
   const cladeMembership = await fetchCladeMembership();
   const countriesByGenus = await fetchCountriesByGenus(genusNameSet);
   const wikidataMatches = await fetchWikidataMatches(genera.map((g) => g.taxon_name));
+  const bestImages = await fetchBestImagePerGenus(genera.map((g) => g.taxon_name), wikidataMatches);
 
-  const fileTitles = [...new Set([...wikidataMatches.values()].map((m) => m.commonsFile).filter((f): f is string => !!f))];
+  const fileTitles = [...new Set(bestImages.values())];
   const commonsInfo = await fetchCommonsInfo(fileTitles);
 
   const dinosaurs: Dinosaur[] = genera.map((g) => {
     const wd = wikidataMatches.get(g.taxon_name);
+    const bestFile = bestImages.get(g.taxon_name);
     const images: DinosaurImage[] = [];
-    if (wd?.commonsFile) {
-      const info = commonsInfo.get(wd.commonsFile);
+    if (bestFile) {
+      const info = commonsInfo.get(bestFile);
       if (info) {
         images.push({
-          commonsFile: wd.commonsFile,
+          commonsFile: bestFile,
           sourceUrl: info.sourceUrl,
           commonsPageUrl: info.commonsPageUrl,
           author: info.author,
@@ -304,8 +394,8 @@ async function main() {
           licenseUrl: info.licenseUrl,
           width: info.width,
           height: info.height,
-          local400: null,
-          local1000: null,
+          localSmall: null,
+          localLarge: null,
         });
       }
     }

@@ -1,36 +1,74 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# สารานุกรมไดโนเสาร์ (dino-wiki)
 
-## Getting Started
+A Thai-language dinosaur encyclopedia. Fully static Next.js (App Router) site, ~1,500 dinosaur
+pages built from the Paleobiology Database (PBDB), Wikidata, and Wikimedia Commons, plus
+hand-written Thai content layered on top.
 
-First, run the development server:
+## Data pipeline
+
+Scientific data (classification, age range, fossil locality countries, naming author/year,
+image attribution) comes from three public APIs and is rebuilt with:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run fetch:dinosaurs
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+This writes `data/dinosaurs.json` and `data/meta.json`. It hits live APIs (no API keys needed)
+and takes a couple of minutes. Set `WIKIMEDIA_UA` to a descriptive user agent string
+(`name/version (contact info)`) — Wikimedia's APIs expect one.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Images are downloaded and converted to WebP separately:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run fetch:images
+```
 
-## Learn More
+This reads `data/dinosaurs.json`, downloads each dinosaur's lead image via Wikimedia's own
+thumbnailing service (at the two widths Wikimedia allows on demand — 330px and 960px — see the
+comment in `scripts/fetch-images.ts`), converts to WebP with `sharp`, and writes the files into
+`public/images/dinos/`. It also patches `localSmall`/`localLarge` back into `data/dinosaurs.json`.
+It's rate-limited and safe to re-run — already-downloaded images are skipped. Set `IMAGE_LIMIT=20`
+to test against a small subset first.
 
-To learn more about Next.js, take a look at the following resources:
+**The site never fetches images from `upload.wikimedia.org` at runtime** — only the local files
+this script produces.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Hand-written Thai content (name meaning, size comparison, description, fun facts) lives in
+`data/content-th.json`, keyed by slug. Nothing in the pipeline ever overwrites this file — add
+entries by hand. A dinosaur with no entry there still gets a full page from the scientific data
+alone.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Development
 
-## Deploy on Vercel
+```bash
+npm run dev      # dev server at localhost:3000
+npm run build    # static export to out/
+npm run lint
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+`npm run build` produces a plain static `out/` folder — no server runtime required.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Deploying to Cloudflare Pages
+
+1. Connect the GitHub repo in the Cloudflare Pages dashboard (Workers & Pages → Create →
+   Pages → Connect to Git).
+2. Build settings:
+   - Build command: `npm run build`
+   - Build output directory: `out`
+3. Environment variable: `NEXT_PUBLIC_SITE_URL` defaults to `https://dinocodex.com` (used for
+   `sitemap.xml`, `robots.txt`, and Open Graph tags) — only set it explicitly if deploying
+   under a different domain (e.g. a preview/staging URL).
+4. Do **not** run `fetch:dinosaurs`/`fetch:images` as part of the Cloudflare build — the
+   generated data and images are committed to the repo so the build never depends on live
+   third-party APIs. Re-run them locally and commit the results when you want fresh data.
+
+`public/_headers` sets long-lived cache headers for hashed static assets and images; Cloudflare
+Pages picks this file up automatically.
+
+The same `out/` output also deploys to Vercel, Netlify, GitHub Pages, or any static host.
+
+## Attribution
+
+Data: [Paleobiology Database](https://paleobiodb.org) (CC BY 4.0), [Wikidata](https://www.wikidata.org)
+(CC0). Images: [Wikimedia Commons](https://commons.wikimedia.org), per-file licenses shown on
+each dinosaur page. See `/about` for details.
