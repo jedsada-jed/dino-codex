@@ -2,9 +2,13 @@ import type { Metadata } from "next";
 import { getThailandDinosaurs } from "@/lib/dinosaurs";
 import { DinosaurCard } from "@/components/DinosaurCard";
 
+const description = "รวมไดโนเสาร์ที่พบซากดึกดำบรรพ์ในประเทศไทย เช่น ภูเวียงโกซอรัส สยามโมไทรันนัส และสยามแรปเตอร์";
+
 export const metadata: Metadata = {
   title: "ไดโนเสาร์ในประเทศไทย",
-  description: "รวมไดโนเสาร์ที่พบซากดึกดำบรรพ์ในประเทศไทย เช่น ภูเวียงโกซอรัส สยามโมไทรันนัส และสยามแรปเตอร์",
+  description,
+  alternates: { canonical: "/thailand" },
+  openGraph: { title: "ไดโนเสาร์ในประเทศไทย", description },
 };
 
 export default function ThailandPage() {

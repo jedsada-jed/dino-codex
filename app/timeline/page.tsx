@@ -3,9 +3,13 @@ import { getAllDinosaurs, getPeriod, PERIODS } from "@/lib/dinosaurs";
 import { PERIOD_LABELS_TH } from "@/lib/labels";
 import { DinosaurCard } from "@/components/DinosaurCard";
 
+const description = "ไทม์ไลน์ยุคไทรแอสซิก จูแรสซิก และครีเทเชียส ที่ไดโนเสาร์อาศัยอยู่";
+
 export const metadata: Metadata = {
   title: "ไทม์ไลน์ไดโนเสาร์",
-  description: "ไทม์ไลน์ยุคไทรแอสซิก จูแรสซิก และครีเทเชียส ที่ไดโนเสาร์อาศัยอยู่",
+  description,
+  alternates: { canonical: "/timeline" },
+  openGraph: { title: "ไทม์ไลน์ไดโนเสาร์", description },
 };
 
 export default function TimelinePage() {

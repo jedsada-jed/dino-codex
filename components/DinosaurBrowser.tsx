@@ -50,7 +50,7 @@ export function DinosaurBrowser({ items }: { items: BrowseItem[] }) {
 
   return (
     <div>
-      <div className="flex flex-col gap-3 rounded-xl border border-stone-200 bg-white p-4 sm:flex-row sm:flex-wrap sm:items-center">
+      <div className="flex flex-col gap-3 rounded-xl border border-stone-200 bg-stone-100 p-4 sm:flex-row sm:flex-wrap sm:items-center">
         <input
           type="search"
           value={query}
@@ -102,7 +102,7 @@ export function DinosaurBrowser({ items }: { items: BrowseItem[] }) {
           <li key={d.slug}>
             <Link
               href={`/dinosaurs/${d.slug}`}
-              className="group flex flex-col overflow-hidden rounded-xl border border-stone-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+              className="group flex flex-col overflow-hidden rounded-xl border border-stone-200 bg-stone-100 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
             >
               <div className="relative aspect-4/3 w-full overflow-hidden bg-stone-100">
                 {d.thumbnail ? (

@@ -2,9 +2,13 @@ import type { Metadata } from "next";
 import { getBrowseIndex } from "@/lib/dinosaurs";
 import { DinosaurBrowser } from "@/components/DinosaurBrowser";
 
+const description = "ค้นหาและกรองไดโนเสาร์กว่า 1,500 สายพันธุ์ ตามยุค ประเภทอาหาร และประเทศที่พบ";
+
 export const metadata: Metadata = {
   title: "ไดโนเสาร์ทั้งหมด",
-  description: "ค้นหาและกรองไดโนเสาร์กว่า 1,500 สายพันธุ์ ตามยุค ประเภทอาหาร และประเทศที่พบ",
+  description,
+  alternates: { canonical: "/dinosaurs" },
+  openGraph: { title: "ไดโนเสาร์ทั้งหมด", description },
 };
 
 export default function DinosaursPage() {

@@ -49,7 +49,7 @@ export default function Home() {
             <Link
               key={p}
               href={`/timeline#${p.toLowerCase()}`}
-              className="rounded-xl border border-stone-200 bg-white p-5 text-center shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+              className="rounded-xl border border-stone-200 bg-stone-100 p-5 text-center shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
             >
               <p className="text-2xl font-bold text-emerald-800">{PERIOD_LABELS_TH[p]}</p>
               <p className="mt-1 text-sm text-stone-500">{periodCounts[p].toLocaleString("th-TH")} สายพันธุ์</p>

@@ -1,14 +1,117 @@
 @import "tailwindcss";
 
+/*
+ * "Jurassic" theme: humid prehistoric forest greens. Light mode reads like
+ * overcast canopy light; dark mode like dusk under the fern cover. Overriding
+ * Tailwind's stone and emerald scales here (rather than editing every
+ * component) means every existing bg-stone and text-emerald class picks up
+ * the theme for free and flips automatically with the data-theme attribute.
+ */
 :root {
-  --background: #fafaf9;
-  --foreground: #1c1917;
+  --background: #f4f7ef;
+  --foreground: #1c2e22;
+
+  --stone-50: #f4f7ef;
+  --stone-100: #e9efe3;
+  --stone-200: #d8e0ce;
+  --stone-300: #c3cdb8;
+  --stone-500: #6b7863;
+  --stone-600: #545f4d;
+  --stone-700: #3d4536;
+  --stone-800: #2a3025;
+  --stone-900: #1c2e22;
+
+  --emerald-50: #e3eedd;
+  --emerald-100: #c7ddc0;
+  --emerald-500: #3a8f63;
+  --emerald-600: #2c7a52;
+  --emerald-700: #1f6b4a;
+  --emerald-800: #17573c;
+  --emerald-900: #123f2c;
+
+  --amber-50: #fbf1e2;
+  --amber-700: #a15c1f;
+}
+
+[data-theme="dark"] {
+  --background: #0e1b15;
+  --foreground: #e3efe8;
+
+  --stone-50: #0e1b15;
+  --stone-100: #16261d;
+  --stone-200: #23352a;
+  --stone-300: #2e4234;
+  --stone-500: #7c9186;
+  --stone-600: #9bb0a2;
+  --stone-700: #c4d4c8;
+  --stone-800: #dce8de;
+  --stone-900: #e3efe8;
+
+  --emerald-50: #16342a;
+  --emerald-100: #1e4536;
+  --emerald-500: #4caf7d;
+  --emerald-600: #57be89;
+  --emerald-700: #5fc48f;
+  --emerald-800: #7fd4a5;
+  --emerald-900: #9fe0bc;
+
+  --amber-50: #3a2c14;
+  --amber-700: #e0a352;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --background: #0e1b15;
+    --foreground: #e3efe8;
+
+    --stone-50: #0e1b15;
+    --stone-100: #16261d;
+    --stone-200: #23352a;
+    --stone-300: #2e4234;
+    --stone-500: #7c9186;
+    --stone-600: #9bb0a2;
+    --stone-700: #c4d4c8;
+    --stone-800: #dce8de;
+    --stone-900: #e3efe8;
+
+    --emerald-50: #16342a;
+    --emerald-100: #1e4536;
+    --emerald-500: #4caf7d;
+    --emerald-600: #57be89;
+    --emerald-700: #5fc48f;
+    --emerald-800: #7fd4a5;
+    --emerald-900: #9fe0bc;
+
+    --amber-50: #3a2c14;
+    --amber-700: #e0a352;
+  }
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-noto-sans-thai);
+
+  --color-stone-50: var(--stone-50);
+  --color-stone-100: var(--stone-100);
+  --color-stone-200: var(--stone-200);
+  --color-stone-300: var(--stone-300);
+  --color-stone-500: var(--stone-500);
+  --color-stone-600: var(--stone-600);
+  --color-stone-700: var(--stone-700);
+  --color-stone-800: var(--stone-800);
+  --color-stone-900: var(--stone-900);
+
+  --color-emerald-50: var(--emerald-50);
+  --color-emerald-100: var(--emerald-100);
+  --color-emerald-500: var(--emerald-500);
+  --color-emerald-600: var(--emerald-600);
+  --color-emerald-700: var(--emerald-700);
+  --color-emerald-800: var(--emerald-800);
+  --color-emerald-900: var(--emerald-900);
+
+  --color-amber-50: var(--amber-50);
+  --color-amber-700: var(--amber-700);
 }
 
 body {

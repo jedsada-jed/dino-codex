@@ -23,6 +23,7 @@ export async function generateMetadata({ params }: PageProps<"/dinosaurs/[slug]"
   return {
     title: `${nameTh} (${dinosaur.name})`,
     description,
+    alternates: { canonical: `/dinosaurs/${dinosaur.slug}` },
     openGraph: {
       title: `${nameTh} (${dinosaur.name})`,
       description,
@@ -98,7 +99,7 @@ export default async function DinosaurDetailPage({ params }: PageProps<"/dinosau
             <h2 className="font-semibold text-stone-900">เกร็ดความรู้</h2>
             <ul className="mt-2 space-y-2">
               {content.funFactsTh.map((fact, i) => (
-                <li key={i} className="flex gap-2 rounded-xl bg-white p-3 shadow-sm">
+                <li key={i} className="flex gap-2 rounded-xl bg-stone-100 p-3 shadow-sm">
                   <span aria-hidden="true">✨</span>
                   <span className="text-stone-800">{fact}</span>
                 </li>

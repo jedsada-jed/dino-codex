@@ -7,7 +7,7 @@ export function DinosaurCard({ dinosaur }: { dinosaur: DinosaurWithContent }) {
   return (
     <Link
       href={`/dinosaurs/${dinosaur.slug}`}
-      className="group flex flex-col overflow-hidden rounded-xl border border-stone-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+      className="group flex flex-col overflow-hidden rounded-xl border border-stone-200 bg-stone-100 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
     >
       <div className="relative aspect-4/3 w-full overflow-hidden bg-stone-100">
         <DinosaurImage image={dinosaur.images[0]} name={dinosaur.content?.nameTh ?? dinosaur.name} />
