@@ -3,7 +3,9 @@ import contentThData from "@/data/content-th.json";
 import metaData from "@/data/meta.json";
 import type { Dinosaur, DinosaurThaiContent, PipelineMeta } from "@/types/dinosaur";
 
-const dinosaurs = dinosaursData as Dinosaur[];
+// `ageRangeMa` is a fixed-length tuple, but TypeScript infers a plain `number[]` from JSON
+// module content, so the cast needs to go through `unknown` first.
+const dinosaurs = dinosaursData as unknown as Dinosaur[];
 const contentTh = contentThData as Record<string, DinosaurThaiContent>;
 const meta = metaData as PipelineMeta;
 
