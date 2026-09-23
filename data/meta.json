@@ -1,0 +1,23 @@
+{
+  "generatedAt": "2026-09-23T05:40:21.356Z",
+  "dinosaurCount": 1531,
+  "withImageCount": 1246,
+  "thailandCount": 15,
+  "sources": {
+    "pbdb": {
+      "name": "Paleobiology Database",
+      "url": "https://paleobiodb.org",
+      "license": "CC BY 4.0"
+    },
+    "wikidata": {
+      "name": "Wikidata",
+      "url": "https://www.wikidata.org",
+      "license": "CC0"
+    },
+    "wikimediaCommons": {
+      "name": "Wikimedia Commons",
+      "url": "https://commons.wikimedia.org",
+      "license": "Per-file, see each image's attribution"
+    }
+  }
+}
