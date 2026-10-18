@@ -1,5 +1,6 @@
 {
   "name": "dino-codex",
+  "account_id": "50fa10a26b17afa8bd0a9d08d2a3d725",
   "compatibility_date": "2026-01-01",
   "assets": {
     "directory": "./out",
