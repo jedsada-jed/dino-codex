@@ -3,6 +3,8 @@ import { Noto_Sans_Thai } from "next/font/google";
 import Link from "next/link";
 import { LogoMark } from "@/components/LogoMark";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { NewsSection } from "@/components/NewsSection";
+import { getLatestNews } from "@/lib/news";
 import "./globals.css";
 
 const THEME_INIT_SCRIPT = `
@@ -51,6 +53,7 @@ const NAV_LINKS = [
   { href: "/dinosaurs", label: "ไดโนเสาร์ทั้งหมด" },
   { href: "/thailand", label: "ไดโนเสาร์ไทย" },
   { href: "/timeline", label: "ไทม์ไลน์" },
+  { href: "/news", label: "ข่าวสาร" },
   { href: "/about", label: "เกี่ยวกับ" },
 ];
 
@@ -85,6 +88,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         </header>
 
         <main className="flex-1">{children}</main>
+
+        <NewsSection pool={getLatestNews(10)} />
 
         <footer className="border-t border-stone-200 bg-stone-100 text-sm text-stone-600">
           <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6">
