@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import type { NewsItem } from "@/types/news";
 
 function formatNewsDate(date: string): string {
@@ -9,6 +12,41 @@ function formatNewsDate(date: string): string {
   });
 }
 
+function NewsCover({ item }: { item: NewsItem }) {
+  // Try the article's own image first, then our local dinosaur image, then the placeholder.
+  const sources = [item.image, item.cover].filter((s): s is string => Boolean(s));
+  const [failed, setFailed] = useState(0);
+  const src = sources[failed];
+
+  if (!src) {
+    return (
+      <div
+        className="flex h-full w-full items-center justify-center bg-gradient-to-br from-emerald-100 to-stone-200"
+        aria-hidden="true"
+      >
+        <span className="text-5xl">🦴</span>
+      </div>
+    );
+  }
+
+  return (
+    // eslint-disable-next-line @next/next/no-img-element -- remote hotlinked images, static export
+    <img
+      key={src}
+      src={src}
+      alt=""
+      loading="lazy"
+      referrerPolicy="no-referrer"
+      onError={() => setFailed((n) => n + 1)}
+      // An image that already failed before hydration never fires onError, so check on mount.
+      ref={(el) => {
+        if (el?.complete && el.naturalWidth === 0) setFailed((n) => n + 1);
+      }}
+      className="h-full w-full object-cover"
+    />
+  );
+}
+
 export function NewsCard({ item }: { item: NewsItem }) {
   return (
     <a
@@ -18,17 +56,7 @@ export function NewsCard({ item }: { item: NewsItem }) {
       className="group flex flex-col overflow-hidden rounded-xl border border-stone-200 bg-stone-100 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
     >
       <div className="relative aspect-video w-full overflow-hidden bg-stone-200">
-        {item.cover ? (
-          // eslint-disable-next-line @next/next/no-img-element -- static export with unoptimized images
-          <img src={item.cover} alt="" loading="lazy" className="h-full w-full object-cover" />
-        ) : (
-          <div
-            className="flex h-full w-full items-center justify-center bg-gradient-to-br from-emerald-100 to-stone-200"
-            aria-hidden="true"
-          >
-            <span className="text-5xl">🦴</span>
-          </div>
-        )}
+        <NewsCover item={item} />
       </div>
       <div className="flex flex-1 flex-col gap-2 p-4">
         <p className="text-xs text-stone-500">

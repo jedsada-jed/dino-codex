@@ -6,6 +6,7 @@
     "date": "2026-10-14",
     "source": "ScienceDaily",
     "url": "https://www.sciencedaily.com/releases/2026/10/261014015457.htm",
+    "image": "https://www.sciencedaily.com/images/1920/invictibellatrix-amberina.webp",
     "cover": "/images/dinos/megaraptor-960.webp"
   },
   {
@@ -15,6 +16,7 @@
     "date": "2026-10-14",
     "source": "ข่าวจริงประเทศไทย",
     "url": "https://www.realnewsthailand.net/article/74787/",
+    "image": "https://www.realnewsthailand.net/wp-content/uploads/2026/10/0000-014-00021.jpg",
     "cover": "/images/dinos/brachiosaurus-960.webp"
   },
   {
@@ -24,6 +26,7 @@
     "date": "2026-10-13",
     "source": "TOP NEWS",
     "url": "https://www.topnews.co.th/news/1718150",
+    "image": "https://images.topnews.co.th/2026/10/Tdf4k1xx-02.jpg",
     "cover": "/images/dinos/phuwiangvenator-960.webp"
   },
   {
@@ -33,6 +36,7 @@
     "date": "2026-09-14",
     "source": "Sci.News",
     "url": "https://www.sci.news/paleontology/spanish-diplodocus-15064.html",
+    "image": "https://cdn.sci.news/images/2026/09/image_15064f-Spanish-Diplodocus.jpg",
     "cover": "/images/dinos/diplodocus-960.webp"
   },
   {
@@ -42,6 +46,7 @@
     "date": "2026-09-10",
     "source": "NPR",
     "url": "https://npr.org/2026/09/10/nx-s1-5963519/best-fossilized-bird-feather-dinosaur-feces-extinction",
+    "image": "https://npr.brightspotcdn.com/dims3/default/strip/false/crop/7060x3971+3126+0/resize/1400/quality/85/format/jpeg/?url=http%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2F6e%2Fa2%2F86b79eed4041a812789ac1a341d4%2Ffull-feather-200x.jpg",
     "cover": null
   },
   {
@@ -51,6 +56,7 @@
     "date": "2026-09-03",
     "source": "The Manila Times (AFP)",
     "url": "https://www.manilatimes.net/2026/09/03/world/thailands-jurassic-park-shines-light-on-dinosaur-evolution/2418012",
+    "image": "https://www.manilatimes.net/manilatimes/uploads/images/2026/09/03/1201922.jpg",
     "cover": "/images/dinos/phuwiangosaurus-960.webp"
   },
   {
@@ -60,6 +66,7 @@
     "date": "2026-08-13",
     "source": "Thai PBS",
     "url": "https://www.thaipbs.or.th/now/content/4307",
+    "image": "https://thaipbs-media-fuzzylop.thaipbs.or.th/imgpx1/unsafe/s:1200:0/aHR0cHM6Ly9vbmVjbXMudGhhaXBicy5vci50aC9tZWRpYS9xdHloSlJqQ0p1QmFUNHZwcEtYUk8ydk93ZXVBSElnNVpBR05ieVN4QnpZRkdaT0pZa1RkdFNsLmpwZw.jpg",
     "cover": null
   },
   {
@@ -69,6 +76,7 @@
     "date": "2026-08-08",
     "source": "ข่าวจริงประเทศไทย",
     "url": "https://www.realnewsthailand.net/article/69409/",
+    "image": "https://www.realnewsthailand.net/wp-content/uploads/2026/08/8-8-69-2.jpg",
     "cover": "/images/dinos/siamotyrannus-960.webp"
   },
   {
@@ -78,6 +86,7 @@
     "date": "2026-08-05",
     "source": "Source NM",
     "url": "https://sourcenm.com/2026/08/05/new-mexico-scientists-announce-discovery-of-beefy-new-bird-like-dinosaur-in-san-juan-county/",
+    "image": null,
     "cover": null
   },
   {
@@ -87,6 +96,7 @@
     "date": "2026-07-29",
     "source": "IOL",
     "url": "https://iol.co.za/news/world/2026-07-29-how-a-210-million-year-old-dinosaur-found-in-zimbabwe-changes-our-understanding-of-dinosaurs-in-southern-africa/",
+    "image": "https://iol-prod.appspot.com/image/79414bfc83b7a3ff21a38f867710ef19c8cf0bf0/1000/jpeg",
     "cover": "/images/dinos/musankwa-960.webp"
   },
   {
@@ -96,6 +106,7 @@
     "date": "2026-07-15",
     "source": "The Isaan Record",
     "url": "https://theisaanrecord.co/2026/07/15/thailands-15th-dinosaur-following-the-discovery-of-naka-titan/",
+    "image": "https://theisaanrecord.co/wp-content/uploads/2026/07/Dinosour-Kalasin-02.jpg",
     "cover": "/images/dinos/isanosaurus-960.webp"
   },
   {
@@ -105,6 +116,7 @@
     "date": "2026-07-11",
     "source": "สยามรัฐ",
     "url": "https://siamrath.co.th/regional/159943",
+    "image": "https://siamrath.co.th/assets/1e164947-5533-414e-9bbc-7cb7707cfca4?width=680&quality=80&format=webp",
     "cover": "/images/dinos/nagatitan-960.webp"
   },
   {
@@ -114,6 +126,7 @@
     "date": "2026-07-09",
     "source": "Thai PBS",
     "url": "https://www.thaipbs.or.th/news/content/508055",
+    "image": "https://content-images.thaipbs.or.th/imgpx1/unsafe/rt:fill/el:1/s:1200:630/q:90/aHR0cHM6Ly9vbmVjbXMudGhhaXBicy5vci50aC9tZWRpYS9xdHloSlJqQ0p1QXFkYVdlVzA4WGZVcDd2b1Z3ekw0MktMVHMyeVZnUFBSVjlXZWZ6MUo4UTFYLmpwZw==.jpg",
     "cover": "/images/dinos/uragasaurus-960.webp"
   },
   {
@@ -123,6 +136,7 @@
     "date": "2026-06-29",
     "source": "Natural History Museum",
     "url": "https://www.nhm.ac.uk/discover/news/2026/june/first-ever-dinosaur-fossil-discovered-on-antarctica-a-titanosaur.html",
+    "image": "https://www.nhm.ac.uk/content/dam/nhm-www/discover/antarctica-dinosaur-sauropod/antarctic-titanosaur-dinosaur-forest-reconstruction-full-width-andrew-mcafee-carnegie-museum-of-natural-history.jpg",
     "cover": null
   },
   {
@@ -132,6 +146,7 @@
     "date": "2026-06-19",
     "source": "Thai PBS",
     "url": "https://www.thaipbs.or.th/news/content/507270",
+    "image": "https://content-images.thaipbs.or.th/imgpx1/unsafe/rt:fill/el:1/s:1200:630/q:90/aHR0cHM6Ly9vbmVjbXMudGhhaXBicy5vci50aC9tZWRpYS9xdHloSlJqQ0p1QXBUR1lPbVlKR3pMMW9zOEpqY0dYem1pU01KOUlpRUg4ejBpOE0yUVc0RWVKLmpwZw==.jpg",
     "cover": "/images/dinos/siamraptor-960.webp"
   },
   {
@@ -141,6 +156,7 @@
     "date": "2026-05-20",
     "source": "PPTV",
     "url": "https://www.pptvhd36.com/news/%E0%B9%84%E0%B8%A5%E0%B8%9F%E0%B9%8C%E0%B8%AA%E0%B9%84%E0%B8%95%E0%B8%A5%E0%B9%8C/275690",
+    "image": "https://img.pptvhd36.com/thumbor/2026/05/17/news-043f60e.jpg",
     "cover": "/images/dinos/kinnareemimus-960.webp"
   },
   {
@@ -150,6 +166,7 @@
     "date": "2026-05-15",
     "source": "Thai PBS",
     "url": "https://www.thaipbs.or.th/news/content/505913",
+    "image": "https://content-images.thaipbs.or.th/imgpx1/unsafe/rt:fill/el:1/s:1200:630/q:90/aHR0cHM6Ly9vbmVjbXMudGhhaXBicy5vci50aC9tZWRpYS9xdHloSlJqQ0p1QW1YUWZNU2tVWDZXN1pHWlVmSkl1R1I2UUhOS2c4MXlxeHJIWUZQYVdKbFQzLmpwZw==.jpg",
     "cover": "/images/dinos/nagatitan-960.webp"
   },
   {
@@ -159,6 +176,7 @@
     "date": "2026-05-12",
     "source": "ScienceDaily",
     "url": "https://www.sciencedaily.com/releases/2026/05/260511213154.htm",
+    "image": "https://www.sciencedaily.com/images/1920/bicharracosaurus-dionidei-dinosaur.webp",
     "cover": "/images/dinos/bicharracosaurus-960.webp"
   },
   {
@@ -168,6 +186,7 @@
     "date": "2026-04-24",
     "source": "ScienceDaily",
     "url": "https://www.sciencedaily.com/releases/2026/04/260423031547.htm",
+    "image": "https://www.sciencedaily.com/images/1920/coastal-dinosaur-footprint.webp",
     "cover": null
   },
   {
@@ -177,6 +196,7 @@
     "date": "2026-03-20",
     "source": "Natural History Museum",
     "url": "https://www.nhm.ac.uk/discover/news/2026/march/new-species-of-south-korea-dinosaur-named-after-famous-south-korean-cartoon.html",
+    "image": "https://www.nhm.ac.uk/content/dam/nhm-www/discover/new-dinosaur-south-korea/new-dinosaur-south-korea-reconstruction-full-width.jpg",
     "cover": "/images/dinos/doolysaurus-960.webp"
   },
   {
@@ -186,6 +206,7 @@
     "date": "2026-02-19",
     "source": "Natural History Museum",
     "url": "https://www.nhm.ac.uk/discover/news/2026/february/new-sabre-crested-spinosaurus-species-named-from-desert-dinosaur-fossils.html",
+    "image": "https://www.nhm.ac.uk/content/dam/nhm-www/discover/new-spinosaurus/New-spinosaurus-spinosaurus-mirabilis-wetland-full-width-dani-navarro-university-chicago.jpg",
     "cover": "/images/dinos/spinosaurus-960.webp"
   },
   {
@@ -195,6 +216,7 @@
     "date": "2025-12-29",
     "source": "Interesting Engineering",
     "url": "https://interestingengineering.com/science/fossil-fish-dinosaur-thailand",
+    "image": "https://cms.interestingengineering.com/wp-content/uploads/2025/12/IE-15-1.jpg",
     "cover": "/images/dinos/baryonyx-960.webp"
   },
   {
@@ -204,6 +226,7 @@
     "date": "2025-08-14",
     "source": "Pattaya Mail",
     "url": "https://www.pattayamail.com/thailandnews/step-back-in-time-thailands-13-dinos-of-siam-dinosaur-exhibition-opens-514138",
+    "image": "https://www.pattayamail.com/wp-content/uploads/2025/08/t-08-Step-Back-in-Time-Thailands-%E2%80%9813-Dinos-of-Siam-dinosaur-exhibition-opens-1.png",
     "cover": "/images/dinos/siamodon-960.webp"
   },
   {
@@ -213,6 +236,7 @@
     "date": "2025-08-06",
     "source": "ไทยโพสต์",
     "url": "https://www.thaipost.net/district-news/838823/",
+    "image": "https://storage-wp.thaipost.net/2025/08/1000045285.jpg",
     "cover": "/images/dinos/phuwiangosaurus-960.webp"
   },
   {
@@ -222,6 +246,7 @@
     "date": "2025-07-04",
     "source": "University of Regina",
     "url": "https://www.uregina.ca/news/2025/scottys-rib-university-of-regina-phd-student-examines-preserved-blood-vessels-in-famous-fossil.html",
+    "image": null,
     "cover": "/images/dinos/tyrannosaurus-960.webp"
   },
   {
@@ -231,6 +256,7 @@
     "date": "2025-06-14",
     "source": "ไทยโพสต์",
     "url": "https://www.thaipost.net/news-update/806487/",
+    "image": "https://storage-wp.thaipost.net/2025/06/1-39.jpg",
     "cover": "/images/dinos/isanosaurus-960.webp"
   },
   {
@@ -240,6 +266,7 @@
     "date": "2025-03-31",
     "source": "Sci.News",
     "url": "https://www.sci.news/paleontology/garudapterus-buffetauti-13788.html",
+    "image": "https://cdn.sci.news/images/2025/03/image_13788f-Garudapterus-buffetauti.jpg",
     "cover": null
   },
   {
@@ -249,6 +276,7 @@
     "date": "2024-08-02",
     "source": "ไทยรัฐ",
     "url": "https://www.thairath.co.th/news/society/2805120",
+    "image": "https://static.thairath.co.th/media/dFQROr7oWzulq5Fa6rBWhhqIesIgzHO1Zed6aLsDhXHKTnv1s614CMoWREWKEHiqlH5.jpg",
     "cover": null
   },
   {
@@ -258,6 +286,7 @@
     "date": "2024-01-12",
     "source": "Thai PBS",
     "url": "https://www.thaipbs.or.th/news/content/335884",
+    "image": "https://content-images.thaipbs.or.th/imgpx1/unsafe/rt:fill/el:1/s:1200:630/q:90/aHR0cHM6Ly9vbmVjbXMudGhhaXBicy5vci50aC9tZWRpYS9xdHloSlJqQ0pyVnBjQWJzQzhScG1YQjNYNWVMNnNjN1dLNG5RWFhGd09KNjdQRkc5OFRoV05YLmpwZw==.jpg",
     "cover": null
   },
   {
@@ -267,6 +296,7 @@
     "date": "2023-07-26",
     "source": "Thai PBS",
     "url": "https://www.thaipbs.or.th/news/content/330034",
+    "image": "https://content-images.thaipbs.or.th/imgpx1/unsafe/rt:fill/el:1/s:1200:630/q:90/aHR0cHM6Ly9vbmVjbXMudGhhaXBicy5vci50aC9tZWRpYS9xdHloSlJqQ0pyVnBiNzFiNUdaMWhkaHZVZHpwM3UxUzJjWHJZZmpUcUJqMXprZ3c2a1dnSnRULmpwZw==.jpg",
     "cover": "/images/dinos/minimocursor-960.webp"
   }
 ]
