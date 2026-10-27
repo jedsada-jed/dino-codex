@@ -49,7 +49,9 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="th" className={`${notoSansThai.variable} h-full antialiased`}>
+    // THEME_INIT_SCRIPT sets data-theme on <html> before hydration to avoid a flash of the
+    // wrong theme, so that one attribute is expected to differ from the server HTML.
+    <html lang="th" className={`${notoSansThai.variable} h-full antialiased`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
       </head>
