@@ -1,0 +1,50 @@
+name: Update popularity
+
+# Monthly refresh of data/popularity.json. Runs on the 3rd so Wikimedia has finished
+# publishing pageviews for the month that just ended.
+on:
+  schedule:
+    - cron: "0 3 3 * *" # 03:00 UTC (10:00 Thailand) on the 3rd
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - run: npm run fetch:popularity
+        env:
+          WIKIMEDIA_UA: "dino-wiki/0.1 (Thai dinosaur encyclopedia; https://github.com/${{ github.repository }})"
+
+      - name: Commit if changed
+        id: commit
+        run: |
+          if git diff --quiet -- data/popularity.json; then
+            echo "No changes"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/popularity.json
+          git commit -m "Update popularity data ($(jq -r '.periodStart + " to " + .periodEnd' data/popularity.json))"
+          git push
+          echo "pushed=true" >> "$GITHUB_OUTPUT"
+
+      # Pushes made with GITHUB_TOKEN don't trigger other workflows, so start the deploy explicitly.
+      - name: Deploy
+        if: steps.commit.outputs.pushed == 'true'
+        run: gh workflow run deploy.yml --ref main
+        env:
+          GH_TOKEN: ${{ github.token }}
