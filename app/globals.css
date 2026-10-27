@@ -15,7 +15,7 @@
   --stone-100: #e9efe3;
   --stone-200: #d8e0ce;
   --stone-300: #c3cdb8;
-  --stone-500: #6b7863;
+  --stone-500: #5b6853; /* 5:1 on stone-100 cards (WCAG AA) */
   --stone-600: #545f4d;
   --stone-700: #3d4536;
   --stone-800: #2a3025;
@@ -118,4 +118,25 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans), sans-serif;
+}
+
+/* Keyboard focus: one consistent ring instead of per-component outline-none. */
+:focus-visible {
+  outline: 2px solid var(--emerald-600);
+  outline-offset: 2px;
+}
+
+button:not(:disabled),
+[role="button"]:not([aria-disabled="true"]) {
+  cursor: pointer;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

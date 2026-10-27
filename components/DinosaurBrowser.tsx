@@ -7,6 +7,7 @@ import Fuse from "fuse.js";
 import type { BrowseItem } from "@/lib/dinosaurs";
 import { DIET_LABELS_TH, PERIOD_LABELS_TH } from "@/lib/labels";
 import type { Diet } from "@/types/dinosaur";
+import { BoneIcon } from "@/components/Icons";
 
 const PERIOD_OPTIONS = ["Triassic", "Jurassic", "Cretaceous"] as const;
 const DIET_OPTIONS: Diet[] = ["carnivore", "herbivore", "omnivore", "unknown"];
@@ -57,13 +58,13 @@ export function DinosaurBrowser({ items }: { items: BrowseItem[] }) {
           onChange={(e) => setQuery(e.target.value)}
           placeholder="ค้นหาชื่อไดโนเสาร์..."
           aria-label="ค้นหาชื่อไดโนเสาร์"
-          className="w-full flex-1 rounded-lg border border-stone-300 px-3 py-2 text-sm focus:border-emerald-500 focus:outline-none sm:min-w-[200px]"
+          className="min-h-11 w-full flex-1 rounded-lg border border-stone-300 px-3 py-2 text-base focus:border-emerald-500 sm:text-sm sm:min-w-[200px]"
         />
         <select
           value={period}
           onChange={(e) => setPeriod(e.target.value)}
           aria-label="กรองตามยุค"
-          className="rounded-lg border border-stone-300 px-3 py-2 text-sm"
+          className="min-h-11 rounded-lg border border-stone-300 bg-stone-50 px-3 py-2 text-sm"
         >
           <option value="all">ทุกยุค</option>
           {PERIOD_OPTIONS.map((p) => (
@@ -76,7 +77,7 @@ export function DinosaurBrowser({ items }: { items: BrowseItem[] }) {
           value={diet}
           onChange={(e) => setDiet(e.target.value)}
           aria-label="กรองตามอาหาร"
-          className="rounded-lg border border-stone-300 px-3 py-2 text-sm"
+          className="min-h-11 rounded-lg border border-stone-300 bg-stone-50 px-3 py-2 text-sm"
         >
           <option value="all">ทุกประเภทอาหาร</option>
           {DIET_OPTIONS.map((d) => (
@@ -85,24 +86,26 @@ export function DinosaurBrowser({ items }: { items: BrowseItem[] }) {
             </option>
           ))}
         </select>
-        <label className="flex items-center gap-2 text-sm text-stone-700">
-          <input type="checkbox" checked={imageOnly} onChange={(e) => setImageOnly(e.target.checked)} />
-          มีภาพประกอบ
-        </label>
-        <label className="flex items-center gap-2 text-sm text-stone-700">
-          <input type="checkbox" checked={thailandOnly} onChange={(e) => setThailandOnly(e.target.checked)} />
-          พบในไทย
-        </label>
+        <div className="flex gap-5">
+          <label className="flex min-h-11 items-center gap-2 text-sm text-stone-700">
+            <input type="checkbox" className="h-4 w-4 accent-emerald-700" checked={imageOnly} onChange={(e) => setImageOnly(e.target.checked)} />
+            มีภาพประกอบ
+          </label>
+          <label className="flex min-h-11 items-center gap-2 text-sm text-stone-700">
+            <input type="checkbox" className="h-4 w-4 accent-emerald-700" checked={thailandOnly} onChange={(e) => setThailandOnly(e.target.checked)} />
+            พบในไทย
+          </label>
+        </div>
       </div>
 
-      <p className="mt-4 text-sm text-stone-500">พบ {results.length.toLocaleString("th-TH")} รายการ</p>
+      <p className="mt-4 text-sm text-stone-500" aria-live="polite">พบ {results.length.toLocaleString("th-TH")} รายการ</p>
 
       <ul className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
         {results.map((d) => (
           <li key={d.slug}>
             <Link
               href={`/dinosaurs/${d.slug}`}
-              className="group flex flex-col overflow-hidden rounded-xl border border-stone-200 bg-stone-100 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+              className="group flex flex-col overflow-hidden rounded-xl border border-stone-200 bg-stone-100 shadow-sm transition motion-safe:hover:-translate-y-0.5 hover:shadow-md"
             >
               <div className="relative aspect-4/3 w-full overflow-hidden bg-stone-100">
                 {d.thumbnail ? (
@@ -114,8 +117,8 @@ export function DinosaurBrowser({ items }: { items: BrowseItem[] }) {
                     className="object-cover"
                   />
                 ) : (
-                  <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-emerald-100 to-stone-200 text-3xl">
-                    🦴
+                  <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-emerald-100 to-stone-200 text-emerald-800">
+                    <BoneIcon className="h-8 w-8 opacity-60" />
                   </div>
                 )}
               </div>
@@ -123,7 +126,7 @@ export function DinosaurBrowser({ items }: { items: BrowseItem[] }) {
                 <p className="truncate text-sm font-semibold text-stone-900 group-hover:text-emerald-700">
                   {d.nameTh ?? d.name}
                 </p>
-                <p className="truncate text-xs italic text-stone-500">{d.name}</p>
+                {d.nameTh && <p className="truncate text-xs italic text-stone-500">{d.name}</p>}
               </div>
             </Link>
           </li>

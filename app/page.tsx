@@ -3,6 +3,7 @@ import { getFeaturedDinosaurs, getThailandDinosaurs, getMeta, getAllDinosaurs } 
 import { PERIOD_LABELS_TH } from "@/lib/labels";
 import { DinosaurCard } from "@/components/DinosaurCard";
 import { PopularDinosaurs } from "@/components/PopularDinosaurs";
+import { MapPinIcon } from "@/components/Icons";
 
 export default function Home() {
   const featured = getFeaturedDinosaurs(6);
@@ -27,15 +28,19 @@ export default function Home() {
             สำรวจไดโนเสาร์ {meta.dinosaurCount.toLocaleString("th-TH")} สายพันธุ์ พร้อมภาพประกอบและข้อมูลไดโนเสาร์ที่พบในประเทศไทย
           </p>
           <form action="/dinosaurs" className="mx-auto mt-6 flex max-w-md gap-2">
+            <label htmlFor="home-search" className="sr-only">
+              ค้นหาชื่อไดโนเสาร์
+            </label>
             <input
-              type="text"
+              id="home-search"
+              type="search"
               name="q"
               placeholder="ค้นหาชื่อไดโนเสาร์ เช่น ไทแรนโนซอรัส"
-              className="w-full rounded-lg border border-stone-300 px-4 py-2.5 text-sm focus:border-emerald-500 focus:outline-none"
+              className="w-full rounded-lg border border-stone-300 min-h-11 px-4 py-2.5 text-base focus:border-emerald-500 sm:text-sm"
             />
             <button
               type="submit"
-              className="shrink-0 rounded-lg bg-emerald-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-emerald-800"
+              className="shrink-0 min-h-11 rounded-lg bg-emerald-700 px-5 py-2.5 text-sm font-medium text-stone-50 transition-colors hover:bg-emerald-800"
             >
               ค้นหา
             </button>
@@ -45,15 +50,15 @@ export default function Home() {
 
       <section className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
         <h2 className="text-xl font-bold text-stone-900">เรียกดูตามยุค</h2>
-        <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-3">
+        <div className="mt-4 grid grid-cols-3 gap-3 sm:gap-4">
           {(["Triassic", "Jurassic", "Cretaceous"] as const).map((p) => (
             <Link
               key={p}
               href={`/timeline#${p.toLowerCase()}`}
-              className="rounded-xl border border-stone-200 bg-stone-100 p-5 text-center shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+              className="rounded-xl border border-stone-200 bg-stone-100 px-2 py-4 text-center sm:p-5 shadow-sm transition motion-safe:hover:-translate-y-0.5 hover:shadow-md"
             >
-              <p className="text-2xl font-bold text-emerald-800">{PERIOD_LABELS_TH[p]}</p>
-              <p className="mt-1 text-sm text-stone-500">{periodCounts[p].toLocaleString("th-TH")} สายพันธุ์</p>
+              <p className="text-base font-bold text-emerald-800 sm:text-2xl">{PERIOD_LABELS_TH[p]}</p>
+              <p className="mt-1 text-xs text-stone-500 sm:text-sm">{periodCounts[p].toLocaleString("th-TH")} สายพันธุ์</p>
             </Link>
           ))}
         </div>
@@ -80,7 +85,10 @@ export default function Home() {
       <section className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
         <div className="rounded-2xl bg-amber-50 p-6">
           <div className="flex items-center justify-between">
-            <h2 className="text-xl font-bold text-stone-900">🇹🇭 ไดโนเสาร์ในประเทศไทย</h2>
+            <h2 className="flex items-center gap-2 text-xl font-bold text-stone-900">
+              <MapPinIcon className="h-5 w-5 text-amber-700" />
+              ไดโนเสาร์ในประเทศไทย
+            </h2>
             <Link href="/thailand" className="text-sm font-medium text-amber-700 hover:underline">
               ดูทั้งหมด →
             </Link>

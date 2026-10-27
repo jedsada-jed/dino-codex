@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { BoneIcon } from "./Icons";
 import type { DinosaurImage as DinosaurImageData } from "@/types/dinosaur";
 
 function PlaceholderImage({ name }: { name: string }) {
@@ -8,9 +9,7 @@ function PlaceholderImage({ name }: { name: string }) {
       role="img"
       aria-label={`ยังไม่มีภาพประกอบสำหรับ ${name}`}
     >
-      <span className="text-5xl" aria-hidden="true">
-        🦴
-      </span>
+      <BoneIcon className="h-10 w-10 opacity-60" />
     </div>
   );
 }

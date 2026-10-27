@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { DinosaurImage } from "./DinosaurImage";
+import { FlameIcon } from "./Icons";
 import { getPopularDinosaurs, getPopularityPeriod, pageviewsToolUrl } from "@/lib/popularity";
 
 const formatDateTh = (iso: string) =>
@@ -15,8 +16,9 @@ export function PopularDinosaurs({ limit = 10 }: { limit?: number }) {
 
   return (
     <section className="mx-auto max-w-6xl px-4 py-6 sm:px-6" aria-labelledby="popular-heading">
-      <h2 id="popular-heading" className="text-xl font-bold text-stone-900">
-        🔥 ไดโนเสาร์ยอดฮิต
+      <h2 id="popular-heading" className="flex items-center gap-2 text-xl font-bold text-stone-900">
+        <FlameIcon className="h-5 w-5 text-amber-700" />
+        ไดโนเสาร์ยอดฮิต
       </h2>
       <p className="mt-1 text-sm text-stone-500">จัดอันดับจากจำนวนครั้งที่คนทั่วโลกเปิดอ่านบทความใน Wikipedia ช่วง 12 เดือนล่าสุด</p>
 
@@ -25,7 +27,7 @@ export function PopularDinosaurs({ limit = 10 }: { limit?: number }) {
           <li key={dinosaur.slug}>
             <Link
               href={`/dinosaurs/${dinosaur.slug}`}
-              className="group flex h-full flex-col overflow-hidden rounded-xl border border-stone-200 bg-stone-100 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+              className="group flex h-full flex-col overflow-hidden rounded-xl border border-stone-200 bg-stone-100 shadow-sm transition motion-safe:hover:-translate-y-0.5 hover:shadow-md"
             >
               <div className="relative aspect-4/3 w-full overflow-hidden bg-stone-100">
                 <DinosaurImage image={dinosaur.images[0]} name={nameTh ?? dinosaur.name} />

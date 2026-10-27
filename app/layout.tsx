@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Noto_Sans_Thai } from "next/font/google";
 import Link from "next/link";
-import { LogoMark } from "@/components/LogoMark";
-import { ThemeToggle } from "@/components/ThemeToggle";
+import { SiteHeader } from "@/components/SiteHeader";
 import { NewsSection } from "@/components/NewsSection";
 import { getLatestNews } from "@/lib/news";
 import "./globals.css";
@@ -48,15 +47,6 @@ export const metadata: Metadata = {
   },
 };
 
-const NAV_LINKS = [
-  { href: "/", label: "หน้าแรก" },
-  { href: "/dinosaurs", label: "ไดโนเสาร์ทั้งหมด" },
-  { href: "/thailand", label: "ไดโนเสาร์ไทย" },
-  { href: "/timeline", label: "ไทม์ไลน์" },
-  { href: "/news", label: "ข่าวสาร" },
-  { href: "/about", label: "เกี่ยวกับ" },
-];
-
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="th" className={`${notoSansThai.variable} h-full antialiased`}>
@@ -64,30 +54,15 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
       </head>
       <body className="min-h-full flex flex-col bg-stone-50 text-stone-900">
-        <header className="border-b border-stone-200 bg-stone-100">
-          <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-3 sm:px-6">
-            <Link href="/" className="flex items-center gap-2 text-lg font-bold text-emerald-800">
-              <LogoMark className="h-7 w-7" />
-              สารานุกรมไดโนเสาร์
-            </Link>
-            <div className="flex items-center gap-4">
-              <nav aria-label="เมนูหลัก">
-                <ul className="flex flex-wrap gap-x-5 gap-y-1 text-sm font-medium text-stone-700">
-                  {NAV_LINKS.map((link) => (
-                    <li key={link.href}>
-                      <Link href={link.href} className="hover:text-emerald-700">
-                        {link.label}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </nav>
-              <ThemeToggle />
-            </div>
-          </div>
-        </header>
+        <a
+          href="#main"
+          className="sr-only rounded-lg bg-emerald-700 px-4 py-2 font-medium text-stone-50 focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50"
+        >
+          ข้ามไปยังเนื้อหา
+        </a>
+        <SiteHeader />
 
-        <main className="flex-1">{children}</main>
+        <main id="main" className="flex-1">{children}</main>
 
         <NewsSection pool={getLatestNews(10)} />
 

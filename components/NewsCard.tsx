@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import type { NewsItem } from "@/types/news";
+import { BoneIcon } from "@/components/Icons";
 
 function formatNewsDate(date: string): string {
   return new Date(`${date}T00:00:00Z`).toLocaleDateString("th-TH", {
@@ -24,7 +25,7 @@ function NewsCover({ item }: { item: NewsItem }) {
         className="flex h-full w-full items-center justify-center bg-gradient-to-br from-emerald-100 to-stone-200"
         aria-hidden="true"
       >
-        <span className="text-5xl">🦴</span>
+        <BoneIcon className="h-10 w-10 text-emerald-800 opacity-60" />
       </div>
     );
   }
@@ -53,7 +54,7 @@ export function NewsCard({ item }: { item: NewsItem }) {
       href={item.url}
       target="_blank"
       rel="noopener noreferrer"
-      className="group flex flex-col overflow-hidden rounded-xl border border-stone-200 bg-stone-100 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+      className="group flex flex-col overflow-hidden rounded-xl border border-stone-200 bg-stone-100 shadow-sm transition motion-safe:hover:-translate-y-0.5 hover:shadow-md"
     >
       <div className="relative aspect-video w-full overflow-hidden bg-stone-200">
         <NewsCover item={item} />

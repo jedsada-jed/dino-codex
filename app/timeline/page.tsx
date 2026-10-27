@@ -34,7 +34,7 @@ export default function TimelinePage() {
         {PERIODS.map((p) => {
           const duration = p.maxMa - p.minMa;
           const widthPercent = (duration / totalDuration) * 100;
-          const color = p.key === "Triassic" ? "bg-orange-500" : p.key === "Jurassic" ? "bg-emerald-600" : "bg-sky-700";
+          const color = p.key === "Triassic" ? "bg-[#a14c12]" : p.key === "Jurassic" ? "bg-[#1f6b4a]" : "bg-[#0369a1]";
           return (
             <div key={p.key} className={`flex items-center justify-center ${color}`} style={{ width: `${widthPercent}%` }}>
               {PERIOD_LABELS_TH[p.key]}
