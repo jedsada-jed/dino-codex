@@ -1,0 +1,257 @@
+{
+  "generatedAt": "2026-10-27T12:14:04.972Z",
+  "periodStart": "2025-10-01",
+  "periodEnd": "2026-09-30",
+  "items": [
+    {
+      "slug": "tyrannosaurus",
+      "wikipediaTitle": "Tyrannosaurus",
+      "views": 1102882
+    },
+    {
+      "slug": "spinosaurus",
+      "wikipediaTitle": "Spinosaurus",
+      "views": 557496
+    },
+    {
+      "slug": "velociraptor",
+      "wikipediaTitle": "Velociraptor",
+      "views": 445738
+    },
+    {
+      "slug": "stegosaurus",
+      "wikipediaTitle": "Stegosaurus",
+      "views": 400351
+    },
+    {
+      "slug": "triceratops",
+      "wikipediaTitle": "Triceratops",
+      "views": 399710
+    },
+    {
+      "slug": "allosaurus",
+      "wikipediaTitle": "Allosaurus",
+      "views": 347142
+    },
+    {
+      "slug": "archaeopteryx",
+      "wikipediaTitle": "Archaeopteryx",
+      "views": 335049
+    },
+    {
+      "slug": "giganotosaurus",
+      "wikipediaTitle": "Giganotosaurus",
+      "views": 311214
+    },
+    {
+      "slug": "brachiosaurus",
+      "wikipediaTitle": "Brachiosaurus",
+      "views": 287373
+    },
+    {
+      "slug": "ankylosaurus",
+      "wikipediaTitle": "Ankylosaurus",
+      "views": 284771
+    },
+    {
+      "slug": "dilophosaurus",
+      "wikipediaTitle": "Dilophosaurus",
+      "views": 275484
+    },
+    {
+      "slug": "therizinosaurus",
+      "wikipediaTitle": "Therizinosaurus",
+      "views": 256433
+    },
+    {
+      "slug": "deinonychus",
+      "wikipediaTitle": "Deinonychus",
+      "views": 239672
+    },
+    {
+      "slug": "carnotaurus",
+      "wikipediaTitle": "Carnotaurus",
+      "views": 227961
+    },
+    {
+      "slug": "utahraptor",
+      "wikipediaTitle": "Utahraptor",
+      "views": 225208
+    },
+    {
+      "slug": "parasaurolophus",
+      "wikipediaTitle": "Parasaurolophus",
+      "views": 223571
+    },
+    {
+      "slug": "argentinosaurus",
+      "wikipediaTitle": "Argentinosaurus",
+      "views": 220540
+    },
+    {
+      "slug": "brontosaurus",
+      "wikipediaTitle": "Brontosaurus",
+      "views": 219885
+    },
+    {
+      "slug": "diplodocus",
+      "wikipediaTitle": "Diplodocus",
+      "views": 216248
+    },
+    {
+      "slug": "pachycephalosaurus",
+      "wikipediaTitle": "Pachycephalosaurus",
+      "views": 209118
+    },
+    {
+      "slug": "nanotyrannus",
+      "wikipediaTitle": "Nanotyrannus",
+      "views": 170154
+    },
+    {
+      "slug": "iguanodon",
+      "wikipediaTitle": "Iguanodon",
+      "views": 169802
+    },
+    {
+      "slug": "apatosaurus",
+      "wikipediaTitle": "Apatosaurus",
+      "views": 154333
+    },
+    {
+      "slug": "megalosaurus",
+      "wikipediaTitle": "Megalosaurus",
+      "views": 143528
+    },
+    {
+      "slug": "yutyrannus",
+      "wikipediaTitle": "Yutyrannus",
+      "views": 140641
+    },
+    {
+      "slug": "carcharodontosaurus",
+      "wikipediaTitle": "Carcharodontosaurus",
+      "views": 135583
+    },
+    {
+      "slug": "achelousaurus",
+      "wikipediaTitle": "Achelousaurus",
+      "views": 133788
+    },
+    {
+      "slug": "baryonyx",
+      "wikipediaTitle": "Baryonyx",
+      "views": 131848
+    },
+    {
+      "slug": "compsognathus",
+      "wikipediaTitle": "Compsognathus",
+      "views": 122437
+    },
+    {
+      "slug": "borealopelta",
+      "wikipediaTitle": "Borealopelta",
+      "views": 120152
+    },
+    {
+      "slug": "ceratosaurus",
+      "wikipediaTitle": "Ceratosaurus",
+      "views": 118537
+    },
+    {
+      "slug": "patagotitan",
+      "wikipediaTitle": "Patagotitan",
+      "views": 117041
+    },
+    {
+      "slug": "edmontosaurus",
+      "wikipediaTitle": "Edmontosaurus",
+      "views": 113320
+    },
+    {
+      "slug": "herrerasaurus",
+      "wikipediaTitle": "Herrerasaurus",
+      "views": 112694
+    },
+    {
+      "slug": "troodon",
+      "wikipediaTitle": "Troodon",
+      "views": 104718
+    },
+    {
+      "slug": "microraptor",
+      "wikipediaTitle": "Microraptor",
+      "views": 102985
+    },
+    {
+      "slug": "acrocanthosaurus",
+      "wikipediaTitle": "Acrocanthosaurus",
+      "views": 101905
+    },
+    {
+      "slug": "tarbosaurus",
+      "wikipediaTitle": "Tarbosaurus",
+      "views": 99029
+    },
+    {
+      "slug": "suchomimus",
+      "wikipediaTitle": "Suchomimus",
+      "views": 98999
+    },
+    {
+      "slug": "deinocheirus",
+      "wikipediaTitle": "Deinocheirus",
+      "views": 91946
+    },
+    {
+      "slug": "aquilops",
+      "wikipediaTitle": "Aquilops",
+      "views": 86902
+    },
+    {
+      "slug": "albertosaurus",
+      "wikipediaTitle": "Albertosaurus",
+      "views": 86649
+    },
+    {
+      "slug": "styracosaurus",
+      "wikipediaTitle": "Styracosaurus",
+      "views": 85115
+    },
+    {
+      "slug": "coelophysis",
+      "wikipediaTitle": "Coelophysis",
+      "views": 83835
+    },
+    {
+      "slug": "dreadnoughtus",
+      "wikipediaTitle": "Dreadnoughtus",
+      "views": 81580
+    },
+    {
+      "slug": "irritator",
+      "wikipediaTitle": "Irritator",
+      "views": 80558
+    },
+    {
+      "slug": "protoceratops",
+      "wikipediaTitle": "Protoceratops",
+      "views": 78570
+    },
+    {
+      "slug": "psittacosaurus",
+      "wikipediaTitle": "Psittacosaurus",
+      "views": 77315
+    },
+    {
+      "slug": "maip",
+      "wikipediaTitle": "Maip",
+      "views": 74719
+    },
+    {
+      "slug": "gorgosaurus",
+      "wikipediaTitle": "Gorgosaurus",
+      "views": 71762
+    }
+  ]
+}

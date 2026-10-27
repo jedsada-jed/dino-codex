@@ -2,6 +2,7 @@ import Link from "next/link";
 import { getFeaturedDinosaurs, getThailandDinosaurs, getMeta, getAllDinosaurs } from "@/lib/dinosaurs";
 import { PERIOD_LABELS_TH } from "@/lib/labels";
 import { DinosaurCard } from "@/components/DinosaurCard";
+import { PopularDinosaurs } from "@/components/PopularDinosaurs";
 
 export default function Home() {
   const featured = getFeaturedDinosaurs(6);
@@ -57,6 +58,8 @@ export default function Home() {
           ))}
         </div>
       </section>
+
+      <PopularDinosaurs />
 
       {featured.length > 0 && (
         <section className="mx-auto max-w-6xl px-4 py-6 sm:px-6">
