@@ -3,7 +3,7 @@ import { DinosaurImage } from "./DinosaurImage";
 import { FlameIcon } from "./Icons";
 import { SectionHeading } from "./SectionHeading";
 import { AiBadge } from "./AiImageDisclosure";
-import { getCoverImage } from "@/lib/ai-images";
+import { aiImageScore, getCoverImage } from "@/lib/ai-images";
 import { getPopularDinosaurs, getPopularityPeriod, pageviewsToolUrl, type PopularDinosaur } from "@/lib/popularity";
 
 const formatDateTh = (iso: string) =>
@@ -30,7 +30,7 @@ function PodiumCard({ item, maxViews }: { item: PopularDinosaur; maxViews: numbe
         <div className="absolute inset-0 transition-transform duration-500 motion-safe:group-hover:scale-105">
           <DinosaurImage image={cover.image} name={nameTh ?? dinosaur.name} />
         </div>
-        {cover.ai && <AiBadge className="absolute bottom-3 left-3" />}
+        {cover.ai && <AiBadge className="absolute bottom-3 left-3" percent={aiImageScore(cover.ai)?.percent} />}
         <span
           className={`absolute left-3 top-3 flex h-11 w-11 items-center justify-center rounded-full text-lg font-black shadow-lg ${
             rank === 1 ? "bg-[#e0a352] text-[#1c2e22]" : "bg-[#1c2e22] text-[#f4f7ef]"

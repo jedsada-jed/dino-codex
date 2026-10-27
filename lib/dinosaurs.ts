@@ -2,7 +2,7 @@ import dinosaursData from "@/data/dinosaurs.json";
 import contentThData from "@/data/content-th.json";
 import metaData from "@/data/meta.json";
 import type { Dinosaur, DinosaurThaiContent, PipelineMeta } from "@/types/dinosaur";
-import { getCoverImage } from "@/lib/ai-images";
+import { aiImageScore, getCoverImage } from "@/lib/ai-images";
 
 // `ageRangeMa` is a fixed-length tuple, but TypeScript infers a plain `number[]` from JSON
 // module content, so the cast needs to go through `unknown` first.
@@ -110,6 +110,8 @@ export interface BrowseItem {
   countries: string[];
   thumbnail: string | null;
   thumbnailIsAi: boolean;
+  /** Prompt-accuracy percent when the thumbnail is a reviewed AI image. */
+  thumbnailAiScore: number | null;
 }
 
 /** Slim, client-safe index for the search/filter UI on /dinosaurs — avoids shipping the full dataset to the browser. */
@@ -126,6 +128,7 @@ export function getBrowseIndex(): BrowseItem[] {
     countries: d.countries,
     thumbnail: cover.image?.localSmall ?? null,
     thumbnailIsAi: cover.ai !== null,
+    thumbnailAiScore: cover.ai ? (aiImageScore(cover.ai)?.percent ?? null) : null,
   };
   });
 }

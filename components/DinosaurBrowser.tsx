@@ -122,7 +122,7 @@ export function DinosaurBrowser({ items }: { items: BrowseItem[] }) {
                     <BoneIcon className="h-8 w-8 opacity-60" />
                   </div>
                 )}
-                {d.thumbnailIsAi && <AiBadge className="absolute left-2 top-2" />}
+                {d.thumbnailIsAi && <AiBadge className="absolute left-2 top-2" percent={d.thumbnailAiScore ?? undefined} />}
               </div>
               <div className="p-2">
                 <p className="truncate text-sm font-semibold text-stone-900 group-hover:text-emerald-700">

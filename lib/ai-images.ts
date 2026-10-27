@@ -5,7 +5,7 @@ import type { DinosaurImage } from "@/types/dinosaur";
 const aiImages = aiImagesData as AiImageData;
 
 /** An AI image only replaces the real cover once its review matches at least this share of its prompt. */
-export const MIN_COVER_SCORE = 0.9;
+export const MIN_COVER_SCORE = 0.75;
 
 export interface AiImageScore {
   passed: number;

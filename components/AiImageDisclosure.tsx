@@ -4,13 +4,14 @@ import type { AiImageScore } from "@/lib/ai-images";
 const formatDateTh = (iso: string) =>
   new Date(iso).toLocaleDateString("th-TH", { day: "numeric", month: "short", year: "numeric", timeZone: "Asia/Bangkok" });
 
-/** Small pill marking an image as AI-generated. */
-export function AiBadge({ className = "" }: { className?: string }) {
+/** Small pill marking an image as AI-generated, with its prompt-accuracy score when reviewed. */
+export function AiBadge({ className = "", percent }: { className?: string; percent?: number }) {
   return (
     <span
       className={`inline-flex items-center rounded-full bg-[#1c2e22]/85 px-2 py-0.5 text-[11px] font-semibold text-[#f4f7ef] backdrop-blur ${className}`}
+      title={percent !== undefined ? `ภาพจาก AI ตรงตาม prompt ${percent}%` : "ภาพจาก AI"}
     >
-      ภาพจาก AI
+      ภาพจาก AI{percent !== undefined && ` · ${percent}%`}
     </span>
   );
 }
@@ -28,6 +29,7 @@ function scoreTone(percent: number) {
 export function AiImageDisclosure({ image, score }: { image: AiImage; score: AiImageScore | null }) {
   const verdicts = new Map(image.review?.results.map((r) => [r.id, r]));
   const tone = score ? scoreTone(score.percent) : null;
+  const mismatches = image.checklist.filter((item) => verdicts.get(item.id)?.pass === false);
 
   return (
     <div className="rounded-2xl border border-stone-200 bg-stone-100 p-4 text-sm">
@@ -61,6 +63,29 @@ export function AiImageDisclosure({ image, score }: { image: AiImage; score: AiI
             >
               <div className={`h-full rounded-full ${tone.bar}`} style={{ width: `${score.percent}%` }} />
             </div>
+            {mismatches.length > 0 && (
+              <div className="mt-3 rounded-xl border border-stone-200 bg-stone-50 p-3">
+                <p className="font-semibold text-stone-900">จุดที่ภาพไม่ตรงกับ prompt</p>
+                <ul className="mt-1.5 space-y-1.5">
+                  {mismatches.map((item) => (
+                    <li key={item.id} className="flex gap-2">
+                      <span
+                        className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-danger text-xs font-bold text-stone-50"
+                        aria-hidden="true"
+                      >
+                        ✕
+                      </span>
+                      <span className="text-stone-800">
+                        {verdicts.get(item.id)?.note ?? item.label}
+                        {verdicts.get(item.id)?.note && (
+                          <span className="block text-xs text-stone-500">ควรเป็น: {item.label}</span>
+                        )}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </>
         ) : (
           <p className="text-stone-600">ยังไม่ได้ตรวจความถูกต้องตาม prompt</p>

@@ -2,7 +2,7 @@ import Link from "next/link";
 import { DinosaurImage } from "./DinosaurImage";
 import { DIET_LABELS_TH, PERIOD_COLORS, PERIOD_LABELS_TH } from "@/lib/labels";
 import { getPeriod, type DinosaurWithContent } from "@/lib/dinosaurs";
-import { getCoverImage } from "@/lib/ai-images";
+import { aiImageScore, getCoverImage } from "@/lib/ai-images";
 import { AiBadge } from "./AiImageDisclosure";
 
 export function DinosaurCard({ dinosaur }: { dinosaur: DinosaurWithContent }) {
@@ -19,7 +19,7 @@ export function DinosaurCard({ dinosaur }: { dinosaur: DinosaurWithContent }) {
         <div className="absolute inset-0 transition-transform duration-500 motion-safe:group-hover:scale-105">
           <DinosaurImage image={cover.image} name={nameTh ?? dinosaur.name} />
         </div>
-        {cover.ai && <AiBadge className="absolute left-2 top-2" />}
+        {cover.ai && <AiBadge className="absolute left-2 top-2" percent={aiImageScore(cover.ai)?.percent} />}
         <span className="absolute right-2 top-2 rounded-full bg-stone-900/75 px-2 py-0.5 text-[11px] font-medium text-stone-50 backdrop-blur">
           {DIET_LABELS_TH[dinosaur.diet]}
         </span>
