@@ -3,7 +3,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getAllSlugs, getDinosaurBySlug, countryNameTh } from "@/lib/dinosaurs";
 import { DIET_LABELS_TH, CLADE_LABELS_TH } from "@/lib/labels";
-import { DinosaurImage, ImageAttribution } from "@/components/DinosaurImage";
+import { DinosaurGallery, type GalleryItem } from "@/components/DinosaurGallery";
+import { aiImageScore, getAiImages, getCoverImage } from "@/lib/ai-images";
 
 export function generateStaticParams() {
   return getAllSlugs().map((slug) => ({ slug }));
@@ -18,7 +19,8 @@ export async function generateMetadata({ params }: PageProps<"/dinosaurs/[slug]"
   const description =
     dinosaur.content?.descriptionTh ??
     `ข้อมูล ${dinosaur.name} ไดโนเสาร์กลุ่ม ${CLADE_LABELS_TH[dinosaur.clade]} ที่มีชีวิตอยู่เมื่อ ${dinosaur.ageRangeMa[1]}-${dinosaur.ageRangeMa[0]} ล้านปีก่อน`;
-  const image = dinosaur.images[0]?.localLarge ?? dinosaur.images[0]?.localSmall;
+  const cover = getCoverImage(dinosaur).image;
+  const image = cover?.localLarge ?? cover?.localSmall;
 
   return {
     title: `${nameTh} (${dinosaur.name})`,
@@ -39,7 +41,10 @@ export default async function DinosaurDetailPage({ params }: PageProps<"/dinosau
 
   const { content } = dinosaur;
   const nameTh = content?.nameTh ?? dinosaur.name;
-  const image = dinosaur.images[0];
+  // A well-reviewed AI image leads; otherwise the Commons image stays first and AI images follow.
+  const aiItems: GalleryItem[] = getAiImages(dinosaur.slug).map((image) => ({ kind: "ai", image, score: aiImageScore(image) }));
+  const commonsItems: GalleryItem[] = dinosaur.images.map((image) => ({ kind: "commons", image }));
+  const galleryItems = getCoverImage(dinosaur).ai ? [...aiItems, ...commonsItems] : [...commonsItems, ...aiItems];
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -64,14 +69,7 @@ export default async function DinosaurDetailPage({ params }: PageProps<"/dinosau
 
       {/* Simple layer */}
       <section className="mt-4">
-        <div className="relative aspect-video w-full overflow-hidden rounded-2xl bg-stone-100">
-          <DinosaurImage image={image} name={nameTh} size="large" priority />
-        </div>
-        {image && (
-          <div className="mt-2">
-            <ImageAttribution image={image} />
-          </div>
-        )}
+        <DinosaurGallery items={galleryItems} name={nameTh} />
 
         <h1 className="mt-4 text-3xl font-bold text-stone-900">{nameTh}</h1>
         <p className="text-lg italic text-stone-500">{dinosaur.name}</p>

@@ -8,6 +8,7 @@ import type { BrowseItem } from "@/lib/dinosaurs";
 import { DIET_LABELS_TH, PERIOD_LABELS_TH } from "@/lib/labels";
 import type { Diet } from "@/types/dinosaur";
 import { BoneIcon } from "@/components/Icons";
+import { AiBadge } from "@/components/AiImageDisclosure";
 
 const PERIOD_OPTIONS = ["Triassic", "Jurassic", "Cretaceous"] as const;
 const DIET_OPTIONS: Diet[] = ["carnivore", "herbivore", "omnivore", "unknown"];
@@ -121,6 +122,7 @@ export function DinosaurBrowser({ items }: { items: BrowseItem[] }) {
                     <BoneIcon className="h-8 w-8 opacity-60" />
                   </div>
                 )}
+                {d.thumbnailIsAi && <AiBadge className="absolute left-2 top-2" />}
               </div>
               <div className="p-2">
                 <p className="truncate text-sm font-semibold text-stone-900 group-hover:text-emerald-700">

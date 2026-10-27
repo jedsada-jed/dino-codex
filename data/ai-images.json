@@ -1,0 +1,236 @@
+{
+  "tyrannosaurus": [
+    {
+      "localSmall": "/images/ai/tyrannosaurus-1-330.webp",
+      "localLarge": "/images/ai/tyrannosaurus-1-960.webp",
+      "width": 1024,
+      "height": 768,
+      "model": "@cf/black-forest-labs/flux-2-dev",
+      "modelLabel": "FLUX.2 [dev] โดย Black Forest Labs (ผ่าน Cloudflare Workers AI)",
+      "prompt": "Scientifically accurate paleoart of Tyrannosaurus, a carnivore Tyrannosauridae dinosaur from Campanian–Maastrichtian times (83.6–66 million years ago). Reference: Tyrannosaurus is a genus of large theropod dinosaur. The type species Tyrannosaurus rex, often shortened to T. rex or colloquially T-Rex, is one of the best represented theropods. It lived throughout what is now western North America, on what was then an island continent known as Laramidia. Anatomy: bipedal with the back held roughly horizontal and the tail held straight out behind for balance, never dragging on the ground; hands with palms facing each other (not pronated), three-toed feet; lips covering the teeth when the mouth is closed; skin predominantly covered in small scales, massive deep skull, short two-fingered arms, powerful hind legs. Full body in side view, whole animal visible, standing in a Late Cretaceous landscape with conifers, ferns and early flowering plants, no grass lawns. Natural history museum illustration style, realistic textures and natural daylight, muted natural colors. No text, no labels, no humans, no modern objects.",
+      "promptSources": [
+        {
+          "label": "Wikipedia (en)",
+          "url": "https://en.wikipedia.org/wiki/Tyrannosaurus"
+        },
+        {
+          "label": "Paleobiology Database",
+          "url": "https://paleobiodb.org/classic/basicTaxonInfo?taxon_no=38613"
+        }
+      ],
+      "createdAt": "2026-10-27T13:30:45.347Z",
+      "checklist": [
+        {
+          "id": "pose",
+          "label": "ยืนสองขา หลังขนานพื้น หางยื่นตรงไม่ลากพื้น"
+        },
+        {
+          "id": "lips",
+          "label": "ปากปิด มีริมฝีปากปิดฟันจนมองไม่เห็นฟัน"
+        },
+        {
+          "id": "hands",
+          "label": "ฝ่ามือหันเข้าหากัน ไม่คว่ำลงหรือห้อยลง"
+        },
+        {
+          "id": "feet",
+          "label": "เท้ามีนิ้วรับน้ำหนัก 3 นิ้ว"
+        },
+        {
+          "id": "scales",
+          "label": "ผิวส่วนใหญ่เป็นเกล็ดเล็ก"
+        },
+        {
+          "id": "build",
+          "label": "กะโหลกใหญ่ลึก แขนสั้นมี 2 นิ้ว ขาหลังแข็งแรง"
+        },
+        {
+          "id": "composition",
+          "label": "เห็นทั้งตัวในมุมด้านข้าง"
+        },
+        {
+          "id": "habitat",
+          "label": "ฉากตรงกับยุคและแหล่งที่พบฟอสซิล"
+        },
+        {
+          "id": "clean",
+          "label": "ไม่มีตัวหนังสือ คน หรือวัตถุสมัยใหม่"
+        }
+      ],
+      "review": {
+        "reviewer": "Claude Opus 5.5 (ตรวจจากภาพทีละข้อ)",
+        "reviewedAt": "2026-10-27T13:37:39.867Z",
+        "results": [
+          {
+            "id": "pose",
+            "pass": true
+          },
+          {
+            "id": "lips",
+            "pass": false,
+            "note": "เห็นฟันชัดตลอดแนวปาก"
+          },
+          {
+            "id": "hands",
+            "pass": true,
+            "note": "แขนเล็ก มองเห็นไม่ชัดนัก"
+          },
+          {
+            "id": "feet",
+            "pass": true
+          },
+          {
+            "id": "scales",
+            "pass": true
+          },
+          {
+            "id": "build",
+            "pass": true
+          },
+          {
+            "id": "composition",
+            "pass": true
+          },
+          {
+            "id": "habitat",
+            "pass": true,
+            "note": "ดอกไม้บางดอกดูคล้ายพืชสมัยใหม่"
+          },
+          {
+            "id": "clean",
+            "pass": true
+          }
+        ]
+      }
+    }
+  ],
+  "velociraptor": [
+    {
+      "localSmall": "/images/ai/velociraptor-1-330.webp",
+      "localLarge": "/images/ai/velociraptor-1-960.webp",
+      "width": 1024,
+      "height": 768,
+      "model": "@cf/black-forest-labs/flux-2-dev",
+      "modelLabel": "FLUX.2 [dev] โดย Black Forest Labs (ผ่าน Cloudflare Workers AI)",
+      "prompt": "Scientifically accurate paleoart of Velociraptor, a carnivore Dromaeosauridae dinosaur from Coniacian–Maastrichtian times (89.8–66 million years ago). Pose: walking with the whole body held horizontal and balanced over the hips like a seesaw, back parallel to the ground, head held low and forward at the same height as the hips, short neck curving forward rather than upward, long stiff tail extended straight back in line with the back. NOT standing upright, NOT a raised head, NOT an ostrich or kangaroo posture. Reference: Velociraptor is a genus of small dromaeosaurid dinosaurs that lived in Asia during the Late Cretaceous epoch, about 75 million to 71 million years ago (Mya). Two species are currently recognized, although others have been assigned in the past. The type species is V. mongoliensis, named and described in 1924. Fossils of this species have been discovered in the Djadochta Formation, Mongolia. Anatomy: bipedal with the back held roughly horizontal and the tail held straight out behind for balance, never dragging on the ground; hands with palms facing each other (not pronated), three-toed feet; lips covering the teeth when the mouth is closed; a long, low, narrow snout with a slightly upturned profile and rows of small serrated teeth, NOT a bird beak and NOT a rounded bird head; a short S-curved neck about as long as the skull, NOT a long ostrich neck; clearly visible arms folded at the sides of the body like a bird's wings, with long pennaceous feathers attached along the forearm and hand, and three separate clawed fingers visible at the end of each hand; a stiff, straight tail held horizontally, fringed with feathers along its sides; each foot has a small sickle-shaped claw on the second toe, retracted and held just off the ground, proportionate in size and attached to the toe; the animal walks on the third and fourth toes; body covered in short feathers, about 2 meters long including the tail and about 50 cm tall at the hip. Full body in side view, whole animal visible, standing in an arid Late Cretaceous landscape of red sand dunes with sparse low shrubs and scattered small conifers, like the Djadochta Formation of Mongolia. Natural history museum illustration style, realistic textures and natural daylight, muted natural colors. No text, no labels, no humans, no modern objects.",
+      "promptSources": [
+        {
+          "label": "Wikipedia (en)",
+          "url": "https://en.wikipedia.org/wiki/Velociraptor"
+        },
+        {
+          "label": "Paleobiology Database",
+          "url": "https://paleobiodb.org/classic/basicTaxonInfo?taxon_no=38564"
+        }
+      ],
+      "createdAt": "2026-10-27T13:34:40.146Z",
+      "checklist": [
+        {
+          "id": "pose",
+          "label": "ลำตัวขนานพื้น หัวต่ำระดับสะโพก หางยื่นตรงแนวเดียวกับหลัง"
+        },
+        {
+          "id": "lips",
+          "label": "ปากปิด มีริมฝีปากปิดฟันจนมองไม่เห็นฟัน"
+        },
+        {
+          "id": "hands",
+          "label": "ฝ่ามือหันเข้าหากัน ไม่คว่ำลงหรือห้อยลง"
+        },
+        {
+          "id": "snout",
+          "label": "ปากยาว ต่ำ และแคบ ไม่ใช่จะงอยปากหรือหัวกลมแบบนก"
+        },
+        {
+          "id": "neck",
+          "label": "คอสั้นโค้งรูปตัว S ไม่ยาวแบบนกกระจอกเทศ"
+        },
+        {
+          "id": "arms",
+          "label": "เห็นแขนพับข้างลำตัว มีขนปีกติดที่แขน และเห็นนิ้วที่มีกรงเล็บ"
+        },
+        {
+          "id": "tail",
+          "label": "หางแข็งตรง มีขนเรียงด้านข้าง"
+        },
+        {
+          "id": "sickle-claw",
+          "label": "เห็นกรงเล็บรูปเคียวที่นิ้วเท้าที่ 2 ยกพ้นพื้น ขนาดสมส่วน"
+        },
+        {
+          "id": "feathers",
+          "label": "ลำตัวมีขนปกคลุม ขนาดเล็กประมาณ 2 เมตรรวมหาง"
+        },
+        {
+          "id": "composition",
+          "label": "เห็นทั้งตัวในมุมด้านข้าง"
+        },
+        {
+          "id": "habitat",
+          "label": "ฉากตรงกับยุคและแหล่งที่พบฟอสซิล"
+        },
+        {
+          "id": "clean",
+          "label": "ไม่มีตัวหนังสือ คน หรือวัตถุสมัยใหม่"
+        }
+      ],
+      "review": {
+        "reviewer": "Claude Opus 5.5 (ตรวจจากภาพทีละข้อ)",
+        "reviewedAt": "2026-10-27T13:37:39.867Z",
+        "results": [
+          {
+            "id": "pose",
+            "pass": true
+          },
+          {
+            "id": "lips",
+            "pass": false,
+            "note": "เห็นแนวฟันเล็กๆ ตามขอบปาก"
+          },
+          {
+            "id": "hands",
+            "pass": false,
+            "note": "นิ้วมือห้อยลงใต้ขนปีก"
+          },
+          {
+            "id": "snout",
+            "pass": true
+          },
+          {
+            "id": "neck",
+            "pass": true
+          },
+          {
+            "id": "arms",
+            "pass": true
+          },
+          {
+            "id": "tail",
+            "pass": true
+          },
+          {
+            "id": "sickle-claw",
+            "pass": false,
+            "note": "มองไม่เห็นกรงเล็บรูปเคียวชัดเจน"
+          },
+          {
+            "id": "feathers",
+            "pass": true
+          },
+          {
+            "id": "composition",
+            "pass": true
+          },
+          {
+            "id": "habitat",
+            "pass": true
+          },
+          {
+            "id": "clean",
+            "pass": true
+          }
+        ]
+      }
+    }
+  ]
+}

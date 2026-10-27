@@ -2,6 +2,8 @@ import Link from "next/link";
 import { DinosaurImage } from "./DinosaurImage";
 import { FlameIcon } from "./Icons";
 import { SectionHeading } from "./SectionHeading";
+import { AiBadge } from "./AiImageDisclosure";
+import { getCoverImage } from "@/lib/ai-images";
 import { getPopularDinosaurs, getPopularityPeriod, pageviewsToolUrl, type PopularDinosaur } from "@/lib/popularity";
 
 const formatDateTh = (iso: string) =>
@@ -18,6 +20,7 @@ function ViewsBar({ views, maxViews }: { views: number; maxViews: number }) {
 /** Top 3 as large podium cards. */
 function PodiumCard({ item, maxViews }: { item: PopularDinosaur; maxViews: number }) {
   const { rank, dinosaur, nameTh, views } = item;
+  const cover = getCoverImage(dinosaur);
   return (
     <Link
       href={`/dinosaurs/${dinosaur.slug}`}
@@ -25,8 +28,9 @@ function PodiumCard({ item, maxViews }: { item: PopularDinosaur; maxViews: numbe
     >
       <div className="relative aspect-[4/3] overflow-hidden bg-white">
         <div className="absolute inset-0 transition-transform duration-500 motion-safe:group-hover:scale-105">
-          <DinosaurImage image={dinosaur.images[0]} name={nameTh ?? dinosaur.name} />
+          <DinosaurImage image={cover.image} name={nameTh ?? dinosaur.name} />
         </div>
+        {cover.ai && <AiBadge className="absolute bottom-3 left-3" />}
         <span
           className={`absolute left-3 top-3 flex h-11 w-11 items-center justify-center rounded-full text-lg font-black shadow-lg ${
             rank === 1 ? "bg-[#e0a352] text-[#1c2e22]" : "bg-[#1c2e22] text-[#f4f7ef]"
@@ -53,6 +57,7 @@ function PodiumCard({ item, maxViews }: { item: PopularDinosaur; maxViews: numbe
 /** Ranks 4+ as a compact ranked list. */
 function RankRow({ item, maxViews }: { item: PopularDinosaur; maxViews: number }) {
   const { rank, dinosaur, nameTh, views } = item;
+  const cover = getCoverImage(dinosaur);
   return (
     <Link
       href={`/dinosaurs/${dinosaur.slug}`}
@@ -62,7 +67,10 @@ function RankRow({ item, maxViews }: { item: PopularDinosaur; maxViews: number }
         {rank}
       </span>
       <div className="relative h-14 w-20 shrink-0 overflow-hidden rounded-xl bg-white">
-        <DinosaurImage image={dinosaur.images[0]} name={nameTh ?? dinosaur.name} />
+        <DinosaurImage image={cover.image} name={nameTh ?? dinosaur.name} />
+        {cover.ai && (
+          <span className="absolute bottom-0.5 left-0.5 rounded bg-[#1c2e22]/85 px-1 text-[10px] font-bold text-[#f4f7ef]">AI</span>
+        )}
       </div>
       <div className="min-w-0 flex-1">
         <div className="flex items-baseline justify-between gap-2">

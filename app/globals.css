@@ -31,6 +31,8 @@
 
   --amber-50: #fbf1e2;
   --amber-700: #a15c1f;
+
+  --danger: #b42318;
 }
 
 [data-theme="dark"] {
@@ -57,6 +59,8 @@
 
   --amber-50: #3a2c14;
   --amber-700: #e0a352;
+
+  --danger: #f97066;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -84,6 +88,8 @@
 
     --amber-50: #3a2c14;
     --amber-700: #e0a352;
+
+    --danger: #f97066;
   }
 }
 
@@ -112,6 +118,7 @@
 
   --color-amber-50: var(--amber-50);
   --color-amber-700: var(--amber-700);
+  --color-danger: var(--danger);
 }
 
 body {

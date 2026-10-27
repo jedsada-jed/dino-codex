@@ -2,6 +2,7 @@ import dinosaursData from "@/data/dinosaurs.json";
 import contentThData from "@/data/content-th.json";
 import metaData from "@/data/meta.json";
 import type { Dinosaur, DinosaurThaiContent, PipelineMeta } from "@/types/dinosaur";
+import { getCoverImage } from "@/lib/ai-images";
 
 // `ageRangeMa` is a fixed-length tuple, but TypeScript infers a plain `number[]` from JSON
 // module content, so the cast needs to go through `unknown` first.
@@ -108,11 +109,14 @@ export interface BrowseItem {
   period: PeriodKey | "unknown";
   countries: string[];
   thumbnail: string | null;
+  thumbnailIsAi: boolean;
 }
 
 /** Slim, client-safe index for the search/filter UI on /dinosaurs — avoids shipping the full dataset to the browser. */
 export function getBrowseIndex(): BrowseItem[] {
-  return getAllDinosaurs().map((d) => ({
+  return getAllDinosaurs().map((d) => {
+    const cover = getCoverImage(d);
+    return {
     slug: d.slug,
     name: d.name,
     nameTh: d.content?.nameTh ?? null,
@@ -120,6 +124,8 @@ export function getBrowseIndex(): BrowseItem[] {
     clade: d.clade,
     period: getPeriod(d),
     countries: d.countries,
-    thumbnail: d.images[0]?.localSmall ?? null,
-  }));
+    thumbnail: cover.image?.localSmall ?? null,
+    thumbnailIsAi: cover.ai !== null,
+  };
+  });
 }

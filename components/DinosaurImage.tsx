@@ -20,7 +20,7 @@ export function DinosaurImage({
   size = "small",
   priority = false,
 }: {
-  image: DinosaurImageData | undefined;
+  image: Pick<DinosaurImageData, "localSmall" | "localLarge"> | undefined;
   name: string;
   size?: "small" | "large";
   priority?: boolean;

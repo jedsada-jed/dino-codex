@@ -1,6 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { SearchIcon } from "./Icons";
+import { AiBadge } from "./AiImageDisclosure";
+import { getCoverImage } from "@/lib/ai-images";
+import { getDinosaurBySlug } from "@/lib/dinosaurs";
 
 /** Decorative fern frond: leaflets placed along a gently curving stem. */
 function Fern({ className }: { className?: string }) {
@@ -34,6 +37,8 @@ export function Hero({ dinosaurCount, thailandCount }: { dinosaurCount: number; 
     { value: thailandCount.toLocaleString("th-TH"), label: "พบในไทย" },
     { value: "3", label: "ยุคไดโนเสาร์" },
   ];
+  const trex = getDinosaurBySlug("tyrannosaurus");
+  const cover = trex ? getCoverImage(trex) : null;
 
   return (
     <section className="relative isolate overflow-hidden bg-[#0b2419] text-[#e3efe8]">
@@ -96,15 +101,16 @@ export function Hero({ dinosaurCount, thailandCount }: { dinosaurCount: number; 
           href="/dinosaurs/tyrannosaurus"
           className="group relative block rounded-3xl bg-[#f4f7ef] p-3 shadow-2xl shadow-black/40 ring-1 ring-white/10 transition motion-safe:lg:rotate-2 motion-safe:hover:rotate-0"
         >
-          <div className="relative aspect-[960/388] overflow-hidden rounded-2xl bg-white">
+          <div className={`relative overflow-hidden rounded-2xl bg-white ${cover?.ai ? "aspect-[4/3]" : "aspect-[960/388]"}`}>
             <Image
-              src="/images/dinos/tyrannosaurus-960.webp"
+              src={cover?.image?.localLarge ?? "/images/dinos/tyrannosaurus-960.webp"}
               alt="ไทแรนโนซอรัส"
               fill
               priority
               sizes="(min-width: 1024px) 480px, 100vw"
               className="object-cover transition-transform duration-500 motion-safe:group-hover:scale-105"
             />
+            {cover?.ai && <AiBadge className="absolute left-3 top-3" />}
           </div>
           <div className="flex items-end justify-between gap-3 px-2 pb-1 pt-3 text-[#1c2e22]">
             <div>
