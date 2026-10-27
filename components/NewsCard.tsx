@@ -54,7 +54,7 @@ export function NewsCard({ item }: { item: NewsItem }) {
       href={item.url}
       target="_blank"
       rel="noopener noreferrer"
-      className="group flex flex-col overflow-hidden rounded-xl border border-stone-200 bg-stone-100 shadow-sm transition motion-safe:hover:-translate-y-0.5 hover:shadow-md"
+      className="group flex flex-col overflow-hidden rounded-2xl border border-stone-200 bg-stone-100 shadow-sm transition hover:border-emerald-500 hover:shadow-lg motion-safe:hover:-translate-y-1"
     >
       <div className="relative aspect-video w-full overflow-hidden bg-stone-200">
         <NewsCover item={item} />

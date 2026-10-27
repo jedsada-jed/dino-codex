@@ -20,3 +20,14 @@ export const PERIOD_LABELS_TH: Record<string, string> = {
   Cretaceous: "ครีเทเชียส",
   unknown: "ไม่ทราบยุค",
 };
+
+/**
+ * Fixed (theme-independent) period fills, dark enough that white text on them passes
+ * WCAG AA in both light and dark mode. Shared by the homepage period strip and /timeline.
+ */
+export const PERIOD_COLORS: Record<string, string> = {
+  Triassic: "#a14c12",
+  Jurassic: "#1f6b4a",
+  Cretaceous: "#0369a1",
+  unknown: "#545f4d",
+};

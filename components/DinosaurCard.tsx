@@ -1,27 +1,34 @@
 import Link from "next/link";
 import { DinosaurImage } from "./DinosaurImage";
-import { DIET_LABELS_TH } from "@/lib/labels";
-import type { DinosaurWithContent } from "@/lib/dinosaurs";
+import { DIET_LABELS_TH, PERIOD_COLORS, PERIOD_LABELS_TH } from "@/lib/labels";
+import { getPeriod, type DinosaurWithContent } from "@/lib/dinosaurs";
 
 export function DinosaurCard({ dinosaur }: { dinosaur: DinosaurWithContent }) {
+  const nameTh = dinosaur.content?.nameTh;
+  const period = getPeriod(dinosaur);
+
   return (
     <Link
       href={`/dinosaurs/${dinosaur.slug}`}
-      className="group flex flex-col overflow-hidden rounded-xl border border-stone-200 bg-stone-100 shadow-sm transition motion-safe:hover:-translate-y-0.5 hover:shadow-md"
+      className="group flex h-full flex-col overflow-hidden rounded-2xl border border-stone-200 bg-stone-100 shadow-sm transition hover:border-emerald-500 hover:shadow-lg motion-safe:hover:-translate-y-1"
     >
-      <div className="relative aspect-4/3 w-full overflow-hidden bg-stone-100">
-        <DinosaurImage image={dinosaur.images[0]} name={dinosaur.content?.nameTh ?? dinosaur.name} />
+      <div className="relative aspect-4/3 w-full overflow-hidden bg-white">
+        <div className="absolute inset-0 transition-transform duration-500 motion-safe:group-hover:scale-105">
+          <DinosaurImage image={dinosaur.images[0]} name={nameTh ?? dinosaur.name} />
+        </div>
+        <span className="absolute right-2 top-2 rounded-full bg-stone-900/75 px-2 py-0.5 text-[11px] font-medium text-stone-50 backdrop-blur">
+          {DIET_LABELS_TH[dinosaur.diet]}
+        </span>
       </div>
-      <div className="flex flex-1 flex-col gap-1 p-3">
-        <p className="font-semibold text-stone-900 group-hover:text-emerald-700">
-          {dinosaur.content?.nameTh ?? dinosaur.name}
-        </p>
-        {dinosaur.content?.nameTh && <p className="text-sm italic text-stone-500">{dinosaur.name}</p>}
-        <div className="mt-auto flex flex-wrap gap-1 pt-2 text-xs">
-          <span className="rounded-full bg-emerald-50 px-2 py-0.5 text-emerald-700">{DIET_LABELS_TH[dinosaur.diet]}</span>
-          {dinosaur.countries.includes("TH") && (
-            <span className="rounded-full bg-amber-50 px-2 py-0.5 text-amber-700">พบในไทย</span>
-          )}
+      <div className="flex flex-1 flex-col p-3">
+        <p className="font-bold leading-snug text-stone-900 group-hover:text-emerald-700">{nameTh ?? dinosaur.name}</p>
+        {nameTh && <p className="text-sm italic text-stone-500">{dinosaur.name}</p>}
+        <div className="mt-auto flex flex-wrap items-center gap-x-3 gap-y-1 pt-3 text-xs text-stone-600">
+          <span className="inline-flex items-center gap-1.5">
+            <span className="h-2 w-2 rounded-full" style={{ backgroundColor: PERIOD_COLORS[period] }} aria-hidden="true" />
+            {PERIOD_LABELS_TH[period]}
+          </span>
+          {dinosaur.countries.includes("TH") && <span className="font-medium text-amber-700">พบในไทย</span>}
         </div>
       </div>
     </Link>

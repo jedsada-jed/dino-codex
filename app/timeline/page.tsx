@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { getAllDinosaurs, getPeriod, PERIODS } from "@/lib/dinosaurs";
-import { PERIOD_LABELS_TH } from "@/lib/labels";
+import { PERIOD_COLORS, PERIOD_LABELS_TH } from "@/lib/labels";
 import { DinosaurCard } from "@/components/DinosaurCard";
 
 const description = "ไทม์ไลน์ยุคไทรแอสซิก จูแรสซิก และครีเทเชียส ที่ไดโนเสาร์อาศัยอยู่";
@@ -34,9 +34,12 @@ export default function TimelinePage() {
         {PERIODS.map((p) => {
           const duration = p.maxMa - p.minMa;
           const widthPercent = (duration / totalDuration) * 100;
-          const color = p.key === "Triassic" ? "bg-[#a14c12]" : p.key === "Jurassic" ? "bg-[#1f6b4a]" : "bg-[#0369a1]";
-          return (
-            <div key={p.key} className={`flex items-center justify-center ${color}`} style={{ width: `${widthPercent}%` }}>
+                    return (
+            <div
+              key={p.key}
+              className="flex items-center justify-center"
+              style={{ width: `${widthPercent}%`, backgroundColor: PERIOD_COLORS[p.key] }}
+            >
               {PERIOD_LABELS_TH[p.key]}
             </div>
           );
