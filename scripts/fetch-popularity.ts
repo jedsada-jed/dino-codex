@@ -99,6 +99,16 @@ async function main() {
     periodEnd: ymd(end),
     items: results.slice(0, TOP_N),
   };
+
+  // Leave the file untouched when only generatedAt would change, so the monthly
+  // workflow doesn't commit and redeploy identical data.
+  const withoutTimestamp = (d: PopularityData) => JSON.stringify({ ...d, generatedAt: undefined });
+  const previous = await readFile(OUTPUT_PATH, "utf8").then((s) => JSON.parse(s) as PopularityData, () => null);
+  if (previous && withoutTimestamp(previous) === withoutTimestamp(output)) {
+    console.log("Popularity data unchanged; not rewriting", OUTPUT_PATH);
+    return;
+  }
+
   await writeFile(OUTPUT_PATH, JSON.stringify(output, null, 2) + "\n");
   console.log(`Wrote top ${output.items.length} to ${OUTPUT_PATH}`);
   console.table(output.items.slice(0, 15));
