@@ -575,7 +575,9 @@ async function main() {
 
   const dinosaurs = JSON.parse(await readFile(DATA_PATH, "utf8")) as Dinosaur[];
   const popularity = JSON.parse(await readFile(POPULARITY_PATH, "utf8")) as PopularityData;
-  const existing: AiImageData = existsSync(OUTPUT_DATA) ? JSON.parse(await readFile(OUTPUT_DATA, "utf8")) : {};
+  // Re-read before every use: reviews may be recorded into the same file while a long run is going.
+  const loadData = async (): Promise<AiImageData> =>
+    existsSync(OUTPUT_DATA) ? JSON.parse(await readFile(OUTPUT_DATA, "utf8")) : {};
   await mkdir(OUTPUT_DIR, { recursive: true });
 
   for (const slug of slugs) {
@@ -588,8 +590,9 @@ async function main() {
     if (dryRun) continue;
 
     const png = await generate(prompt);
-    if (replace) existing[slug] = [];
-    const index = (existing[slug]?.length ?? 0) + 1;
+    const before = await loadData();
+    if (replace) before[slug] = [];
+    const index = (before[slug]?.length ?? 0) + 1;
     const files = {} as Record<(typeof SIZES)[number], string>;
     for (const size of SIZES) {
       const name = `${slug}-${index}-${size}.webp`;
@@ -614,8 +617,9 @@ async function main() {
       ],
       createdAt: new Date().toISOString(),
     };
-    existing[slug] = [...(existing[slug] ?? []), image];
-    await writeFile(OUTPUT_DATA, JSON.stringify(existing, null, 2) + "\n");
+    const latest = await loadData();
+    latest[slug] = [...(replace ? [] : (latest[slug] ?? [])), image];
+    await writeFile(OUTPUT_DATA, JSON.stringify(latest, null, 2) + "\n");
     console.log(`[${slug}] saved ${files[960]}`);
   }
 }
