@@ -3,7 +3,6 @@ import { notFound } from "next/navigation";
 import { getMeta } from "@/lib/dinosaurs";
 import { formatDate, formatNumber, href, isLocale, languageAlternates, type Locale } from "@/lib/i18n";
 import { AUTHOR } from "@/lib/author";
-import { CLOUDFLARE_ANALYTICS_TOKEN } from "@/lib/analytics";
 
 /** Page-specific prose, kept here rather than in the shared dictionary. */
 const COPY = {
@@ -135,12 +134,10 @@ export default async function AboutPage({ params }: PageProps<"/[lang]/about">) 
         <p className="mt-2 leading-relaxed text-stone-700">{c.aiBody}</p>
       </section>
 
-      {CLOUDFLARE_ANALYTICS_TOKEN && (
-        <section className="mt-8">
-          <h2 className="text-lg font-semibold text-stone-900">{c.privacyTitle}</h2>
-          <p className="mt-2 leading-relaxed text-stone-700">{c.privacyBody}</p>
-        </section>
-      )}
+      <section className="mt-8">
+        <h2 className="text-lg font-semibold text-stone-900">{c.privacyTitle}</h2>
+        <p className="mt-2 leading-relaxed text-stone-700">{c.privacyBody}</p>
+      </section>
 
       <section className="mt-8">
         <h2 className="text-lg font-semibold text-stone-900">{c.howTitle}</h2>
