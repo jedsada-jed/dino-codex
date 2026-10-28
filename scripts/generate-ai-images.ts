@@ -75,6 +75,7 @@ interface Rule {
 /** Reconstruction guidance that reflects current consensus for each group. */
 function anatomyRules(d: Dinosaur): Rule[] {
   const dromaeosaur = d.family === "Dromaeosauridae";
+  const spinosaurid = d.family === "Spinosauridae";
   const rules: Rule[] = [];
   if (d.clade === "Theropoda") {
     rules.push(
@@ -93,20 +94,26 @@ function anatomyRules(d: Dinosaur): Rule[] {
               "bipedal with the back held roughly horizontal and the tail held straight out behind for balance, never dragging on the ground. NOT standing upright like a kangaroo",
             check: "ยืนสองขา หลังขนานพื้น หางยื่นตรงไม่ลากพื้น",
           },
-      {
+    );
+    // Lips are well supported for most theropods, but the interlocking snout-tip teeth of
+    // spinosaurids may have stayed exposed, so the rule is left out for them.
+    if (!spinosaurid) {
+      rules.push({
         id: "lips",
         early: true,
         prompt:
           "mouth closed with all teeth fully hidden behind scaly lips, like a monitor lizard. NO visible teeth",
         check: "ปากปิด มีริมฝีปากปิดฟันจนมองไม่เห็นฟัน",
-      },
+      });
+    }
+    rules.push(
       {
         id: "hands",
         prompt: "hands held with palms facing each other (not pronated, not palms-down, not dangling)",
         check: "ฝ่ามือหันเข้าหากัน ไม่คว่ำลงหรือห้อยลง",
       },
     );
-    if (!dromaeosaur) {
+    if (!dromaeosaur && !spinosaurid) {
       rules.push({ id: "feet", prompt: "three main weight-bearing toes on each foot", check: "เท้ามีนิ้วรับน้ำหนัก 3 นิ้ว" });
     }
   }
@@ -147,6 +154,33 @@ function anatomyRules(d: Dinosaur): Rule[] {
       },
     );
   }
+  if (spinosaurid) {
+    rules.push(
+      {
+        id: "snout",
+        early: true,
+        prompt:
+          "a long, narrow, crocodile-like snout with conical teeth and nostrils set far back near the eyes, NOT a deep tyrannosaur-like skull",
+        check: "ปากยาวแคบแบบจระเข้ ฟันทรงกรวย รูจมูกอยู่ค่อนไปทางตา",
+      },
+      {
+        id: "sail",
+        early: true,
+        prompt: "a tall sail along the back formed by elongated neural spines covered in skin",
+        check: "มีใบเรือสูงบนหลังจากกระดูกสันหลังที่ยืดยาว",
+      },
+      {
+        id: "tail",
+        prompt: "a deep, flexible, paddle-like tail with tall thin spines forming a fin, like a giant newt's tail",
+        check: "หางแบนลึกเป็นครีบคล้ายพาย",
+      },
+      {
+        id: "limbs",
+        prompt: "robust arms with a large curved thumb claw, relatively short hind legs with broad, flat feet",
+        check: "แขนแข็งแรงมีกรงเล็บนิ้วโป้งใหญ่ ขาหลังค่อนข้างสั้น เท้ากว้างแบน",
+      },
+    );
+  }
   if (d.family === "Tyrannosauridae") {
     rules.push(
       { id: "scales", prompt: "skin predominantly covered in small scales", check: "ผิวส่วนใหญ่เป็นเกล็ดเล็ก" },
@@ -174,8 +208,18 @@ function anatomyRules(d: Dinosaur): Rule[] {
   return rules;
 }
 
+/**
+ * Age for genera whose PBDB range includes doubtful referrals (Spinosaurus spans 125–72 Ma
+ * there, but the genus is Cenomanian). Uses the range given in the Wikipedia summary.
+ */
+const AGE_OVERRIDES: Record<string, string> = {
+  spinosaurus: "the Cenomanian age of the Late Cretaceous (about 100–94 million years ago)",
+};
+
 /** Known depositional settings that the period-wide default would get wrong. */
 const HABITAT_OVERRIDES: Record<string, string> = {
+  spinosaurus:
+    "shallow water at the edge of a wide Late Cretaceous river system in North Africa, like the Kem Kem beds of Morocco, with large fish in the water, ferns and conifers on the banks, no grass",
   velociraptor:
     "an arid Late Cretaceous landscape of red sand dunes with sparse low shrubs and scattered small conifers, like the Djadochta Formation of Mongolia",
 };
@@ -223,9 +267,10 @@ function buildPrompt(d: Dinosaur, summary: string): { prompt: string; checklist:
   const prompt = [
     `Scientifically accurate paleoart of ${d.name}, a ${d.diet === "unknown" ? "" : `${d.diet} `}${
       d.family ?? d.clade
-    } dinosaur from ${d.earlyInterval ?? ""}${d.lateInterval ? `–${d.lateInterval}` : ""} times (${d.ageRangeMa[0]}–${
-      d.ageRangeMa[1]
-    } million years ago).`,
+    } dinosaur from ${
+      AGE_OVERRIDES[d.slug] ??
+      `${d.earlyInterval ?? ""}${d.lateInterval ? `–${d.lateInterval}` : ""} times (${d.ageRangeMa[0]}–${d.ageRangeMa[1]} million years ago)`
+    }.`,
     ...early.map((r) => `${r.prompt[0].toUpperCase()}${r.prompt.slice(1)}.`),
     `Reference: ${summary}`,
     ...(rest.length ? [`Anatomy: ${rest.map((r) => r.prompt).join("; ")}.`] : []),
