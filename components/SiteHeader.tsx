@@ -12,6 +12,7 @@ const NAV_LINKS = [
   { href: "/dinosaurs", label: "ไดโนเสาร์ทั้งหมด" },
   { href: "/thailand", label: "ไดโนเสาร์ไทย" },
   { href: "/timeline", label: "ไทม์ไลน์" },
+  { href: "/articles", label: "บทความ" },
   { href: "/news", label: "ข่าวสาร" },
   { href: "/about", label: "เกี่ยวกับ" },
 ];
@@ -21,7 +22,7 @@ function isActive(pathname: string, href: string) {
   return href === "/" ? path === "/" : path === href || path.startsWith(`${href}/`);
 }
 
-/** Inline nav from md up; below that a menu button opens a full-width list with 44px rows. */
+/** Inline nav from lg up; below that a menu button opens a full-width list with 44px rows. */
 export function SiteHeader() {
   const pathname = usePathname();
   // Remember which page the menu was opened on, so navigating closes it without an effect.
@@ -42,7 +43,7 @@ export function SiteHeader() {
         </Link>
 
         <div className="flex items-center gap-2">
-          <nav aria-label="เมนูหลัก" className="hidden md:block">
+          <nav aria-label="เมนูหลัก" className="hidden lg:block">
             <ul className="flex gap-1 text-sm font-medium">
               {NAV_LINKS.map((link) => {
                 const active = isActive(pathname, link.href);
@@ -65,7 +66,7 @@ export function SiteHeader() {
           <ThemeToggle />
           <button
             type="button"
-            className="flex h-11 w-11 items-center justify-center rounded-full text-stone-700 transition-colors hover:bg-stone-200 md:hidden"
+            className="flex h-11 w-11 items-center justify-center rounded-full text-stone-700 transition-colors hover:bg-stone-200 lg:hidden"
             aria-expanded={menuOpen}
             aria-controls="mobile-nav"
             aria-label={menuOpen ? "ปิดเมนู" : "เปิดเมนู"}
@@ -76,7 +77,7 @@ export function SiteHeader() {
         </div>
       </div>
 
-      <nav id="mobile-nav" aria-label="เมนูหลัก" hidden={!menuOpen} className="border-t border-stone-200 md:hidden">
+      <nav id="mobile-nav" aria-label="เมนูหลัก" hidden={!menuOpen} className="border-t border-stone-200 lg:hidden">
         <ul className="mx-auto max-w-6xl px-2 py-2">
           {NAV_LINKS.map((link) => {
             const active = isActive(pathname, link.href);
