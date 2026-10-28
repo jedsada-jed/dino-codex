@@ -8,6 +8,7 @@ import { getLatestNews } from "@/lib/news";
 import { getDictionary } from "@/lib/dictionaries";
 import { LOCALES, href, isLocale } from "@/lib/i18n";
 import { AUTHOR } from "@/lib/author";
+import { CLOUDFLARE_ANALYTICS_TOKEN } from "@/lib/analytics";
 import "../globals.css";
 
 const THEME_INIT_SCRIPT = `
@@ -63,6 +64,14 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[la
     <html lang={lang} className={`${notoSansThai.variable} h-full antialiased`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
+        {/* Production builds only, so local dev visits don't count. */}
+        {CLOUDFLARE_ANALYTICS_TOKEN && process.env.NODE_ENV === "production" && (
+          <script
+            defer
+            src="https://static.cloudflareinsights.com/beacon.min.js"
+            data-cf-beacon={JSON.stringify({ token: CLOUDFLARE_ANALYTICS_TOKEN })}
+          />
+        )}
       </head>
       <body className="min-h-full flex flex-col bg-stone-50 text-stone-900">
         <a

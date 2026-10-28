@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { getMeta } from "@/lib/dinosaurs";
 import { formatDate, formatNumber, href, isLocale, languageAlternates, type Locale } from "@/lib/i18n";
 import { AUTHOR } from "@/lib/author";
+import { CLOUDFLARE_ANALYTICS_TOKEN } from "@/lib/analytics";
 
 /** Page-specific prose, kept here rather than in the shared dictionary. */
 const COPY = {
@@ -12,6 +13,9 @@ const COPY = {
     creatorBody:
       "เว็บไซต์นี้จัดทำโดย Jedsada Saengow โดยมี AI (Claude) ช่วยเขียนโค้ด เขียนบทความและคำแปลภาษาอังกฤษ และตรวจภาพที่สร้างด้วย AI ผู้จัดทำเป็นผู้ตรวจและรับผิดชอบเนื้อหาทั้งหมด หากพบข้อมูลที่ไม่ถูกต้อง แจ้งได้ผ่านเว็บไซต์ของผู้จัดทำ",
     creatorLink: "เว็บไซต์ของผู้จัดทำ",
+    privacyTitle: "ความเป็นส่วนตัว",
+    privacyBody:
+      "เว็บไซต์นี้ใช้ Cloudflare Web Analytics นับจำนวนผู้เข้าชมและหน้าที่ได้รับความนิยม โดยไม่ใช้ cookie และไม่เก็บข้อมูลที่ระบุตัวบุคคลได้",
     description: "ที่มาของข้อมูล วิธีการสร้างเว็บไซต์ และสัญญาอนุญาตของข้อมูลและภาพประกอบ",
     sourcesTitle: "ที่มาของข้อมูล",
     sourcesLead:
@@ -33,6 +37,9 @@ const COPY = {
     creatorBody:
       "This site is made by Jedsada Saengow, with help from AI (Claude) for writing code, articles and English translations, and for checking the AI-generated images. The creator reviews and is responsible for all content. If you spot a mistake, please get in touch through the creator's website.",
     creatorLink: "Creator's website",
+    privacyTitle: "Privacy",
+    privacyBody:
+      "This site uses Cloudflare Web Analytics to count visits and popular pages. It does not use cookies or collect personally identifiable information.",
     description: "Where the data comes from, how the site is built, and the licenses for data and images.",
     sourcesTitle: "Data sources",
     sourcesLead:
@@ -127,6 +134,13 @@ export default async function AboutPage({ params }: PageProps<"/[lang]/about">) 
         <h2 className="text-lg font-semibold text-stone-900">{c.aiTitle}</h2>
         <p className="mt-2 leading-relaxed text-stone-700">{c.aiBody}</p>
       </section>
+
+      {CLOUDFLARE_ANALYTICS_TOKEN && (
+        <section className="mt-8">
+          <h2 className="text-lg font-semibold text-stone-900">{c.privacyTitle}</h2>
+          <p className="mt-2 leading-relaxed text-stone-700">{c.privacyBody}</p>
+        </section>
+      )}
 
       <section className="mt-8">
         <h2 className="text-lg font-semibold text-stone-900">{c.howTitle}</h2>
