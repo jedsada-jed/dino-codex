@@ -1,5 +1,5 @@
 /**
- * Generates AI paleoart for selected dinosaurs with Cloudflare Workers AI and records the
+ * Generates AI paleoart for selected dinosaurs (Cloudflare Workers AI or OpenAI) and records the
  * prompt and model next to each image (data/ai-images.json), so the site can disclose
  * exactly how every AI image was made.
  *
@@ -11,11 +11,13 @@
  *
  * Needs in .env.local (never committed):
  *   CLOUDFLARE_ACCOUNT_ID   – optional, defaults to the account in wrangler.jsonc
- *   CLOUDFLARE_AI_TOKEN     – API token with the "Workers AI" permission
+ *   CLOUDFLARE_AI_TOKEN     – API token with the "Workers AI" permission (FLUX models)
+ *   OPENAI_API_KEY          – only for OpenAI models (gpt-image-*)
  *
  * Run with: npm run gen:ai-images -- tyrannosaurus velociraptor
  * Preview prompts without generating (no token or quota needed): add --dry-run
  * Replace a dinosaur's existing AI images instead of adding another: add --replace
+ * Pick a model (default FLUX.2 [dev] on Workers AI): add --model=gpt-image-2
  *
  * Every image gets a checklist built from the same rules as its prompt. After looking at
  * the image, record a review (see AiImageReview) so the site can show its accuracy score.
@@ -38,11 +40,21 @@ const SIZES = [330, 960] as const;
 const WIDTH = 1024;
 const HEIGHT = 768;
 
-const MODEL = process.env.AI_IMAGE_MODEL ?? "@cf/black-forest-labs/flux-2-dev";
+const MODEL =
+  process.argv.find((a) => a.startsWith("--model="))?.slice("--model=".length) ??
+  process.env.AI_IMAGE_MODEL ??
+  "@cf/black-forest-labs/flux-2-dev";
+const IS_OPENAI = MODEL.startsWith("gpt-image");
 const MODEL_LABELS: Record<string, string> = {
   "@cf/black-forest-labs/flux-2-dev": "FLUX.2 [dev] โดย Black Forest Labs (ผ่าน Cloudflare Workers AI)",
   "@cf/black-forest-labs/flux-1-schnell": "FLUX.1 [schnell] โดย Black Forest Labs (ผ่าน Cloudflare Workers AI)",
+  "gpt-image-2": "GPT Image 2 โดย OpenAI",
+  "gpt-image-2.5-flare": "GPT Image 2.5 Flare โดย OpenAI",
+  "gpt-image-2.5-sunburst": "GPT Image 2.5 Sunburst โดย OpenAI",
 };
+/** OpenAI's standard landscape size; cards crop it to 4:3. */
+const OPENAI_SIZE = "1536x1024";
+const OPENAI_QUALITY = "medium";
 const WIKI_UA = "dino-wiki/0.1 (Thai dinosaur encyclopedia; AI image prompt builder)";
 
 if (existsSync(path.join(ROOT, ".env.local"))) process.loadEnvFile(path.join(ROOT, ".env.local"));
@@ -282,7 +294,19 @@ function buildPrompt(d: Dinosaur, summary: string): { prompt: string; checklist:
   return { prompt, checklist };
 }
 
-async function generate(prompt: string, account: string, token: string): Promise<Buffer> {
+async function generateOpenAi(prompt: string, apiKey: string): Promise<Buffer> {
+  const res = await fetch("https://api.openai.com/v1/images/generations", {
+    method: "POST",
+    headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
+    body: JSON.stringify({ model: MODEL, prompt, size: OPENAI_SIZE, quality: OPENAI_QUALITY, output_format: "png", n: 1 }),
+  });
+  const json = (await res.json()) as { data?: { b64_json?: string }[]; error?: { message: string } };
+  const b64 = json.data?.[0]?.b64_json;
+  if (!res.ok || !b64) throw new Error(`OpenAI ${res.status}: ${json.error?.message ?? JSON.stringify(json).slice(0, 500)}`);
+  return Buffer.from(b64, "base64");
+}
+
+async function generateWorkersAi(prompt: string, account: string, token: string): Promise<Buffer> {
   const url = `https://api.cloudflare.com/client/v4/accounts/${account}/ai/run/${MODEL}`;
   const isMultipart = MODEL.includes("flux-2");
   let body: BodyInit;
@@ -310,9 +334,17 @@ async function main() {
   const replace = process.argv.includes("--replace");
   const slugs = process.argv.slice(2).filter((a) => !a.startsWith("--"));
   if (slugs.length === 0) throw new Error("Pass dinosaur slugs, e.g. npm run gen:ai-images -- tyrannosaurus");
-  const token = process.env.CLOUDFLARE_AI_TOKEN;
-  if (!token && !dryRun) throw new Error("Set CLOUDFLARE_AI_TOKEN in .env.local (API token with Workers AI permission)");
-  const account = await accountId();
+  const token = IS_OPENAI ? process.env.OPENAI_API_KEY : process.env.CLOUDFLARE_AI_TOKEN;
+  if (!token && !dryRun) {
+    throw new Error(
+      IS_OPENAI
+        ? "Set OPENAI_API_KEY in .env.local"
+        : "Set CLOUDFLARE_AI_TOKEN in .env.local (API token with Workers AI permission)",
+    );
+  }
+  const account = IS_OPENAI ? "" : await accountId();
+  const generate = (prompt: string) =>
+    IS_OPENAI ? generateOpenAi(prompt, token!) : generateWorkersAi(prompt, account, token!);
 
   const dinosaurs = JSON.parse(await readFile(DATA_PATH, "utf8")) as Dinosaur[];
   const popularity = JSON.parse(await readFile(POPULARITY_PATH, "utf8")) as PopularityData;
@@ -328,7 +360,7 @@ async function main() {
     console.log(`\n[${slug}] ${prompt}\n`);
     if (dryRun) continue;
 
-    const png = await generate(prompt, account, token!);
+    const png = await generate(prompt);
     if (replace) existing[slug] = [];
     const index = (existing[slug]?.length ?? 0) + 1;
     const files = {} as Record<(typeof SIZES)[number], string>;

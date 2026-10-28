@@ -232,5 +232,112 @@
         ]
       }
     }
+  ],
+  "spinosaurus": [
+    {
+      "localSmall": "/images/ai/spinosaurus-1-330.webp",
+      "localLarge": "/images/ai/spinosaurus-1-960.webp",
+      "width": 1536,
+      "height": 1024,
+      "model": "gpt-image-2",
+      "modelLabel": "GPT Image 2 โดย OpenAI",
+      "prompt": "Scientifically accurate paleoart of Spinosaurus, a carnivore Spinosauridae dinosaur from the Cenomanian age of the Late Cretaceous (about 100–94 million years ago). Bipedal with the back held roughly horizontal and the tail held straight out behind for balance, never dragging on the ground. NOT standing upright like a kangaroo. A long, narrow, crocodile-like snout with conical teeth and nostrils set far back near the eyes, NOT a deep tyrannosaur-like skull. A tall sail along the back formed by elongated neural spines covered in skin. Reference: Spinosaurus is a genus of large spinosaurid theropod dinosaurs that lived in what is now North Africa during the Cenomanian age of the Late Cretaceous period, about 100 to 94 million years ago. The genus was known first from Egyptian remains discovered in 1912 and described by German palaeontologist Ernst Stromer in 1915. The original remains were destroyed in World War II, but additional material came to light in the early 21st century. It is unclear whether one or two species are represented in the fossils reported in the scientific literature. Anatomy: hands held with palms facing each other (not pronated, not palms-down, not dangling); a deep, flexible, paddle-like tail with tall thin spines forming a fin, like a giant newt's tail; robust arms with a large curved thumb claw, relatively short hind legs with broad, flat feet. Full body in side view, whole animal visible, standing in shallow water at the edge of a wide Late Cretaceous river system in North Africa, like the Kem Kem beds of Morocco, with large fish in the water, ferns and conifers on the banks, no grass. Natural history museum illustration style, realistic textures and natural daylight, muted natural colors. No text, no labels, no humans, no modern objects.",
+      "checklist": [
+        {
+          "id": "pose",
+          "label": "ยืนสองขา หลังขนานพื้น หางยื่นตรงไม่ลากพื้น"
+        },
+        {
+          "id": "hands",
+          "label": "ฝ่ามือหันเข้าหากัน ไม่คว่ำลงหรือห้อยลง"
+        },
+        {
+          "id": "snout",
+          "label": "ปากยาวแคบแบบจระเข้ ฟันทรงกรวย รูจมูกอยู่ค่อนไปทางตา"
+        },
+        {
+          "id": "sail",
+          "label": "มีใบเรือสูงบนหลังจากกระดูกสันหลังที่ยืดยาว"
+        },
+        {
+          "id": "tail",
+          "label": "หางแบนลึกเป็นครีบคล้ายพาย"
+        },
+        {
+          "id": "limbs",
+          "label": "แขนแข็งแรงมีกรงเล็บนิ้วโป้งใหญ่ ขาหลังค่อนข้างสั้น เท้ากว้างแบน"
+        },
+        {
+          "id": "composition",
+          "label": "เห็นทั้งตัวในมุมด้านข้าง"
+        },
+        {
+          "id": "habitat",
+          "label": "ฉากตรงกับยุคและแหล่งที่พบฟอสซิล"
+        },
+        {
+          "id": "clean",
+          "label": "ไม่มีตัวหนังสือ คน หรือวัตถุสมัยใหม่"
+        }
+      ],
+      "promptSources": [
+        {
+          "label": "Wikipedia (en)",
+          "url": "https://en.wikipedia.org/wiki/Spinosaurus"
+        },
+        {
+          "label": "Paleobiology Database",
+          "url": "https://paleobiodb.org/classic/basicTaxonInfo?taxon_no=38598"
+        }
+      ],
+      "createdAt": "2026-10-28T14:02:00.092Z",
+      "review": {
+        "reviewer": "Claude Opus 5.5 (ตรวจจากภาพทีละข้อ)",
+        "reviewedAt": "2026-10-28T14:02:33.039Z",
+        "results": [
+          {
+            "id": "pose",
+            "pass": true
+          },
+          {
+            "id": "hands",
+            "pass": false,
+            "note": "มือยื่นไปข้างหน้า กรงเล็บชี้ลงพื้น ดูคล้ายคว่ำมือ"
+          },
+          {
+            "id": "snout",
+            "pass": true,
+            "note": "ปากปิดอยู่ จึงเห็นฟันและตำแหน่งรูจมูกไม่ชัด"
+          },
+          {
+            "id": "sail",
+            "pass": true
+          },
+          {
+            "id": "tail",
+            "pass": true,
+            "note": "ครีบหางเตี้ยกว่าภาพจากงานวิจัยปี 2020 เล็กน้อย"
+          },
+          {
+            "id": "limbs",
+            "pass": true,
+            "note": "เท้าจมน้ำบางส่วน"
+          },
+          {
+            "id": "composition",
+            "pass": true
+          },
+          {
+            "id": "habitat",
+            "pass": true,
+            "note": "มีต้นคล้ายปาล์ม ซึ่งอาจยังไม่มีในช่วง Cenomanian"
+          },
+          {
+            "id": "clean",
+            "pass": true
+          }
+        ]
+      }
+    }
   ]
 }
