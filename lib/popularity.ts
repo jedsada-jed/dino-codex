@@ -1,32 +1,10 @@
 import popularityData from "@/data/popularity.json";
 import { getDinosaurBySlug, type DinosaurWithContent } from "@/lib/dinosaurs";
 import type { PopularityData } from "@/types/popularity";
+import { fallbackNameTh } from "@/lib/names-th";
 
 const popularity = popularityData as PopularityData;
 
-/**
- * Thai names for popular genera that don't have hand-written content yet, so the
- * ranking doesn't fall back to scientific names. content-th.json wins when present.
- */
-const POPULAR_NAMES_TH: Record<string, string> = {
-  spinosaurus: "สไปโนซอรัส",
-  allosaurus: "อัลโลซอรัส",
-  archaeopteryx: "อาร์คีออปเทอริกซ์",
-  giganotosaurus: "จิกาโนโตซอรัส",
-  ankylosaurus: "แองคิโลซอรัส",
-  dilophosaurus: "ไดโลโฟซอรัส",
-  therizinosaurus: "เทอริซิโนซอรัส",
-  deinonychus: "ไดโนนิคัส",
-  carnotaurus: "คาร์โนทอรัส",
-  utahraptor: "ยูทาห์แรปเตอร์",
-  diplodocus: "ดิพลอโดคัส",
-  parasaurolophus: "พาราซอโรโลฟัส",
-  pachycephalosaurus: "แพคีเซฟาโลซอรัส",
-  iguanodon: "อิกัวโนดอน",
-  brontosaurus: "บรอนโตซอรัส",
-  argentinosaurus: "อาร์เจนติโนซอรัส",
-  apatosaurus: "อะแพโทซอรัส",
-};
 
 export interface PopularDinosaur {
   rank: number;
@@ -36,7 +14,7 @@ export interface PopularDinosaur {
   wikipediaTitle: string;
 }
 
-export function getPopularDinosaurs(limit = 10): PopularDinosaur[] {
+export function getPopularDinosaurs(limit = 20): PopularDinosaur[] {
   const result: PopularDinosaur[] = [];
   for (const item of popularity.items) {
     if (result.length >= limit) break;
@@ -45,13 +23,14 @@ export function getPopularDinosaurs(limit = 10): PopularDinosaur[] {
     result.push({
       rank: result.length + 1,
       dinosaur,
-      nameTh: dinosaur.content?.nameTh ?? POPULAR_NAMES_TH[item.slug] ?? null,
+      nameTh: dinosaur.content?.nameTh ?? fallbackNameTh(item.slug) ?? null,
       views: item.views,
       wikipediaTitle: item.wikipediaTitle,
     });
   }
   return result;
 }
+
 
 export function getPopularityPeriod(): { start: string; end: string } {
   return { start: popularity.periodStart, end: popularity.periodEnd };

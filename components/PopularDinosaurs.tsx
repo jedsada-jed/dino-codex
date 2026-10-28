@@ -87,8 +87,8 @@ function RankRow({ item, maxViews }: { item: PopularDinosaur; maxViews: number }
   );
 }
 
-/** Homepage top-10 ranked by English Wikipedia pageviews (data/popularity.json). */
-export function PopularDinosaurs({ limit = 10 }: { limit?: number }) {
+/** Homepage top-20 ranked by English Wikipedia pageviews (data/popularity.json). */
+export function PopularDinosaurs({ limit = 20 }: { limit?: number }) {
   const popular = getPopularDinosaurs(limit);
   if (popular.length === 0) return null;
 

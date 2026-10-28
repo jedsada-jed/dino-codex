@@ -41,6 +41,13 @@ export function AiImageDisclosure({ image, score }: { image: AiImage; score: AiI
         </span>
       </div>
 
+      {image.caveat && (
+        <p className="mt-3 rounded-xl border border-amber-700/40 bg-amber-50 p-3 text-stone-800">
+          <span className="font-semibold">ข้อควรรู้: </span>
+          {image.caveat}
+        </p>
+      )}
+
       <div className="mt-3">
         {score && tone ? (
           <>

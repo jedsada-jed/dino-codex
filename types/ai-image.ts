@@ -28,6 +28,8 @@ export interface AiImage {
   /** Requirements taken from the prompt, used to score the image. */
   checklist: AiImageCheck[];
   review?: AiImageReview;
+  /** Shown next to the image, e.g. when the genus is known from only a few bones. */
+  caveat?: string;
   /** Where the scientific facts in the prompt came from. */
   promptSources: { label: string; url: string }[];
   createdAt: string;

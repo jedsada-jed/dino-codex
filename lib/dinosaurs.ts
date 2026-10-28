@@ -3,6 +3,7 @@ import contentThData from "@/data/content-th.json";
 import metaData from "@/data/meta.json";
 import type { Dinosaur, DinosaurThaiContent, PipelineMeta } from "@/types/dinosaur";
 import { aiImageScore, getCoverImage } from "@/lib/ai-images";
+import { fallbackNameTh } from "@/lib/names-th";
 
 // `ageRangeMa` is a fixed-length tuple, but TypeScript infers a plain `number[]` from JSON
 // module content, so the cast needs to go through `unknown` first.
@@ -121,7 +122,7 @@ export function getBrowseIndex(): BrowseItem[] {
     return {
     slug: d.slug,
     name: d.name,
-    nameTh: d.content?.nameTh ?? null,
+    nameTh: d.content?.nameTh ?? fallbackNameTh(d.slug),
     diet: d.diet,
     clade: d.clade,
     period: getPeriod(d),

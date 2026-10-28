@@ -3,10 +3,11 @@ import { DinosaurImage } from "./DinosaurImage";
 import { DIET_LABELS_TH, PERIOD_COLORS, PERIOD_LABELS_TH } from "@/lib/labels";
 import { getPeriod, type DinosaurWithContent } from "@/lib/dinosaurs";
 import { aiImageScore, getCoverImage } from "@/lib/ai-images";
+import { fallbackNameTh } from "@/lib/names-th";
 import { AiBadge } from "./AiImageDisclosure";
 
 export function DinosaurCard({ dinosaur }: { dinosaur: DinosaurWithContent }) {
-  const nameTh = dinosaur.content?.nameTh;
+  const nameTh = dinosaur.content?.nameTh ?? fallbackNameTh(dinosaur.slug);
   const period = getPeriod(dinosaur);
   const cover = getCoverImage(dinosaur);
 

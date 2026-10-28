@@ -5,6 +5,7 @@ import { getAllSlugs, getDinosaurBySlug, countryNameTh } from "@/lib/dinosaurs";
 import { DIET_LABELS_TH, CLADE_LABELS_TH } from "@/lib/labels";
 import { DinosaurGallery, type GalleryItem } from "@/components/DinosaurGallery";
 import { aiImageScore, getAiImages, getCoverImage } from "@/lib/ai-images";
+import { fallbackNameTh } from "@/lib/names-th";
 
 export function generateStaticParams() {
   return getAllSlugs().map((slug) => ({ slug }));
@@ -15,7 +16,7 @@ export async function generateMetadata({ params }: PageProps<"/dinosaurs/[slug]"
   const dinosaur = getDinosaurBySlug(slug);
   if (!dinosaur) return {};
 
-  const nameTh = dinosaur.content?.nameTh ?? dinosaur.name;
+  const nameTh = dinosaur.content?.nameTh ?? fallbackNameTh(dinosaur.slug) ?? dinosaur.name;
   const description =
     dinosaur.content?.descriptionTh ??
     `ข้อมูล ${dinosaur.name} ไดโนเสาร์กลุ่ม ${CLADE_LABELS_TH[dinosaur.clade]} ที่มีชีวิตอยู่เมื่อ ${dinosaur.ageRangeMa[1]}-${dinosaur.ageRangeMa[0]} ล้านปีก่อน`;
@@ -40,7 +41,7 @@ export default async function DinosaurDetailPage({ params }: PageProps<"/dinosau
   if (!dinosaur) notFound();
 
   const { content } = dinosaur;
-  const nameTh = content?.nameTh ?? dinosaur.name;
+  const nameTh = content?.nameTh ?? fallbackNameTh(dinosaur.slug) ?? dinosaur.name;
   // A well-reviewed AI image leads; otherwise the Commons image stays first and AI images follow.
   const aiItems: GalleryItem[] = getAiImages(dinosaur.slug).map((image) => ({ kind: "ai", image, score: aiImageScore(image) }));
   const commonsItems: GalleryItem[] = dinosaur.images.map((image) => ({ kind: "commons", image }));
