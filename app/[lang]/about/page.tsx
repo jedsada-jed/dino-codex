@@ -2,11 +2,16 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getMeta } from "@/lib/dinosaurs";
 import { formatDate, formatNumber, href, isLocale, languageAlternates, type Locale } from "@/lib/i18n";
+import { AUTHOR } from "@/lib/author";
 
 /** Page-specific prose, kept here rather than in the shared dictionary. */
 const COPY = {
   th: {
     title: "เกี่ยวกับเว็บไซต์นี้",
+    creatorTitle: "ผู้จัดทำ",
+    creatorBody:
+      "เว็บไซต์นี้จัดทำโดย Jedsada Saengow โดยมี AI (Claude) ช่วยเขียนโค้ด เขียนบทความและคำแปลภาษาอังกฤษ และตรวจภาพที่สร้างด้วย AI ผู้จัดทำเป็นผู้ตรวจและรับผิดชอบเนื้อหาทั้งหมด หากพบข้อมูลที่ไม่ถูกต้อง แจ้งได้ผ่านเว็บไซต์ของผู้จัดทำ",
+    creatorLink: "เว็บไซต์ของผู้จัดทำ",
     description: "ที่มาของข้อมูล วิธีการสร้างเว็บไซต์ และสัญญาอนุญาตของข้อมูลและภาพประกอบ",
     sourcesTitle: "ที่มาของข้อมูล",
     sourcesLead:
@@ -24,6 +29,10 @@ const COPY = {
   },
   en: {
     title: "About this site",
+    creatorTitle: "Creator",
+    creatorBody:
+      "This site is made by Jedsada Saengow, with help from AI (Claude) for writing code, articles and English translations, and for checking the AI-generated images. The creator reviews and is responsible for all content. If you spot a mistake, please get in touch through the creator's website.",
+    creatorLink: "Creator's website",
     description: "Where the data comes from, how the site is built, and the licenses for data and images.",
     sourcesTitle: "Data sources",
     sourcesLead:
@@ -99,6 +108,19 @@ export default async function AboutPage({ params }: PageProps<"/[lang]/about">) 
             </p>
           </li>
         </ul>
+      </section>
+
+      <section className="mt-8">
+        <h2 className="text-lg font-semibold text-stone-900">{c.creatorTitle}</h2>
+        <p className="mt-2 leading-relaxed text-stone-700">{c.creatorBody}</p>
+        <a
+          href={AUTHOR.url}
+          target="_blank"
+          rel="noopener author"
+          className="mt-3 inline-flex min-h-11 items-center gap-1 rounded-full border border-stone-300 px-4 text-sm font-medium text-stone-800 transition-colors hover:border-emerald-600 hover:text-emerald-700"
+        >
+          {c.creatorLink}: {AUTHOR.name} ↗
+        </a>
       </section>
 
       <section className="mt-8">

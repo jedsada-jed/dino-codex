@@ -31,6 +31,7 @@ const th = {
     imagesFrom: "ภาพประกอบจาก",
     licensePerImage: "(สัญญาอนุญาตแยกตามรูปภาพ) ดูรายละเอียดที่",
     aboutPage: "หน้าเกี่ยวกับ",
+    madeBy: "จัดทำโดย",
   },
   common: {
     seeAll: "ดูทั้งหมด",
@@ -199,6 +200,7 @@ const en: Dictionary = {
     imagesFrom: "Images from",
     licensePerImage: "(licensed per image). Details on the",
     aboutPage: "About page",
+    madeBy: "Made by",
   },
   common: {
     seeAll: "See all",

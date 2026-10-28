@@ -7,6 +7,7 @@ import { NewsSection } from "@/components/NewsSection";
 import { getLatestNews } from "@/lib/news";
 import { getDictionary } from "@/lib/dictionaries";
 import { LOCALES, href, isLocale } from "@/lib/i18n";
+import { AUTHOR } from "@/lib/author";
 import "../globals.css";
 
 const THEME_INIT_SCRIPT = `
@@ -38,6 +39,8 @@ export async function generateMetadata({ params }: LayoutProps<"/[lang]">): Prom
     metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://dinocodex.com"),
     title: { default: t.siteName, template: `%s | ${t.siteName}` },
     description: t.siteDescription,
+    authors: [{ name: AUTHOR.name, url: AUTHOR.url }],
+    creator: AUTHOR.name,
     openGraph: {
       siteName: t.siteName,
       description: t.siteDescription,
@@ -96,6 +99,12 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[la
               <Link href={href(lang, "/about")} className="underline hover:text-emerald-700">
                 {t.footer.aboutPage}
               </Link>
+            </p>
+            <p className="mt-3">
+              {t.footer.madeBy}{" "}
+              <a href={AUTHOR.url} target="_blank" rel="noopener author" className="font-medium text-stone-800 underline hover:text-emerald-700">
+                {AUTHOR.name}
+              </a>
             </p>
           </div>
         </footer>
