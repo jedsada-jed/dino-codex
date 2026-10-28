@@ -9,7 +9,7 @@ export function SectionHeading({
   icon,
   description,
   href,
-  linkLabel = "ดูทั้งหมด",
+  linkLabel,
 }: {
   id?: string;
   eyebrow: string;

@@ -36,6 +36,7 @@ const DATA_PATH = path.join(ROOT, "data", "dinosaurs.json");
 const POPULARITY_PATH = path.join(ROOT, "data", "popularity.json");
 const OUTPUT_DATA = path.join(ROOT, "data", "ai-images.json");
 const OUTPUT_DIR = path.join(ROOT, "public", "images", "ai");
+const TEXT_EN_PATH = path.join(ROOT, "data", "ai-image-text-en.json");
 const SIZES = [330, 960] as const;
 const WIDTH = 1024;
 const HEIGHT = 768;
@@ -574,6 +575,7 @@ async function main() {
     IS_OPENAI ? generateOpenAi(prompt, token!) : generateWorkersAi(prompt, account, token!);
 
   const dinosaurs = JSON.parse(await readFile(DATA_PATH, "utf8")) as Dinosaur[];
+  const textEn = JSON.parse(await readFile(TEXT_EN_PATH, "utf8")) as { labels: Record<string, string> };
   const popularity = JSON.parse(await readFile(POPULARITY_PATH, "utf8")) as PopularityData;
   // Re-read before every use: reviews may be recorded into the same file while a long run is going.
   const loadData = async (): Promise<AiImageData> =>
@@ -586,6 +588,10 @@ async function main() {
     const title = popularity.items.find((p) => p.slug === slug)?.wikipediaTitle ?? d.name;
     const summary = await wikipediaSummary(title);
     const { prompt, checklist } = buildPrompt(d, summary?.text ?? null);
+    const untranslated = checklist.filter((c) => !textEn.labels[c.label]).map((c) => c.label);
+    if (untranslated.length) {
+      console.warn(`[${slug}] add English for these checklist items to data/ai-image-text-en.json:\n  ${untranslated.join("\n  ")}`);
+    }
     console.log(`\n[${slug}] ${prompt}\n`);
     if (dryRun) continue;
 

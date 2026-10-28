@@ -5,7 +5,9 @@ import Link from "next/link";
 import Image from "next/image";
 import Fuse from "fuse.js";
 import type { BrowseItem } from "@/lib/dinosaurs";
-import { DIET_LABELS_TH, PERIOD_LABELS_TH } from "@/lib/labels";
+import { DIET_LABELS, PERIOD_LABELS } from "@/lib/labels";
+import { getDictionary } from "@/lib/dictionaries";
+import { formatNumber, href, type Locale } from "@/lib/i18n";
 import type { Diet } from "@/types/dinosaur";
 import { BoneIcon } from "@/components/Icons";
 import { AiBadge } from "@/components/AiImageDisclosure";
@@ -13,7 +15,8 @@ import { AiBadge } from "@/components/AiImageDisclosure";
 const PERIOD_OPTIONS = ["Triassic", "Jurassic", "Cretaceous"] as const;
 const DIET_OPTIONS: Diet[] = ["carnivore", "herbivore", "omnivore", "unknown"];
 
-export function DinosaurBrowser({ items }: { items: BrowseItem[] }) {
+export function DinosaurBrowser({ items, lang }: { items: BrowseItem[]; lang: Locale }) {
+  const t = getDictionary(lang).browse;
   const [query, setQuery] = useState("");
   const [period, setPeriod] = useState<string>("all");
   const [diet, setDiet] = useState<string>("all");
@@ -35,7 +38,7 @@ export function DinosaurBrowser({ items }: { items: BrowseItem[] }) {
   const fuse = useMemo(
     () =>
       new Fuse(items, {
-        keys: ["name", "nameTh"],
+        keys: ["name", "localName"],
         threshold: 0.3,
       }),
     [items]
@@ -57,62 +60,62 @@ export function DinosaurBrowser({ items }: { items: BrowseItem[] }) {
           type="search"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="ค้นหาชื่อไดโนเสาร์..."
-          aria-label="ค้นหาชื่อไดโนเสาร์"
+          placeholder={t.searchPlaceholder}
+          aria-label={t.searchLabel}
           className="min-h-11 w-full flex-1 rounded-lg border border-stone-300 px-3 py-2 text-base focus:border-emerald-500 sm:text-sm sm:min-w-[200px]"
         />
         <select
           value={period}
           onChange={(e) => setPeriod(e.target.value)}
-          aria-label="กรองตามยุค"
+          aria-label={t.periodLabel}
           className="min-h-11 rounded-lg border border-stone-300 bg-stone-50 px-3 py-2 text-sm"
         >
-          <option value="all">ทุกยุค</option>
+          <option value="all">{t.allPeriods}</option>
           {PERIOD_OPTIONS.map((p) => (
             <option key={p} value={p}>
-              {PERIOD_LABELS_TH[p]}
+              {PERIOD_LABELS[lang][p]}
             </option>
           ))}
         </select>
         <select
           value={diet}
           onChange={(e) => setDiet(e.target.value)}
-          aria-label="กรองตามอาหาร"
+          aria-label={t.dietLabel}
           className="min-h-11 rounded-lg border border-stone-300 bg-stone-50 px-3 py-2 text-sm"
         >
-          <option value="all">ทุกประเภทอาหาร</option>
+          <option value="all">{t.allDiets}</option>
           {DIET_OPTIONS.map((d) => (
             <option key={d} value={d}>
-              {DIET_LABELS_TH[d]}
+              {DIET_LABELS[lang][d]}
             </option>
           ))}
         </select>
         <div className="flex gap-5">
           <label className="flex min-h-11 items-center gap-2 text-sm text-stone-700">
             <input type="checkbox" className="h-4 w-4 accent-emerald-700" checked={imageOnly} onChange={(e) => setImageOnly(e.target.checked)} />
-            มีภาพประกอบ
+            {t.withImage}
           </label>
           <label className="flex min-h-11 items-center gap-2 text-sm text-stone-700">
             <input type="checkbox" className="h-4 w-4 accent-emerald-700" checked={thailandOnly} onChange={(e) => setThailandOnly(e.target.checked)} />
-            พบในไทย
+            {t.inThailand}
           </label>
         </div>
       </div>
 
-      <p className="mt-4 text-sm text-stone-500" aria-live="polite">พบ {results.length.toLocaleString("th-TH")} รายการ</p>
+      <p className="mt-4 text-sm text-stone-500" aria-live="polite">{t.results(formatNumber(lang, results.length))}</p>
 
       <ul className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
         {results.map((d) => (
           <li key={d.slug}>
             <Link
-              href={`/dinosaurs/${d.slug}`}
+              href={href(lang, `/dinosaurs/${d.slug}`)}
               className="group flex flex-col overflow-hidden rounded-2xl border border-stone-200 bg-stone-100 shadow-sm transition hover:border-emerald-500 hover:shadow-lg motion-safe:hover:-translate-y-1"
             >
               <div className="relative aspect-4/3 w-full overflow-hidden bg-stone-100">
                 {d.thumbnail ? (
                   <Image
                     src={d.thumbnail}
-                    alt={d.nameTh ?? d.name}
+                    alt={d.localName ?? d.name}
                     fill
                     sizes="(min-width: 768px) 200px, 50vw"
                     className="object-cover"
@@ -122,13 +125,13 @@ export function DinosaurBrowser({ items }: { items: BrowseItem[] }) {
                     <BoneIcon className="h-8 w-8 opacity-60" />
                   </div>
                 )}
-                {d.thumbnailIsAi && <AiBadge className="absolute left-2 top-2" percent={d.thumbnailAiScore ?? undefined} />}
+                {d.thumbnailIsAi && <AiBadge lang={lang} className="absolute left-2 top-2" percent={d.thumbnailAiScore ?? undefined} />}
               </div>
               <div className="p-2">
                 <p className="truncate text-sm font-semibold text-stone-900 group-hover:text-emerald-700">
-                  {d.nameTh ?? d.name}
+                  {d.localName ?? d.name}
                 </p>
-                {d.nameTh && <p className="truncate text-xs italic text-stone-500">{d.name}</p>}
+                {d.localName && <p className="truncate text-xs italic text-stone-500">{d.name}</p>}
               </div>
             </Link>
           </li>
@@ -136,7 +139,7 @@ export function DinosaurBrowser({ items }: { items: BrowseItem[] }) {
       </ul>
 
       {results.length === 0 && (
-        <p className="mt-8 text-center text-stone-500">ไม่พบไดโนเสาร์ที่ตรงกับเงื่อนไข ลองปรับตัวกรองดูใหม่</p>
+        <p className="mt-8 text-center text-stone-500">{t.noResults}</p>
       )}
     </div>
   );

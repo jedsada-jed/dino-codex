@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
 import { Noto_Sans_Thai } from "next/font/google";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { SiteHeader } from "@/components/SiteHeader";
 import { NewsSection } from "@/components/NewsSection";
 import { getLatestNews } from "@/lib/news";
-import "./globals.css";
+import { getDictionary } from "@/lib/dictionaries";
+import { LOCALES, href, isLocale } from "@/lib/i18n";
+import "../globals.css";
 
 const THEME_INIT_SCRIPT = `
 try {
@@ -21,37 +24,40 @@ const notoSansThai = Noto_Sans_Thai({
   weight: ["400", "500", "600", "700"],
 });
 
-const SITE_NAME = "สารานุกรมไดโนเสาร์";
-const SITE_DESCRIPTION =
-  "สารานุกรมไดโนเสาร์ภาษาไทย ข้อมูลไดโนเสาร์กว่า 1,500 สายพันธุ์ พร้อมภาพประกอบและข้อมูลไดโนเสาร์ที่พบในประเทศไทย";
+export function generateStaticParams() {
+  return LOCALES.map((lang) => ({ lang }));
+}
+// Anything else in the first segment (e.g. a browser asking for /favicon.ico) is a 404.
+export const dynamicParams = false;
 
-export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://dinocodex.com"),
-  title: {
-    default: SITE_NAME,
-    template: "%s | สารานุกรมไดโนเสาร์",
-  },
-  description: SITE_DESCRIPTION,
-  alternates: {
-    canonical: "./",
-  },
-  openGraph: {
-    siteName: SITE_NAME,
-    description: SITE_DESCRIPTION,
-    locale: "th_TH",
-    type: "website",
-    images: ["/images/dinos/tyrannosaurus-960.webp"],
-  },
-  twitter: {
-    card: "summary_large_image",
-  },
-};
+export async function generateMetadata({ params }: LayoutProps<"/[lang]">): Promise<Metadata> {
+  const { lang } = await params;
+  if (!isLocale(lang)) return {};
+  const t = getDictionary(lang);
+  return {
+    metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://dinocodex.com"),
+    title: { default: t.siteName, template: `%s | ${t.siteName}` },
+    description: t.siteDescription,
+    openGraph: {
+      siteName: t.siteName,
+      description: t.siteDescription,
+      locale: lang === "th" ? "th_TH" : "en_US",
+      type: "website",
+      images: ["/images/dinos/tyrannosaurus-960.webp"],
+    },
+    twitter: { card: "summary_large_image" },
+  };
+}
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default async function RootLayout({ children, params }: LayoutProps<"/[lang]">) {
+  const { lang } = await params;
+  if (!isLocale(lang)) notFound();
+  const t = getDictionary(lang);
+
   return (
     // THEME_INIT_SCRIPT sets data-theme on <html> before hydration to avoid a flash of the
     // wrong theme, so that one attribute is expected to differ from the server HTML.
-    <html lang="th" className={`${notoSansThai.variable} h-full antialiased`} suppressHydrationWarning>
+    <html lang={lang} className={`${notoSansThai.variable} h-full antialiased`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
       </head>
@@ -60,32 +66,35 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           href="#main"
           className="sr-only rounded-lg bg-emerald-700 px-4 py-2 font-medium text-stone-50 focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50"
         >
-          ข้ามไปยังเนื้อหา
+          {t.nav.skipToContent}
         </a>
-        <SiteHeader />
+        <SiteHeader lang={lang} />
 
-        <main id="main" className="flex-1">{children}</main>
+        <main id="main" className="flex-1">
+          {children}
+        </main>
 
-        <NewsSection pool={getLatestNews(10)} />
+        {/* News items are written in Thai, so the strip only appears on Thai pages. */}
+        {lang === "th" && <NewsSection pool={getLatestNews(10)} />}
 
         <footer className="border-t border-stone-200 bg-stone-100 text-sm text-stone-600">
           <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6">
             <p>
-              ข้อมูลไดโนเสาร์จาก{" "}
+              {t.footer.dataFrom}{" "}
               <a className="underline hover:text-emerald-700" href="https://paleobiodb.org" target="_blank" rel="noopener noreferrer">
                 Paleobiology Database
               </a>{" "}
-              (CC BY 4.0) และ{" "}
+              (CC BY 4.0) {t.footer.and}{" "}
               <a className="underline hover:text-emerald-700" href="https://www.wikidata.org" target="_blank" rel="noopener noreferrer">
                 Wikidata
               </a>{" "}
-              (CC0) ภาพประกอบจาก{" "}
+              (CC0){lang === "en" && "."} {t.footer.imagesFrom}{" "}
               <a className="underline hover:text-emerald-700" href="https://commons.wikimedia.org" target="_blank" rel="noopener noreferrer">
                 Wikimedia Commons
               </a>{" "}
-              (สัญญาอนุญาตแยกตามรูปภาพ) ดูรายละเอียดที่{" "}
-              <Link href="/about" className="underline hover:text-emerald-700">
-                หน้าเกี่ยวกับ
+              {t.footer.licensePerImage}{" "}
+              <Link href={href(lang, "/about")} className="underline hover:text-emerald-700">
+                {t.footer.aboutPage}
               </Link>
             </p>
           </div>

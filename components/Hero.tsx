@@ -4,6 +4,9 @@ import { SearchIcon } from "./Icons";
 import { AiBadge } from "./AiImageDisclosure";
 import { aiImageScore, getCoverImage } from "@/lib/ai-images";
 import { getDinosaurBySlug } from "@/lib/dinosaurs";
+import { getDictionary } from "@/lib/dictionaries";
+import { PERIOD_LABELS } from "@/lib/labels";
+import { formatNumber, href, type Locale } from "@/lib/i18n";
 
 /** Decorative fern frond: leaflets placed along a gently curving stem. */
 function Fern({ className }: { className?: string }) {
@@ -31,11 +34,12 @@ function Fern({ className }: { className?: string }) {
  * Homepage hero. Uses a fixed deep-forest palette in both themes (like a museum hall at
  * dusk) so the white specimen card and light text always have the same contrast.
  */
-export function Hero({ dinosaurCount, thailandCount }: { dinosaurCount: number; thailandCount: number }) {
+export function Hero({ lang, dinosaurCount, thailandCount }: { lang: Locale; dinosaurCount: number; thailandCount: number }) {
+  const t = getDictionary(lang).hero;
   const stats = [
-    { value: dinosaurCount.toLocaleString("th-TH"), label: "สายพันธุ์" },
-    { value: thailandCount.toLocaleString("th-TH"), label: "พบในไทย" },
-    { value: "3", label: "ยุคไดโนเสาร์" },
+    { value: formatNumber(lang, dinosaurCount), label: t.statSpecies },
+    { value: formatNumber(lang, thailandCount), label: t.statThailand },
+    { value: "3", label: t.statPeriods },
   ];
   const trex = getDinosaurBySlug("tyrannosaurus");
   const cover = trex ? getCoverImage(trex) : null;
@@ -53,21 +57,21 @@ export function Hero({ dinosaurCount, thailandCount }: { dinosaurCount: number; 
         <div>
           <p className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs font-medium text-[#9fe0bc]">
             <span className="h-1.5 w-1.5 rounded-full bg-[#e0a352]" aria-hidden="true" />
-            สารานุกรมไดโนเสาร์ภาษาไทย
+            {t.eyebrow}
           </p>
           <h1 className="mt-5 text-4xl font-extrabold leading-tight sm:text-5xl lg:text-6xl">
-            ย้อนเวลา
+            {t.titleTop}
             <span className="block bg-gradient-to-r from-[#9fe0bc] to-[#e0a352] bg-clip-text text-transparent">
-              ไปพบไดโนเสาร์
+              {t.titleBottom}
             </span>
           </h1>
           <p className="mt-5 max-w-xl text-lg leading-relaxed text-[#c4d4c8]">
-            ค้นหาข้อมูล ภาพประกอบ และเรื่องน่ารู้ของไดโนเสาร์จากทั่วโลก รวมถึงสายพันธุ์ที่ค้นพบในประเทศไทย
+            {t.lead}
           </p>
 
-          <form action="/dinosaurs" className="mt-8 flex max-w-xl gap-2 rounded-full border border-white/15 bg-white/10 p-1.5 backdrop-blur">
+          <form action={href(lang, "/dinosaurs")} className="mt-8 flex max-w-xl gap-2 rounded-full border border-white/15 bg-white/10 p-1.5 backdrop-blur">
             <label htmlFor="home-search" className="sr-only">
-              ค้นหาชื่อไดโนเสาร์
+              {t.searchLabel}
             </label>
             <div className="flex flex-1 items-center gap-2 pl-3">
               <SearchIcon className="h-5 w-5 shrink-0 text-[#9bb0a2]" />
@@ -75,7 +79,7 @@ export function Hero({ dinosaurCount, thailandCount }: { dinosaurCount: number; 
                 id="home-search"
                 type="search"
                 name="q"
-                placeholder="เช่น ไทแรนโนซอรัส, สยามโมไทรันนัส"
+                placeholder={t.searchPlaceholder}
                 className="min-h-11 w-full bg-transparent text-base text-white placeholder:text-[#9bb0a2] focus-visible:outline-none sm:text-sm"
               />
             </div>
@@ -83,7 +87,7 @@ export function Hero({ dinosaurCount, thailandCount }: { dinosaurCount: number; 
               type="submit"
               className="min-h-11 shrink-0 rounded-full bg-[#e0a352] px-6 text-sm font-semibold text-[#1c2e22] transition-colors hover:bg-[#ecb86f]"
             >
-              ค้นหา
+              {t.searchButton}
             </button>
           </form>
 
@@ -98,27 +102,27 @@ export function Hero({ dinosaurCount, thailandCount }: { dinosaurCount: number; 
         </div>
 
         <Link
-          href="/dinosaurs/tyrannosaurus"
+          href={href(lang, "/dinosaurs/tyrannosaurus")}
           className="group relative block rounded-3xl bg-[#f4f7ef] p-3 shadow-2xl shadow-black/40 ring-1 ring-white/10 transition motion-safe:lg:rotate-2 motion-safe:hover:rotate-0"
         >
           <div className={`relative overflow-hidden rounded-2xl bg-white ${cover?.ai ? "aspect-[4/3]" : "aspect-[960/388]"}`}>
             <Image
               src={cover?.image?.localLarge ?? "/images/dinos/tyrannosaurus-960.webp"}
-              alt="ไทแรนโนซอรัส"
+              alt={t.featuredName}
               fill
               priority
               sizes="(min-width: 1024px) 480px, 100vw"
               className="object-cover transition-transform duration-500 motion-safe:group-hover:scale-105"
             />
-            {cover?.ai && <AiBadge className="absolute left-3 top-3" percent={aiImageScore(cover.ai)?.percent} />}
+            {cover?.ai && <AiBadge lang={lang} className="absolute left-3 top-3" percent={aiImageScore(cover.ai)?.percent} />}
           </div>
           <div className="flex items-end justify-between gap-3 px-2 pb-1 pt-3 text-[#1c2e22]">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#a15c1f]">อันดับ 1 ยอดฮิต</p>
-              <p className="text-xl font-bold">ไทแรนโนซอรัส</p>
-              <p className="text-sm italic text-[#545f4d]">Tyrannosaurus rex · ยาว ~12 เมตร</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#a15c1f]">{t.featuredRank}</p>
+              <p className="text-xl font-bold">{t.featuredName}</p>
+              <p className="text-sm italic text-[#545f4d]">{t.featuredCaption}</p>
             </div>
-            <span className="rounded-full bg-[#1f6b4a] px-3 py-1 text-xs font-medium text-white">ครีเทเชียส</span>
+            <span className="rounded-full bg-[#1f6b4a] px-3 py-1 text-xs font-medium text-white">{PERIOD_LABELS[lang].Cretaceous}</span>
           </div>
         </Link>
       </div>

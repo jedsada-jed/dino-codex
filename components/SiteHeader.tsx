@@ -6,28 +6,57 @@ import { useState } from "react";
 import { LogoMark } from "./LogoMark";
 import { ThemeToggle } from "./ThemeToggle";
 import { CloseIcon, MenuIcon } from "./Icons";
+import { getDictionary } from "@/lib/dictionaries";
+import { href, type Locale } from "@/lib/i18n";
 
-const NAV_LINKS = [
-  { href: "/", label: "หน้าแรก" },
-  { href: "/dinosaurs", label: "ไดโนเสาร์ทั้งหมด" },
-  { href: "/thailand", label: "ไดโนเสาร์ไทย" },
-  { href: "/timeline", label: "ไทม์ไลน์" },
-  { href: "/articles", label: "บทความ" },
-  { href: "/news", label: "ข่าวสาร" },
-  { href: "/about", label: "เกี่ยวกับ" },
-];
+/** News is written in Thai only, so English pages leave it out of the menu. */
+const THAI_ONLY = new Set(["/news"]);
 
-function isActive(pathname: string, href: string) {
-  const path = pathname.replace(/\/$/, "") || "/";
-  return href === "/" ? path === "/" : path === href || path.startsWith(`${href}/`);
+function isActive(pathname: string, target: string) {
+  const path = pathname.replace(/\/$/, "");
+  return path === target || (target.split("/").length > 2 && path.startsWith(`${target}/`));
+}
+
+/** Same page in the other language; Thai-only pages fall back to the English home page. */
+function switchPath(pathname: string, from: Locale, to: Locale): string {
+  const rest = pathname.replace(new RegExp(`^/${from}`), "") || "/";
+  if (to === "en" && [...THAI_ONLY].some((p) => rest === p || rest.startsWith(`${p}/`))) return href(to, "/");
+  return href(to, rest);
 }
 
 /** Inline nav from lg up; below that a menu button opens a full-width list with 44px rows. */
-export function SiteHeader() {
+export function SiteHeader({ lang }: { lang: Locale }) {
+  const t = getDictionary(lang);
   const pathname = usePathname();
   // Remember which page the menu was opened on, so navigating closes it without an effect.
   const [openOn, setOpenOn] = useState<string | null>(null);
   const menuOpen = openOn === pathname;
+  const other: Locale = lang === "th" ? "en" : "th";
+
+  const links = [
+    { path: "/", label: t.nav.home },
+    { path: "/dinosaurs", label: t.nav.dinosaurs },
+    { path: "/thailand", label: t.nav.thailand },
+    { path: "/timeline", label: t.nav.timeline },
+    { path: "/articles", label: t.nav.articles },
+    { path: "/news", label: t.nav.news },
+    { path: "/about", label: t.nav.about },
+  ]
+    .filter((l) => lang === "th" || !THAI_ONLY.has(l.path))
+    .map((l) => ({ ...l, href: href(lang, l.path) }));
+
+  const languageLink = (
+    <Link
+      href={switchPath(pathname, lang, other)}
+      hrefLang={other}
+      lang={other}
+      aria-label={t.nav.switchLanguageLabel}
+      className="flex min-h-11 items-center rounded-full border border-stone-300 px-3 text-sm font-medium text-stone-700 transition-colors hover:border-emerald-600 hover:text-emerald-700"
+    >
+      <span className="sm:hidden">{t.nav.switchLanguageShort}</span>
+      <span className="hidden sm:inline">{t.nav.switchLanguage}</span>
+    </Link>
+  );
 
   return (
     <header
@@ -37,15 +66,15 @@ export function SiteHeader() {
       }}
     >
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-2 sm:px-6">
-        <Link href="/" className="flex min-h-11 items-center gap-2 text-lg font-bold text-emerald-800">
+        <Link href={href(lang, "/")} className="flex min-h-11 items-center gap-2 whitespace-nowrap text-lg font-bold text-emerald-800">
           <LogoMark className="h-7 w-7" />
-          สารานุกรมไดโนเสาร์
+          {t.siteName}
         </Link>
 
-        <div className="flex items-center gap-2">
-          <nav aria-label="เมนูหลัก" className="hidden lg:block">
+        <div className="flex items-center gap-1 sm:gap-2">
+          <nav aria-label={t.nav.label} className="hidden lg:block">
             <ul className="flex gap-1 text-sm font-medium">
-              {NAV_LINKS.map((link) => {
+              {links.map((link) => {
                 const active = isActive(pathname, link.href);
                 return (
                   <li key={link.href}>
@@ -63,13 +92,14 @@ export function SiteHeader() {
               })}
             </ul>
           </nav>
-          <ThemeToggle />
+          {languageLink}
+          <ThemeToggle lang={lang} />
           <button
             type="button"
             className="flex h-11 w-11 items-center justify-center rounded-full text-stone-700 transition-colors hover:bg-stone-200 lg:hidden"
             aria-expanded={menuOpen}
             aria-controls="mobile-nav"
-            aria-label={menuOpen ? "ปิดเมนู" : "เปิดเมนู"}
+            aria-label={menuOpen ? t.nav.closeMenu : t.nav.openMenu}
             onClick={() => setOpenOn(menuOpen ? null : pathname)}
           >
             {menuOpen ? <CloseIcon /> : <MenuIcon />}
@@ -77,9 +107,9 @@ export function SiteHeader() {
         </div>
       </div>
 
-      <nav id="mobile-nav" aria-label="เมนูหลัก" hidden={!menuOpen} className="border-t border-stone-200 lg:hidden">
+      <nav id="mobile-nav" aria-label={t.nav.label} hidden={!menuOpen} className="border-t border-stone-200 lg:hidden">
         <ul className="mx-auto max-w-6xl px-2 py-2">
-          {NAV_LINKS.map((link) => {
+          {links.map((link) => {
             const active = isActive(pathname, link.href);
             return (
               <li key={link.href}>

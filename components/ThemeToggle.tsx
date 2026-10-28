@@ -1,8 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { getDictionary } from "@/lib/dictionaries";
+import type { Locale } from "@/lib/i18n";
 
-export function ThemeToggle() {
+export function ThemeToggle({ lang }: { lang: Locale }) {
+  const t = getDictionary(lang);
   const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
@@ -22,7 +25,7 @@ export function ThemeToggle() {
     <button
       type="button"
       onClick={toggle}
-      aria-label={isDark ? "สลับเป็นโหมดสว่าง" : "สลับเป็นโหมดมืด"}
+      aria-label={isDark ? t.theme.toLight : t.theme.toDark}
       className="flex h-11 w-11 items-center justify-center rounded-full text-stone-700 transition-colors hover:bg-stone-200"
     >
       {isDark ? (

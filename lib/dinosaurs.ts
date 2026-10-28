@@ -1,15 +1,26 @@
 import dinosaursData from "@/data/dinosaurs.json";
 import contentThData from "@/data/content-th.json";
+import contentEnData from "@/data/content-en.json";
 import metaData from "@/data/meta.json";
 import type { Dinosaur, DinosaurThaiContent, PipelineMeta } from "@/types/dinosaur";
 import { aiImageScore, getCoverImage } from "@/lib/ai-images";
 import { fallbackNameTh } from "@/lib/names-th";
+import type { Locale } from "@/lib/i18n";
 
 // `ageRangeMa` is a fixed-length tuple, but TypeScript infers a plain `number[]` from JSON
 // module content, so the cast needs to go through `unknown` first.
 const dinosaurs = dinosaursData as unknown as Dinosaur[];
 const contentTh = contentThData as Record<string, DinosaurThaiContent>;
 const meta = metaData as PipelineMeta;
+
+/** Hand-written English counterparts of content-th.json (name meaning, size, description, facts). */
+interface EnglishContent {
+  nameMeaning: string;
+  sizeComparison?: string;
+  description?: string;
+  funFacts: string[];
+}
+const contentEn = contentEnData as Record<string, EnglishContent>;
 
 export interface DinosaurWithContent extends Dinosaur {
   content: DinosaurThaiContent | null;
@@ -64,47 +75,45 @@ export function getPeriod(d: Dinosaur): PeriodKey | "unknown" {
   return "unknown";
 }
 
-const COUNTRY_NAMES_TH: Record<string, string> = {
-  TH: "ไทย",
-  US: "สหรัฐอเมริกา",
-  CN: "จีน",
-  CA: "แคนาดา",
-  MN: "มองโกเลีย",
-  AR: "อาร์เจนตินา",
-  GB: "สหราชอาณาจักร",
-  DE: "เยอรมนี",
-  FR: "ฝรั่งเศส",
-  AU: "ออสเตรเลีย",
-  BR: "บราซิล",
-  MX: "เม็กซิโก",
-  ES: "สเปน",
-  IN: "อินเดีย",
-  JP: "ญี่ปุ่น",
-  KR: "เกาหลีใต้",
-  NE: "ไนเจอร์",
-  MA: "โมร็อกโก",
-  EG: "อียิปต์",
-  ZA: "แอฟริกาใต้",
-  RU: "รัสเซีย",
-  RO: "โรมาเนีย",
-  PT: "โปรตุเกส",
-  IT: "อิตาลี",
-  CH: "สวิตเซอร์แลนด์",
-  PL: "โปแลนด์",
-  NZ: "นิวซีแลนด์",
-  LA: "ลาว",
-  MM: "เมียนมา",
-  MY: "มาเลเซีย",
-};
+const regionNames: Partial<Record<Locale, Intl.DisplayNames>> = {};
 
-export function countryNameTh(code: string): string {
-  return COUNTRY_NAMES_TH[code] ?? code;
+/** Country name in the page language, from an ISO 3166-1 alpha-2 code. */
+export function countryName(code: string, lang: Locale): string {
+  regionNames[lang] ??= new Intl.DisplayNames([lang], { type: "region" });
+  // PBDB uses a few non-ISO codes (e.g. "UK"), which Intl rejects.
+  try {
+    return regionNames[lang]!.of(code === "UK" ? "GB" : code) ?? code;
+  } catch {
+    return code;
+  }
+}
+
+/** Name to show: Thai name in Thai (hand-written, else our transliteration), scientific name in English. */
+export function displayName(d: Pick<DinosaurWithContent, "slug" | "name" | "content">, lang: Locale): string {
+  if (lang === "en") return d.name;
+  return d.content?.nameTh ?? fallbackNameTh(d.slug) ?? d.name;
+}
+
+export interface LocalContent {
+  nameMeaning: string;
+  sizeComparison?: string;
+  description?: string;
+  funFacts: string[];
+}
+
+/** Write-up in the page language, or null when that language has none. */
+export function localContent(d: DinosaurWithContent, lang: Locale): LocalContent | null {
+  if (lang === "en") return contentEn[d.slug] ?? null;
+  const c = d.content;
+  if (!c) return null;
+  return { nameMeaning: c.nameMeaningTh, sizeComparison: c.sizeComparisonTh, description: c.descriptionTh, funFacts: c.funFactsTh };
 }
 
 export interface BrowseItem {
   slug: string;
   name: string;
-  nameTh: string | null;
+  /** Name in the page language when it differs from the scientific name. */
+  localName: string | null;
   diet: Dinosaur["diet"];
   clade: Dinosaur["clade"];
   period: PeriodKey | "unknown";
@@ -116,13 +125,14 @@ export interface BrowseItem {
 }
 
 /** Slim, client-safe index for the search/filter UI on /dinosaurs — avoids shipping the full dataset to the browser. */
-export function getBrowseIndex(): BrowseItem[] {
+export function getBrowseIndex(lang: Locale): BrowseItem[] {
   return getAllDinosaurs().map((d) => {
     const cover = getCoverImage(d);
+    const local = displayName(d, lang);
     return {
     slug: d.slug,
     name: d.name,
-    nameTh: d.content?.nameTh ?? fallbackNameTh(d.slug),
+    localName: local === d.name ? null : local,
     diet: d.diet,
     clade: d.clade,
     period: getPeriod(d),

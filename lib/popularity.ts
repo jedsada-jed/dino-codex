@@ -1,7 +1,6 @@
 import popularityData from "@/data/popularity.json";
 import { getDinosaurBySlug, type DinosaurWithContent } from "@/lib/dinosaurs";
 import type { PopularityData } from "@/types/popularity";
-import { fallbackNameTh } from "@/lib/names-th";
 
 const popularity = popularityData as PopularityData;
 
@@ -9,7 +8,6 @@ const popularity = popularityData as PopularityData;
 export interface PopularDinosaur {
   rank: number;
   dinosaur: DinosaurWithContent;
-  nameTh: string | null;
   views: number;
   wikipediaTitle: string;
 }
@@ -23,7 +21,6 @@ export function getPopularDinosaurs(limit = 20): PopularDinosaur[] {
     result.push({
       rank: result.length + 1,
       dinosaur,
-      nameTh: dinosaur.content?.nameTh ?? fallbackNameTh(item.slug) ?? null,
       views: item.views,
       wikipediaTitle: item.wikipediaTitle,
     });

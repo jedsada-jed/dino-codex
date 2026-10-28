@@ -1,0 +1,2 @@
+# Cloudflare Workers static assets: send the bare domain to the default (Thai) locale.
+/ /th 302

@@ -1,3 +1,6 @@
+import type { Locale } from "@/lib/i18n";
+import { ARTICLES_EN } from "@/lib/articles-en";
+
 /**
  * Long-form explainer articles for /articles. Written for this site (not translated or copied),
  * each with sources a reader can check.
@@ -7,13 +10,17 @@ export interface ArticleSection {
   paragraphs: string[];
 }
 
-export interface Article {
-  slug: string;
+export interface ArticleBody {
   title: string;
   summary: string;
   /** Short label for the list card, e.g. "การเกิดฟอสซิล". */
   topic: string;
   sections: ArticleSection[];
+}
+
+/** Thai is the source text; English lives in lib/articles-en.ts. */
+export interface Article extends ArticleBody {
+  slug: string;
   sources: { label: string; url: string }[];
 }
 
@@ -239,10 +246,15 @@ const ARTICLES: Article[] = [
   },
 ];
 
-export function getAllArticles(): Article[] {
-  return ARTICLES;
+function localize(article: Article, lang: Locale): Article {
+  return lang === "en" ? { ...article, ...ARTICLES_EN[article.slug] } : article;
 }
 
-export function getArticleBySlug(slug: string): Article | undefined {
-  return ARTICLES.find((a) => a.slug === slug);
+export function getAllArticles(lang: Locale): Article[] {
+  return ARTICLES.map((a) => localize(a, lang));
+}
+
+export function getArticleBySlug(slug: string, lang: Locale): Article | undefined {
+  const article = ARTICLES.find((a) => a.slug === slug);
+  return article && localize(article, lang);
 }

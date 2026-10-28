@@ -1,0 +1,83 @@
+{
+  "tyrannosaurus": {
+    "nameMeaning": "From Greek, meaning \"tyrant lizard\".",
+    "sizeComparison": "About 12 m long and 4 m tall at the hip: longer than a bus and taller than two adults standing on each other's shoulders.",
+    "description": "Tyrannosaurus was one of the largest land predators that ever lived. Its huge head had the strongest bite ever estimated for a land animal, yet its arms were tiny for its body.",
+    "funFacts": [
+      "A Tyrannosaurus bite could crush bone in a single chomp.",
+      "Despite its size, Tyrannosaurus had a very keen sense of smell, comparable to some vultures."
+    ]
+  },
+  "triceratops": {
+    "nameMeaning": "Means \"three-horned face\", after the three horns on its head.",
+    "sizeComparison": "About 9 m long and up to 12 tonnes, heavier than an adult African elephant.",
+    "description": "Triceratops was a plant-eater with a large bony frill over its neck and three horns: a short one on the nose and two long ones above the eyes, used for defense against predators such as Tyrannosaurus.",
+    "funFacts": [
+      "Some Triceratops frills still carry Tyrannosaurus bite marks.",
+      "The brow horns of Triceratops could reach about 1 m long."
+    ]
+  },
+  "velociraptor": {
+    "nameMeaning": "Means \"swift thief\".",
+    "sizeComparison": "The real animal was about the size of a large turkey: around 2 m long including the tail but only knee-high to a person, much smaller than in the movies.",
+    "description": "Velociraptor was a small feathered predator, closely related to birds, with a large sickle-shaped claw on the second toe of each foot.",
+    "funFacts": [
+      "Fossil evidence shows Velociraptor really had bird-like feathers, not bare skin as in the films.",
+      "The sickle claw was probably used to pin prey down rather than to slash it like a knife."
+    ]
+  },
+  "stegosaurus": {
+    "nameMeaning": "Means \"roofed lizard\", after the plates on its back.",
+    "sizeComparison": "About 9 m long, yet its brain was only about the size of a walnut.",
+    "description": "Stegosaurus had two rows of large bony plates along its back and four spikes at the end of its tail, nicknamed the \"thagomizer\", for defense.",
+    "funFacts": [
+      "No one is sure whether the plates were for defense, temperature control or display.",
+      "The nickname \"thagomizer\" began as a joke in a cartoon, but paleontologists now use it seriously."
+    ]
+  },
+  "brachiosaurus": {
+    "nameMeaning": "Means \"arm lizard\", because its front legs were longer than its back legs.",
+    "sizeComparison": "Up to 12–13 m tall, like a four-storey building; its neck alone was longer than a whole giraffe.",
+    "description": "Brachiosaurus was a long-necked plant-eater whose front legs were longer than its hind legs, so its body sloped upward like a giraffe's and it could reach leaves high in the trees.",
+    "funFacts": [
+      "Brachiosaurus had a tall bony arch over its nose. People once thought its nostrils sat on top of its head, but they were most likely near the tip of the snout.",
+      "Its neck alone was long enough to peek into a third-floor window."
+    ]
+  },
+  "phuwiangosaurus": {
+    "nameMeaning": "Named after Phu Wiang district in Khon Kaen province, where its fossils were found.",
+    "sizeComparison": "About 15–20 m long, longer than a semi-trailer truck.",
+    "description": "Phuwiangosaurus was a long-necked, plant-eating sauropod and one of the first Thai dinosaurs to be formally named, from the Phu Wiang dig sites in Khon Kaen.",
+    "funFacts": [
+      "Named in 1994, Phuwiangosaurus was the first new dinosaur species from Thailand to receive a scientific name.",
+      "The Sirindhorn Museum in Kalasin province displays fossils of Thai dinosaurs, including Phuwiangosaurus."
+    ]
+  },
+  "siamotyrannus": {
+    "nameMeaning": "Means \"tyrant of Siam\".",
+    "sizeComparison": "About 6–7 m long, roughly half the length of Tyrannosaurus rex.",
+    "description": "Siamotyrannus was a medium-sized meat-eater from the Sao Khua Formation in Khon Kaen. When it was named in 1996 it was thought to be an early tyrannosaur relative, but current research places it among the allosauroids, a separate lineage of predators.",
+    "funFacts": [
+      "Its name means \"tyrant of Siam\", the old name of Thailand, even though it is no longer considered a close relative of Tyrannosaurus.",
+      "Siamotyrannus shows how dinosaur classifications can change as new fossils and methods appear."
+    ]
+  },
+  "siamraptor": {
+    "nameMeaning": "Means \"Siam's thief\" or \"hunter of Siam\".",
+    "sizeComparison": "Estimated at around 8 m long, longer than a medium-sized bus.",
+    "description": "Siamraptor was a large carcharodontosaurian predator found in Nakhon Ratchasima province, and one of the biggest meat-eaters ever discovered in Thailand.",
+    "funFacts": [
+      "Siamraptor fossils come from several individuals mixed together, which helped scientists piece together much of its body.",
+      "It belongs to the same group as Carcharodontosaurus, which included some of the largest land predators of their time."
+    ]
+  },
+  "sirindhorna": {
+    "nameMeaning": "Named in honor of Her Royal Highness Princess Maha Chakri Sirindhorn.",
+    "sizeComparison": "About 6 m long, roughly two pickup trucks end to end.",
+    "description": "Sirindhorna was a plant-eater and an early relative of the duck-billed dinosaurs (hadrosaurs), found in the Khok Kruat Formation of Nakhon Ratchasima province. It is one of the Thai dinosaurs named with royal permission after the Princess.",
+    "funFacts": [
+      "Sirindhorna helps scientists understand how duck-billed dinosaurs arose and evolved in Asia in the Early Cretaceous.",
+      "Its fossils include several skull bones that show the shape of its head and teeth fairly clearly."
+    ]
+  }
+}

@@ -2,35 +2,41 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getAllArticles, getArticleBySlug } from "@/lib/articles";
+import { getDictionary } from "@/lib/dictionaries";
+import { href, isLocale, languageAlternates } from "@/lib/i18n";
 
 export function generateStaticParams() {
-  return getAllArticles().map((a) => ({ slug: a.slug }));
+  return getAllArticles("th").map((a) => ({ slug: a.slug }));
 }
 
-export async function generateMetadata({ params }: PageProps<"/articles/[slug]">): Promise<Metadata> {
-  const { slug } = await params;
-  const article = getArticleBySlug(slug);
+export async function generateMetadata({ params }: PageProps<"/[lang]/articles/[slug]">): Promise<Metadata> {
+  const { lang, slug } = await params;
+  if (!isLocale(lang)) return {};
+  const article = getArticleBySlug(slug, lang);
   if (!article) return {};
+  const path = `/articles/${article.slug}`;
   return {
     title: article.title,
     description: article.summary,
-    alternates: { canonical: `/articles/${article.slug}` },
+    alternates: { canonical: href(lang, path), languages: languageAlternates(path) },
     openGraph: { title: article.title, description: article.summary, type: "article" },
   };
 }
 
-export default async function ArticlePage({ params }: PageProps<"/articles/[slug]">) {
-  const { slug } = await params;
-  const article = getArticleBySlug(slug);
+export default async function ArticlePage({ params }: PageProps<"/[lang]/articles/[slug]">) {
+  const { lang, slug } = await params;
+  if (!isLocale(lang)) notFound();
+  const article = getArticleBySlug(slug, lang);
   if (!article) notFound();
 
-  const others = getAllArticles().filter((a) => a.slug !== article.slug);
+  const t = getDictionary(lang).articles;
+  const others = getAllArticles(lang).filter((a) => a.slug !== article.slug);
 
   return (
     <article className="mx-auto max-w-3xl px-4 py-10 sm:px-6">
       <nav className="text-sm text-stone-500" aria-label="breadcrumb">
-        <Link href="/articles" className="hover:text-emerald-700">
-          บทความ
+        <Link href={href(lang, "/articles")} className="hover:text-emerald-700">
+          {t.title}
         </Link>
         {" / "}
         {article.topic}
@@ -51,7 +57,7 @@ export default async function ArticlePage({ params }: PageProps<"/articles/[slug
       ))}
 
       <section className="mt-12 rounded-2xl border border-stone-200 bg-stone-100 p-5">
-        <h2 className="font-semibold text-stone-900">แหล่งอ้างอิงและอ่านเพิ่มเติม</h2>
+        <h2 className="font-semibold text-stone-900">{t.sources}</h2>
         <ul className="mt-2 space-y-1.5 text-sm">
           {article.sources.map((s) => (
             <li key={s.url}>
@@ -64,12 +70,12 @@ export default async function ArticlePage({ params }: PageProps<"/articles/[slug
       </section>
 
       <section className="mt-12">
-        <h2 className="font-semibold text-stone-900">บทความอื่น</h2>
+        <h2 className="font-semibold text-stone-900">{t.others}</h2>
         <ul className="mt-3 grid gap-2 sm:grid-cols-2">
           {others.map((a) => (
             <li key={a.slug}>
               <Link
-                href={`/articles/${a.slug}`}
+                href={href(lang, `/articles/${a.slug}`)}
                 className="block min-h-11 rounded-xl border border-stone-200 p-3 text-sm font-medium text-stone-800 transition-colors hover:border-emerald-500 hover:text-emerald-700"
               >
                 {a.title}

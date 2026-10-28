@@ -1,13 +1,15 @@
 import Image from "next/image";
 import { BoneIcon } from "./Icons";
+import { getDictionary } from "@/lib/dictionaries";
+import type { Locale } from "@/lib/i18n";
 import type { DinosaurImage as DinosaurImageData } from "@/types/dinosaur";
 
-function PlaceholderImage({ name }: { name: string }) {
+function PlaceholderImage({ name, lang }: { name: string; lang: Locale }) {
   return (
     <div
       className="flex h-full w-full items-center justify-center bg-gradient-to-br from-emerald-100 to-stone-200 text-emerald-800"
       role="img"
-      aria-label={`ยังไม่มีภาพประกอบสำหรับ ${name}`}
+      aria-label={getDictionary(lang).common.noImage(name)}
     >
       <BoneIcon className="h-10 w-10 opacity-60" />
     </div>
@@ -17,18 +19,20 @@ function PlaceholderImage({ name }: { name: string }) {
 export function DinosaurImage({
   image,
   name,
+  lang,
   size = "small",
   priority = false,
 }: {
   image: Pick<DinosaurImageData, "localSmall" | "localLarge"> | undefined;
   name: string;
+  lang: Locale;
   size?: "small" | "large";
   priority?: boolean;
 }) {
   const src = size === "large" ? image?.localLarge ?? image?.localSmall : image?.localSmall;
 
   if (!image || !src) {
-    return <PlaceholderImage name={name} />;
+    return <PlaceholderImage name={name} lang={lang} />;
   }
 
   return (
@@ -43,16 +47,17 @@ export function DinosaurImage({
   );
 }
 
-export function ImageAttribution({ image }: { image: DinosaurImageData }) {
+export function ImageAttribution({ image, lang }: { image: DinosaurImageData; lang: Locale }) {
+  const t = getDictionary(lang).gallery;
   return (
     <p className="text-xs text-stone-500">
-      ภาพโดย {image.author} ·{" "}
+      {t.by} {image.author} ·{" "}
       <a href={image.licenseUrl} target="_blank" rel="noopener noreferrer" className="underline hover:text-emerald-700">
         {image.license}
       </a>{" "}
       ·{" "}
       <a href={image.commonsPageUrl} target="_blank" rel="noopener noreferrer" className="underline hover:text-emerald-700">
-        ดูที่ Wikimedia Commons
+        {t.viewOnCommons}
       </a>
     </p>
   );
