@@ -30,6 +30,7 @@ export function FossilMap({
   const byCode = new Map(stats.map((s) => [s.code, s]));
   const [selected, setSelected] = useState(initial);
   const current = byCode.get(selected);
+  const byName = [...stats].sort((a, b) => a.name.localeCompare(b.name, lang));
   const max = stats[0]?.count ?? 1;
 
   return (
@@ -67,6 +68,22 @@ export function FossilMap({
           </span>
         </div>
       </div>
+
+      {/* Every country, not just the top of the ranking: small ones are hard to tap on the map. */}
+      <label className="mt-4 flex flex-wrap items-center gap-2 text-sm text-stone-700">
+        {t.pickCountry}
+        <select
+          value={selected}
+          onChange={(e) => setSelected(e.target.value)}
+          className="min-h-11 rounded-lg border border-stone-300 bg-stone-50 px-3 py-2 text-sm"
+        >
+          {byName.map((s) => (
+            <option key={s.code} value={s.code}>
+              {s.name} ({formatNumber(lang, s.count)})
+            </option>
+          ))}
+        </select>
+      </label>
 
       <div className="mt-8 grid gap-8 lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]">
         <section>
