@@ -57,7 +57,7 @@ const FALLBACK_NAMES_TH: Record<string, string> = {
   psittacosaurus: "ซิตตะโกซอรัส",
   ratchasimasaurus: "ราชสีมาซอรัส",
   siamodon: "สยามโมดอน",
-  uragasaurus: "อุรคะซอรัส",
+  uragasaurus: "อุรคาซอรัส",
   vayuraptor: "วายุแรปเตอร์",
 };
 

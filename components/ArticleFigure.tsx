@@ -385,7 +385,7 @@ const THAI_LAYERS = [
   {
     fill: "var(--fig-rock)",
     height: 72,
-    th: { name: "หมวดหินภูกระดาน", age: "ราว 150 ล้านปี", dinos: ["มินิโมเคอร์เซอร์ · อุรคะซอรัส"], where: "กาฬสินธุ์" },
+    th: { name: "หมวดหินภูกระดาน", age: "ราว 150 ล้านปี", dinos: ["มินิโมเคอร์เซอร์ · อุรคาซอรัส"], where: "กาฬสินธุ์" },
     en: { name: "Phu Kradung Formation", age: "about 150 million years", dinos: ["Minimocursor · Uragasaurus"], where: "Kalasin" },
     count: 2,
   },
