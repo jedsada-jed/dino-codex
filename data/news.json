@@ -1,5 +1,102 @@
 [
   {
+    "id": "nanotyrannus-jodie-auction",
+    "title": "ฟอสซิล \"นาโนไทแรนนัส\" ถูกประมูลขาย 47.3 ล้านดอลลาร์ ราว 1.6 พันล้านบาท",
+    "description": "โครงกระดูก \"โจดี\" สูงราว 3 เมตร หนึ่งในสามโครงของสายพันธุ์นี้ที่พบในโลก ถูกประมูลที่ Sotheby's นิวยอร์ก นักวิทยาศาสตร์กังวลว่าอาจไปอยู่ในคอลเลกชันส่วนตัวแทนพิพิธภัณฑ์",
+    "date": "2026-10-28",
+    "source": "ไทยรัฐ",
+    "url": "https://thairath.co.th/news/foreign/2968765",
+    "image": "https://static.thairath.co.th/media/dFQROr7oWzulq5Fa7Hb4VyrhTLAmMtdbOfUOstUoQT8z5d98JHiGVFeiwcEQqr2VBjf.jpg",
+    "cover": "/images/dinos/nanotyrannus-960.webp",
+    "tags": [
+      "general"
+    ]
+  },
+  {
+    "id": "infernogallus-hell-chicken",
+    "title": "พบ \"อินเฟอร์โนกัลลัส\" ไก่นรกแห่งเฮลครีก ไดโนเสาร์ตัวแรกที่กินผลไม้เป็นหลัก",
+    "description": "โอวิแรปเตอโรซอร์ขนาดเท่าไก่งวง หนักราว 12 กก. จากชั้นหินเฮลครีกในสหรัฐฯ มีกระดูกเพดานปากและกล้ามเนื้อขากรรไกรที่บดอาหารนิ่มแบบเคี้ยวไปด้านข้าง เผยแพร่ใน Nature Communications",
+    "date": "2026-10-27",
+    "source": "EurekAlert! (Stony Brook University)",
+    "url": "https://www.eurekalert.org/news-releases/1149430",
+    "image": "https://mediasvc.eurekalert.org/Api/v1/Multimedia/43e01d3d-50eb-4792-a137-41b07c88f024/Rendition/thumbnail/Content/Public",
+    "cover": "/images/dinos/anzu-960.webp",
+    "tags": [
+      "new-species",
+      "research"
+    ]
+  },
+  {
+    "id": "paludohadros-surrey",
+    "title": "\"พาลูโดฮาโดรส\" อิกัวโนดอนต์ชนิดใหม่ของอังกฤษ ซ่อนอยู่ในคลังพิพิธภัณฑ์ 25 ปี",
+    "description": "ฟอสซิลที่ขุดได้จากโรงงานอิฐในเซอร์รีย์เมื่อปี 2001 ถูกวิเคราะห์ใหม่จนพบว่าเป็นไดโนเสาร์กินพืชสกุลใหม่ ยาวราว 5 เมตร อายุประมาณ 125 ล้านปี ตั้งชื่อตามผู้จัดการเหมืองผู้ล่วงลับ",
+    "date": "2026-10-27",
+    "source": "Natural History Museum",
+    "url": "https://www.nhm.ac.uk/press-office/press-releases/new-uk-dinosaur-named-after-devoted-dad-and-husband.html",
+    "image": "https://www.nhm.ac.uk/content/dam/nhm-www/press-office/paludohadros-palaeoart-full-width-guilherme-gehr.jpg",
+    "cover": "/images/dinos/iguanodon-960.webp",
+    "tags": [
+      "new-species"
+    ]
+  },
+  {
+    "id": "concornis-reconstruction",
+    "title": "ปั้น \"คอนคอร์นิส\" นกยุคไดโนเสาร์ขนาดเท่าตัวจริง จากหลักฐานฟอสซิลอายุกว่า 100 ล้านปี",
+    "description": "นักบรรพชีวินวิทยาใช้หลักฐานฟอสซิล โมเดลดิจิทัล และงานปั้นแบบดั้งเดิม สร้างรูปจำลองนกกลุ่มเอนันทิออร์นิทีสที่อาศัยร่วมยุคกับไดโนเสาร์ในสเปน",
+    "date": "2026-10-26",
+    "source": "Sci.News",
+    "url": "https://www.sci.news/paleontology/concornis-lacustris-15155.html",
+    "image": "https://cdn.sci.news/images/2026/10/image_15155f-Concornis-lacustris.jpg",
+    "cover": null,
+    "tags": [
+      "research"
+    ]
+  },
+  {
+    "id": "phu-luang-first-tracks",
+    "title": "อันซีน \"ภูหลวง\" จ.เลย แหล่งรอยตีนไดโนเสาร์แห่งแรกของไทยและอาเซียน",
+    "description": "รอยตีนไดโนเสาร์กินเนื้อ 15 รอยบนลานหินทรายอายุราว 120 ล้านปี บริเวณผาเตลิ่น บนยอดภูหลวง ค้นพบเมื่อปี 2527 ปัจจุบันเป็นจุดท่องเที่ยวเชิงเรียนรู้",
+    "date": "2026-10-24",
+    "source": "ผู้จัดการออนไลน์",
+    "url": "https://mgronline.com/travel/detail/9690000102371",
+    "image": "https://mpics2.mgronline.com/pics/Images/569000010386601.JPEG",
+    "cover": null,
+    "tags": [
+      "thailand",
+      "footprints",
+      "learning"
+    ]
+  },
+  {
+    "id": "thai-footprint-sites-5-highlights",
+    "title": "5 จุดชม \"รอยตีนไดโนเสาร์-สัตว์ดึกดำบรรพ์\" ทั่วไทย ตั้งแต่ภูหลวงถึงภูหินร่องกล้า",
+    "description": "แนะนำแหล่งเรียนรู้ภูหลวง ภูเวียง ภูแฝก ภูหินร่องกล้า และผารอยตีนอาร์โคซอร์ที่เพชรบูรณ์ พร้อมอัปเดตรอยตีนที่น้ำตกตาดน้อย อุดรธานี ที่เพิ่งพบ",
+    "date": "2026-10-22",
+    "source": "ผู้จัดการออนไลน์",
+    "url": "https://mgronline.com/travel/detail/9690000101785",
+    "image": "https://mpics2.mgronline.com/pics/Images/569000010323601.JPEG",
+    "cover": null,
+    "tags": [
+      "thailand",
+      "footprints",
+      "learning"
+    ]
+  },
+  {
+    "id": "ban-phue-udon-tracks",
+    "title": "กรมทรัพยากรธรณียืนยัน รอยตีนไดโนเสาร์กินเนื้อแห่งแรกของอุดรธานี อายุ 120 ล้านปี",
+    "description": "ชาวบ้านพบรอยปริศนาริมลำธารใกล้น้ำตกตาดน้อย อ.บ้านผือ ก่อนผู้เชี่ยวชาญยืนยันว่าเป็นรอยตีนเทอโรพอด 6 รอย บนหินทรายหมวดหินภูพาน ใกล้แหล่งมรดกโลกภูพระบาท",
+    "date": "2026-10-20",
+    "source": "กรุงเทพธุรกิจ",
+    "url": "https://www.bangkokbiznews.com/news/news-update/1257154",
+    "image": "https://image.bangkokbiznews.com/uploads/images/md/2026/10/0RtXQNlQEMBhiR0yTHnq.webp",
+    "cover": "/images/dinos/siamotyrannus-960.webp",
+    "tags": [
+      "thailand",
+      "footprints"
+    ]
+  },
+  {
     "id": "invictibellatrix-isle-of-wight",
     "title": "พบ \"อินวิกติเบลลาทริกซ์\" นักล่ากรงเล็บยักษ์ตัวแรกของยุโรป จากฟอสซิลที่ถูกลืมในพิพิธภัณฑ์ 100 ปี",
     "description": "ชิ้นส่วนกะโหลกจากเกาะไวต์ ประเทศอังกฤษ ที่เก็บไว้ตั้งแต่ปี 1924 ถูกระบุว่าเป็นเมการ์แร็พทอร์ชนิดใหม่ ขนาดราวเสือโคร่ง อายุประมาณ 120 ล้านปี",
@@ -7,7 +104,10 @@
     "source": "ScienceDaily",
     "url": "https://www.sciencedaily.com/releases/2026/10/261014015457.htm",
     "image": "https://www.sciencedaily.com/images/1920/invictibellatrix-amberina.webp",
-    "cover": "/images/dinos/megaraptor-960.webp"
+    "cover": "/images/dinos/megaraptor-960.webp",
+    "tags": [
+      "new-species"
+    ]
   },
   {
     "id": "phu-wiang-pit3-brachiosaurid",
@@ -17,7 +117,24 @@
     "source": "ข่าวจริงประเทศไทย",
     "url": "https://www.realnewsthailand.net/article/74787/",
     "image": "https://www.realnewsthailand.net/wp-content/uploads/2026/10/0000-014-00021.jpg",
-    "cover": "/images/dinos/brachiosaurus-960.webp"
+    "cover": "/images/dinos/brachiosaurus-960.webp",
+    "tags": [
+      "thailand",
+      "discovery"
+    ]
+  },
+  {
+    "id": "atrociraptor-albertosaurus-bites",
+    "title": "รอยฟันบนขากรรไกรอัลเบอร์โตซอรัส ชี้แรปเตอร์ตัวเล็กเคยแทะซากไทรันโนซอร์",
+    "description": "ขากรรไกรอัลเบอร์โตซอรัสวัยรุ่นจากแคนาดามีรอยกัดที่ตรงกับฟันของอะโทรซิแรปเตอร์ ซึ่งหนักเพียง 16–18 กก. นักวิจัยเชื่อว่าเป็นการกินซาก ไม่ใช่การล่า",
+    "date": "2026-10-14",
+    "source": "Sci.News",
+    "url": "https://www.sci.news/paleontology/atrociraptor-albertosaurus-scavenging-15129.html",
+    "image": "https://cdn.sci.news/images/2026/10/image_15129-Atrociraptor-Albertosaurus.jpg",
+    "cover": "/images/dinos/albertosaurus-960.webp",
+    "tags": [
+      "research"
+    ]
   },
   {
     "id": "phu-wiang-royal-visit-prep",
@@ -27,7 +144,11 @@
     "source": "TOP NEWS",
     "url": "https://www.topnews.co.th/news/1718150",
     "image": "https://images.topnews.co.th/2026/10/Tdf4k1xx-02.jpg",
-    "cover": "/images/dinos/phuwiangvenator-960.webp"
+    "cover": "/images/dinos/phuwiangvenator-960.webp",
+    "tags": [
+      "thailand",
+      "learning"
+    ]
   },
   {
     "id": "diplodocus-spain",
@@ -37,7 +158,10 @@
     "source": "Sci.News",
     "url": "https://www.sci.news/paleontology/spanish-diplodocus-15064.html",
     "image": "https://cdn.sci.news/images/2026/09/image_15064f-Spanish-Diplodocus.jpg",
-    "cover": "/images/dinos/diplodocus-960.webp"
+    "cover": "/images/dinos/diplodocus-960.webp",
+    "tags": [
+      "discovery"
+    ]
   },
   {
     "id": "feather-in-dinosaur-dung",
@@ -47,7 +171,10 @@
     "source": "NPR",
     "url": "https://npr.org/2026/09/10/nx-s1-5963519/best-fossilized-bird-feather-dinosaur-feces-extinction",
     "image": "https://npr.brightspotcdn.com/dims3/default/strip/false/crop/7060x3971+3126+0/resize/1400/quality/85/format/jpeg/?url=http%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2F6e%2Fa2%2F86b79eed4041a812789ac1a341d4%2Ffull-feather-200x.jpg",
-    "cover": null
+    "cover": null,
+    "tags": [
+      "research"
+    ]
   },
   {
     "id": "thailand-jurassic-park-afp",
@@ -57,7 +184,11 @@
     "source": "The Manila Times (AFP)",
     "url": "https://www.manilatimes.net/2026/09/03/world/thailands-jurassic-park-shines-light-on-dinosaur-evolution/2418012",
     "image": "https://www.manilatimes.net/manilatimes/uploads/images/2026/09/03/1201922.jpg",
-    "cover": "/images/dinos/phuwiangosaurus-960.webp"
+    "cover": "/images/dinos/phuwiangosaurus-960.webp",
+    "tags": [
+      "thailand",
+      "learning"
+    ]
   },
   {
     "id": "indosinosuchus-peninsularensis",
@@ -67,7 +198,12 @@
     "source": "Thai PBS",
     "url": "https://www.thaipbs.or.th/now/content/4307",
     "image": "https://thaipbs-media-fuzzylop.thaipbs.or.th/imgpx1/unsafe/s:1200:0/aHR0cHM6Ly9vbmVjbXMudGhhaXBicy5vci50aC9tZWRpYS9xdHloSlJqQ0p1QmFUNHZwcEtYUk8ydk93ZXVBSElnNVpBR05ieVN4QnpZRkdaT0pZa1RkdFNsLmpwZw.jpg",
-    "cover": null
+    "cover": null,
+    "tags": [
+      "thailand",
+      "new-species",
+      "other-animals"
+    ]
   },
   {
     "id": "chaiyaphum-ban-khwao-carnivore",
@@ -77,7 +213,11 @@
     "source": "ข่าวจริงประเทศไทย",
     "url": "https://www.realnewsthailand.net/article/69409/",
     "image": "https://www.realnewsthailand.net/wp-content/uploads/2026/08/8-8-69-2.jpg",
-    "cover": "/images/dinos/siamotyrannus-960.webp"
+    "cover": "/images/dinos/siamotyrannus-960.webp",
+    "tags": [
+      "thailand",
+      "discovery"
+    ]
   },
   {
     "id": "dinevenator-new-mexico",
@@ -87,7 +227,10 @@
     "source": "Source NM",
     "url": "https://sourcenm.com/2026/08/05/new-mexico-scientists-announce-discovery-of-beefy-new-bird-like-dinosaur-in-san-juan-county/",
     "image": null,
-    "cover": null
+    "cover": null,
+    "tags": [
+      "new-species"
+    ]
   },
   {
     "id": "musango-zimbabwe",
@@ -97,7 +240,23 @@
     "source": "IOL",
     "url": "https://iol.co.za/news/world/2026-07-29-how-a-210-million-year-old-dinosaur-found-in-zimbabwe-changes-our-understanding-of-dinosaurs-in-southern-africa/",
     "image": "https://iol-prod.appspot.com/image/79414bfc83b7a3ff21a38f867710ef19c8cf0bf0/1000/jpeg",
-    "cover": "/images/dinos/musankwa-960.webp"
+    "cover": "/images/dinos/musankwa-960.webp",
+    "tags": [
+      "new-species"
+    ]
+  },
+  {
+    "id": "ceratocaudia-india",
+    "title": "\"เซราโตคอเดีย\" ซอโรพอดตัวเล็กยุคจูแรสซิกจากอินเดีย หนึ่งในนีโอซอโรพอดยุคแรกสุด",
+    "description": "โครงกระดูกบางส่วนจากแอ่งคัชช์ รัฐคุชราต ยาวราว 7 เมตร อายุอาจถึง 190 ล้านปี ช่วยบอกว่าซอโรพอดกลุ่มนี้กระจายไปทั่วโลกเร็วกว่าที่คิด",
+    "date": "2026-07-21",
+    "source": "Sci.News",
+    "url": "https://www.sci.news/paleontology/ceratocaudia-antiqua-14934.html",
+    "image": "https://cdn.sci.news/images/2026/07/image_14934f-Ceratocaudia-antiqua.jpg",
+    "cover": "/images/dinos/ceratocaudia-960.webp",
+    "tags": [
+      "new-species"
+    ]
   },
   {
     "id": "isaan-jurassic-hub",
@@ -107,7 +266,11 @@
     "source": "The Isaan Record",
     "url": "https://theisaanrecord.co/2026/07/15/thailands-15th-dinosaur-following-the-discovery-of-naka-titan/",
     "image": "https://theisaanrecord.co/wp-content/uploads/2026/07/Dinosour-Kalasin-02.jpg",
-    "cover": "/images/dinos/isanosaurus-960.webp"
+    "cover": "/images/dinos/isanosaurus-960.webp",
+    "tags": [
+      "thailand",
+      "new-species"
+    ]
   },
   {
     "id": "nagatitan-geopark",
@@ -117,7 +280,11 @@
     "source": "สยามรัฐ",
     "url": "https://siamrath.co.th/regional/159943",
     "image": "https://siamrath.co.th/assets/1e164947-5533-414e-9bbc-7cb7707cfca4?width=680&quality=80&format=webp",
-    "cover": "/images/dinos/nagatitan-960.webp"
+    "cover": "/images/dinos/nagatitan-960.webp",
+    "tags": [
+      "thailand",
+      "learning"
+    ]
   },
   {
     "id": "uragasaurus-kalasinensis",
@@ -127,7 +294,24 @@
     "source": "Thai PBS",
     "url": "https://www.thaipbs.or.th/news/content/508055",
     "image": "https://content-images.thaipbs.or.th/imgpx1/unsafe/rt:fill/el:1/s:1200:630/q:90/aHR0cHM6Ly9vbmVjbXMudGhhaXBicy5vci50aC9tZWRpYS9xdHloSlJqQ0p1QXFkYVdlVzA4WGZVcDd2b1Z3ekw0MktMVHMyeVZnUFBSVjlXZWZ6MUo4UTFYLmpwZw==.jpg",
-    "cover": "/images/dinos/uragasaurus-960.webp"
+    "cover": "/images/dinos/uragasaurus-960.webp",
+    "tags": [
+      "thailand",
+      "new-species"
+    ]
+  },
+  {
+    "id": "oviraptor-nest-sunlight",
+    "title": "จำลองรังโอวิแรปเตอร์ขนาดจริง พบว่าไดโนเสาร์ใช้ทั้งความร้อนจากตัวและแสงแดดฟักไข่",
+    "description": "ทีมวิจัยไต้หวันสร้างโมเดลโอวิแรปเตอร์และไข่เรซินขนาดเท่าจริง ร่วมกับการจำลองการถ่ายเทความร้อน พบว่าการฟักไข่มีประสิทธิภาพน้อยกว่านกในปัจจุบัน",
+    "date": "2026-07-01",
+    "source": "ScienceDaily",
+    "url": "https://www.sciencedaily.com/releases/2026/06/260621031409.htm",
+    "image": "https://www.sciencedaily.com/images/1920/oviraptor-dinosaur-with-egg.webp",
+    "cover": "/images/dinos/oviraptor-960.webp",
+    "tags": [
+      "research"
+    ]
   },
   {
     "id": "antarctica-first-dinosaur-bone",
@@ -137,7 +321,10 @@
     "source": "Natural History Museum",
     "url": "https://www.nhm.ac.uk/discover/news/2026/june/first-ever-dinosaur-fossil-discovered-on-antarctica-a-titanosaur.html",
     "image": "https://www.nhm.ac.uk/content/dam/nhm-www/discover/antarctica-dinosaur-sauropod/antarctic-titanosaur-dinosaur-forest-reconstruction-full-width-andrew-mcafee-carnegie-museum-of-natural-history.jpg",
-    "cover": null
+    "cover": null,
+    "tags": [
+      "discovery"
+    ]
   },
   {
     "id": "phu-pha-dang-sakon-nakhon",
@@ -147,7 +334,25 @@
     "source": "Thai PBS",
     "url": "https://www.thaipbs.or.th/news/content/507270",
     "image": "https://content-images.thaipbs.or.th/imgpx1/unsafe/rt:fill/el:1/s:1200:630/q:90/aHR0cHM6Ly9vbmVjbXMudGhhaXBicy5vci50aC9tZWRpYS9xdHloSlJqQ0p1QXBUR1lPbVlKR3pMMW9zOEpqY0dYem1pU01KOUlpRUg4ejBpOE0yUVc0RWVKLmpwZw==.jpg",
-    "cover": "/images/dinos/siamraptor-960.webp"
+    "cover": "/images/dinos/siamraptor-960.webp",
+    "tags": [
+      "thailand",
+      "discovery"
+    ]
+  },
+  {
+    "id": "tylosaurus-rex-mosasaur",
+    "title": "\"ไทโลซอรัส เร็กซ์\" โมซาซอร์ชนิดใหม่ยาว 13 เมตร ฉายา ทีเร็กซ์แห่งท้องทะเล",
+    "description": "สัตว์เลื้อยคลานทะเลอายุราว 80 ล้านปีจากเท็กซัส ระบุจากตัวอย่างในพิพิธภัณฑ์ที่เคยจัดเป็นชนิดอื่น มีฟันหยักและร่องรอยบาดแผลจากการต่อสู้กันเอง",
+    "date": "2026-05-22",
+    "source": "University of Cincinnati",
+    "url": "https://www.uc.edu/news/articles/2026/05/n21410486.html",
+    "image": "https://www.uc.edu/content/dam/uc/news/public-relations/inthenews-uc/181008jfMosasaur029.jpg",
+    "cover": null,
+    "tags": [
+      "new-species",
+      "other-animals"
+    ]
   },
   {
     "id": "pptv-14-thai-dinosaurs",
@@ -157,7 +362,11 @@
     "source": "PPTV",
     "url": "https://www.pptvhd36.com/news/%E0%B9%84%E0%B8%A5%E0%B8%9F%E0%B9%8C%E0%B8%AA%E0%B9%84%E0%B8%95%E0%B8%A5%E0%B9%8C/275690",
     "image": "https://img.pptvhd36.com/thumbor/2026/05/17/news-043f60e.jpg",
-    "cover": "/images/dinos/kinnareemimus-960.webp"
+    "cover": "/images/dinos/kinnareemimus-960.webp",
+    "tags": [
+      "thailand",
+      "learning"
+    ]
   },
   {
     "id": "nagatitan-chaiyaphumensis",
@@ -167,7 +376,24 @@
     "source": "Thai PBS",
     "url": "https://www.thaipbs.or.th/news/content/505913",
     "image": "https://content-images.thaipbs.or.th/imgpx1/unsafe/rt:fill/el:1/s:1200:630/q:90/aHR0cHM6Ly9vbmVjbXMudGhhaXBicy5vci50aC9tZWRpYS9xdHloSlJqQ0p1QW1YUWZNU2tVWDZXN1pHWlVmSkl1R1I2UUhOS2c4MXlxeHJIWUZQYVdKbFQzLmpwZw==.jpg",
-    "cover": "/images/dinos/nagatitan-960.webp"
+    "cover": "/images/dinos/nagatitan-960.webp",
+    "tags": [
+      "thailand",
+      "new-species"
+    ]
+  },
+  {
+    "id": "edmontosaurus-collagen",
+    "title": "พบร่องรอยคอลลาเจนในกระดูกเอ็ดมอนโตซอรัสอายุ 66 ล้านปี",
+    "description": "นักวิจัยมหาวิทยาลัยลิเวอร์พูลตรวจกระดูกสะโพกจากชั้นหินเฮลครีก พบโปรตีนคอลลาเจนและไฮดรอกซีโพรลีน หลักฐานว่าโมเลกุลดั้งเดิมอาจอยู่รอดได้นับสิบล้านปี",
+    "date": "2026-05-14",
+    "source": "ScienceDaily",
+    "url": "https://www.sciencedaily.com/releases/2026/05/260514084421.htm",
+    "image": "https://www.sciencedaily.com/images/1920/edmontosaurus-hip-bone.webp",
+    "cover": "/images/dinos/edmontosaurus-960.webp",
+    "tags": [
+      "research"
+    ]
   },
   {
     "id": "bicharracosaurus-argentina",
@@ -177,7 +403,10 @@
     "source": "ScienceDaily",
     "url": "https://www.sciencedaily.com/releases/2026/05/260511213154.htm",
     "image": "https://www.sciencedaily.com/images/1920/bicharracosaurus-dionidei-dinosaur.webp",
-    "cover": "/images/dinos/bicharracosaurus-960.webp"
+    "cover": "/images/dinos/bicharracosaurus-960.webp",
+    "tags": [
+      "new-species"
+    ]
   },
   {
     "id": "knysna-tracks-south-africa",
@@ -187,7 +416,10 @@
     "source": "ScienceDaily",
     "url": "https://www.sciencedaily.com/releases/2026/04/260423031547.htm",
     "image": "https://www.sciencedaily.com/images/1920/coastal-dinosaur-footprint.webp",
-    "cover": null
+    "cover": null,
+    "tags": [
+      "footprints"
+    ]
   },
   {
     "id": "doolysaurus-korea",
@@ -197,7 +429,10 @@
     "source": "Natural History Museum",
     "url": "https://www.nhm.ac.uk/discover/news/2026/march/new-species-of-south-korea-dinosaur-named-after-famous-south-korean-cartoon.html",
     "image": "https://www.nhm.ac.uk/content/dam/nhm-www/discover/new-dinosaur-south-korea/new-dinosaur-south-korea-reconstruction-full-width.jpg",
-    "cover": "/images/dinos/doolysaurus-960.webp"
+    "cover": "/images/dinos/doolysaurus-960.webp",
+    "tags": [
+      "new-species"
+    ]
   },
   {
     "id": "spinosaurus-mirabilis",
@@ -207,7 +442,23 @@
     "source": "Natural History Museum",
     "url": "https://www.nhm.ac.uk/discover/news/2026/february/new-sabre-crested-spinosaurus-species-named-from-desert-dinosaur-fossils.html",
     "image": "https://www.nhm.ac.uk/content/dam/nhm-www/discover/new-spinosaurus/New-spinosaurus-spinosaurus-mirabilis-wetland-full-width-dani-navarro-university-chicago.jpg",
-    "cover": "/images/dinos/spinosaurus-960.webp"
+    "cover": "/images/dinos/spinosaurus-960.webp",
+    "tags": [
+      "new-species"
+    ]
+  },
+  {
+    "id": "foskeia-spain",
+    "title": "\"ฟอสเกีย\" ไดโนเสาร์กินพืชจิ๋วยาวครึ่งเมตรจากสเปน แต่กะโหลกก้าวหน้าเกินตัว",
+    "description": "ฟอสซิลอย่างน้อย 5 ตัวจากเมืองบูร์โกส ยุคครีเทเชียสตอนต้น เป็นหนึ่งในออร์นิโทพอดที่เล็กที่สุด และมีกะโหลกที่ทำให้ต้องคิดใหม่เรื่องวิวัฒนาการของไดโนเสาร์กินพืช",
+    "date": "2026-02-03",
+    "source": "ScienceDaily",
+    "url": "https://www.sciencedaily.com/releases/2026/02/260203030521.htm",
+    "image": "https://www.sciencedaily.com/images/1920/foskeia-pelendonum-dinosaur-reconstruction.webp",
+    "cover": "/images/dinos/foskeia-960.webp",
+    "tags": [
+      "new-species"
+    ]
   },
   {
     "id": "sam-ran-spinosaurid",
@@ -217,7 +468,49 @@
     "source": "Interesting Engineering",
     "url": "https://interestingengineering.com/science/fossil-fish-dinosaur-thailand",
     "image": "https://cms.interestingengineering.com/wp-content/uploads/2025/12/IE-15-1.jpg",
-    "cover": "/images/dinos/baryonyx-960.webp"
+    "cover": "/images/dinos/baryonyx-960.webp",
+    "tags": [
+      "discovery"
+    ]
+  },
+  {
+    "id": "edmontosaurus-mummies-hooves",
+    "title": "\"มัมมี่\" ไดโนเสาร์ปากเป็ดจากไวโอมิง เผยว่าเอ็ดมอนโตซอรัสมีกีบเท้า",
+    "description": "ทีมของพอล เซเรโน ศึกษามัมมี่เอ็ดมอนโตซอรัสสองตัว พบกีบที่นิ้วเท้าหลังและหงอนเนื้อตามแนวหลัง ผิวหนังเหลือเป็นฟิล์มดินเหนียวบางๆ เผยแพร่ใน Science",
+    "date": "2025-10-29",
+    "source": "Live Science",
+    "url": "https://www.livescience.com/animals/dinosaurs/first-ever-mummified-and-hoofed-dinosaur-discovered-in-wyoming-badlands",
+    "image": "https://cdn.mos.cms.futurecdn.net/MbA5AW8VV7MebWsofpag6o-2560-80.jpg",
+    "cover": "/images/dinos/edmontosaurus-960.webp",
+    "tags": [
+      "research"
+    ]
+  },
+  {
+    "id": "cariocecus-portugal",
+    "title": "\"คาริโอเซคัส\" อิกัวโนดอนต์ชนิดใหม่จากโปรตุเกส ขากรรไกรแข็งแรงเป็นพิเศษ",
+    "description": "ไดโนเสาร์กินพืชขนาดกลางอายุราว 125 ล้านปี จากคาบสมุทรเซตูบัล ทางใต้ของลิสบอน มีกระดูกแก้มเชื่อมกับขากรรไกรบน ลักษณะที่ไม่เคยพบในอิกัวโนดอนต์อื่น",
+    "date": "2025-09-23",
+    "source": "Good Morning America",
+    "url": "https://www.goodmorningamerica.com/news/story/new-iguanodontian-dinosaur-discovered-portugal-125853083",
+    "image": "https://i.abcnewsfe.com/a/b83010ff-7faf-47a8-a125-7c43c9f3a753/dino-ht-jt-250923_1758649724588_hpMain_16x9.jpg?w=992",
+    "cover": "/images/dinos/mantellisaurus-960.webp",
+    "tags": [
+      "new-species"
+    ]
+  },
+  {
+    "id": "zavacephale-mongolia",
+    "title": "\"ซาวาเซฟาเล\" ไดโนเสาร์หัวโดมที่เก่าแก่ที่สุดในโลก จากทะเลทรายโกบี",
+    "description": "ฟอสซิลอายุ 108–115 ล้านปีจากมองโกเลีย ยาวราว 1 เมตร สมบูรณ์ที่สุดในกลุ่มแพคีเซฟาโลซอร์ ดันประวัติไดโนเสาร์หัวโดมให้เก่าขึ้นอย่างน้อย 14 ล้านปี",
+    "date": "2025-09-17",
+    "source": "Good Morning America",
+    "url": "https://www.goodmorningamerica.com/news/story/paleontologists-discover-earliest-dome-headed-dinosaur-125627447",
+    "image": "https://i.abcnewsfe.com/a/aeeacce8-32a8-482f-903c-c739cc8575f0/Pachycephalosaur-ht-er-250916_1758047367020_hpMain_16x9.jpg?w=992",
+    "cover": "/images/dinos/zavacephale-960.webp",
+    "tags": [
+      "new-species"
+    ]
   },
   {
     "id": "13-dinos-of-siam",
@@ -227,7 +520,11 @@
     "source": "Pattaya Mail",
     "url": "https://www.pattayamail.com/thailandnews/step-back-in-time-thailands-13-dinos-of-siam-dinosaur-exhibition-opens-514138",
     "image": "https://www.pattayamail.com/wp-content/uploads/2025/08/t-08-Step-Back-in-Time-Thailands-%E2%80%9813-Dinos-of-Siam-dinosaur-exhibition-opens-1.png",
-    "cover": "/images/dinos/siamodon-960.webp"
+    "cover": "/images/dinos/siamodon-960.webp",
+    "tags": [
+      "thailand",
+      "learning"
+    ]
   },
   {
     "id": "phu-wiang-6th-species",
@@ -237,7 +534,11 @@
     "source": "ไทยโพสต์",
     "url": "https://www.thaipost.net/district-news/838823/",
     "image": "https://storage-wp.thaipost.net/2025/08/1000045285.jpg",
-    "cover": "/images/dinos/phuwiangosaurus-960.webp"
+    "cover": "/images/dinos/phuwiangosaurus-960.webp",
+    "tags": [
+      "thailand",
+      "discovery"
+    ]
   },
   {
     "id": "scotty-rib-blood-vessels",
@@ -247,7 +548,10 @@
     "source": "University of Regina",
     "url": "https://www.uregina.ca/news/2025/scottys-rib-university-of-regina-phd-student-examines-preserved-blood-vessels-in-famous-fossil.html",
     "image": null,
-    "cover": "/images/dinos/tyrannosaurus-960.webp"
+    "cover": "/images/dinos/tyrannosaurus-960.webp",
+    "tags": [
+      "research"
+    ]
   },
   {
     "id": "phu-wiang-huai-pratu-ti-ma",
@@ -257,7 +561,11 @@
     "source": "ไทยโพสต์",
     "url": "https://www.thaipost.net/news-update/806487/",
     "image": "https://storage-wp.thaipost.net/2025/06/1-39.jpg",
-    "cover": "/images/dinos/isanosaurus-960.webp"
+    "cover": "/images/dinos/isanosaurus-960.webp",
+    "tags": [
+      "thailand",
+      "discovery"
+    ]
   },
   {
     "id": "garudapterus-buffetauti",
@@ -267,7 +575,12 @@
     "source": "Sci.News",
     "url": "https://www.sci.news/paleontology/garudapterus-buffetauti-13788.html",
     "image": "https://cdn.sci.news/images/2025/03/image_13788f-Garudapterus-buffetauti.jpg",
-    "cover": null
+    "cover": null,
+    "tags": [
+      "thailand",
+      "new-species",
+      "other-animals"
+    ]
   },
   {
     "id": "phu-hin-rong-kla-tracks",
@@ -277,7 +590,11 @@
     "source": "ไทยรัฐ",
     "url": "https://www.thairath.co.th/news/society/2805120",
     "image": "https://static.thairath.co.th/media/dFQROr7oWzulq5Fa6rBWhhqIesIgzHO1Zed6aLsDhXHKTnv1s614CMoWREWKEHiqlH5.jpg",
-    "cover": null
+    "cover": null,
+    "tags": [
+      "thailand",
+      "footprints"
+    ]
   },
   {
     "id": "tad-yai-oldest-tracks",
@@ -287,7 +604,11 @@
     "source": "Thai PBS",
     "url": "https://www.thaipbs.or.th/news/content/335884",
     "image": "https://content-images.thaipbs.or.th/imgpx1/unsafe/rt:fill/el:1/s:1200:630/q:90/aHR0cHM6Ly9vbmVjbXMudGhhaXBicy5vci50aC9tZWRpYS9xdHloSlJqQ0pyVnBjQWJzQzhScG1YQjNYNWVMNnNjN1dLNG5RWFhGd09KNjdQRkc5OFRoV05YLmpwZw==.jpg",
-    "cover": null
+    "cover": null,
+    "tags": [
+      "thailand",
+      "footprints"
+    ]
   },
   {
     "id": "minimocursor-phunoiensis",
@@ -297,6 +618,10 @@
     "source": "Thai PBS",
     "url": "https://www.thaipbs.or.th/news/content/330034",
     "image": "https://content-images.thaipbs.or.th/imgpx1/unsafe/rt:fill/el:1/s:1200:630/q:90/aHR0cHM6Ly9vbmVjbXMudGhhaXBicy5vci50aC9tZWRpYS9xdHloSlJqQ0pyVnBiNzFiNUdaMWhkaHZVZHpwM3UxUzJjWHJZZmpUcUJqMXprZ3c2a1dnSnRULmpwZw==.jpg",
-    "cover": "/images/dinos/minimocursor-960.webp"
+    "cover": "/images/dinos/minimocursor-960.webp",
+    "tags": [
+      "thailand",
+      "new-species"
+    ]
   }
 ]

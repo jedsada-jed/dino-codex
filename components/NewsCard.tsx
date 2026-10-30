@@ -3,6 +3,7 @@
 import { useState } from "react";
 import type { NewsItem } from "@/types/news";
 import { BoneIcon } from "@/components/Icons";
+import { NEWS_TAGS } from "@/lib/labels";
 
 function formatNewsDate(date: string): string {
   return new Date(`${date}T00:00:00Z`).toLocaleDateString("th-TH", {
@@ -60,6 +61,17 @@ export function NewsCard({ item }: { item: NewsItem }) {
         <NewsCover item={item} />
       </div>
       <div className="flex flex-1 flex-col gap-2 p-4">
+        <ul className="flex flex-wrap gap-1.5" aria-label="หมวดหมู่">
+          {item.tags.map((tag) => (
+            <li
+              key={tag}
+              className="inline-flex items-center gap-1.5 rounded-full bg-stone-200 px-2 py-0.5 text-[11px] font-medium text-stone-700"
+            >
+              <span className="h-2 w-2 rounded-full" style={{ backgroundColor: NEWS_TAGS[tag].color }} aria-hidden="true" />
+              {NEWS_TAGS[tag].label}
+            </li>
+          ))}
+        </ul>
         <p className="text-xs text-stone-500">
           <time dateTime={item.date}>{formatNewsDate(item.date)}</time> · {item.source}
         </p>

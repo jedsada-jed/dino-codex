@@ -1,3 +1,13 @@
+export type NewsTag =
+  | "thailand"
+  | "new-species"
+  | "discovery"
+  | "research"
+  | "footprints"
+  | "learning"
+  | "other-animals"
+  | "general";
+
 export interface NewsItem {
   id: string;
   title: string;
@@ -10,4 +20,6 @@ export interface NewsItem {
   image: string | null;
   /** Local image path, or null to show the placeholder. */
   cover: string | null;
+  /** Categories shown as labels on the card; the first one is the main category. */
+  tags: NewsTag[];
 }
