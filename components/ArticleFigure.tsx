@@ -620,6 +620,71 @@ function ImpactTimelineFigure({ lang, compact }: FigureProps) {
   );
 }
 
+/* ---------- 10. Not dinosaurs: where the look-alikes sit on the amniote tree ---------- */
+
+const KIN_LEAVES = [
+  { x: 60, th: "สัตว์เลี้ยงลูกด้วยนม", thSub: "มนุษย์ แมมมอธ", en: "Mammals", enSub: "humans, mammoths" },
+  { x: 160, th: "ไดเมโทรดอน", en: "Dimetrodon" },
+  { x: 265, th: "กิ้งก่า งู", en: "Lizards, snakes" },
+  { x: 355, th: "โมซาซอร์", en: "Mosasaurs" },
+  { x: 440, th: "จระเข้", en: "Crocodiles" },
+  { x: 520, th: "เทอโรซอร์", en: "Pterosaurs" },
+  { x: 598, th: "ไดโนเสาร์", thSub: "รวมนก", en: "Dinosaurs", enSub: "incl. birds" },
+];
+
+function NotDinosaursFigure({ lang, compact }: FigureProps) {
+  const th = lang === "th";
+  const branches =
+    // Synapsids: mammals + Dimetrodon
+    "M60 70 V150 M160 70 V150 M60 150 H160 M110 150 V260 " +
+    // Lepidosaurs: lizards & snakes + mosasaurs
+    "M265 70 V130 M355 70 V130 M265 130 H355 M310 130 V210 " +
+    // Archosaurs: crocodiles, then pterosaurs + dinosaurs
+    "M520 70 V110 M598 70 V110 M520 110 H598 M559 110 V170 M440 70 V170 M440 170 H559 M499.5 170 V210 " +
+    // Reptiles, then amniotes
+    "M310 210 H499.5 M404.75 210 V260 M110 260 H404.75 M257.4 260 V280";
+  return (
+    <svg viewBox={compact ? "0 50 640 240" : "0 0 640 300"} className="h-auto w-full">
+      <path d={branches} stroke={MUTED} strokeWidth={3} strokeLinecap="round" fill="none" />
+      <path d="M598 70 V110" stroke={WARM} strokeWidth={5} strokeLinecap="round" />
+      {KIN_LEAVES.map((leaf, i) => {
+        const dino = i === KIN_LEAVES.length - 1;
+        return <circle key={leaf.en} cx={leaf.x} cy={70} r={dino ? 9 : 7} fill={dino ? WARM : MUTED} />;
+      })}
+
+      {!compact && (
+        <g fontSize={13}>
+          {KIN_LEAVES.map((leaf, i) => {
+            const dino = i === KIN_LEAVES.length - 1;
+            const sub = th ? leaf.thSub : leaf.enSub;
+            return (
+              <g key={leaf.en} textAnchor="middle">
+                <text x={leaf.x} y={50} fontWeight={dino ? 800 : 600} fill={dino ? WARM : INK}>
+                  {th ? leaf.th : leaf.en}
+                </text>
+                {sub && (
+                  <text x={leaf.x} y={32} fontSize={11.5} fill={dino ? WARM : MUTED}>
+                    {sub}
+                  </text>
+                )}
+              </g>
+            );
+          })}
+          <g fontSize={12} fill={ACCENT} fontWeight={600}>
+            <text x={118} y={176}>{th ? "ไซแนปซิด" : "synapsids"}</text>
+            <text x={318} y={156}>{th ? "ญาติกิ้งก่า" : "lizard kin"}</text>
+            <text x={507} y={196}>{th ? "อาร์โคซอร์" : "archosaurs"}</text>
+            <text x={412} y={236}>{th ? "สัตว์เลื้อยคลาน" : "reptiles"}</text>
+          </g>
+          <text x={257.4} y={296} textAnchor="middle" fontSize={12} fill={MUTED}>
+            {th ? "บรรพบุรุษร่วมของสัตว์มีถุงน้ำคร่ำ" : "common ancestor of amniotes"}
+          </text>
+        </g>
+      )}
+    </svg>
+  );
+}
+
 /** Most articles have one figure; a few have more, each placed after its own section. */
 const FIGURES: Record<string, FigureDef[]> = {
   "dinosaur-footprints": [{
@@ -728,6 +793,18 @@ const FIGURES: Record<string, FigureDef[]> = {
       en: "What happened after the impact: orange is the disaster, green the recovery. (Spacing is not to scale; the recovery stops are based on fossils from Corral Bluffs, Colorado, USA.)",
     },
     Draw: ImpactTimelineFigure,
+  }],
+  "not-dinosaurs": [{
+    afterSection: 0,
+    alt: {
+      th: "ต้นไม้ครอบครัวอย่างง่าย: สัตว์เลี้ยงลูกด้วยนมกับไดเมโทรดอนอยู่สายไซแนปซิด กิ้งก่า งู และโมซาซอร์อยู่สายเดียวกัน จระเข้ เทอโรซอร์ และไดโนเสาร์ (รวมนก) อยู่ในกลุ่มอาร์โคซอร์ โดยเทอโรซอร์เป็นญาติใกล้ที่สุดของไดโนเสาร์",
+      en: "A simplified family tree: mammals and Dimetrodon on the synapsid branch; lizards, snakes and mosasaurs together; crocodiles, pterosaurs and dinosaurs (including birds) in the archosaurs, with pterosaurs the closest relatives of dinosaurs.",
+    },
+    caption: {
+      th: "มีเพียงกิ่งสีส้มเท่านั้นที่เป็นไดโนเสาร์ (แผนภาพอย่างง่าย ไม่ได้แสดงเต่า เพลซิโอซอร์ และอิกทิโอซอร์ ส่วนเมกาโลดอนเป็นปลา จึงอยู่นอกต้นไม้นี้ทั้งหมด)",
+      en: "Only the orange branch is dinosaurs. (Simplified: turtles, plesiosaurs and ichthyosaurs are left out, and Megalodon is a fish, so it sits outside this tree entirely.)",
+    },
+    Draw: NotDinosaursFigure,
   }],
 };
 

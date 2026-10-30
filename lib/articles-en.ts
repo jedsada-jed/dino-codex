@@ -342,4 +342,61 @@ export const ARTICLES_EN: Record<string, ArticleBody> = {
       },
     ],
   },
+  "not-dinosaurs": {
+    title: "Animals people think are dinosaurs, but aren't",
+    topic: "Not dinosaurs",
+    summary:
+      "Flying pterosaurs, mosasaurs in the sea, sail-backed Dimetrodon and Megalodon are often lumped in with dinosaurs, but none of them is one. So where is the line?",
+    sections: [
+      {
+        heading: "What exactly is a dinosaur?",
+        paragraphs: [
+          "\"Dinosaur\" doesn't mean every big prehistoric animal. It is one group of reptiles that all come from a single ancestor. Scientists define dinosaurs as the most recent common ancestor of Triceratops and birds, plus all of its descendants. Under this definition, birds are dinosaurs too.",
+          "What sets dinosaurs apart from other reptiles is legs held straight under the body, not sprawled out to the side like a lizard's or a crocodile's, and a hip socket that is an open hole. Every non-avian dinosaur lived on land. None lived mainly in the sea or flew on skin wings.",
+          "The earliest known dinosaurs are about 230 million years old, from the Late Triassic. Animals from before then, or from after the non-avian dinosaurs died out 66 million years ago, are definitely not dinosaurs, birds aside.",
+        ],
+        debated: [
+          "Some groups near the base of the dinosaur tree, such as the silesaurids, are still argued over. Some studies place them among the earliest plant-eating ornithischian dinosaurs, while many others keep them just outside the dinosaurs.",
+        ],
+      },
+      {
+        heading: "Pterosaurs: the flying cousins",
+        paragraphs: [
+          "Pterosaurs such as Pteranodon and Quetzalcoatlus were the first vertebrates to truly fly. Their wings were skin stretched along a very long fourth finger, unlike a bird's wing, which is feathers on the arm.",
+          "Pterosaurs are close relatives of dinosaurs, on the same branch of the family tree, but they split off before dinosaurs appeared: cousins rather than siblings. Flying birds today don't come from pterosaurs but from small meat-eating dinosaurs.",
+        ],
+      },
+      {
+        heading: "Reptiles of the sea",
+        paragraphs: [
+          "Mosasaurs, the big ocean predators of the Late Cretaceous, are relatives of today's lizards and snakes, not dinosaurs, even though they lived at the same time and died out in the same extinction.",
+          "Long-necked, four-flippered plesiosaurs and dolphin-shaped ichthyosaurs are also marine reptiles from lineages separate from dinosaurs. Their legs evolved into flippers for swimming.",
+        ],
+        debated: [
+          "Exactly where plesiosaurs and ichthyosaurs sit on the reptile family tree is still debated, but scientists agree that neither group is inside the dinosaurs.",
+        ],
+      },
+      {
+        heading: "Dimetrodon: closer to us",
+        paragraphs: [
+          "Sail-backed Dimetrodon often turns up in sets of toy dinosaurs, but it lived in the Permian, about 294–271 million years ago, and died out some 40 million years before the first dinosaur.",
+          "Dimetrodon was a synapsid, part of the same lineage that gave rise to mammals. In other words, Dimetrodon is more closely related to humans than to dinosaurs.",
+        ],
+      },
+      {
+        heading: "Megalodon and mammoths",
+        paragraphs: [
+          "Megalodon was a giant shark, not even a reptile. It lived about 23 to 3.6 million years ago, more than 40 million years after the non-avian dinosaurs were gone.",
+          "Mammoths and saber-toothed cats were Ice Age mammals, much closer to our time than to the age of dinosaurs. Early humans lived alongside mammoths and hunted them, but no human has ever seen a non-avian dinosaur.",
+        ],
+      },
+      {
+        heading: "The closest living relatives",
+        paragraphs: [
+          "Apart from birds, which are dinosaurs themselves, the closest living relatives of dinosaurs are crocodiles. Both belong to a larger group called archosaurs, but the crocodile line split off before both dinosaurs and pterosaurs appeared.",
+          "Lizards, snakes and turtles are reptiles too, but more distant relatives still. See the family tree above.",
+        ],
+      },
+    ],
+  },
 };
