@@ -39,6 +39,7 @@ export function SiteHeader({ lang }: { lang: Locale }) {
     { path: "/thailand", label: t.nav.thailand },
     { path: "/timeline", label: t.nav.timeline },
     { path: "/size-compare", label: t.nav.sizeCompare },
+    { path: "/quiz", label: t.nav.quiz },
     { path: "/articles", label: t.nav.articles },
     { path: "/news", label: t.nav.news },
     { path: "/about", label: t.nav.about },
