@@ -38,6 +38,16 @@ Hand-written Thai content (name meaning, size comparison, description, fun facts
 entries by hand. A dinosaur with no entry there still gets a full page from the scientific data
 alone.
 
+Body lengths for the size-comparison page (`/size-compare`) come from Wikidata (P2043):
+
+```bash
+npm run fetch:sizes
+```
+
+This writes `data/sizes-wikidata.json` (length only; Wikidata masses are too unreliable). Hand-checked
+lengths and masses for well-known and Thai dinosaurs live in `data/sizes-curated.json`, which wins
+over Wikidata and is never written by a script.
+
 ## Development
 
 ```bash

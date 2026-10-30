@@ -1,0 +1,62 @@
+import type { BodyPlan } from "@/lib/sizes";
+
+/**
+ * Side-view silhouettes for /size-compare, facing right with feet on the bottom edge.
+ * Every dinosaur shape is 100 units nose-to-tail, so scaling it to a length in metres is a
+ * single factor; `h` is the shape's height in those same units.
+ */
+export interface Shape {
+  w: number;
+  h: number;
+  d: string;
+}
+
+export const DINO_SHAPES: Record<BodyPlan, Shape> = {
+  theropod: {
+    w: 100,
+    h: 34,
+    d: "M0 15Q20 9 45 9Q58 9 66 12Q72 8 78 6L94 6Q99 6 100 10L99 14L86 15Q80 17 76 20Q72 22 70 24L74 26L73 27.5L68 25.5Q64 27 58 27L56 29Q57 31 55.5 32L61 33L62 34L50 34L48.5 30Q46 27 44 25L41 29L39 32L43 33L44 34L34 34L33.5 31L35.5 25Q30 21 22 18Q12 16 0 16Z",
+  },
+  sauropod: {
+    w: 100,
+    h: 30,
+    d: "M0 22Q15 14 35 11Q50 8 62 11Q74 8 84 2Q88 0 92 1L96 2Q97.5 3.5 95 4.5L90 4.5Q86 6 82 12Q77 17 75 19L75 30L68.5 30L67.5 22Q58 23 50 22.5L45 22L44.5 30L38 30L36 20.5Q24 18 0 23Z",
+  },
+  ceratopsian: {
+    w: 100,
+    h: 34,
+    d: "M0 20Q10 16 22 14Q40 8 58 10Q66 10 70 12L72 4Q78 0 82 6L86 12L99 6L91 14L95 18L98 15L97 20L100 22L96 26L86 25Q80 22 77 24L77 34L70.5 34L69.5 27Q55 29 43 27.5L42 34L35.5 34L33.5 24.5Q20 22 0 21Z",
+  },
+  stegosaur: {
+    w: 100,
+    h: 42,
+    d: "M0 30Q15 24 30 20Q45 14 55 16Q68 20 78 26L88 27Q93 27 95 30L93 32L84 31Q80 32 78.5 33L78.5 42L73 42L72 34.5Q60 36 50.5 35.5L50.5 42L43.5 42L41.5 33.5Q28 30.5 18 30.5L0 31Z M18 25.5L20 18L24 23Z M25 22L29 11L33 20Z M34 18.5L39 5L44 16Z M44.5 15.5L50 2L56 16.5Z M56.5 17L62 6L66.5 20Z M66.5 21L70.5 12L73.5 23.5Z M4 29.5L1 21.5L8 28.5Z M10 28L8 20L13.5 27Z",
+  },
+  ankylosaur: {
+    w: 100,
+    h: 24,
+    d: "M6 13Q20 11 30 10Q40 4 55 4Q72 4 80 10L88 11Q94 11 95.5 14L93.5 17L85 17Q82 18 80.5 18.5L80.5 24L74.5 24L73.5 19.5Q58 21 45.5 20.5L45.5 24L39.5 24L37.5 18Q25 16 8 15.5Z M0 14A5 3.6 0 1 0 10 14A5 3.6 0 1 0 0 14Z",
+  },
+  ornithopod: {
+    w: 100,
+    h: 32,
+    d: "M0 16Q20 10 40 8Q55 6 64 10Q72 10 78 12Q82 8 88 7L96 9Q100 11 99 14L92 14Q86 15 82 17Q76 20 72.5 22.5L71.5 32L66 32L66.5 24.5Q60 26 54 25.5L53 27Q55 30 53.5 31L57 31.5L57.5 32L46.5 32L44.5 26Q40 22 34 20Q20 17 0 17Z",
+  },
+};
+
+/** 1.75 m adult, drawn 100 units tall. */
+export const HUMAN_SHAPE: Shape = {
+  w: 36,
+  h: 100,
+  d: "M18 1A8 8 0 1 0 18 17A8 8 0 1 0 18 1Z M10 20L26 20Q30 20 31 26L34 52L30 53L27 30L27 58L26 100L20 100L18 62L16 100L10 100L9 58L9 30L6 53L2 52L5 26Q6 20 10 20Z",
+};
+export const HUMAN_HEIGHT_M = 1.75;
+
+/** 12 m city bus, 100 units long. Windows are cut out with the even-odd fill rule; wheels are a separate path. */
+export const BUS_SHAPE: Shape = {
+  w: 100,
+  h: 27,
+  d: "M2 0L96 0Q100 0 100 4L100 22L0 22L0 2Q0 0 2 0Z M5 4L5 11L22 11L22 4Z M26 4L26 11L44 11L44 4Z M48 4L48 11L66 11L66 4Z M70 4L70 11L88 11L88 4Z M91 4L91 17L97 17L97 4Z",
+};
+export const BUS_WHEELS = "M12 22A5 5 0 1 0 22 22A5 5 0 1 0 12 22Z M78 22A5 5 0 1 0 88 22A5 5 0 1 0 78 22Z";
+export const BUS_LENGTH_M = 12;

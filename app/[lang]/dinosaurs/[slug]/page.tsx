@@ -7,6 +7,7 @@ import { getDictionary } from "@/lib/dictionaries";
 import { formatNumber, href, isLocale, languageAlternates } from "@/lib/i18n";
 import { DinosaurGallery, type GalleryItem } from "@/components/DinosaurGallery";
 import { aiImageScore, getAiImages, getCoverImage } from "@/lib/ai-images";
+import { hasSize } from "@/lib/sizes";
 
 export function generateStaticParams() {
   return getAllSlugs().map((slug) => ({ slug }));
@@ -96,6 +97,15 @@ export default async function DinosaurDetailPage({ params }: PageProps<"/[lang]/
 
         {content?.sizeComparison && (
           <p className="mt-4 rounded-xl bg-emerald-50 p-4 text-emerald-900">📏 {content.sizeComparison}</p>
+        )}
+
+        {hasSize(dinosaur.slug) && (
+          <Link
+            href={`${href(lang, "/size-compare")}?d=${dinosaur.slug},tyrannosaurus`}
+            className="mt-3 inline-flex min-h-11 items-center font-medium text-emerald-700 hover:text-emerald-800 hover:underline"
+          >
+            📐 {dict.sizeCompare.detailLink} →
+          </Link>
         )}
 
         {content?.description && <p className="mt-4 leading-relaxed text-stone-800">{content.description}</p>}

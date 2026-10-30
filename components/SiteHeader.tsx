@@ -24,7 +24,7 @@ function switchPath(pathname: string, from: Locale, to: Locale): string {
   return href(to, rest);
 }
 
-/** Inline nav from lg up; below that a menu button opens a full-width list with 44px rows. */
+/** Inline nav from xl up; below that a menu button opens a full-width list with 44px rows. */
 export function SiteHeader({ lang }: { lang: Locale }) {
   const t = getDictionary(lang);
   const pathname = usePathname();
@@ -38,6 +38,7 @@ export function SiteHeader({ lang }: { lang: Locale }) {
     { path: "/dinosaurs", label: t.nav.dinosaurs },
     { path: "/thailand", label: t.nav.thailand },
     { path: "/timeline", label: t.nav.timeline },
+    { path: "/size-compare", label: t.nav.sizeCompare },
     { path: "/articles", label: t.nav.articles },
     { path: "/news", label: t.nav.news },
     { path: "/about", label: t.nav.about },
@@ -72,7 +73,7 @@ export function SiteHeader({ lang }: { lang: Locale }) {
         </Link>
 
         <div className="flex items-center gap-1 sm:gap-2">
-          <nav aria-label={t.nav.label} className="hidden lg:block">
+          <nav aria-label={t.nav.label} className="hidden xl:block">
             <ul className="flex gap-1 text-sm font-medium">
               {links.map((link) => {
                 const active = isActive(pathname, link.href);
@@ -81,7 +82,7 @@ export function SiteHeader({ lang }: { lang: Locale }) {
                     <Link
                       href={link.href}
                       aria-current={active ? "page" : undefined}
-                      className={`flex min-h-11 items-center rounded-lg px-3 transition-colors ${
+                      className={`flex min-h-11 items-center whitespace-nowrap rounded-lg px-3 transition-colors ${
                         active ? "bg-emerald-50 text-emerald-800" : "text-stone-700 hover:bg-stone-200 hover:text-emerald-700"
                       }`}
                     >
@@ -96,7 +97,7 @@ export function SiteHeader({ lang }: { lang: Locale }) {
           <ThemeToggle lang={lang} />
           <button
             type="button"
-            className="flex h-11 w-11 items-center justify-center rounded-full text-stone-700 transition-colors hover:bg-stone-200 lg:hidden"
+            className="flex h-11 w-11 items-center justify-center rounded-full text-stone-700 transition-colors hover:bg-stone-200 xl:hidden"
             aria-expanded={menuOpen}
             aria-controls="mobile-nav"
             aria-label={menuOpen ? t.nav.closeMenu : t.nav.openMenu}
@@ -107,7 +108,7 @@ export function SiteHeader({ lang }: { lang: Locale }) {
         </div>
       </div>
 
-      <nav id="mobile-nav" aria-label={t.nav.label} hidden={!menuOpen} className="border-t border-stone-200 lg:hidden">
+      <nav id="mobile-nav" aria-label={t.nav.label} hidden={!menuOpen} className="border-t border-stone-200 xl:hidden">
         <ul className="mx-auto max-w-6xl px-2 py-2">
           {links.map((link) => {
             const active = isActive(pathname, link.href);
