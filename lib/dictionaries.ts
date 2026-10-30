@@ -110,6 +110,8 @@ const th = {
     barLabel: "แถบไทม์ไลน์แสดงสัดส่วนความยาวของแต่ละยุค",
     start: "251.9 ล้านปีก่อน",
     end: "66 ล้านปีก่อน (ปัจจุบัน)",
+    extinctionEyebrow: "66 ล้านปีก่อน",
+    extinctionLead: "ดาวเคราะห์น้อยพุ่งชนโลก และยุคของไดโนเสาร์ก็จบลง อ่านว่านักวิทยาศาสตร์รู้ได้อย่างไร และหลังการชนเกิดอะไรขึ้นบ้าง",
   },
   sizeCompare: {
     title: "เทียบขนาดไดโนเสาร์",
@@ -313,6 +315,8 @@ const en: Dictionary = {
     barLabel: "Timeline bar showing the relative length of each period",
     start: "251.9 million years ago",
     end: "66 million years ago",
+    extinctionEyebrow: "66 million years ago",
+    extinctionLead: "An asteroid hit the Earth and the age of dinosaurs ended. Read how scientists know, and what happened after the impact.",
   },
   sizeCompare: {
     title: "Dinosaur size comparison",

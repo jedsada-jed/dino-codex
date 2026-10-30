@@ -424,6 +424,7 @@ const ARTICLES: Article[] = [
         paragraphs: [
           "สัตว์ที่รอดชีวิตมักมีขนาดเล็ก กินอาหารได้หลายอย่าง หรือมีที่หลบภัย เช่น สัตว์เลี้ยงลูกด้วยนมขนาดเล็กที่อาศัยในโพรง จระเข้ เต่า กบ งู และกิ้งก่า สัตว์ในแหล่งน้ำจืดได้เปรียบ เพราะห่วงโซ่อาหารในน้ำพึ่งพาซากพืชซากสัตว์ที่สะสมอยู่ ไม่ได้พึ่งพืชที่ยังมีชีวิตโดยตรง",
           "งานวิจัยชี้ว่านกที่รอดมาได้น่าจะเป็นนกที่หากินบนพื้นดินและกินเมล็ดพืช ซึ่งเก็บอยู่ในดินได้นานแม้ไม่มีแสงแดด นกกลุ่มนี้คือบรรพบุรุษของนกทุกชนิดในปัจจุบัน และเมื่อไดโนเสาร์ขนาดใหญ่หายไป สัตว์เลี้ยงลูกด้วยนมก็มีโอกาสวิวัฒนาการเป็นสัตว์หลากหลายชนิด รวมถึงมนุษย์ด้วย",
+          "ธรรมชาติฟื้นตัวเร็วกว่าที่หลายคนคิด ฟอสซิลจากแหล่งคอร์รัลบลัฟส์ (Corral Bluffs) รัฐโคโลราโด สหรัฐอเมริกา ซึ่งเก็บชั้นหินช่วงหนึ่งล้านปีแรกหลังการชนไว้ต่อเนื่อง แสดงว่าในช่วงหลายพันปีแรก พื้นที่ถูกปกคลุมด้วยเฟิร์นเป็นหลัก ราว 1 แสนปีหลังการชน ความหลากหลายของพืชและสัตว์เลี้ยงลูกด้วยนมกลับมาใกล้เคียงก่อนเกิดเหตุ และราว 7 แสนปีต่อมา ก็มีสัตว์เลี้ยงลูกด้วยนมที่หนักถึงราว 45 กิโลกรัม ใหญ่กว่าสัตว์เลี้ยงลูกด้วยนมทุกชนิดที่รู้จักจากยุคไดโนเสาร์",
           "สำหรับประเทศไทย ไดโนเสาร์ที่ตั้งชื่อแล้วทุกตัวมาจากหินที่เก่ากว่าเหตุการณ์นี้หลายสิบล้านปี เราจึงยังไม่รู้ว่าไดโนเสาร์ในดินแดนไทยในวันนั้นมีหน้าตาอย่างไร",
         ],
         debated: [
@@ -437,6 +438,8 @@ const ARTICLES: Article[] = [
       { label: "Wikipedia: Chicxulub crater", url: "https://en.wikipedia.org/wiki/Chicxulub_crater" },
       { label: "Wikipedia: Shocked quartz", url: "https://en.wikipedia.org/wiki/Shocked_quartz" },
       { label: "Wikipedia: Deccan Traps", url: "https://en.wikipedia.org/wiki/Deccan_Traps" },
+      { label: "Smithsonian Magazine: What happened seconds, hours, weeks after the dino-killing asteroid hit Earth?", url: "https://www.smithsonianmag.com/science-nature/what-happened-seconds-hours-weeks-after-dino-killing-asteroid-hit-earth-180960032/" },
+      { label: "PBS NOVA: New fossils capture million-year timeline of life after the dinosaurs died", url: "https://www.pbs.org/wgbh/nova/article/fossils-million-years-after-dinosaurs-died" },
     ],
   },
 ];

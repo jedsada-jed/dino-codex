@@ -45,7 +45,7 @@ export default async function ArticlePage({ params }: PageProps<"/[lang]/article
 
       <h1 className="mt-3 text-balance text-3xl font-extrabold leading-tight text-stone-900 sm:text-4xl">{article.title}</h1>
       <p className="mt-4 text-lg leading-relaxed text-stone-600">{article.summary}</p>
-      {hasArticleFigure(article.slug, -1) && <ArticleFigure slug={article.slug} lang={lang} />}
+      {hasArticleFigure(article.slug, -1) && <ArticleFigure slug={article.slug} lang={lang} afterSection={-1} />}
 
       {article.sections.map((section, index) => (
         <section key={section.heading} className="mt-10">
@@ -66,7 +66,7 @@ export default async function ArticlePage({ params }: PageProps<"/[lang]/article
               </ul>
             </aside>
           )}
-          {hasArticleFigure(article.slug, index) && <ArticleFigure slug={article.slug} lang={lang} />}
+          {hasArticleFigure(article.slug, index) && <ArticleFigure slug={article.slug} lang={lang} afterSection={index} />}
         </section>
       ))}
 

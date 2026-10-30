@@ -333,6 +333,7 @@ export const ARTICLES_EN: Record<string, ArticleBody> = {
         paragraphs: [
           "Survivors were usually small, could eat many kinds of food, or had places to shelter, such as small burrowing mammals, crocodiles, turtles, frogs, snakes and lizards. Freshwater animals had an advantage, because food chains in water rely on dead plant and animal matter that builds up there, not directly on living plants.",
           "Research suggests the birds that survived were probably ground-dwelling seed eaters, since seeds can last a long time in the soil without sunlight. These birds are the ancestors of every bird alive today. And once the large dinosaurs were gone, mammals had the chance to evolve into many new forms, including humans.",
+          "Nature recovered faster than many people expect. Fossils from Corral Bluffs in Colorado, USA, where the rock layers record the first million years after the impact without a break, show that ferns dominated the land for the first few thousand years. About 100,000 years after the impact, the variety of plants and mammals was close to what it had been before, and by about 700,000 years later there were mammals weighing around 45 kilograms, bigger than any mammal known from the age of dinosaurs.",
           "In Thailand, every named dinosaur comes from rocks tens of millions of years older than this event, so we do not yet know what dinosaurs lived in what is now Thailand on that day.",
         ],
         debated: [

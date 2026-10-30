@@ -557,8 +557,72 @@ function ExtinctionFigure({ lang, compact }: FigureProps) {
   );
 }
 
-const FIGURES: Record<string, FigureDef> = {
-  "dinosaur-footprints": {
+/* ---------- 9. Extinction: what happened after the impact, minutes to 700,000 years ---------- */
+
+/** The first `IMPACT_PHASE` stops are the disaster, drawn warm; the rest are the recovery. */
+const IMPACT_PHASE = 5;
+
+function ImpactTimelineFigure({ lang, compact }: FigureProps) {
+  const stops: { when: string; lines: [string, string] }[] =
+    lang === "th"
+      ? [
+          { when: "0 วินาที", lines: ["ดาวเคราะห์น้อย ~10 กม.", "พุ่งชนยูกาตัง"] },
+          { when: "ไม่กี่นาที", lines: ["เกิดหลุมกว้าง", "ราว 200 กม."] },
+          { when: "ไม่กี่ชั่วโมง", lines: ["สึนามิยักษ์", "เศษหินร้อนตกทั่วโลก"] },
+          { when: "วัน–สัปดาห์", lines: ["เขม่าและฝุ่น", "ปกคลุมท้องฟ้า"] },
+          { when: "เดือน–ปี", lines: ["มืดและหนาว", "ห่วงโซ่อาหารพัง"] },
+          { when: "หลายพันปี", lines: ["เฟิร์นขึ้นเต็ม", "พื้นที่ที่ถูกทำลาย"] },
+          { when: "1 แสนปี", lines: ["พืชและสัตว์เลี้ยง", "ลูกด้วยนมฟื้นตัว"] },
+          { when: "7 แสนปี", lines: ["สัตว์เลี้ยงลูกด้วยนม", "หนักถึงราว 45 กก."] },
+        ]
+      : [
+          { when: "0 seconds", lines: ["a ~10 km asteroid", "hits the Yucatán"] },
+          { when: "Minutes", lines: ["a crater about", "200 km wide forms"] },
+          { when: "Hours", lines: ["giant tsunamis,", "hot debris everywhere"] },
+          { when: "Days–weeks", lines: ["soot and dust", "fill the sky"] },
+          { when: "Months–years", lines: ["dark and cold,", "food chains collapse"] },
+          { when: "Millennia", lines: ["ferns cover", "the burned land"] },
+          { when: "100,000 yrs", lines: ["plants and mammals", "bounce back"] },
+          { when: "700,000 yrs", lines: ["mammals reach", "about 45 kg"] },
+        ];
+  const x = (i: number) => 75 + i * 70;
+  const lineY = compact ? 70 : 118;
+  const last = stops.length - 1;
+  return (
+    <svg viewBox={`0 0 640 ${compact ? 140 : 230}`} className="h-auto w-full">
+      <path d={`M${x(0)} ${lineY} H${x(IMPACT_PHASE - 1)}`} stroke={WARM} strokeWidth={4} strokeLinecap="round" />
+      <path d={`M${x(IMPACT_PHASE - 1)} ${lineY} H${x(last)}`} stroke={ACCENT} strokeWidth={4} strokeLinecap="round" />
+      {stops.map((s, i) => {
+        const color = i < IMPACT_PHASE ? WARM : ACCENT;
+        // Alternate labels above and below the line so neighbours have room.
+        const above = i % 2 === 0;
+        const whenY = above ? lineY - 68 : lineY + 44;
+        return (
+          <g key={s.when}>
+            <circle cx={x(i)} cy={lineY} r={i === 0 ? 12 : 9} fill={color} stroke="var(--stone-50)" strokeWidth={4} />
+            {!compact && (
+              <g textAnchor="middle">
+                <path d={`M${x(i)} ${above ? lineY - 14 : lineY + 14} V${above ? lineY - 22 : lineY + 22}`} stroke={MUTED} strokeWidth={1.5} />
+                <text x={x(i)} y={whenY} fontSize={14} fontWeight={800} fill={color}>
+                  {s.when}
+                </text>
+                {s.lines.map((line, j) => (
+                  <text key={j} x={x(i)} y={whenY + 19 + j * 17} fontSize={12} fill={j === 0 ? INK : MUTED}>
+                    {line}
+                  </text>
+                ))}
+              </g>
+            )}
+          </g>
+        );
+      })}
+    </svg>
+  );
+}
+
+/** Most articles have one figure; a few have more, each placed after its own section. */
+const FIGURES: Record<string, FigureDef[]> = {
+  "dinosaur-footprints": [{
     afterSection: 0,
     alt: {
       th: "ภาพสี่ขั้นตอน: ไดโนเสาร์เหยียบโคลนชื้น แดดเผาผิวให้แข็ง ตะกอนทับถมจนกลายเป็นหิน และการกัดเซาะเผยให้เห็นรอยเท้า",
@@ -569,8 +633,8 @@ const FIGURES: Record<string, FigureDef> = {
       en: "Cross-section through the ground: a footprint has to go through all four steps to become a fossil.",
     },
     Draw: FootprintsFigure,
-  },
-  "fossil-not-bone": {
+  }],
+  "fossil-not-bone": [{
     afterSection: 1,
     alt: {
       th: "ภาพขยายเนื้อกระดูกสามขั้น: กระดูกที่มีรูพรุนว่าง แร่สีฟ้าเข้าไปเติมรูพรุน และเนื้อกระดูกถูกแทนที่ด้วยหิน",
@@ -581,8 +645,8 @@ const FIGURES: Record<string, FigureDef> = {
       en: "Magnified bone (simplified): blue is mineral crystallizing in the pores, grey is mineral that has replaced the original bone.",
     },
     Draw: FossilizationFigure,
-  },
-  "dating-dinosaur-fossils": {
+  }],
+  "dating-dinosaur-fossils": [{
     afterSection: 2,
     alt: {
       th: "ภาพชั้นหิน มีชั้นเถ้าภูเขาไฟอายุ 75.0 ล้านปีอยู่ด้านบน และ 76.2 ล้านปีอยู่ด้านล่างของชั้นที่มีฟอสซิล",
@@ -593,8 +657,8 @@ const FIGURES: Record<string, FigureDef> = {
       en: "Lower layers are older than upper ones, and dated volcanic ash brackets the fossil's age. (The numbers are an example.)",
     },
     Draw: DatingFigure,
-  },
-  "first-dinosaur-fossil": {
+  }],
+  "first-dinosaur-fossil": [{
     afterSection: -1,
     alt: {
       th: "เส้นเวลา: ค.ศ. 1676 พล็อตบรรยายกระดูก, 1824 เมกาโลซอรัส, 1825 อิกัวโนดอน, 1842 คำว่า Dinosauria, 1976 ฟอสซิลชิ้นแรกของไทยที่ภูเวียง",
@@ -605,8 +669,8 @@ const FIGURES: Record<string, FigureDef> = {
       en: "Key moments in this article (spacing is not to scale).",
     },
     Draw: HistoryFigure,
-  },
-  "naming-dinosaurs": {
+  }],
+  "naming-dinosaurs": [{
     afterSection: 0,
     alt: {
       th: "ชื่อ Kinnareemimus khonkaenensis แยกเป็นส่วน: Kinnaree (กินรี) mimus (เลียนแบบ) khonkaen (ขอนแก่น) ensis (มาจาก)",
@@ -617,8 +681,8 @@ const FIGURES: Record<string, FigureDef> = {
       en: "Put together, Kinnareemimus khonkaenensis means roughly \"kinnaree mimic from Khon Kaen\".",
     },
     Draw: NamingFigure,
-  },
-  "thai-dinosaurs": {
+  }],
+  "thai-dinosaurs": [{
     afterSection: 1,
     alt: {
       th: "แผนภาพชั้นหินสี่หมวดในภาคอีสาน พร้อมรายชื่อไดโนเสาร์ไทยทั้ง 15 ชนิดและจังหวัดที่พบ เรียงจากหมวดหินโคกกรวดด้านบนถึงหมวดหินน้ำพองด้านล่าง",
@@ -629,8 +693,8 @@ const FIGURES: Record<string, FigureDef> = {
       en: "The 15 Thai dinosaur species by formation; upper layers are younger. (Simplified: thickness not to scale, only formations with named dinosaurs are shown, ages are estimates, and the list includes names whose validity is debated.)",
     },
     Draw: ThaiDinosaursFigure,
-  },
-  "birds-are-dinosaurs": {
+  }],
+  "birds-are-dinosaurs": [{
     afterSection: 0,
     alt: {
       th: "แผนภาพต้นไม้ครอบครัวอย่างง่าย: ไทรเซราทอปส์ สเตโกซอรัส แบรคิโอซอรัส ไทแรนโนซอรัส เวโลซีแรปเตอร์ และนก แยกจากบรรพบุรุษร่วมกัน โดยนกอยู่ในสายเดียวกับไทแรนโนซอรัสและเวโลซีแรปเตอร์",
@@ -641,8 +705,8 @@ const FIGURES: Record<string, FigureDef> = {
       en: "The orange line is the lineage that leads to birds; green dots mark where bird-like features appear. (Simplified, showing only a few dinosaurs; how the base of the tree splits is still debated.)",
     },
     Draw: BirdsFigure,
-  },
-  "dinosaur-extinction": {
+  }],
+  "dinosaur-extinction": [{
     afterSection: 0,
     alt: {
       th: "ภาพชั้นหิน: หินยุคครีเทเชียสที่มีฟอสซิลไดโนเสาร์อยู่ด้านล่าง ชั้นดินเหนียวบางๆ อายุ 66 ล้านปีที่มีอิริเดียมสูงอยู่ตรงกลาง และหินยุคพาลีโอจีนที่ไม่พบไดโนเสาร์ที่ไม่ใช่นกอยู่ด้านบน",
@@ -653,34 +717,47 @@ const FIGURES: Record<string, FigureDef> = {
       en: "The boundary between the Cretaceous and the Paleogene (simplified, not to scale). In many places the clay between them is only about a centimeter thick.",
     },
     Draw: ExtinctionFigure,
-  },
+  }, {
+    afterSection: 2,
+    alt: {
+      th: "เส้นเวลาหลังการชน: 0 วินาที ดาวเคราะห์น้อยชนยูกาตัง, ไม่กี่นาที เกิดหลุมกว้างราว 200 กม., ไม่กี่ชั่วโมง สึนามิและเศษหินร้อนตกทั่วโลก, วันถึงสัปดาห์ เขม่าและฝุ่นปกคลุมท้องฟ้า, เดือนถึงปี โลกมืดและหนาวจนห่วงโซ่อาหารพัง, หลายพันปี เฟิร์นขึ้นเต็มพื้นที่, หนึ่งแสนปี พืชและสัตว์เลี้ยงลูกด้วยนมฟื้นตัว, เจ็ดแสนปี สัตว์เลี้ยงลูกด้วยนมหนักถึงราว 45 กิโลกรัม",
+      en: "Timeline after the impact: 0 seconds, the asteroid hits the Yucatán; minutes, a crater about 200 km wide forms; hours, tsunamis and hot debris; days to weeks, soot and dust fill the sky; months to years, darkness and cold collapse food chains; millennia, ferns cover the land; 100,000 years, plants and mammals bounce back; 700,000 years, mammals reach about 45 kg.",
+    },
+    caption: {
+      th: "ลำดับเหตุการณ์หลังการชน สีส้มคือช่วงหายนะ สีเขียวคือช่วงฟื้นตัว (ระยะห่างบนเส้นไม่ได้เป็นสัดส่วนกับเวลาจริง ช่วงฟื้นตัวอ้างอิงฟอสซิลจาก Corral Bluffs รัฐโคโลราโด สหรัฐอเมริกา)",
+      en: "What happened after the impact: orange is the disaster, green the recovery. (Spacing is not to scale; the recovery stops are based on fossils from Corral Bluffs, Colorado, USA.)",
+    },
+    Draw: ImpactTimelineFigure,
+  }],
 };
 
-export function hasArticleFigure(slug: string, afterSection: number): boolean {
-  return FIGURES[slug]?.afterSection === afterSection;
+function figuresAt(slug: string, afterSection: number): FigureDef[] {
+  return (FIGURES[slug] ?? []).filter((f) => f.afterSection === afterSection);
 }
 
-/** The article's diagram with its caption, for the article page. */
-export function ArticleFigure({ slug, lang }: { slug: string; lang: Locale }) {
-  const figure = FIGURES[slug];
-  if (!figure) return null;
-  const { Draw } = figure;
-  return (
-    <figure className="mt-8">
+export function hasArticleFigure(slug: string, afterSection: number): boolean {
+  return figuresAt(slug, afterSection).length > 0;
+}
+
+/** The article's diagrams placed after `afterSection`, each with its caption, for the article page. */
+export function ArticleFigure({ slug, lang, afterSection }: { slug: string; lang: Locale; afterSection: number }) {
+  return figuresAt(slug, afterSection).map(({ Draw, alt, caption }) => (
+    <figure key={alt.en} className="mt-8">
       {/* Below ~520px the labels get too small to read, so the diagram scrolls sideways instead. */}
-      <div role="img" aria-label={figure.alt[lang]} className="overflow-x-auto rounded-2xl border border-stone-200 bg-stone-100 p-3 sm:p-5">
+      <div role="img" aria-label={alt[lang]} className="overflow-x-auto rounded-2xl border border-stone-200 bg-stone-100 p-3 sm:p-5">
         <div className="min-w-[520px]">
           <Draw lang={lang} compact={false} />
         </div>
       </div>
-      <figcaption className="mt-2 text-sm leading-relaxed text-stone-600">{figure.caption[lang]}</figcaption>
+      <figcaption className="mt-2 text-sm leading-relaxed text-stone-600">{caption[lang]}</figcaption>
     </figure>
-  );
+  ));
 }
 
 /** Label-free version for the article list card; decorative, since the card has the title. */
 export function ArticleThumbnail({ slug, lang }: { slug: string; lang: Locale }) {
-  const figure = FIGURES[slug];
+  // The first figure stands for the article on its list card.
+  const figure = FIGURES[slug]?.[0];
   if (!figure) return null;
   const { Draw } = figure;
   return (

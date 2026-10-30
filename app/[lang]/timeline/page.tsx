@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import Link from "next/link";
 import { getAllDinosaurs, getPeriod, PERIODS } from "@/lib/dinosaurs";
+import { getArticleBySlug } from "@/lib/articles";
 import { PERIOD_COLORS, PERIOD_LABELS } from "@/lib/labels";
 import { getDictionary } from "@/lib/dictionaries";
 import { formatNumber, href, isLocale, languageAlternates } from "@/lib/i18n";
@@ -30,6 +32,7 @@ export default async function TimelinePage({ params }: PageProps<"/[lang]/timeli
     if (p !== "unknown") byPeriod[p].push(d);
   }
 
+  const extinction = getArticleBySlug("dinosaur-extinction", lang);
   const totalDuration = PERIODS.reduce((sum, p) => sum + (p.maxMa - p.minMa), 0);
 
   return (
@@ -75,6 +78,17 @@ export default async function TimelinePage({ params }: PageProps<"/[lang]/timeli
           </div>
         </section>
       ))}
+
+      {extinction && (
+        <Link
+          href={href(lang, `/articles/${extinction.slug}`)}
+          className="group mt-10 block rounded-2xl border border-amber-700/40 bg-amber-50 p-5 transition-colors hover:border-amber-700"
+        >
+          <p className="text-sm font-semibold text-amber-700">{t.extinctionEyebrow}</p>
+          <p className="mt-1 text-lg font-bold text-stone-900 group-hover:text-emerald-700">{extinction.title} →</p>
+          <p className="mt-1 text-stone-700">{t.extinctionLead}</p>
+        </Link>
+      )}
     </div>
   );
 }
