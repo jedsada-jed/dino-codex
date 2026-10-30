@@ -7,6 +7,7 @@ import { PERIOD_COLORS, PERIOD_LABELS } from "@/lib/labels";
 import { getDictionary } from "@/lib/dictionaries";
 import { formatNumber, href, isLocale, languageAlternates } from "@/lib/i18n";
 import { DinosaurCard } from "@/components/DinosaurCard";
+import { PaleoMaps } from "@/components/PaleoMaps";
 
 export async function generateMetadata({ params }: PageProps<"/[lang]/timeline">): Promise<Metadata> {
   const { lang } = await params;
@@ -59,6 +60,8 @@ export default async function TimelinePage({ params }: PageProps<"/[lang]/timeli
         <span>{t.start}</span>
         <span>{t.end}</span>
       </div>
+
+      <PaleoMaps lang={lang} />
 
       {PERIODS.map((p) => (
         <section key={p.key} id={p.key.toLowerCase()} className="mt-10 scroll-mt-20 border-t border-stone-200 pt-6">

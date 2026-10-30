@@ -12,6 +12,7 @@
     "fetch:popularity": "tsx scripts/fetch-popularity.ts",
     "fetch:sizes": "tsx scripts/fetch-sizes.ts",
     "build:map": "tsx scripts/build-world-map.ts",
+    "build:paleo-maps": "tsx scripts/build-paleo-maps.ts",
     "gen:ai-images": "tsx scripts/generate-ai-images.ts"
   },
   "dependencies": {

@@ -57,6 +57,16 @@ npm run build:map
 This writes `data/world-map.json` (Natural Earth 1:110m via `world-atlas`, keyed by ISO alpha-2), so
 the map libraries are dev dependencies only. Re-run it only to change the projection or size.
 
+The continent maps on `/timeline` come from the GPlates Web Service (EarthByte, plate model of
+Müller et al. 2019, CC BY 4.0), fetched and projected ahead of time:
+
+```bash
+npm run build:paleo-maps
+```
+
+This writes `data/paleo-maps.json`: coastlines at 220, 170, 100 and 66 million years ago, plus
+where Khon Kaen was at each time. The page credits the model under each set of maps.
+
 ## Development
 
 ```bash
