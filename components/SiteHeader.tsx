@@ -40,6 +40,7 @@ export function SiteHeader({ lang }: { lang: Locale }) {
     { path: "/timeline", label: t.nav.timeline },
     { path: "/size-compare", label: t.nav.sizeCompare },
     { path: "/quiz", label: t.nav.quiz },
+    { path: "/map", label: t.nav.fossilMap },
     { path: "/articles", label: t.nav.articles },
     { path: "/news", label: t.nav.news },
     { path: "/about", label: t.nav.about },
@@ -83,7 +84,7 @@ export function SiteHeader({ lang }: { lang: Locale }) {
                     <Link
                       href={link.href}
                       aria-current={active ? "page" : undefined}
-                      className={`flex min-h-11 items-center whitespace-nowrap rounded-lg px-3 transition-colors ${
+                      className={`flex min-h-11 items-center whitespace-nowrap rounded-lg px-2 transition-colors ${
                         active ? "bg-emerald-50 text-emerald-800" : "text-stone-700 hover:bg-stone-200 hover:text-emerald-700"
                       }`}
                     >

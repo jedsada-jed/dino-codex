@@ -22,7 +22,7 @@ function localized(path: string, changeFrequency: Entry["changeFrequency"], prio
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const pages = ["/", "/dinosaurs", "/thailand", "/timeline", "/size-compare", "/quiz", "/articles", "/about"].flatMap((path) =>
+  const pages = ["/", "/dinosaurs", "/thailand", "/timeline", "/size-compare", "/quiz", "/map", "/articles", "/about"].flatMap((path) =>
     localized(path, "monthly", path === "/" ? 1 : 0.7),
   );
   // News is Thai-only.

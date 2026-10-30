@@ -16,6 +16,7 @@ const th = {
     timeline: "ไทม์ไลน์",
     sizeCompare: "เทียบขนาด",
     quiz: "ควิซ",
+    fossilMap: "แผนที่ฟอสซิล",
     articles: "บทความ",
     news: "ข่าวสาร",
     about: "เกี่ยวกับ",
@@ -97,6 +98,8 @@ const th = {
     inThailand: "พบในไทย",
     results: (n: string) => `พบ ${n} รายการ`,
     noResults: "ไม่พบไดโนเสาร์ที่ตรงกับเงื่อนไข ลองปรับตัวกรองดูใหม่",
+    countryChip: (country: string) => `พบที่${country}`,
+    clearCountry: (country: string) => `ล้างตัวกรองประเทศ ${country}`,
   },
   thailandPage: {
     title: "ไดโนเสาร์ในประเทศไทย",
@@ -189,6 +192,19 @@ const th = {
     copied: "คัดลอกลิงก์แล้ว",
     shareText: (score: number, total: number) => `ฉันได้ ${score}/${total} คะแนนในควิซไดโนเสาร์ ลองเล่นดูสิ!`,
   },
+  fossilMap: {
+    title: "แผนที่ฟอสซิลไดโนเสาร์",
+    description: "แผนที่โลกแสดงจำนวนไดโนเสาร์ที่พบในแต่ละประเทศ จีน สหรัฐอเมริกา อาร์เจนตินา และไทยพบไดโนเสาร์กี่ชนิด",
+    lead: (n: string, countries: string) =>
+      `ไดโนเสาร์ยุคมีโซโซอิก ${n} สกุลในเว็บนี้ พบฟอสซิลใน ${countries} ประเทศและดินแดน กดที่ประเทศบนแผนที่หรือในรายการเพื่อดูว่าพบตัวไหนบ้าง`,
+    mapLabel: "แผนที่โลก ระบายสีตามจำนวนสกุลไดโนเสาร์ที่พบในแต่ละประเทศ",
+    tooltip: (country: string, n: string) => `${country}: ${n} สกุล`,
+    selected: "ประเทศที่เลือก",
+    rankingTitle: "ประเทศที่พบไดโนเสาร์มากที่สุด",
+    countryLead: (n: string) => `พบไดโนเสาร์ ${n} สกุล ตัวอย่างเช่น (เรียงตัวที่พบเฉพาะประเทศนี้ก่อน):`,
+    seeAll: (n: string, country: string) => `ดูทั้ง ${n} สกุลที่พบใน${country}`,
+    note: "นับจากประเทศที่พบฟอสซิลตามฐานข้อมูล Paleobiology Database ไดโนเสาร์หนึ่งสกุลอาจพบได้หลายประเทศ ไม่รวมนกยุคปัจจุบัน ประเทศที่พบมากมักเป็นประเทศที่มีหินยุคมีโซโซอิกโผล่ให้เห็นมากและมีการสำรวจมานาน ไม่ได้แปลว่าไดโนเสาร์เคยอยู่ที่นั่นมากกว่าที่อื่น",
+  },
   detail: {
     breadcrumb: "ไดโนเสาร์ทั้งหมด",
     nameMeaning: "ความหมายของชื่อ",
@@ -266,6 +282,7 @@ const en: Dictionary = {
     timeline: "Timeline",
     sizeCompare: "Size compare",
     quiz: "Quiz",
+    fossilMap: "Fossil map",
     articles: "Articles",
     news: "News",
     about: "About",
@@ -345,6 +362,8 @@ const en: Dictionary = {
     inThailand: "Found in Thailand",
     results: (n) => `${n} results`,
     noResults: "No dinosaurs match these filters. Try changing them.",
+    countryChip: (country: string) => `Found in ${country}`,
+    clearCountry: (country: string) => `Clear the ${country} filter`,
   },
   thailandPage: {
     title: "Dinosaurs of Thailand",
@@ -436,6 +455,19 @@ const en: Dictionary = {
     share: "Share my score",
     copied: "Link copied",
     shareText: (score: number, total: number) => `I scored ${score}/${total} on the dinosaur quiz. Can you beat me?`,
+  },
+  fossilMap: {
+    title: "Dinosaur fossil map",
+    description: "A world map of how many dinosaurs have been found in each country, from China, the USA and Argentina to Thailand.",
+    lead: (n: string, countries: string) =>
+      `The ${n} Mesozoic dinosaur genera on this site were found in ${countries} countries and territories. Tap a country on the map or in the list to see which ones.`,
+    mapLabel: "World map shaded by the number of dinosaur genera found in each country",
+    tooltip: (country: string, n: string) => `${country}: ${n} genera`,
+    selected: "Selected country",
+    rankingTitle: "Countries with the most dinosaurs",
+    countryLead: (n: string) => `${n} genera found, for example (ones found only here first):`,
+    seeAll: (n: string) => `See all ${n} genera found here`,
+    note: "Counted by the countries where fossils were found, per the Paleobiology Database. One genus can be found in several countries. Modern birds are not included. Countries with many finds usually have lots of exposed Mesozoic rock and a long history of fossil hunting; it doesn't mean more dinosaurs lived there.",
   },
   detail: {
     breadcrumb: "All dinosaurs",

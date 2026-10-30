@@ -9,7 +9,7 @@ import { DIET_LABELS, PERIOD_LABELS } from "@/lib/labels";
 import { getDictionary } from "@/lib/dictionaries";
 import { formatNumber, href, type Locale } from "@/lib/i18n";
 import type { Diet } from "@/types/dinosaur";
-import { BoneIcon } from "@/components/Icons";
+import { BoneIcon, CloseIcon } from "@/components/Icons";
 import { AiBadge } from "@/components/AiImageDisclosure";
 
 const PERIOD_OPTIONS = ["Triassic", "Jurassic", "Cretaceous"] as const;
@@ -22,17 +22,22 @@ export function DinosaurBrowser({ items, lang }: { items: BrowseItem[]; lang: Lo
   const [diet, setDiet] = useState<string>("all");
   const [imageOnly, setImageOnly] = useState(false);
   const [thailandOnly, setThailandOnly] = useState(false);
+  // ISO code from the fossil map's "see all" link; there is no dropdown for it, only a removable chip.
+  const [country, setCountry] = useState<string | null>(null);
 
   // Picks up ?q= from the homepage search form. Read directly from the URL (rather than
   // useSearchParams) so this page can stay statically exported without a Suspense boundary.
   // A one-time read of browser state on mount, not state derived from props/existing state,
   // so syncing it via effect is the correct pattern despite the lint rule's default heuristic.
   useEffect(() => {
-    const q = new URLSearchParams(window.location.search).get("q");
+    const params = new URLSearchParams(window.location.search);
+    const q = params.get("q");
     if (q) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setQuery(q);
     }
+    const c = params.get("country");
+    if (c && /^[A-Z]{2}$/.test(c)) setCountry(c);
   }, []);
 
   const fuse = useMemo(
@@ -50,8 +55,12 @@ export function DinosaurBrowser({ items, lang }: { items: BrowseItem[]; lang: Lo
     if (diet !== "all") list = list.filter((d) => d.diet === diet);
     if (imageOnly) list = list.filter((d) => d.thumbnail);
     if (thailandOnly) list = list.filter((d) => d.countries.includes("TH"));
+    // PBDB writes the United Kingdom as "UK"; the map links with ISO "GB". Like the map, leave out
+    // genera with no Mesozoic period (modern birds), so "see all 63" shows 63.
+    if (country)
+      list = list.filter((d) => d.period !== "unknown" && (d.countries.includes(country) || (country === "GB" && d.countries.includes("UK"))));
     return list;
-  }, [query, period, diet, imageOnly, thailandOnly, fuse, items]);
+  }, [query, period, diet, imageOnly, thailandOnly, country, fuse, items]);
 
   return (
     <div>
@@ -101,6 +110,23 @@ export function DinosaurBrowser({ items, lang }: { items: BrowseItem[]; lang: Lo
           </label>
         </div>
       </div>
+
+      {country && (
+        <button
+          type="button"
+          onClick={() => {
+            setCountry(null);
+            const url = new URL(window.location.href);
+            url.searchParams.delete("country");
+            window.history.replaceState(null, "", url);
+          }}
+          aria-label={t.clearCountry(new Intl.DisplayNames([lang], { type: "region" }).of(country) ?? country)}
+          className="mt-4 inline-flex min-h-11 items-center gap-2 rounded-full bg-amber-50 px-4 text-sm font-medium text-amber-700"
+        >
+          {t.countryChip(new Intl.DisplayNames([lang], { type: "region" }).of(country) ?? country)}
+          <CloseIcon className="h-4 w-4" />
+        </button>
+      )}
 
       <p className="mt-4 text-sm text-stone-500" aria-live="polite">{t.results(formatNumber(lang, results.length))}</p>
 

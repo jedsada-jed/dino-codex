@@ -48,6 +48,15 @@ This writes `data/sizes-wikidata.json` (length only; Wikidata masses are too unr
 lengths and masses for well-known and Thai dinosaurs live in `data/sizes-curated.json`, which wins
 over Wikidata and is never written by a script.
 
+The fossil map (`/map`) draws country outlines that are projected once, ahead of time:
+
+```bash
+npm run build:map
+```
+
+This writes `data/world-map.json` (Natural Earth 1:110m via `world-atlas`, keyed by ISO alpha-2), so
+the map libraries are dev dependencies only. Re-run it only to change the projection or size.
+
 ## Development
 
 ```bash

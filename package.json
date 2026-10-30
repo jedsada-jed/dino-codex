@@ -11,6 +11,7 @@
     "fetch:images": "tsx scripts/fetch-images.ts",
     "fetch:popularity": "tsx scripts/fetch-popularity.ts",
     "fetch:sizes": "tsx scripts/fetch-sizes.ts",
+    "build:map": "tsx scripts/build-world-map.ts",
     "gen:ai-images": "tsx scripts/generate-ai-images.ts"
   },
   "dependencies": {
@@ -22,14 +23,20 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
+    "@types/d3-geo": "^3.1.0",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/topojson-client": "^3.1.5",
+    "d3-geo": "^3.1.1",
     "eslint": "^9",
     "eslint-config-next": "16.3.6",
+    "i18n-iso-countries": "^7.14.0",
     "tailwindcss": "^4",
+    "topojson-client": "^3.1.0",
     "tsx": "^4.23.15",
     "typescript": "^5",
+    "world-atlas": "^2.0.2",
     "wrangler": "^4.136.3"
   }
 }
