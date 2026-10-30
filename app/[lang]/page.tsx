@@ -45,6 +45,18 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
         <div className="mt-5">
           <DinoOfTheDay pool={getDailyPool(lang)} lang={lang} />
         </div>
+        <Link
+          href={href(lang, "/coloring")}
+          className="group mt-4 flex min-h-11 items-center gap-3 rounded-2xl border border-stone-200 bg-stone-100 px-5 py-4 transition-colors hover:border-emerald-500"
+        >
+          <span className="text-2xl" aria-hidden="true">
+            🖍️
+          </span>
+          <span>
+            <span className="block font-semibold text-stone-900 group-hover:text-emerald-700">{t.coloring.homeTitle} →</span>
+            <span className="block text-sm text-stone-600">{t.coloring.homeText}</span>
+          </span>
+        </Link>
       </section>
 
       <section className="mx-auto max-w-6xl px-4 py-14 sm:px-6" aria-labelledby="periods-heading">

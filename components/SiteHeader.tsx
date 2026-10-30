@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { LogoMark } from "./LogoMark";
 import { ThemeToggle } from "./ThemeToggle";
 import { CloseIcon, MenuIcon } from "./Icons";
@@ -11,6 +11,19 @@ import { href, type Locale } from "@/lib/i18n";
 
 /** News is written in Thai only, so English pages leave it out of the menu. */
 const THAI_ONLY = new Set(["/news"]);
+
+interface NavLink {
+  path: string;
+  label: string;
+}
+interface NavGroup {
+  id: string;
+  label: string;
+  links: NavLink[];
+}
+type NavEntry = NavLink | NavGroup;
+
+const isGroup = (e: NavEntry): e is NavGroup => "links" in e;
 
 function isActive(pathname: string, target: string) {
   const path = pathname.replace(/\/$/, "");
@@ -24,29 +37,73 @@ function switchPath(pathname: string, from: Locale, to: Locale): string {
   return href(to, rest);
 }
 
-/** Inline nav from xl up; below that a menu button opens a full-width list with 44px rows. */
+function Chevron({ open }: { open: boolean }) {
+  return (
+    <svg viewBox="0 0 20 20" className={`h-4 w-4 transition-transform ${open ? "rotate-180" : ""}`} aria-hidden="true">
+      <path d="M5 8l5 5 5-5" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+/**
+ * Pages are grouped (explore / read / activities) so the bar stays short. From lg up the groups are
+ * dropdowns; below that a menu button opens a full-width list with each group as a heading.
+ */
 export function SiteHeader({ lang }: { lang: Locale }) {
   const t = getDictionary(lang);
   const pathname = usePathname();
-  // Remember which page the menu was opened on, so navigating closes it without an effect.
+  // Both menus remember which page they were opened on, so navigating closes them without an effect.
   const [openOn, setOpenOn] = useState<string | null>(null);
   const menuOpen = openOn === pathname;
+  const [dropdown, setDropdown] = useState<{ id: string; on: string } | null>(null);
+  const openGroup = dropdown?.on === pathname ? dropdown.id : null;
+  const navRef = useRef<HTMLElement>(null);
   const other: Locale = lang === "th" ? "en" : "th";
 
-  const links = [
-    { path: "/", label: t.nav.home },
-    { path: "/dinosaurs", label: t.nav.dinosaurs },
-    { path: "/thailand", label: t.nav.thailand },
-    { path: "/timeline", label: t.nav.timeline },
-    { path: "/size-compare", label: t.nav.sizeCompare },
-    { path: "/quiz", label: t.nav.quiz },
-    { path: "/map", label: t.nav.fossilMap },
-    { path: "/articles", label: t.nav.articles },
-    { path: "/news", label: t.nav.news },
-    { path: "/about", label: t.nav.about },
-  ]
-    .filter((l) => lang === "th" || !THAI_ONLY.has(l.path))
-    .map((l) => ({ ...l, href: href(lang, l.path) }));
+  // Close an open dropdown when clicking anywhere outside the nav.
+  useEffect(() => {
+    if (!openGroup) return;
+    const onPointerDown = (e: PointerEvent) => {
+      if (!navRef.current?.contains(e.target as Node)) setDropdown(null);
+    };
+    document.addEventListener("pointerdown", onPointerDown);
+    return () => document.removeEventListener("pointerdown", onPointerDown);
+  }, [openGroup]);
+
+  const local = (links: NavLink[]) =>
+    links.filter((l) => lang === "th" || !THAI_ONLY.has(l.path)).map((l) => ({ ...l, path: href(lang, l.path) }));
+
+  const entries: NavEntry[] = [
+    { path: href(lang, "/"), label: t.nav.home },
+    {
+      id: "explore",
+      label: t.nav.explore,
+      links: local([
+        { path: "/dinosaurs", label: t.nav.dinosaurs },
+        { path: "/thailand", label: t.nav.thailand },
+        { path: "/timeline", label: t.nav.timeline },
+        { path: "/map", label: t.nav.fossilMap },
+      ]),
+    },
+    {
+      id: "read",
+      label: t.nav.read,
+      links: local([
+        { path: "/articles", label: t.nav.articles },
+        { path: "/news", label: t.nav.news },
+      ]),
+    },
+    {
+      id: "activities",
+      label: t.nav.activities,
+      links: local([
+        { path: "/size-compare", label: t.nav.sizeCompare },
+        { path: "/quiz", label: t.nav.quiz },
+        { path: "/coloring", label: t.nav.coloring },
+      ]),
+    },
+    { path: href(lang, "/about"), label: t.nav.about },
+  ];
 
   const languageLink = (
     <Link
@@ -61,11 +118,19 @@ export function SiteHeader({ lang }: { lang: Locale }) {
     </Link>
   );
 
+  const itemClass = (active: boolean) =>
+    `flex min-h-11 items-center whitespace-nowrap rounded-lg px-3 transition-colors ${
+      active ? "bg-emerald-50 text-emerald-800" : "text-stone-700 hover:bg-stone-200 hover:text-emerald-700"
+    }`;
+
   return (
     <header
       className="border-b border-stone-200 bg-stone-100"
       onKeyDown={(e) => {
-        if (e.key === "Escape") setOpenOn(null);
+        if (e.key === "Escape") {
+          setOpenOn(null);
+          setDropdown(null);
+        }
       }}
     >
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-2 sm:px-6">
@@ -75,21 +140,49 @@ export function SiteHeader({ lang }: { lang: Locale }) {
         </Link>
 
         <div className="flex items-center gap-1 sm:gap-2">
-          <nav aria-label={t.nav.label} className="hidden xl:block">
+          <nav ref={navRef} aria-label={t.nav.label} className="hidden lg:block">
             <ul className="flex gap-1 text-sm font-medium">
-              {links.map((link) => {
-                const active = isActive(pathname, link.href);
+              {entries.map((entry) => {
+                if (!isGroup(entry)) {
+                  const active = isActive(pathname, entry.path);
+                  return (
+                    <li key={entry.path}>
+                      <Link href={entry.path} aria-current={active ? "page" : undefined} className={itemClass(active)}>
+                        {entry.label}
+                      </Link>
+                    </li>
+                  );
+                }
+                const open = openGroup === entry.id;
+                const active = entry.links.some((l) => isActive(pathname, l.path));
                 return (
-                  <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      aria-current={active ? "page" : undefined}
-                      className={`flex min-h-11 items-center whitespace-nowrap rounded-lg px-2 transition-colors ${
-                        active ? "bg-emerald-50 text-emerald-800" : "text-stone-700 hover:bg-stone-200 hover:text-emerald-700"
-                      }`}
+                  <li key={entry.id} className="relative">
+                    <button
+                      type="button"
+                      aria-expanded={open}
+                      aria-controls={`nav-${entry.id}`}
+                      onClick={() => setDropdown(open ? null : { id: entry.id, on: pathname })}
+                      className={`${itemClass(active)} gap-1`}
                     >
-                      {link.label}
-                    </Link>
+                      {entry.label}
+                      <Chevron open={open} />
+                    </button>
+                    <ul
+                      id={`nav-${entry.id}`}
+                      hidden={!open}
+                      className="absolute left-0 top-full z-20 mt-1 min-w-48 rounded-xl border border-stone-200 bg-stone-50 p-1 shadow-lg"
+                    >
+                      {entry.links.map((link) => {
+                        const linkActive = isActive(pathname, link.path);
+                        return (
+                          <li key={link.path}>
+                            <Link href={link.path} aria-current={linkActive ? "page" : undefined} className={itemClass(linkActive)}>
+                              {link.label}
+                            </Link>
+                          </li>
+                        );
+                      })}
+                    </ul>
                   </li>
                 );
               })}
@@ -99,7 +192,7 @@ export function SiteHeader({ lang }: { lang: Locale }) {
           <ThemeToggle lang={lang} />
           <button
             type="button"
-            className="flex h-11 w-11 items-center justify-center rounded-full text-stone-700 transition-colors hover:bg-stone-200 xl:hidden"
+            className="flex h-11 w-11 items-center justify-center rounded-full text-stone-700 transition-colors hover:bg-stone-200 lg:hidden"
             aria-expanded={menuOpen}
             aria-controls="mobile-nav"
             aria-label={menuOpen ? t.nav.closeMenu : t.nav.openMenu}
@@ -110,21 +203,31 @@ export function SiteHeader({ lang }: { lang: Locale }) {
         </div>
       </div>
 
-      <nav id="mobile-nav" aria-label={t.nav.label} hidden={!menuOpen} className="border-t border-stone-200 xl:hidden">
+      <nav id="mobile-nav" aria-label={t.nav.label} hidden={!menuOpen} className="border-t border-stone-200 lg:hidden">
         <ul className="mx-auto max-w-6xl px-2 py-2">
-          {links.map((link) => {
-            const active = isActive(pathname, link.href);
+          {entries.map((entry) => {
+            const links = isGroup(entry) ? entry.links : [entry];
             return (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  aria-current={active ? "page" : undefined}
-                  className={`flex min-h-11 items-center rounded-lg px-3 font-medium ${
-                    active ? "bg-emerald-50 text-emerald-800" : "text-stone-700 hover:bg-stone-200"
-                  }`}
-                >
-                  {link.label}
-                </Link>
+              <li key={isGroup(entry) ? entry.id : entry.path}>
+                {isGroup(entry) && <p className="px-3 pb-1 pt-3 text-xs font-semibold text-stone-500">{entry.label}</p>}
+                <ul>
+                  {links.map((link) => {
+                    const active = isActive(pathname, link.path);
+                    return (
+                      <li key={link.path}>
+                        <Link
+                          href={link.path}
+                          aria-current={active ? "page" : undefined}
+                          className={`flex min-h-11 items-center rounded-lg px-3 font-medium ${isGroup(entry) ? "pl-6" : ""} ${
+                            active ? "bg-emerald-50 text-emerald-800" : "text-stone-700 hover:bg-stone-200"
+                          }`}
+                        >
+                          {link.label}
+                        </Link>
+                      </li>
+                    );
+                  })}
+                </ul>
               </li>
             );
           })}

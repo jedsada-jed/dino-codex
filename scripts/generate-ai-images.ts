@@ -72,7 +72,7 @@ async function accountId(): Promise<string> {
  * One reconstruction requirement. The same list builds the prompt and the review checklist,
  * so an image's score always means "how much of its own prompt it got right".
  */
-interface Rule {
+export interface Rule {
   id: string;
   /** Text sent to the model. */
   prompt: string;
@@ -125,7 +125,7 @@ const FRAGMENTARY = new Set([
 export const FRAGMENTARY_CAVEAT =
   "ไดโนเสาร์ตัวนี้รู้จักจากซากเพียงบางส่วน ภาพนี้เติมส่วนที่ไม่พบด้วยการคาดเดาจากญาติใกล้ชิด จึงอาจต่างจากตัวจริงได้มาก";
 
-function groupOf(d: Dinosaur): string {
+export function groupOf(d: Dinosaur): string {
   return d.family ?? GENUS_GROUPS[d.slug] ?? d.clade;
 }
 
@@ -327,7 +327,7 @@ const NO_LIPS = new Set(["Spinosauridae", "Therizinosauridae", "Archaeopterygida
 const NO_THREE_TOE_RULE = new Set(["Dromaeosauridae", "Spinosauridae", "Therizinosauridae"]);
 
 /** Reconstruction guidance that reflects current consensus for each group. */
-function anatomyRules(d: Dinosaur): Rule[] {
+export function anatomyRules(d: Dinosaur): Rule[] {
   const group = groupOf(d);
   const rules: Rule[] = [];
   if (d.clade === "Theropoda") {
@@ -522,11 +522,11 @@ function buildPrompt(d: Dinosaur, summary: string | null): { prompt: string; che
   return { prompt, checklist };
 }
 
-async function generateOpenAi(prompt: string, apiKey: string): Promise<Buffer> {
+export async function generateOpenAi(prompt: string, apiKey: string, model = MODEL): Promise<Buffer> {
   const res = await fetch("https://api.openai.com/v1/images/generations", {
     method: "POST",
     headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
-    body: JSON.stringify({ model: MODEL, prompt, size: OPENAI_SIZE, quality: OPENAI_QUALITY, output_format: "png", n: 1 }),
+    body: JSON.stringify({ model, prompt, size: OPENAI_SIZE, quality: OPENAI_QUALITY, output_format: "png", n: 1 }),
   });
   const json = (await res.json()) as { data?: { b64_json?: string }[]; error?: { message: string } };
   const b64 = json.data?.[0]?.b64_json;
@@ -630,7 +630,11 @@ async function main() {
   }
 }
 
-main().catch((err) => {
-  console.error(err instanceof Error ? err.message : err);
-  process.exit(1);
-});
+// Only when run directly: scripts/generate-coloring-pages.ts imports the rules and OpenAI call.
+// (tsx doesn't set require.main, so check the script path instead.)
+if (process.argv[1]?.endsWith("generate-ai-images.ts")) {
+  main().catch((err) => {
+    console.error(err instanceof Error ? err.message : err);
+    process.exit(1);
+  });
+}

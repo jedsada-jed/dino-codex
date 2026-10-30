@@ -1,0 +1,916 @@
+{
+  "velociraptor": {
+    "image": "/coloring/velociraptor.png",
+    "thumb": "/coloring/velociraptor-thumb.webp",
+    "width": 1536,
+    "height": 1024,
+    "model": "gpt-image-2",
+    "prompt": "A children's coloring book page of Velociraptor, a Dromaeosauridae dinosaur, drawn as simple, friendly but scientifically accurate line art. Anatomy: walking with the whole body held horizontal and balanced over the hips like a seesaw, back parallel to the ground, head held low and forward at the same height as the hips, short neck curving forward rather than upward, long stiff tail extended straight back in line with the back. NOT standing upright, NOT a raised head, NOT an ostrich or kangaroo posture; mouth closed with all teeth fully hidden behind scaly lips, like a monitor lizard. NO visible teeth; hands held with palms facing each other (not pronated, not palms-down, not dangling); a long, low, narrow snout with a slightly upturned profile, NOT a bird beak and NOT a rounded bird head; a short S-curved neck about as long as the skull, NOT a long ostrich neck; clearly visible arms folded at the sides of the body like a bird's wings, with long pennaceous feathers attached along the forearm and hand, and three separate clawed fingers visible at the end of each hand; a stiff, straight tail fringed with feathers along its sides and a fan of feathers at the tip; each foot has a clearly visible sickle-shaped claw on the second toe, retracted and held off the ground, proportionate in size and attached to the toe; body covered in short feathers, about 2 meters long including the tail and about 50 cm tall at the hip. Clean bold black outlines on a pure white background. No shading, no gray tones, no color fills, large open areas left white to color in. The whole animal in side view, filling most of the page, on a simple ground line with a few plants. No text, no labels, no humans, no modern objects, no border frame.",
+    "checklist": [
+      {
+        "id": "pose",
+        "label": "ลำตัวขนานพื้น หัวต่ำระดับสะโพก หางยื่นตรงแนวเดียวกับหลัง"
+      },
+      {
+        "id": "lips",
+        "label": "ปากปิด มีริมฝีปากปิดฟันจนมองไม่เห็นฟัน"
+      },
+      {
+        "id": "hands",
+        "label": "ฝ่ามือหันเข้าหากัน ไม่คว่ำลงหรือห้อยลง"
+      },
+      {
+        "id": "snout",
+        "label": "ปากยาว ต่ำ และแคบ ไม่ใช่จะงอยปากหรือหัวกลมแบบนก"
+      },
+      {
+        "id": "neck",
+        "label": "คอสั้นโค้งรูปตัว S ไม่ยาวแบบนกกระจอกเทศ"
+      },
+      {
+        "id": "arms",
+        "label": "เห็นแขนพับข้างลำตัว มีขนปีกติดที่แขน และเห็นนิ้วที่มีกรงเล็บ"
+      },
+      {
+        "id": "tail",
+        "label": "หางแข็งตรง มีขนเรียงด้านข้างและเป็นพัดที่ปลาย"
+      },
+      {
+        "id": "sickle-claw",
+        "label": "เห็นกรงเล็บรูปเคียวที่นิ้วเท้าที่ 2 ยกพ้นพื้น ขนาดสมส่วน"
+      },
+      {
+        "id": "feathers",
+        "label": "ลำตัวมีขนปกคลุม ขนาดประมาณ 2 เมตรรวมหาง"
+      },
+      {
+        "id": "line-art",
+        "label": "เส้นขอบสีดำชัด พื้นขาว"
+      },
+      {
+        "id": "no-fill",
+        "label": "ไม่มีการลงเงา สีเทา หรือสี"
+      },
+      {
+        "id": "composition",
+        "label": "เห็นทั้งตัวในมุมด้านข้าง"
+      },
+      {
+        "id": "clean",
+        "label": "ไม่มีตัวหนังสือ คน หรือวัตถุสมัยใหม่"
+      }
+    ],
+    "createdAt": "2026-10-30T14:29:39.364Z",
+    "review": {
+      "reviewedAt": "2026-10-30T14:37:07.041852+00:00",
+      "results": [
+        {
+          "id": "pose",
+          "pass": true
+        },
+        {
+          "id": "lips",
+          "pass": true
+        },
+        {
+          "id": "hands",
+          "pass": false,
+          "note": "ทิศของฝ่ามือดูไม่ชัดว่าหันเข้าหากัน",
+          "noteEn": "Hard to tell whether the palms face each other"
+        },
+        {
+          "id": "snout",
+          "pass": true
+        },
+        {
+          "id": "neck",
+          "pass": true
+        },
+        {
+          "id": "arms",
+          "pass": true
+        },
+        {
+          "id": "tail",
+          "pass": true
+        },
+        {
+          "id": "sickle-claw",
+          "pass": true
+        },
+        {
+          "id": "feathers",
+          "pass": true
+        },
+        {
+          "id": "line-art",
+          "pass": true
+        },
+        {
+          "id": "no-fill",
+          "pass": true
+        },
+        {
+          "id": "composition",
+          "pass": true
+        },
+        {
+          "id": "clean",
+          "pass": true
+        }
+      ]
+    }
+  },
+  "tyrannosaurus": {
+    "image": "/coloring/tyrannosaurus.png",
+    "thumb": "/coloring/tyrannosaurus-thumb.webp",
+    "width": 1536,
+    "height": 1024,
+    "model": "gpt-image-2",
+    "prompt": "A children's coloring book page of Tyrannosaurus, a Tyrannosauridae dinosaur, drawn as simple, friendly but scientifically accurate line art. Anatomy: bipedal with the back held roughly horizontal and the tail held straight out behind for balance, never dragging on the ground. NOT standing upright like a kangaroo; mouth closed with all teeth fully hidden behind scaly lips, like a monitor lizard. NO visible teeth; hands held with palms facing each other (not pronated, not palms-down, not dangling); three main weight-bearing toes on each foot; skin predominantly covered in small scales; massive deep skull, short two-fingered arms, powerful hind legs. Clean bold black outlines on a pure white background. No shading, no gray tones, no color fills, large open areas left white to color in. The whole animal in side view, filling most of the page, on a simple ground line with a few plants. No text, no labels, no humans, no modern objects, no border frame.",
+    "checklist": [
+      {
+        "id": "pose",
+        "label": "ยืนสองขา หลังขนานพื้น หางยื่นตรงไม่ลากพื้น"
+      },
+      {
+        "id": "lips",
+        "label": "ปากปิด มีริมฝีปากปิดฟันจนมองไม่เห็นฟัน"
+      },
+      {
+        "id": "hands",
+        "label": "ฝ่ามือหันเข้าหากัน ไม่คว่ำลงหรือห้อยลง"
+      },
+      {
+        "id": "feet",
+        "label": "เท้ามีนิ้วรับน้ำหนัก 3 นิ้ว"
+      },
+      {
+        "id": "scales",
+        "label": "ผิวส่วนใหญ่เป็นเกล็ดเล็ก"
+      },
+      {
+        "id": "build",
+        "label": "กะโหลกใหญ่ลึก แขนสั้นมี 2 นิ้ว ขาหลังแข็งแรง"
+      },
+      {
+        "id": "line-art",
+        "label": "เส้นขอบสีดำชัด พื้นขาว"
+      },
+      {
+        "id": "no-fill",
+        "label": "ไม่มีการลงเงา สีเทา หรือสี"
+      },
+      {
+        "id": "composition",
+        "label": "เห็นทั้งตัวในมุมด้านข้าง"
+      },
+      {
+        "id": "clean",
+        "label": "ไม่มีตัวหนังสือ คน หรือวัตถุสมัยใหม่"
+      }
+    ],
+    "createdAt": "2026-10-30T14:30:23.595Z",
+    "review": {
+      "reviewedAt": "2026-10-30T14:37:07.041852+00:00",
+      "results": [
+        {
+          "id": "pose",
+          "pass": true
+        },
+        {
+          "id": "lips",
+          "pass": true
+        },
+        {
+          "id": "hands",
+          "pass": false,
+          "note": "มือดูห้อยลง ไม่ได้หันฝ่ามือเข้าหากัน",
+          "noteEn": "Hands hang down instead of palms facing each other"
+        },
+        {
+          "id": "feet",
+          "pass": true
+        },
+        {
+          "id": "scales",
+          "pass": true
+        },
+        {
+          "id": "build",
+          "pass": true
+        },
+        {
+          "id": "line-art",
+          "pass": true
+        },
+        {
+          "id": "no-fill",
+          "pass": true
+        },
+        {
+          "id": "composition",
+          "pass": true
+        },
+        {
+          "id": "clean",
+          "pass": true
+        }
+      ]
+    }
+  },
+  "triceratops": {
+    "image": "/coloring/triceratops.png",
+    "thumb": "/coloring/triceratops-thumb.webp",
+    "width": 1536,
+    "height": 1024,
+    "model": "gpt-image-2",
+    "prompt": "A children's coloring book page of Triceratops, a Ceratopsidae dinosaur, drawn as simple, friendly but scientifically accurate line art. Anatomy: two long brow horns above the eyes and one short horn on the nose; a solid bony frill without holes, edged with small triangular bony points; a large, hooked, parrot-like beak; quadrupedal with pillar-like hind legs; front legs semi-erect with the elbows slightly out and the fingers pointing forward and outward, NOT palms-down; skin of large rounded scales, some with small conical bumps. Clean bold black outlines on a pure white background. No shading, no gray tones, no color fills, large open areas left white to color in. The whole animal in side view, filling most of the page, on a simple ground line with a few plants. No text, no labels, no humans, no modern objects, no border frame.",
+    "checklist": [
+      {
+        "id": "horns",
+        "label": "เขายาว 2 อันเหนือตา และเขาสั้น 1 อันบนจมูก"
+      },
+      {
+        "id": "frill",
+        "label": "แผงคอกระดูกทึบ ไม่มีรู ขอบมีปุ่มสามเหลี่ยม"
+      },
+      {
+        "id": "beak",
+        "label": "จะงอยปากใหญ่งุ้มคล้ายนกแก้ว"
+      },
+      {
+        "id": "posture",
+        "label": "เดินสี่ขา ขาหน้ากางศอกเล็กน้อย นิ้วชี้ไปด้านหน้าและออกด้านข้าง"
+      },
+      {
+        "id": "skin",
+        "label": "ผิวเป็นเกล็ดกลมใหญ่ บางเกล็ดมีปุ่มเล็ก"
+      },
+      {
+        "id": "line-art",
+        "label": "เส้นขอบสีดำชัด พื้นขาว"
+      },
+      {
+        "id": "no-fill",
+        "label": "ไม่มีการลงเงา สีเทา หรือสี"
+      },
+      {
+        "id": "composition",
+        "label": "เห็นทั้งตัวในมุมด้านข้าง"
+      },
+      {
+        "id": "clean",
+        "label": "ไม่มีตัวหนังสือ คน หรือวัตถุสมัยใหม่"
+      }
+    ],
+    "createdAt": "2026-10-30T14:30:55.728Z",
+    "review": {
+      "reviewedAt": "2026-10-30T14:37:07.041852+00:00",
+      "results": [
+        {
+          "id": "horns",
+          "pass": true
+        },
+        {
+          "id": "frill",
+          "pass": true
+        },
+        {
+          "id": "beak",
+          "pass": true
+        },
+        {
+          "id": "posture",
+          "pass": true
+        },
+        {
+          "id": "skin",
+          "pass": true
+        },
+        {
+          "id": "line-art",
+          "pass": true
+        },
+        {
+          "id": "no-fill",
+          "pass": true
+        },
+        {
+          "id": "composition",
+          "pass": true
+        },
+        {
+          "id": "clean",
+          "pass": true
+        }
+      ]
+    }
+  },
+  "stegosaurus": {
+    "image": "/coloring/stegosaurus.png",
+    "thumb": "/coloring/stegosaurus-thumb.webp",
+    "width": 1536,
+    "height": 1024,
+    "model": "gpt-image-2",
+    "prompt": "A children's coloring book page of Stegosaurus, a Stegosauridae dinosaur, drawn as simple, friendly but scientifically accurate line art. Anatomy: quadrupedal with the hind legs much longer than the front legs, so the back arches highest over the hips, small head held low near the ground, tail held off the ground; two alternating rows of large, flat, kite-shaped bony plates standing upright along the neck, back and tail; four long bony spikes at the end of the tail pointing outward and backward; a small, narrow head with a toothless beak at the front. Clean bold black outlines on a pure white background. No shading, no gray tones, no color fills, large open areas left white to color in. The whole animal in side view, filling most of the page, on a simple ground line with a few plants. No text, no labels, no humans, no modern objects, no border frame.",
+    "checklist": [
+      {
+        "id": "pose",
+        "label": "เดินสี่ขา ขาหลังยาวกว่าขาหน้า หลังโก่งสูงสุดที่สะโพก หัวเล็กต่ำ หางไม่ลากพื้น"
+      },
+      {
+        "id": "plates",
+        "label": "แผ่นกระดูกรูปว่าวตั้งเรียงสลับ 2 แถวตามคอ หลัง และหาง"
+      },
+      {
+        "id": "spikes",
+        "label": "หนามยาว 4 อันที่ปลายหาง ชี้ออกด้านข้างและด้านหลัง"
+      },
+      {
+        "id": "head",
+        "label": "หัวเล็กแคบ มีจะงอยปากด้านหน้า"
+      },
+      {
+        "id": "line-art",
+        "label": "เส้นขอบสีดำชัด พื้นขาว"
+      },
+      {
+        "id": "no-fill",
+        "label": "ไม่มีการลงเงา สีเทา หรือสี"
+      },
+      {
+        "id": "composition",
+        "label": "เห็นทั้งตัวในมุมด้านข้าง"
+      },
+      {
+        "id": "clean",
+        "label": "ไม่มีตัวหนังสือ คน หรือวัตถุสมัยใหม่"
+      }
+    ],
+    "createdAt": "2026-10-30T14:31:26.115Z",
+    "review": {
+      "reviewedAt": "2026-10-30T14:37:07.041852+00:00",
+      "results": [
+        {
+          "id": "pose",
+          "pass": true
+        },
+        {
+          "id": "plates",
+          "pass": false,
+          "note": "แผ่นกระดูกดูเป็นแถวเดียว ไม่เห็นชัดว่าสลับ 2 แถว",
+          "noteEn": "Plates look like one row, not clearly two alternating rows"
+        },
+        {
+          "id": "spikes",
+          "pass": false,
+          "note": "เห็นหนามหางชัดเพียง 3 อัน",
+          "noteEn": "Only 3 tail spikes are clearly visible"
+        },
+        {
+          "id": "head",
+          "pass": true
+        },
+        {
+          "id": "line-art",
+          "pass": true
+        },
+        {
+          "id": "no-fill",
+          "pass": true
+        },
+        {
+          "id": "composition",
+          "pass": true
+        },
+        {
+          "id": "clean",
+          "pass": true
+        }
+      ]
+    }
+  },
+  "brachiosaurus": {
+    "image": "/coloring/brachiosaurus.png",
+    "thumb": "/coloring/brachiosaurus-thumb.webp",
+    "width": 1536,
+    "height": 1024,
+    "model": "gpt-image-2",
+    "prompt": "A children's coloring book page of Brachiosaurus, a Brachiosauridae dinosaur, drawn as simple, friendly but scientifically accurate line art. Anatomy: front legs longer than the hind legs so the back slopes down from high shoulders to the hips, like a giraffe; a very long neck held raised upward at a steep angle; a small head with a bony arch over the nose in front of the eyes; pillar-like legs; front feet are columns with a single thumb claw; a relatively short tail held off the ground. Clean bold black outlines on a pure white background. No shading, no gray tones, no color fills, large open areas left white to color in. The whole animal in side view, filling most of the page, on a simple ground line with a few plants. No text, no labels, no humans, no modern objects, no border frame.",
+    "checklist": [
+      {
+        "id": "proportions",
+        "label": "ขาหน้ายาวกว่าขาหลัง หลังลาดลงจากไหล่ไปสะโพก"
+      },
+      {
+        "id": "neck",
+        "label": "คอยาวมาก ชูขึ้นในมุมชัน"
+      },
+      {
+        "id": "head",
+        "label": "หัวเล็ก มีสันกระดูกโค้งเหนือจมูก"
+      },
+      {
+        "id": "feet",
+        "label": "ขาเป็นเสา เท้าหน้ามีกรงเล็บเดียว"
+      },
+      {
+        "id": "tail",
+        "label": "หางค่อนข้างสั้น ไม่ลากพื้น"
+      },
+      {
+        "id": "line-art",
+        "label": "เส้นขอบสีดำชัด พื้นขาว"
+      },
+      {
+        "id": "no-fill",
+        "label": "ไม่มีการลงเงา สีเทา หรือสี"
+      },
+      {
+        "id": "composition",
+        "label": "เห็นทั้งตัวในมุมด้านข้าง"
+      },
+      {
+        "id": "clean",
+        "label": "ไม่มีตัวหนังสือ คน หรือวัตถุสมัยใหม่"
+      }
+    ],
+    "createdAt": "2026-10-30T14:31:52.923Z",
+    "review": {
+      "reviewedAt": "2026-10-30T14:37:07.041852+00:00",
+      "results": [
+        {
+          "id": "proportions",
+          "pass": true
+        },
+        {
+          "id": "neck",
+          "pass": true
+        },
+        {
+          "id": "head",
+          "pass": true
+        },
+        {
+          "id": "feet",
+          "pass": true
+        },
+        {
+          "id": "tail",
+          "pass": true
+        },
+        {
+          "id": "line-art",
+          "pass": true
+        },
+        {
+          "id": "no-fill",
+          "pass": true
+        },
+        {
+          "id": "composition",
+          "pass": true
+        },
+        {
+          "id": "clean",
+          "pass": true
+        }
+      ]
+    }
+  },
+  "spinosaurus": {
+    "image": "/coloring/spinosaurus.png",
+    "thumb": "/coloring/spinosaurus-thumb.webp",
+    "width": 1536,
+    "height": 1024,
+    "model": "gpt-image-2",
+    "prompt": "A children's coloring book page of Spinosaurus, a Spinosauridae dinosaur, drawn as simple, friendly but scientifically accurate line art. Anatomy: bipedal with the back held roughly horizontal and the tail held straight out behind for balance, never dragging on the ground. NOT standing upright like a kangaroo; hands held with palms facing each other (not pronated, not palms-down, not dangling); a long, narrow, crocodile-like snout with conical teeth and nostrils set far back near the eyes, NOT a deep tyrannosaur-like skull; a tall sail along the back formed by elongated neural spines covered in skin; a deep, flexible, paddle-like tail with tall thin spines forming a fin, like a giant newt's tail; robust arms with a large curved thumb claw, relatively short hind legs with broad, flat feet. Clean bold black outlines on a pure white background. No shading, no gray tones, no color fills, large open areas left white to color in. The whole animal in side view, filling most of the page, on a simple ground line with a few plants. No text, no labels, no humans, no modern objects, no border frame.",
+    "checklist": [
+      {
+        "id": "pose",
+        "label": "ยืนสองขา หลังขนานพื้น หางยื่นตรงไม่ลากพื้น"
+      },
+      {
+        "id": "hands",
+        "label": "ฝ่ามือหันเข้าหากัน ไม่คว่ำลงหรือห้อยลง"
+      },
+      {
+        "id": "snout",
+        "label": "ปากยาวแคบแบบจระเข้ ฟันทรงกรวย รูจมูกอยู่ค่อนไปทางตา"
+      },
+      {
+        "id": "sail",
+        "label": "มีใบเรือสูงบนหลังจากกระดูกสันหลังที่ยืดยาว"
+      },
+      {
+        "id": "tail",
+        "label": "หางแบนลึกเป็นครีบคล้ายพาย"
+      },
+      {
+        "id": "limbs",
+        "label": "แขนแข็งแรงมีกรงเล็บนิ้วโป้งใหญ่ ขาหลังค่อนข้างสั้น เท้ากว้างแบน"
+      },
+      {
+        "id": "line-art",
+        "label": "เส้นขอบสีดำชัด พื้นขาว"
+      },
+      {
+        "id": "no-fill",
+        "label": "ไม่มีการลงเงา สีเทา หรือสี"
+      },
+      {
+        "id": "composition",
+        "label": "เห็นทั้งตัวในมุมด้านข้าง"
+      },
+      {
+        "id": "clean",
+        "label": "ไม่มีตัวหนังสือ คน หรือวัตถุสมัยใหม่"
+      }
+    ],
+    "createdAt": "2026-10-30T14:32:24.553Z",
+    "review": {
+      "reviewedAt": "2026-10-30T14:37:07.041852+00:00",
+      "results": [
+        {
+          "id": "pose",
+          "pass": true
+        },
+        {
+          "id": "hands",
+          "pass": false,
+          "note": "มือหันไปด้านหน้า ไม่ได้หันฝ่ามือเข้าหากัน",
+          "noteEn": "Hands face forward instead of palms facing each other"
+        },
+        {
+          "id": "snout",
+          "pass": true
+        },
+        {
+          "id": "sail",
+          "pass": true
+        },
+        {
+          "id": "tail",
+          "pass": true
+        },
+        {
+          "id": "limbs",
+          "pass": true
+        },
+        {
+          "id": "line-art",
+          "pass": true
+        },
+        {
+          "id": "no-fill",
+          "pass": true
+        },
+        {
+          "id": "composition",
+          "pass": true
+        },
+        {
+          "id": "clean",
+          "pass": true
+        }
+      ]
+    }
+  },
+  "ankylosaurus": {
+    "image": "/coloring/ankylosaurus.png",
+    "thumb": "/coloring/ankylosaurus-thumb.webp",
+    "width": 1536,
+    "height": 1024,
+    "model": "gpt-image-2",
+    "prompt": "A children's coloring book page of Ankylosaurus, a Ankylosauridae dinosaur, drawn as simple, friendly but scientifically accurate line art. Anatomy: a very wide, low body covered on top in rows of flat and keeled bony plates (osteoderms); a large, heavy bony club at the end of a stiff tail; a broad triangular head with short pyramid-shaped horns pointing backward and sideways from the back corners, small beak; short, sturdy legs held under the body, walking on four legs. Clean bold black outlines on a pure white background. No shading, no gray tones, no color fills, large open areas left white to color in. The whole animal in side view, filling most of the page, on a simple ground line with a few plants. No text, no labels, no humans, no modern objects, no border frame.",
+    "checklist": [
+      {
+        "id": "armor",
+        "label": "ลำตัวกว้างเตี้ย หลังปกคลุมด้วยแผ่นกระดูกเกราะเรียงเป็นแถว"
+      },
+      {
+        "id": "club",
+        "label": "ปลายหางเป็นตะบองกระดูกใหญ่ หางแข็ง"
+      },
+      {
+        "id": "head",
+        "label": "หัวกว้างสามเหลี่ยม มีเขาสั้นที่มุมหลังหัว จะงอยปากเล็ก"
+      },
+      {
+        "id": "legs",
+        "label": "ขาสั้นแข็งแรงอยู่ใต้ลำตัว เดินสี่ขา"
+      },
+      {
+        "id": "line-art",
+        "label": "เส้นขอบสีดำชัด พื้นขาว"
+      },
+      {
+        "id": "no-fill",
+        "label": "ไม่มีการลงเงา สีเทา หรือสี"
+      },
+      {
+        "id": "composition",
+        "label": "เห็นทั้งตัวในมุมด้านข้าง"
+      },
+      {
+        "id": "clean",
+        "label": "ไม่มีตัวหนังสือ คน หรือวัตถุสมัยใหม่"
+      }
+    ],
+    "createdAt": "2026-10-30T14:32:52.327Z",
+    "review": {
+      "reviewedAt": "2026-10-30T14:37:07.041852+00:00",
+      "results": [
+        {
+          "id": "armor",
+          "pass": true
+        },
+        {
+          "id": "club",
+          "pass": false,
+          "note": "หางโค้งลงจนตะบองแตะพื้น ไม่ได้เหยียดแข็ง",
+          "noteEn": "Tail curves down so the club touches the ground, instead of held stiff"
+        },
+        {
+          "id": "head",
+          "pass": true
+        },
+        {
+          "id": "legs",
+          "pass": true
+        },
+        {
+          "id": "line-art",
+          "pass": true
+        },
+        {
+          "id": "no-fill",
+          "pass": true
+        },
+        {
+          "id": "composition",
+          "pass": true
+        },
+        {
+          "id": "clean",
+          "pass": true
+        }
+      ]
+    }
+  },
+  "parasaurolophus": {
+    "image": "/coloring/parasaurolophus.png",
+    "thumb": "/coloring/parasaurolophus-thumb.webp",
+    "width": 1536,
+    "height": 1024,
+    "model": "gpt-image-2",
+    "prompt": "A children's coloring book page of Parasaurolophus, a Hadrosauridae dinosaur, drawn as simple, friendly but scientifically accurate line art. Anatomy: a long, hollow, tube-shaped crest curving backward from the top of the head well past the neck; a broad, flat, duck-like toothless beak; walking on all fours with the front hands forming small hoof-like pads, tail held straight out off the ground; skin of small pebbly scales. Clean bold black outlines on a pure white background. No shading, no gray tones, no color fills, large open areas left white to color in. The whole animal in side view, filling most of the page, on a simple ground line with a few plants. No text, no labels, no humans, no modern objects, no border frame.",
+    "checklist": [
+      {
+        "id": "crest",
+        "label": "หงอนเป็นท่อกลวงยาวโค้งไปด้านหลังเลยคอ"
+      },
+      {
+        "id": "beak",
+        "label": "ปากแบนกว้างแบบปากเป็ด"
+      },
+      {
+        "id": "posture",
+        "label": "เดินสี่ขา มือหน้าเป็นแป้นคล้ายกีบ หางยื่นตรงไม่ลากพื้น"
+      },
+      {
+        "id": "skin",
+        "label": "ผิวเป็นเกล็ดเล็กคล้ายกรวด"
+      },
+      {
+        "id": "line-art",
+        "label": "เส้นขอบสีดำชัด พื้นขาว"
+      },
+      {
+        "id": "no-fill",
+        "label": "ไม่มีการลงเงา สีเทา หรือสี"
+      },
+      {
+        "id": "composition",
+        "label": "เห็นทั้งตัวในมุมด้านข้าง"
+      },
+      {
+        "id": "clean",
+        "label": "ไม่มีตัวหนังสือ คน หรือวัตถุสมัยใหม่"
+      }
+    ],
+    "createdAt": "2026-10-30T14:34:54.266Z",
+    "review": {
+      "reviewedAt": "2026-10-30T14:37:07.041852+00:00",
+      "results": [
+        {
+          "id": "crest",
+          "pass": true
+        },
+        {
+          "id": "beak",
+          "pass": false,
+          "note": "ปากไม่แบนกว้างแบบปากเป็ดอย่างชัดเจน",
+          "noteEn": "The beak isn't clearly broad and flat like a duck's"
+        },
+        {
+          "id": "posture",
+          "pass": true
+        },
+        {
+          "id": "skin",
+          "pass": true
+        },
+        {
+          "id": "line-art",
+          "pass": true
+        },
+        {
+          "id": "no-fill",
+          "pass": true
+        },
+        {
+          "id": "composition",
+          "pass": true
+        },
+        {
+          "id": "clean",
+          "pass": true
+        }
+      ]
+    }
+  },
+  "phuwiangosaurus": {
+    "image": "/coloring/phuwiangosaurus.png",
+    "thumb": "/coloring/phuwiangosaurus-thumb.webp",
+    "width": 1536,
+    "height": 1024,
+    "model": "gpt-image-2",
+    "prompt": "A children's coloring book page of Phuwiangosaurus, a Euhelopodidae dinosaur, drawn as simple, friendly but scientifically accurate line art. Anatomy: a titanosauriform sauropod about 15–20 meters long, with a long neck held moderately raised; pillar-like legs with the front legs about as long as or slightly longer than the hind legs, broad body; a tail held off the ground. Clean bold black outlines on a pure white background. No shading, no gray tones, no color fills, large open areas left white to color in. The whole animal in side view, filling most of the page, on a simple ground line with a few plants. No text, no labels, no humans, no modern objects, no border frame.",
+    "checklist": [
+      {
+        "id": "build",
+        "label": "ไดโนเสาร์คอยาวยาวราว 15–20 เมตร คอชูขึ้นปานกลาง"
+      },
+      {
+        "id": "legs",
+        "label": "ขาเป็นเสา ขาหน้ายาวพอๆ กับหรือยาวกว่าขาหลังเล็กน้อย ลำตัวกว้าง"
+      },
+      {
+        "id": "tail",
+        "label": "หางไม่ลากพื้น"
+      },
+      {
+        "id": "line-art",
+        "label": "เส้นขอบสีดำชัด พื้นขาว"
+      },
+      {
+        "id": "no-fill",
+        "label": "ไม่มีการลงเงา สีเทา หรือสี"
+      },
+      {
+        "id": "composition",
+        "label": "เห็นทั้งตัวในมุมด้านข้าง"
+      },
+      {
+        "id": "clean",
+        "label": "ไม่มีตัวหนังสือ คน หรือวัตถุสมัยใหม่"
+      }
+    ],
+    "createdAt": "2026-10-30T14:35:24.044Z",
+    "review": {
+      "reviewedAt": "2026-10-30T14:37:07.041852+00:00",
+      "results": [
+        {
+          "id": "build",
+          "pass": true,
+          "note": "ผ่าน แต่มีสันหยักตามแนวหลังซึ่งไม่มีหลักฐานจากฟอสซิล",
+          "noteEn": "Passes, but has a scalloped ridge along the back that no fossil shows"
+        },
+        {
+          "id": "legs",
+          "pass": true
+        },
+        {
+          "id": "tail",
+          "pass": true
+        },
+        {
+          "id": "line-art",
+          "pass": true
+        },
+        {
+          "id": "no-fill",
+          "pass": true
+        },
+        {
+          "id": "composition",
+          "pass": true
+        },
+        {
+          "id": "clean",
+          "pass": true
+        }
+      ]
+    }
+  },
+  "siamotyrannus": {
+    "image": "/coloring/siamotyrannus.png",
+    "thumb": "/coloring/siamotyrannus-thumb.webp",
+    "width": 1536,
+    "height": 1024,
+    "model": "gpt-image-2",
+    "prompt": "A children's coloring book page of Siamotyrannus, a Metriacanthosauridae dinosaur, drawn as simple, friendly but scientifically accurate line art. Anatomy: bipedal with the back held roughly horizontal and the tail held straight out behind for balance, never dragging on the ground. NOT standing upright like a kangaroo; mouth closed with all teeth fully hidden behind scaly lips, like a monitor lizard. NO visible teeth; hands held with palms facing each other (not pronated, not palms-down, not dangling); three main weight-bearing toes on each foot; a long, fairly narrow skull of an allosaur-like predator, NOT a tyrannosaur despite its name; medium-sized, about 6–7 meters long, three-fingered arms, skin of small scales. Clean bold black outlines on a pure white background. No shading, no gray tones, no color fills, large open areas left white to color in. The whole animal in side view, filling most of the page, on a simple ground line with a few plants. No text, no labels, no humans, no modern objects, no border frame.",
+    "checklist": [
+      {
+        "id": "pose",
+        "label": "ยืนสองขา หลังขนานพื้น หางยื่นตรงไม่ลากพื้น"
+      },
+      {
+        "id": "lips",
+        "label": "ปากปิด มีริมฝีปากปิดฟันจนมองไม่เห็นฟัน"
+      },
+      {
+        "id": "hands",
+        "label": "ฝ่ามือหันเข้าหากัน ไม่คว่ำลงหรือห้อยลง"
+      },
+      {
+        "id": "feet",
+        "label": "เท้ามีนิ้วรับน้ำหนัก 3 นิ้ว"
+      },
+      {
+        "id": "skull",
+        "label": "กะโหลกยาวแบบอัลโลซอร์ ไม่ใช่ไทแรนโนซอร์แม้จะมีชื่อคล้าย"
+      },
+      {
+        "id": "build",
+        "label": "ขนาดกลางยาวราว 6–7 เมตร แขนมี 3 นิ้ว ผิวเกล็ดเล็ก"
+      },
+      {
+        "id": "line-art",
+        "label": "เส้นขอบสีดำชัด พื้นขาว"
+      },
+      {
+        "id": "no-fill",
+        "label": "ไม่มีการลงเงา สีเทา หรือสี"
+      },
+      {
+        "id": "composition",
+        "label": "เห็นทั้งตัวในมุมด้านข้าง"
+      },
+      {
+        "id": "clean",
+        "label": "ไม่มีตัวหนังสือ คน หรือวัตถุสมัยใหม่"
+      }
+    ],
+    "createdAt": "2026-10-30T14:35:52.378Z",
+    "review": {
+      "reviewedAt": "2026-10-30T14:37:07.041852+00:00",
+      "results": [
+        {
+          "id": "pose",
+          "pass": true
+        },
+        {
+          "id": "lips",
+          "pass": true
+        },
+        {
+          "id": "hands",
+          "pass": false,
+          "note": "มือดูคว่ำลง ไม่ได้หันฝ่ามือเข้าหากัน",
+          "noteEn": "Hands look palms-down instead of facing each other"
+        },
+        {
+          "id": "feet",
+          "pass": true
+        },
+        {
+          "id": "skull",
+          "pass": true
+        },
+        {
+          "id": "build",
+          "pass": true
+        },
+        {
+          "id": "line-art",
+          "pass": true
+        },
+        {
+          "id": "no-fill",
+          "pass": true
+        },
+        {
+          "id": "composition",
+          "pass": true
+        },
+        {
+          "id": "clean",
+          "pass": true
+        }
+      ]
+    }
+  }
+}

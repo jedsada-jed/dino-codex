@@ -13,7 +13,8 @@
     "fetch:sizes": "tsx scripts/fetch-sizes.ts",
     "build:map": "tsx scripts/build-world-map.ts",
     "build:paleo-maps": "tsx scripts/build-paleo-maps.ts",
-    "gen:ai-images": "tsx scripts/generate-ai-images.ts"
+    "gen:ai-images": "tsx scripts/generate-ai-images.ts",
+    "gen:coloring": "tsx scripts/generate-coloring-pages.ts"
   },
   "dependencies": {
     "fuse.js": "^7.5.0",
