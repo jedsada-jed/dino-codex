@@ -41,13 +41,13 @@ export const DINO_SITES: DinoSite[] = [
     text: {
       th: {
         name: "พิพิธภัณฑ์ไดโนเสาร์ภูเวียง และอุทยานแห่งชาติภูเวียง",
-        place: "จังหวัดขอนแก่น",
+        place: "อำเภอเวียงเก่า จังหวัดขอนแก่น",
         about:
           "ภูเวียงคือจุดที่พบฟอสซิลไดโนเสาร์ชิ้นแรกของไทยเมื่อ พ.ศ. 2519 พิพิธภัณฑ์เล่าเรื่องการค้นพบในพื้นที่ และในอุทยานแห่งชาติภูเวียงมีหลุมขุดค้นที่เปิดให้ชม",
       },
       en: {
         name: "Phu Wiang Dinosaur Museum and Phu Wiang National Park",
-        place: "Khon Kaen",
+        place: "Wiang Kao District, Khon Kaen",
         about:
           "Phu Wiang is where Thailand's first dinosaur fossil was found, in 1976. The museum tells the story of the finds in the area, and the national park has dig sites open to visitors.",
       },
