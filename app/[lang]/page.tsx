@@ -8,6 +8,8 @@ import { formatNumber, href, isLocale, languageAlternates } from "@/lib/i18n";
 import { DinosaurCard } from "@/components/DinosaurCard";
 import { PopularDinosaurs } from "@/components/PopularDinosaurs";
 import { Hero } from "@/components/Hero";
+import { DinoOfTheDay } from "@/components/DinoOfTheDay";
+import { getDailyPool } from "@/lib/daily";
 import { SectionHeading } from "@/components/SectionHeading";
 import { ArrowRightIcon, MapPinIcon } from "@/components/Icons";
 
@@ -35,6 +37,15 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
   return (
     <div>
       <Hero lang={lang} dinosaurCount={meta.dinosaurCount} thailandCount={allThailand.length} />
+
+      <section className="mx-auto max-w-6xl px-4 pt-14 sm:px-6" aria-labelledby="daily-heading">
+        <h2 id="daily-heading" className="text-2xl font-bold text-stone-900">
+          {t.daily.title}
+        </h2>
+        <div className="mt-5">
+          <DinoOfTheDay pool={getDailyPool(lang)} lang={lang} />
+        </div>
+      </section>
 
       <section className="mx-auto max-w-6xl px-4 py-14 sm:px-6" aria-labelledby="periods-heading">
         <SectionHeading

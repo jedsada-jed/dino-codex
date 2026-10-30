@@ -205,6 +205,16 @@ const th = {
     seeAll: (n: string, country: string) => `ดูทั้ง ${n} สกุลที่พบใน${country}`,
     note: "นับจากประเทศที่พบฟอสซิลตามฐานข้อมูล Paleobiology Database ไดโนเสาร์หนึ่งสกุลอาจพบได้หลายประเทศ ไม่รวมนกยุคปัจจุบัน ประเทศที่พบมากมักเป็นประเทศที่มีหินยุคมีโซโซอิกโผล่ให้เห็นมากและมีการสำรวจมานาน ไม่ได้แปลว่าไดโนเสาร์เคยอยู่ที่นั่นมากกว่าที่อื่น",
   },
+  daily: {
+    title: "ไดโนเสาร์ประจำวัน",
+    eyebrow: "วันนี้ขอแนะนำ",
+    period: "ยุค",
+    length: "ยาว",
+    diet: "อาหาร",
+    meters: (n: string) => `ราว ${n} ม.`,
+    readMore: (name: string) => `อ่านเรื่อง${name}`,
+    compare: "เทียบขนาดกับทีเร็กซ์",
+  },
   detail: {
     breadcrumb: "ไดโนเสาร์ทั้งหมด",
     nameMeaning: "ความหมายของชื่อ",
@@ -470,6 +480,16 @@ const en: Dictionary = {
     countryLead: (n: string) => `${n} genera found, for example (ones found only here first):`,
     seeAll: (n: string) => `See all ${n} genera found here`,
     note: "Counted by the countries where fossils were found, per the Paleobiology Database. One genus can be found in several countries. Modern birds are not included. Countries with many finds usually have lots of exposed Mesozoic rock and a long history of fossil hunting; it doesn't mean more dinosaurs lived there.",
+  },
+  daily: {
+    title: "Dinosaur of the day",
+    eyebrow: "Today's pick",
+    period: "Period",
+    length: "Length",
+    diet: "Diet",
+    meters: (n: string) => `about ${n} m`,
+    readMore: (name: string) => `Read about ${name}`,
+    compare: "Compare with T. rex",
   },
   detail: {
     breadcrumb: "All dinosaurs",
