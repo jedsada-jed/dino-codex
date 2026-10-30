@@ -24,6 +24,20 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/articles/[
   };
 }
 
+/** Superscript [n] links to the numbered source list at the end of the article. */
+function Cite({ nums, label }: { nums: number[] | undefined; label: (n: number) => string }) {
+  if (!nums?.length) return null;
+  return (
+    <sup className="ml-0.5 whitespace-nowrap text-xs">
+      {nums.map((n) => (
+        <a key={n} href={`#source-${n}`} aria-label={label(n)} className="text-emerald-700 hover:underline">
+          [{n}]
+        </a>
+      ))}
+    </sup>
+  );
+}
+
 export default async function ArticlePage({ params }: PageProps<"/[lang]/articles/[slug]">) {
   const { lang, slug } = await params;
   if (!isLocale(lang)) notFound();
@@ -45,6 +59,12 @@ export default async function ArticlePage({ params }: PageProps<"/[lang]/article
 
       <h1 className="mt-3 text-balance text-3xl font-extrabold leading-tight text-stone-900 sm:text-4xl">{article.title}</h1>
       <p className="mt-4 text-lg leading-relaxed text-stone-600">{article.summary}</p>
+      {article.disclaimer && (
+        <aside className="mt-5 rounded-2xl border border-stone-300 bg-stone-100 p-4">
+          <h2 className="text-sm font-semibold text-stone-900">{t.disclaimerTitle}</h2>
+          <p className="mt-1 text-sm leading-relaxed text-stone-700">{article.disclaimer}</p>
+        </aside>
+      )}
       {hasArticleFigure(article.slug, -1) && <ArticleFigure slug={article.slug} lang={lang} afterSection={-1} />}
 
       {article.sections.map((section, index) => (
@@ -53,6 +73,7 @@ export default async function ArticlePage({ params }: PageProps<"/[lang]/article
           {section.paragraphs.map((p, i) => (
             <p key={i} className="mt-3 leading-loose text-stone-800">
               {p}
+              <Cite nums={article.citations?.[`${index}.${i}`]} label={t.citeLabel} />
             </p>
           ))}
           {section.debated && (
@@ -61,7 +82,10 @@ export default async function ArticlePage({ params }: PageProps<"/[lang]/article
               <p className="mt-0.5 text-xs text-stone-600">{t.debatedNote}</p>
               <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed text-stone-800">
                 {section.debated.map((point, i) => (
-                  <li key={i}>{point}</li>
+                  <li key={i}>
+                    {point}
+                    <Cite nums={article.citations?.[`${index}.d${i}`]} label={t.citeLabel} />
+                  </li>
                 ))}
               </ul>
             </aside>
@@ -72,15 +96,16 @@ export default async function ArticlePage({ params }: PageProps<"/[lang]/article
 
       <section className="mt-12 rounded-2xl border border-stone-200 bg-stone-100 p-5">
         <h2 className="font-semibold text-stone-900">{t.sources}</h2>
-        <ul className="mt-2 space-y-1.5 text-sm">
-          {article.sources.map((s) => (
-            <li key={s.url}>
+        <ol className="mt-2 space-y-1.5 text-sm">
+          {article.sources.map((s, i) => (
+            <li key={s.url} id={`source-${i + 1}`} className="flex scroll-mt-20 gap-2">
+              <span className="shrink-0 tabular-nums text-stone-500">[{i + 1}]</span>
               <a href={s.url} target="_blank" rel="noopener noreferrer" className="text-emerald-700 underline hover:text-emerald-800">
                 {s.label}
               </a>
             </li>
           ))}
-        </ul>
+        </ol>
       </section>
 
       <section className="mt-12">

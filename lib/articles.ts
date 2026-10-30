@@ -20,6 +20,8 @@ export interface ArticleBody {
   summary: string;
   /** Short label for the list card, e.g. "การเกิดฟอสซิล". */
   topic: string;
+  /** Boxed note under the summary saying where the article's facts come from, for touchier topics. */
+  disclaimer?: string;
   sections: ArticleSection[];
 }
 
@@ -27,6 +29,12 @@ export interface ArticleBody {
 export interface Article extends ArticleBody {
   slug: string;
   sources: { label: string; url: string }[];
+  /**
+   * Which sources back which text, shown as [n] markers. Keys are "section.paragraph", or
+   * "section.dN" for the Nth "still debated" point (all 0-based); values are 1-based positions in
+   * `sources`. Kept here rather than in the section text so both languages share one mapping.
+   */
+  citations?: Record<string, number[]>;
 }
 
 const ARTICLES: Article[] = [
@@ -508,6 +516,112 @@ const ARTICLES: Article[] = [
       { label: "Wikipedia: Otodus megalodon", url: "https://en.wikipedia.org/wiki/Otodus_megalodon" },
       { label: "Wikipedia: Silesauridae", url: "https://en.wikipedia.org/wiki/Silesauridae" },
     ],
+  },
+  {
+    slug: "jurassic-park-facts",
+    title: "จูแรสซิก พาร์ค: เรื่องจริงแค่ไหน",
+    topic: "ภาพยนตร์กับความจริง",
+    summary:
+      "ภาพยนตร์ปี 1993 ทำให้คนทั้งโลกหลงรักไดโนเสาร์ แต่เวโลซีแรปเตอร์ตัวจริงตัวเท่าไก่งวงและมีขน ไดโลโฟซอรัสไม่ได้พ่นพิษ และดีเอ็นเอไดโนเสาร์ก็ไม่น่าจะเหลือรอดมาถึงวันนี้ มาดูกันว่าอะไรจริง อะไรแต่ง",
+    disclaimer:
+      "บทความนี้เปรียบเทียบสิ่งที่ปรากฏในภาพยนตร์ จูแรสซิก พาร์ค (ค.ศ. 1993) กับความรู้ทางวิทยาศาสตร์ ข้อเท็จจริงทางวิทยาศาสตร์ทั้งหมดมาจากงานวิจัยที่ตีพิมพ์ในวารสารวิชาการ ฐานข้อมูล Paleobiology Database และสารานุกรมที่ระบุไว้ท้ายบทความ ตัวเลขในวงเล็บเหลี่ยม เช่น [6] บอกว่าข้อความนั้นมาจากแหล่งใด ภาพยนตร์เป็นงานบันเทิงที่ไม่จำเป็นต้องถูกต้องตามวิทยาศาสตร์ทุกจุด บทความนี้ไม่ได้มีเจตนาลดคุณค่าของภาพยนตร์ และเว็บไซต์นี้ไม่มีส่วนเกี่ยวข้องกับผู้สร้างหรือผู้ถือสิทธิ์ของภาพยนตร์ ชื่อ \"Jurassic Park\" เป็นเครื่องหมายการค้าของผู้ถือสิทธิ์",
+    sections: [
+      {
+        heading: "ภาพยนตร์ที่เปลี่ยนภาพจำ",
+        paragraphs: [
+          "จูแรสซิก พาร์ค สร้างจากนวนิยายปี ค.ศ. 1990 ของไมเคิล ไครช์ตัน (Michael Crichton) และฉายในปี ค.ศ. 1993 โดยมี แจ็ก ฮอร์เนอร์ (Jack Horner) นักบรรพชีวินวิทยาเป็นที่ปรึกษา",
+          "สิ่งที่ภาพยนตร์ทำได้ดีคือ แสดงไดโนเสาร์เป็นสัตว์ที่ว่องไว ฉลาด และคล้ายนก ไม่ใช่กิ้งก่ายักษ์ที่เชื่องช้าแบบในภาพยนตร์ยุคก่อน ซึ่งตรงกับแนวคิดของนักวิทยาศาสตร์ในช่วงนั้น แต่ภาพยนตร์ก็เป็นเรื่องแต่ง และความรู้หลายอย่างก็เปลี่ยนไปมากตั้งแต่ปี 1993",
+        ],
+      },
+      {
+        heading: "เวโลซีแรปเตอร์ตัวจริงตัวเล็กและมีขน",
+        paragraphs: [
+          "เวโลซีแรปเตอร์ (Velociraptor) ตัวจริงยาวราว 1.5–2 เมตรรวมหาง หนักราว 15–20 กิโลกรัม หรือประมาณไก่งวงตัวใหญ่ ส่วนแรปเตอร์ในภาพยนตร์ตัวสูงเกือบเท่าคน",
+          "แรปเตอร์ในภาพยนตร์สร้างโดยอิงดีโนนิคัส (Deinonychus) ญาติใกล้ชิดที่ตัวใหญ่กว่า ในปี ค.ศ. 1988 เคยมีการจัดดีโนนิคัสไว้ในสกุลเวโลซีแรปเตอร์ แต่ภายหลังก็แยกกลับเป็นคนละสกุลตามเดิม ส่วนไครช์ตันเลือกใช้ชื่อเวโลซีแรปเตอร์เพราะฟังดูน่าตื่นเต้นกว่า และในปี 1993 ปีเดียวกับที่ภาพยนตร์ออกฉาย ก็มีการตั้งชื่อยูทาห์แรปเตอร์ ญาติในกลุ่มเดียวกันที่ประเมินว่ายาวราว 6–7 เมตร",
+          "เรื่องขนก็ต่างออกไป ในปี ค.ศ. 2007 นักวิทยาศาสตร์พบปุ่มเล็กๆ บนกระดูกแขนท่อนล่างของเวโลซีแรปเตอร์ ซึ่งเป็นจุดยึดโคนขนแบบเดียวกับที่พบในนก หลักฐานนี้บอกว่าเวโลซีแรปเตอร์มีขนบนแขนคล้ายปีก แม้จะบินไม่ได้",
+        ],
+      },
+      {
+        heading: "ไดโลโฟซอรัสไม่มีแผงคอ และไม่พ่นพิษ",
+        paragraphs: [
+          "ไดโลโฟซอรัส (Dilophosaurus) ในภาพยนตร์ตัวเล็ก กางแผงคอได้ และพ่นพิษใส่เหยื่อ แต่ตัวจริงยาวราว 7 เมตร และไม่มีหลักฐานจากฟอสซิลว่ามีแผงคอหรือพ่นพิษเลย ทั้งสองอย่างเป็นการแต่งเติมเพื่อความตื่นเต้น",
+          "สิ่งที่ไดโลโฟซอรัสมีจริงคือ สันกระดูกบางๆ สองแผ่นบนหัว ซึ่งเป็นที่มาของชื่อที่แปลว่า \"กิ้งก่าสองสัน\"",
+        ],
+      },
+      {
+        heading: "ทีเร็กซ์ตาดีมาก",
+        paragraphs: [
+          "ความเชื่อที่ว่าทีเร็กซ์มองไม่เห็นเราถ้าเรายืนนิ่งไม่มีหลักฐานรองรับ งานวิจัยปี ค.ศ. 2006 ที่ศึกษาโครงสร้างกะโหลกพบว่า ดวงตาของทีเร็กซ์หันมาด้านหน้า ทำให้มองเห็นภาพสามมิติได้กว้างราว 55 องศา กว้างกว่าเหยี่ยวในปัจจุบัน และอาจมองเห็นได้คมชัดกว่ามนุษย์หลายเท่า",
+          "ส่วนฉากทีเร็กซ์วิ่งไล่รถจี๊ป งานวิจัยปี ค.ศ. 2017 ที่คำนวณแรงที่กระดูกขารับได้ ประเมินว่าทีเร็กซ์ตัวเต็มวัยเคลื่อนที่ได้เร็วที่สุดราว 19 กิโลเมตรต่อชั่วโมง ถ้าเร็วกว่านั้นกระดูกขาอาจรับแรงไม่ไหว",
+        ],
+        debated: [
+          "ความเร็วของทีเร็กซ์ยังถกเถียงกันอยู่ งานวิจัยเก่าบางชิ้นเคยประเมินไว้สูงกว่า 70 กิโลเมตรต่อชั่วโมง และนักวิจัยบางคนชี้ว่าแบบจำลองปี 2017 ยังไม่เคยทดสอบกับสัตว์ปัจจุบัน ทีเร็กซ์ที่อายุน้อยและตัวเล็กกว่าก็น่าจะวิ่งได้เร็วกว่าตัวเต็มวัย",
+          "การมองเห็นของทีเร็กซ์ประเมินจากรูปร่างกะโหลกและขนาดเบ้าตา ตัวเลขความคมชัดเป็นค่าที่ดีที่สุดที่เป็นไปได้ ไม่ใช่สิ่งที่วัดได้โดยตรง",
+        ],
+      },
+      {
+        heading: "โคลนไดโนเสาร์จากยุงในอำพันได้ไหม",
+        paragraphs: [
+          "ในเรื่อง นักวิทยาศาสตร์ดูดเลือดไดโนเสาร์จากยุงที่ติดอยู่ในอำพันมาโคลน แต่ดีเอ็นเอเสื่อมสลายไปตามเวลาแม้อยู่ในสภาพที่ดีที่สุด งานวิจัยปี ค.ศ. 2012 ที่วัดดีเอ็นเอในกระดูกนกโมอากว่า 150 ชิ้น พบว่าดีเอ็นเอมีครึ่งชีวิตราว 521 ปี และประเมินว่าน่าจะอ่านไม่ได้อีกแล้วหลังผ่านไปราว 1.5 ล้านปี",
+          "ไดโนเสาร์ที่ไม่ใช่นกตัวสุดท้ายตายไปเมื่อ 66 ล้านปีก่อน นานกว่าขีดจำกัดนั้นหลายสิบเท่า การโคลนไดโนเสาร์แบบในภาพยนตร์จึงเป็นไปไม่ได้ด้วยความรู้ที่มีในปัจจุบัน",
+        ],
+      },
+      {
+        heading: "ชื่อว่าจูแรสซิก แต่ดาราส่วนใหญ่มาจากครีเทเชียส",
+        paragraphs: [
+          "ไดโนเสาร์ที่โดดเด่นที่สุดในเรื่อง ทั้งไทแรนโนซอรัส เวโลซีแรปเตอร์ ไทรเซราทอปส์ และกัลลิไมมัส ล้วนมีชีวิตอยู่ในยุคครีเทเชียส ห่างจากยุคจูแรสซิกหลายสิบล้านปี มีเพียงแบรคิโอซอรัสและไดโลโฟซอรัสเท่านั้นที่มาจากยุคจูแรสซิกจริงๆ",
+          "ทีเร็กซ์จริงๆ แล้วมีชีวิตอยู่ใกล้ยุคของเรามากกว่าใกล้ยุคของสเตโกซอรัสเสียอีก ดูช่วงเวลาของแต่ละยุคได้ที่หน้าไทม์ไลน์ของเว็บไซต์นี้",
+        ],
+      },
+    ],
+    sources: [
+      { label: "Wikipedia: Jurassic Park (film)", url: "https://en.wikipedia.org/wiki/Jurassic_Park_(film)" },
+      { label: "Wikipedia: Dinosaurs in Jurassic Park", url: "https://en.wikipedia.org/wiki/Dinosaurs_in_Jurassic_Park" },
+      { label: "Wikipedia: Velociraptor", url: "https://en.wikipedia.org/wiki/Velociraptor" },
+      { label: "Wikipedia: Deinonychus", url: "https://en.wikipedia.org/wiki/Deinonychus" },
+      { label: "Wikipedia: Utahraptor", url: "https://en.wikipedia.org/wiki/Utahraptor" },
+      {
+        label: "Turner, A. H., Makovicky, P. J. & Norell, M. A. (2007). Feather quill knobs in the dinosaur Velociraptor. Science 317, 1721.",
+        url: "https://doi.org/10.1126/science.1145076",
+      },
+      { label: "Wikipedia: Dilophosaurus", url: "https://en.wikipedia.org/wiki/Dilophosaurus" },
+      {
+        label: "Marsh, A. D. & Rowe, T. B. (2020). A comprehensive anatomical and phylogenetic evaluation of Dilophosaurus wetherilli. Journal of Paleontology 94 (S78).",
+        url: "https://doi.org/10.1017/jpa.2020.14",
+      },
+      {
+        label: "Stevens, K. A. (2006). Binocular vision in theropod dinosaurs. Journal of Vertebrate Paleontology 26 (2), 321–330.",
+        url: "https://doi.org/10.1671/0272-4634(2006)26%5B321:BVITD%5D2.0.CO;2",
+      },
+      {
+        label: "Sellers, W. I. et al. (2017). Investigating the running abilities of Tyrannosaurus rex using stress-constrained multibody dynamic analysis. PeerJ 5, e3420.",
+        url: "https://doi.org/10.7717/peerj.3420",
+      },
+      {
+        label: "Allentoft, M. E. et al. (2012). The half-life of DNA in bone: measuring decay kinetics in 158 dated fossils. Proceedings of the Royal Society B 279, 4724–4733.",
+        url: "https://doi.org/10.1098/rspb.2012.1745",
+      },
+      { label: "Paleobiology Database: age range of each genus (the data this site uses)", url: "https://paleobiodb.org/" },
+      { label: "National Geographic (2017): T. rex couldn't run, new study says", url: "https://nationalgeographic.com/science/article/tyrannosaur-trex-running-speed" },
+      { label: "Science News (2006): Sight for 'saur eyes: T. rex vision was among nature's best", url: "https://sciencenews.org/article/sight-saur-eyes-t-rex-vision-was-among-natures-best" },
+    ],
+    citations: {
+      "0.0": [1],
+      "0.1": [1, 2],
+      "1.0": [3],
+      "1.1": [2, 3, 4, 5],
+      "1.2": [6],
+      "2.0": [2, 7, 8],
+      "2.1": [7, 8],
+      "3.0": [9, 14],
+      "3.1": [10, 13],
+      "3.d0": [10, 13],
+      "3.d1": [9, 14],
+      "4.0": [11],
+      "4.1": [11],
+      "5.0": [12],
+      "5.1": [12],
+    },
   },
 ];
 

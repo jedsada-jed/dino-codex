@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import type { Locale } from "@/lib/i18n";
+import { DINO_SHAPES, HUMAN_HEIGHT_M, HUMAN_SHAPE } from "@/components/Silhouettes";
 
 /**
  * Hand-drawn explanatory diagrams for /articles, one per article. Drawn as inline SVG (not
@@ -685,6 +686,64 @@ function NotDinosaursFigure({ lang, compact }: FigureProps) {
   );
 }
 
+/* ---------- 11. Jurassic Park: the real Velociraptor next to Deinonychus and a person ---------- */
+
+/** Pixels per metre, so all three share one scale. */
+const RAPTOR_PX_PER_M = 62;
+const RAPTOR_GROUND = 200;
+
+function RaptorScaleFigure({ lang, compact }: FigureProps) {
+  const th = lang === "th";
+  const theropod = DINO_SHAPES.theropod;
+  const animals = [
+    { x: 40, lengthM: 1.8, fill: WARM, th: "เวโลซีแรปเตอร์ตัวจริง", en: "Real Velociraptor" },
+    { x: 200, lengthM: 3.4, fill: MUTED, th: "ดีโนนิคัส", en: "Deinonychus" },
+  ];
+  const humanX = 500;
+  const humanScale = (HUMAN_HEIGHT_M * RAPTOR_PX_PER_M) / HUMAN_SHAPE.h;
+  return (
+    <svg viewBox={compact ? "0 60 640 160" : "0 80 640 175"} className="h-auto w-full">
+      <path d={`M20 ${RAPTOR_GROUND} H620`} stroke={MUTED} strokeWidth={2} />
+      {animals.map((a) => {
+        const s = (a.lengthM * RAPTOR_PX_PER_M) / theropod.w;
+        return (
+          <path
+            key={a.en}
+            d={theropod.d}
+            fill={a.fill}
+            transform={`translate(${a.x} ${RAPTOR_GROUND - theropod.h * s}) scale(${s})`}
+          />
+        );
+      })}
+      <path d={HUMAN_SHAPE.d} fill={INK} transform={`translate(${humanX} ${RAPTOR_GROUND - HUMAN_SHAPE.h * humanScale}) scale(${humanScale})`} />
+
+      {!compact && (
+        <g fontSize={13} textAnchor="middle">
+          {animals.map((a) => (
+            <g key={a.en}>
+              <text x={a.x + (a.lengthM * RAPTOR_PX_PER_M) / 2} y={RAPTOR_GROUND + 22} fontWeight={700} fill={a.fill === WARM ? WARM : INK}>
+                {th ? a.th : a.en}
+              </text>
+              <text x={a.x + (a.lengthM * RAPTOR_PX_PER_M) / 2} y={RAPTOR_GROUND + 40} fontSize={12} fill={MUTED}>
+                {th ? `ยาวราว ${a.lengthM} ม.` : `about ${a.lengthM} m long`}
+              </text>
+            </g>
+          ))}
+          <text x={humanX + 11} y={RAPTOR_GROUND + 22} fontWeight={700} fill={INK}>
+            {th ? "คน" : "Person"}
+          </text>
+          <text x={humanX + 11} y={RAPTOR_GROUND + 40} fontSize={12} fill={MUTED}>
+            {th ? "สูง 1.75 ม." : "1.75 m tall"}
+          </text>
+          <text x={200 + (3.4 * RAPTOR_PX_PER_M) / 2} y={RAPTOR_GROUND - 100} fontSize={12} fill={MUTED}>
+            {th ? "ใกล้เคียงแรปเตอร์ในภาพยนตร์" : "closer to the film's raptors"}
+          </text>
+        </g>
+      )}
+    </svg>
+  );
+}
+
 /** Most articles have one figure; a few have more, each placed after its own section. */
 const FIGURES: Record<string, FigureDef[]> = {
   "dinosaur-footprints": [{
@@ -805,6 +864,18 @@ const FIGURES: Record<string, FigureDef[]> = {
       en: "Only the orange branch is dinosaurs. (Simplified: turtles, plesiosaurs and ichthyosaurs are left out, and Megalodon is a fish, so it sits outside this tree entirely.)",
     },
     Draw: NotDinosaursFigure,
+  }],
+  "jurassic-park-facts": [{
+    afterSection: 1,
+    alt: {
+      th: "ภาพเงาเทียบขนาดบนสเกลเดียวกัน: เวโลซีแรปเตอร์ตัวจริงยาวราว 1.8 เมตร ตัวเตี้ยกว่าเอวคน ดีโนนิคัสยาวราว 3.4 เมตร และคนสูง 1.75 เมตร",
+      en: "Silhouettes on one scale: the real Velociraptor, about 1.8 m long and shorter than a person's waist; Deinonychus, about 3.4 m long; and a 1.75 m person.",
+    },
+    caption: {
+      th: "เวโลซีแรปเตอร์ตัวจริงเทียบกับดีโนนิคัสและคน (ภาพเงาเป็นรูปทรงทั่วไปของเทอโรพอด ไม่ได้แสดงขน)",
+      en: "The real Velociraptor next to Deinonychus and a person. (Silhouettes show a generic theropod shape, without feathers.)",
+    },
+    Draw: RaptorScaleFigure,
   }],
 };
 

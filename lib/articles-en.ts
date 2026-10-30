@@ -399,4 +399,61 @@ export const ARTICLES_EN: Record<string, ArticleBody> = {
       },
     ],
   },
+  "jurassic-park-facts": {
+    title: "Jurassic Park: how much of it is true?",
+    topic: "Film vs. fact",
+    summary:
+      "The 1993 film made the whole world fall for dinosaurs. But the real Velociraptor was turkey-sized and feathered, Dilophosaurus didn't spit venom, and dinosaur DNA almost certainly didn't survive. Here's what's real and what's made up.",
+    disclaimer:
+      "This article compares what appears in the film Jurassic Park (1993) with scientific knowledge. All scientific facts come from papers published in scientific journals, the Paleobiology Database and the encyclopedia entries listed at the end. A number in square brackets, such as [6], shows which source a statement comes from. The film is entertainment and doesn't need to be scientifically accurate everywhere; this article isn't meant to take anything away from it. This site has no connection with the film's makers or rights holders. \"Jurassic Park\" is a trademark of its rights holder.",
+    sections: [
+      {
+        heading: "The film that changed how we picture dinosaurs",
+        paragraphs: [
+          "Jurassic Park is based on Michael Crichton's 1990 novel and came out in 1993, with paleontologist Jack Horner as an adviser.",
+          "What it got right was showing dinosaurs as quick, clever, bird-like animals instead of the slow giant lizards of older films, which matched scientific thinking at the time. But it is fiction, and a lot of what we know has changed since 1993.",
+        ],
+      },
+      {
+        heading: "The real Velociraptor was small and feathered",
+        paragraphs: [
+          "The real Velociraptor was about 1.5–2 meters long including its tail and weighed about 15–20 kilograms, roughly a big turkey. The film's raptors stand almost as tall as a person.",
+          "The film's raptors were modeled on Deinonychus, a larger close relative. In 1988 Deinonychus was briefly placed in the genus Velociraptor, but the two were later separated again, and Crichton chose the name Velociraptor because it sounded more dramatic. In 1993, the year the film came out, Utahraptor was named: a relative from the same group estimated at about 6–7 meters long.",
+          "Feathers are different too. In 2007 scientists found small bumps on a Velociraptor forearm bone, anchor points for feather quills like those on birds. This shows Velociraptor had wing-like feathers on its arms, even though it could not fly.",
+        ],
+      },
+      {
+        heading: "Dilophosaurus had no frill and spat no venom",
+        paragraphs: [
+          "The film's Dilophosaurus is small, opens a neck frill and spits venom. The real one was about 7 meters long, and there is no fossil evidence of a frill or venom. Both were added for drama.",
+          "What Dilophosaurus really had was a pair of thin bony crests on its head, which is where its name, \"two-crested lizard\", comes from.",
+        ],
+      },
+      {
+        heading: "T. rex had excellent eyesight",
+        paragraphs: [
+          "The idea that a T. rex can't see you if you stand still has no evidence behind it. A 2006 study of its skull found forward-facing eyes with about 55 degrees of depth-perceiving binocular vision, wider than a modern hawk's, and possibly far sharper sight than ours.",
+          "As for outrunning a jeep: a 2017 study that calculated the loads its leg bones could take estimated an adult T. rex's top speed at about 19 kilometers per hour. Any faster and its leg bones might not have coped.",
+        ],
+        debated: [
+          "T. rex's speed is still argued over. Some older studies put it above 70 kilometers per hour, and some researchers point out that the 2017 model hasn't been tested on living animals. Younger, lighter T. rex were probably faster than adults.",
+          "T. rex's eyesight is estimated from the shape of its skull and eye sockets. The sharpness figures are best-case values, not something that can be measured directly.",
+        ],
+      },
+      {
+        heading: "Could you clone a dinosaur from a mosquito in amber?",
+        paragraphs: [
+          "In the story, scientists draw dinosaur blood from mosquitoes trapped in amber. But DNA breaks down over time even in the best conditions. A 2012 study of DNA in more than 150 moa bones found a half-life of about 521 years, and estimated that DNA would become unreadable after roughly 1.5 million years.",
+          "The last non-avian dinosaurs died 66 million years ago, dozens of times longer than that limit. Cloning a dinosaur the way the film does is not possible with anything we know today.",
+        ],
+      },
+      {
+        heading: "Called Jurassic, but most of the stars are Cretaceous",
+        paragraphs: [
+          "The film's biggest stars, Tyrannosaurus, Velociraptor, Triceratops and Gallimimus, all lived in the Cretaceous, tens of millions of years after the Jurassic. Only Brachiosaurus and Dilophosaurus really come from the Jurassic.",
+          "In fact, T. rex lived closer in time to us than to Stegosaurus. See how the periods line up on this site's timeline page.",
+        ],
+      },
+    ],
+  },
 };

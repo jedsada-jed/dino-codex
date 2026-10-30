@@ -258,6 +258,8 @@ const th = {
     others: "บทความอื่น",
     debated: "ยังเป็นที่ถกเถียง",
     debatedNote: "เรื่องที่นักวิทยาศาสตร์ยังเห็นไม่ตรงกัน หรือหลักฐานยังไม่พอจะสรุป",
+    disclaimerTitle: "ข้อมูลในบทความนี้มาจากไหน",
+    citeLabel: (n: number) => `แหล่งอ้างอิงที่ ${n}`,
   },
   news: {
     title: "ข่าวสารไดโนเสาร์",
@@ -521,6 +523,8 @@ const en: Dictionary = {
     others: "More articles",
     debated: "Still debated",
     debatedNote: "Points scientists still disagree on, or where the evidence is not yet enough to decide.",
+    disclaimerTitle: "Where the facts in this article come from",
+    citeLabel: (n: number) => `Source ${n}`,
   },
   news: th.news,
 };
