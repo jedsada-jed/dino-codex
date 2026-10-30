@@ -67,8 +67,8 @@ export const ARTICLES_EN: Record<string, ArticleBody> = {
       {
         heading: "Why fossils aren't bone-colored",
         paragraphs: [
-          "A fossil's color comes from the minerals that replaced the bone, not from the bone itself. Fossils from iron-rich rock are often reddish-brown or black, while fossils from other sites may be gray or cream.",
-          "Many skeletons on display in museums are casts made from real fossils, because the real fossils are too heavy and too valuable to mount as a whole skeleton.",
+          "A fossil's color comes from the minerals that got into the bone as it turned to stone, not from the bone itself. So most vertebrate fossils are earth tones such as brown, black or white: brown from silica, for example, or black from iron minerals. Unusual colors like green are very rare.",
+          "Many skeletons on display in museums are casts made from real fossils, because the real fossils are very heavy, fragile and irreplaceable if damaged, so museums keep the originals safe for scientists to study.",
         ],
       },
       {
@@ -191,7 +191,7 @@ export const ARTICLES_EN: Record<string, ArticleBody> = {
       {
         heading: "Common word roots",
         paragraphs: [
-          "Most dinosaur names come from Greek and Latin, such as -saurus (lizard or reptile), -raptor (thief or seizer), -ceratops (horned face), -mimus (mimic), -titan (giant), -venator (hunter) and -don or -odon (tooth).",
+          "Dinosaur names are often built from Greek and Latin roots, such as saurus (lizard), raptor (robber), cerat (horned), ops (face), tyranno (tyrant) and rex (king).",
           "A name may describe a distinctive feature (Triceratops means \"three-horned face\"), the place where the fossil was found, or honor a person.",
         ],
       },

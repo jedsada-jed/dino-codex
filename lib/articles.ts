@@ -125,8 +125,8 @@ const ARTICLES: Article[] = [
       {
         heading: "ทำไมสีของฟอสซิลไม่เหมือนกระดูก",
         paragraphs: [
-          "สีของฟอสซิลมาจากแร่ธาตุที่เข้าไปแทนที่ ไม่ใช่สีของกระดูกเดิม ฟอสซิลจากหินที่มีเหล็กมากจึงมักเป็นสีน้ำตาลแดงหรือดำ ส่วนฟอสซิลจากแหล่งอื่นอาจเป็นสีเทาหรือสีครีม",
-          "โครงกระดูกที่ตั้งแสดงในพิพิธภัณฑ์หลายแห่งเป็นแบบจำลองที่หล่อจากฟอสซิลจริง เพราะฟอสซิลจริงหนักและมีค่าเกินกว่าจะประกอบตั้งไว้ทั้งตัว",
+          "สีของฟอสซิลมาจากแร่ธาตุที่เข้าไปในกระดูกระหว่างกลายเป็นหิน ไม่ใช่สีของกระดูกเดิม ฟอสซิลสัตว์มีกระดูกสันหลังส่วนใหญ่จึงมีสีโทนดินอย่างน้ำตาล ดำ หรือขาว เช่น สีน้ำตาลจากซิลิกา หรือสีดำจากแร่เหล็ก ส่วนสีแปลกๆ อย่างสีเขียวพบได้ยากมาก",
+          "โครงกระดูกที่ตั้งแสดงในพิพิธภัณฑ์หลายแห่งเป็นแบบจำลองที่หล่อจากฟอสซิลจริง เพราะฟอสซิลจริงหนักมาก เปราะบาง และถ้าเสียหายก็หามาแทนไม่ได้ พิพิธภัณฑ์จึงเก็บของจริงไว้ให้นักวิทยาศาสตร์ศึกษา",
         ],
       },
       {
@@ -145,8 +145,12 @@ const ARTICLES: Article[] = [
       { label: "Wikipedia: Permineralization", url: "https://en.wikipedia.org/wiki/Permineralization" },
       { label: "Wikipedia: Fossil", url: "https://en.wikipedia.org/wiki/Fossil" },
       { label: "Wikipedia: Dinosaur soft tissue", url: "https://en.wikipedia.org/wiki/Dinosaur_soft_tissue" },
+      { label: "NBC News (2024): Gnatalie is the only green-boned dinosaur found on the planet (Natural History Museum of Los Angeles)", url: "https://www.nbcnews.com/news/us-news/gnatalie-only-green-boned-dinosaur-found-planet-will-display-la-rcna161833" },
+      { label: "Museums Victoria: Know your bones – what is a 'real' fossil?", url: "https://museumsvictoria.com.au/article/know-your-bones-what-is-a-real-fossil/" },
     ],
     citations: {
+      "2.0": [5],
+      "2.1": [6],
       "0.0": [3],
       "0.1": [3],
       "1.0": [1, 2],
@@ -305,7 +309,7 @@ const ARTICLES: Article[] = [
       {
         heading: "รากศัพท์ที่พบบ่อย",
         paragraphs: [
-          "ชื่อไดโนเสาร์ส่วนใหญ่มาจากภาษากรีกและละติน เช่น -saurus (สัตว์เลื้อยคลาน) -raptor (ผู้ล่า หรือขโมย) -ceratops (หน้ามีเขา) -mimus (เลียนแบบ) -titan (ยักษ์) -venator (นักล่า) และ -don หรือ -odon (ฟัน)",
+          "ชื่อไดโนเสาร์มักประกอบจากรากศัพท์ภาษากรีกและละติน เช่น saurus (กิ้งก่า) raptor (ผู้ปล้น) cerat (มีเขา) ops (หน้า) tyranno (ทรราช) และ rex (ราชา)",
           "ชื่ออาจมาจากลักษณะเด่น เช่น ไตรเซราทอปส์ แปลว่า \"หน้ามีสามเขา\" มาจากสถานที่ที่พบ หรือตั้งเป็นเกียรติแก่บุคคล",
         ],
       },
@@ -326,8 +330,10 @@ const ARTICLES: Article[] = [
       { label: "Wikipedia: Nagatitan", url: "https://en.wikipedia.org/wiki/Nagatitan" },
       { label: "Wikipedia: Phuwiangosaurus", url: "https://en.wikipedia.org/wiki/Phuwiangosaurus" },
       { label: "Wikipedia: Triceratops", url: "https://en.wikipedia.org/wiki/Triceratops" },
+      { label: "American Museum of Natural History: Dinosaur names", url: "https://www.amnh.org/dinosaurs/dinosaur-names" },
     ],
     citations: {
+      "2.0": [9],
       "2.1": [8],
       "0.0": [2],
       "1.0": [1],
@@ -399,6 +405,7 @@ const ARTICLES: Article[] = [
       { label: "Wikipedia: Phu Wiang Dinosaur Museum", url: "https://en.wikipedia.org/wiki/Phu_Wiang_Dinosaur_Museum" },
     ],
     citations: {
+      "0.2": [9, 12],
       "3.1": [12],
       "0.0": [5, 8, 9],
       "0.1": [5],
