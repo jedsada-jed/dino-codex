@@ -161,6 +161,8 @@ const th = {
     description: "บทความอธิบายเรื่องไดโนเสาร์และฟอสซิลแบบเข้าใจง่าย พร้อมแหล่งอ้างอิง",
     sources: "แหล่งอ้างอิงและอ่านเพิ่มเติม",
     others: "บทความอื่น",
+    debated: "ยังเป็นที่ถกเถียง",
+    debatedNote: "เรื่องที่นักวิทยาศาสตร์ยังเห็นไม่ตรงกัน หรือหลักฐานยังไม่พอจะสรุป",
   },
   news: {
     title: "ข่าวสารไดโนเสาร์",
@@ -327,6 +329,8 @@ const en: Dictionary = {
     description: "Plain-language explainers about dinosaurs and fossils, with sources.",
     sources: "Sources and further reading",
     others: "More articles",
+    debated: "Still debated",
+    debatedNote: "Points scientists still disagree on, or where the evidence is not yet enough to decide.",
   },
   news: th.news,
 };

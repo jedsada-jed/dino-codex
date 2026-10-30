@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { ArticleFigure, hasArticleFigure } from "@/components/ArticleFigure";
 import { getAllArticles, getArticleBySlug } from "@/lib/articles";
 import { getDictionary } from "@/lib/dictionaries";
 import { href, isLocale, languageAlternates } from "@/lib/i18n";
@@ -44,8 +45,9 @@ export default async function ArticlePage({ params }: PageProps<"/[lang]/article
 
       <h1 className="mt-3 text-balance text-3xl font-extrabold leading-tight text-stone-900 sm:text-4xl">{article.title}</h1>
       <p className="mt-4 text-lg leading-relaxed text-stone-600">{article.summary}</p>
+      {hasArticleFigure(article.slug, -1) && <ArticleFigure slug={article.slug} lang={lang} />}
 
-      {article.sections.map((section) => (
+      {article.sections.map((section, index) => (
         <section key={section.heading} className="mt-10">
           <h2 className="text-xl font-bold text-stone-900">{section.heading}</h2>
           {section.paragraphs.map((p, i) => (
@@ -53,6 +55,18 @@ export default async function ArticlePage({ params }: PageProps<"/[lang]/article
               {p}
             </p>
           ))}
+          {section.debated && (
+            <aside className="mt-5 rounded-2xl border border-amber-700/40 bg-amber-50 p-4">
+              <h3 className="text-sm font-semibold text-amber-700">{t.debated}</h3>
+              <p className="mt-0.5 text-xs text-stone-600">{t.debatedNote}</p>
+              <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed text-stone-800">
+                {section.debated.map((point, i) => (
+                  <li key={i}>{point}</li>
+                ))}
+              </ul>
+            </aside>
+          )}
+          {hasArticleFigure(article.slug, index) && <ArticleFigure slug={article.slug} lang={lang} />}
         </section>
       ))}
 

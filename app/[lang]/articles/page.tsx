@@ -5,6 +5,7 @@ import { getAllArticles } from "@/lib/articles";
 import { getDictionary } from "@/lib/dictionaries";
 import { href, isLocale, languageAlternates } from "@/lib/i18n";
 import { ArrowRightIcon } from "@/components/Icons";
+import { ArticleThumbnail } from "@/components/ArticleFigure";
 
 export async function generateMetadata({ params }: PageProps<"/[lang]/articles">): Promise<Metadata> {
   const { lang } = await params;
@@ -38,6 +39,7 @@ export default async function ArticlesPage({ params }: PageProps<"/[lang]/articl
               href={href(lang, `/articles/${article.slug}`)}
               className="group flex h-full flex-col rounded-2xl border border-stone-200 bg-stone-100 p-5 shadow-sm transition hover:border-emerald-500 hover:shadow-lg motion-safe:hover:-translate-y-1"
             >
+              <ArticleThumbnail slug={article.slug} lang={lang} />
               <span className="text-xs font-semibold text-amber-700">
                 {String(i + 1).padStart(2, "0")} · {article.topic}
               </span>

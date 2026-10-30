@@ -33,6 +33,16 @@
   --amber-700: #a15c1f;
 
   --danger: #b42318;
+
+  /* Article diagrams (components/ArticleFigure.tsx): soil, rock, bone and mineral. */
+  --fig-sky: #dfe9d6;
+  --fig-mud: #8c6b4b;
+  --fig-mud-dark: #6a4f36;
+  --fig-sand: #d8bf8e;
+  --fig-rock: #a69a86;
+  --fig-ash: #f3f1ea;
+  --fig-bone: #efe2c4;
+  --fig-mineral: #3f86ad;
 }
 
 [data-theme="dark"] {
@@ -61,6 +71,15 @@
   --amber-700: #e0a352;
 
   --danger: #f97066;
+
+  --fig-sky: #1b2e24;
+  --fig-mud: #6e5139;
+  --fig-mud-dark: #4f3a28;
+  --fig-sand: #92805a;
+  --fig-rock: #5f5749;
+  --fig-ash: #c9c5b8;
+  --fig-bone: #d9cbaa;
+  --fig-mineral: #5aa6cf;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -90,6 +109,15 @@
     --amber-700: #e0a352;
 
     --danger: #f97066;
+
+    --fig-sky: #1b2e24;
+    --fig-mud: #6e5139;
+    --fig-mud-dark: #4f3a28;
+    --fig-sand: #92805a;
+    --fig-rock: #5f5749;
+    --fig-ash: #c9c5b8;
+    --fig-bone: #d9cbaa;
+    --fig-mineral: #5aa6cf;
   }
 }
 
