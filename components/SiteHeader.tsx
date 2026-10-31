@@ -104,6 +104,7 @@ export function SiteHeader({ lang }: { lang: Locale }) {
         { path: "/size-compare", label: t.nav.sizeCompare },
         { path: "/quiz", label: t.nav.quiz },
         { path: "/coloring", label: t.nav.coloring },
+        { path: "/fossil-dig", label: t.nav.dig },
       ]),
     },
     { path: href(lang, "/about"), label: t.nav.about },
