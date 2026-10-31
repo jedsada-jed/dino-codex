@@ -93,6 +93,7 @@ export function SiteHeader({ lang }: { lang: Locale }) {
       label: t.nav.read,
       links: local([
         { path: "/articles", label: t.nav.articles },
+        { path: "/glossary", label: t.nav.glossary },
         { path: "/news", label: t.nav.news },
       ]),
     },
