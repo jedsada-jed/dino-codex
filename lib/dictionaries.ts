@@ -265,6 +265,10 @@ const th = {
     sites: (n: string) => `${n} แหล่ง`,
     countries: "ประเทศที่พบซากดึกดำบรรพ์",
     sourcesFrom: "ข้อมูลอ้างอิงจาก",
+    contemporariesTitle: "อยู่ร่วมยุคกับใคร",
+    contemporariesLead: (name: string, formations: string) => `ไดโนเสาร์ที่พบในหมวดหินเดียวกับ${name} (${formations}) แปลว่าอาศัยอยู่ในพื้นที่และช่วงเวลาใกล้เคียงกัน`,
+    contemporariesNote:
+      "ข้อมูลหมวดหินจาก Paleobiology Database นับเฉพาะหมวดหินหลักของแต่ละสกุล หมวดหินหนึ่งอาจกินเวลาหลายแสนถึงหลายล้านปี จึงไม่ได้แปลว่าสองตัวนี้เคยเจอกันจริง",
     and: "และ",
     metaFallback: (name: string, clade: string, from: number, to: number) =>
       `ข้อมูล ${name} ไดโนเสาร์กลุ่ม ${clade} ที่มีชีวิตอยู่เมื่อ ${to}-${from} ล้านปีก่อน`,
@@ -575,6 +579,10 @@ const en: Dictionary = {
     sites: (n) => `${n} sites`,
     countries: "Countries with fossils",
     sourcesFrom: "Data from",
+    contemporariesTitle: "Who lived alongside it",
+    contemporariesLead: (name: string, formations: string) => `Dinosaurs found in the same rock formation as ${name} (${formations}), so they lived in the same region at roughly the same time.`,
+    contemporariesNote:
+      "Formation data from the Paleobiology Database, counting only each genus's main formations. One formation can span hundreds of thousands to millions of years, so this doesn't mean any two of them ever met.",
     and: "and",
     metaFallback: (name, clade, from, to) => `${name}, a ${clade} dinosaur that lived ${to}–${from} million years ago.`,
   },

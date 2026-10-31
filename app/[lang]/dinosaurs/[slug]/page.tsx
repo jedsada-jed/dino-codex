@@ -8,6 +8,8 @@ import { formatNumber, href, isLocale, languageAlternates } from "@/lib/i18n";
 import { DinosaurGallery, type GalleryItem } from "@/components/DinosaurGallery";
 import { aiImageScore, getAiImages, getCoverImage } from "@/lib/ai-images";
 import { hasSize } from "@/lib/sizes";
+import { getContemporaries } from "@/lib/contemporaries";
+import { DinosaurCard } from "@/components/DinosaurCard";
 
 export function generateStaticParams() {
   return getAllSlugs().map((slug) => ({ slug }));
@@ -49,6 +51,9 @@ export default async function DinosaurDetailPage({ params }: PageProps<"/[lang]/
   const aiItems: GalleryItem[] = getAiImages(dinosaur.slug).map((image) => ({ kind: "ai", image, score: aiImageScore(image) }));
   const commonsItems: GalleryItem[] = dinosaur.images.map((image) => ({ kind: "commons", image }));
   const galleryItems = getCoverImage(dinosaur).ai ? [...aiItems, ...commonsItems] : [...commonsItems, ...aiItems];
+
+  const contemporaries = getContemporaries(dinosaur.slug);
+  const sharedFormations = [...new Set(contemporaries.map((c) => c.formation))];
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -126,6 +131,21 @@ export default async function DinosaurDetailPage({ params }: PageProps<"/[lang]/
 
         {!content && <p className="mt-4 rounded-xl bg-stone-100 p-4 text-sm text-stone-600">{t.noContent}</p>}
       </section>
+
+      {contemporaries.length > 0 && (
+        <section className="mt-10 border-t border-stone-200 pt-6" aria-labelledby="contemporaries-heading">
+          <h2 id="contemporaries-heading" className="text-xl font-bold text-stone-900">
+            {t.contemporariesTitle}
+          </h2>
+          <p className="mt-1 text-stone-600">{t.contemporariesLead(name, sharedFormations.join(", "))}</p>
+          <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
+            {contemporaries.map((c) => (
+              <DinosaurCard key={c.dinosaur.slug} dinosaur={c.dinosaur} lang={lang} />
+            ))}
+          </div>
+          <p className="mt-3 text-xs text-stone-500">{t.contemporariesNote}</p>
+        </section>
+      )}
 
       {/* Deep layer */}
       <section className="mt-10 border-t border-stone-200 pt-6">
