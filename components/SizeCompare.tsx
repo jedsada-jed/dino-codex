@@ -7,6 +7,7 @@ import type { SizeItem } from "@/lib/sizes";
 import { getDictionary } from "@/lib/dictionaries";
 import { formatNumber, href, type Locale } from "@/lib/i18n";
 import { CloseIcon } from "@/components/Icons";
+import { DIET_LABELS, PERIOD_LABELS } from "@/lib/labels";
 import { BUS_LENGTH_M, BUS_SHAPE, BUS_WHEELS, DINO_SHAPES, HUMAN_HEIGHT_M, HUMAN_SHAPE } from "@/components/Silhouettes";
 
 const MAX_SELECTED = 5;
@@ -320,6 +321,63 @@ export function SizeCompare({
             ))}
           </ul>
         </>
+      )}
+
+      {chosen.length >= 2 && (
+        <section className="mt-8" aria-labelledby="compare-table-heading">
+          <h2 id="compare-table-heading" className="text-lg font-bold text-stone-900">
+            {t.tableTitle}
+          </h2>
+          <div className="mt-3 overflow-x-auto rounded-xl border border-stone-200">
+            <table className="w-full min-w-[32rem] text-left text-sm">
+              <thead className="bg-stone-100">
+                <tr>
+                  <th scope="col" className="w-36 px-3 py-2 font-medium text-stone-500">
+                    <span className="sr-only">{t.tableAttribute}</span>
+                  </th>
+                  {chosen.map((d, i) => (
+                    <th key={d.slug} scope="col" className="px-3 py-2 font-semibold text-stone-900">
+                      <span className="flex items-center gap-2">
+                        <span
+                          className="h-3 w-3 shrink-0 rounded-full"
+                          style={{ backgroundColor: SERIES_COLORS[i % SERIES_COLORS.length] }}
+                          aria-hidden="true"
+                        />
+                        {label(d)}
+                      </span>
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-stone-200">
+                {(
+                  [
+                    [t.rowWhen, (d: SizeItem) => t.ma(formatNumber(lang, d.ageRangeMa[0]), formatNumber(lang, d.ageRangeMa[1]))],
+                    [t.rowPeriod, (d: SizeItem) => PERIOD_LABELS[lang][d.period]],
+                    [t.rowDiet, (d: SizeItem) => DIET_LABELS[lang][d.diet]],
+                    [t.length, (d: SizeItem) => fmtM(d.lengthM)],
+                    [t.mass, (d: SizeItem) => (d.massKg ? fmtMass(d.massKg) : "–")],
+                    [t.rowFormation, (d: SizeItem) => d.formation ?? "–"],
+                    [t.rowCountries, (d: SizeItem) => d.countries.join(", ") || "–"],
+                    [t.rowNamedBy, (d: SizeItem) => d.namedBy],
+                  ] as const
+                ).map(([rowLabel, value]) => (
+                  <tr key={rowLabel}>
+                    <th scope="row" className="px-3 py-2 align-top font-medium text-stone-500">
+                      {rowLabel}
+                    </th>
+                    {chosen.map((d) => (
+                      <td key={d.slug} className="px-3 py-2 align-top text-stone-800">
+                        {value(d)}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p className="mt-2 text-xs text-stone-500">{t.tableNote}</p>
+        </section>
       )}
 
       <section className="mt-10">
