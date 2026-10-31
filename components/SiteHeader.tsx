@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { LogoMark } from "./LogoMark";
 import { ThemeToggle } from "./ThemeToggle";
-import { CloseIcon, MenuIcon } from "./Icons";
+import { CloseIcon, MenuIcon, SearchIcon } from "./Icons";
 import { getDictionary } from "@/lib/dictionaries";
 import { href, type Locale } from "@/lib/i18n";
 
@@ -57,7 +57,10 @@ export function SiteHeader({ lang }: { lang: Locale }) {
   const menuOpen = openOn === pathname;
   const [dropdown, setDropdown] = useState<{ id: string; on: string } | null>(null);
   const openGroup = dropdown?.on === pathname ? dropdown.id : null;
+  const [searchOn, setSearchOn] = useState<string | null>(null);
+  const searchOpen = searchOn === pathname;
   const navRef = useRef<HTMLElement>(null);
+  const searchRef = useRef<HTMLInputElement>(null);
   const other: Locale = lang === "th" ? "en" : "th";
 
   // Close an open dropdown when clicking anywhere outside the nav.
@@ -130,13 +133,15 @@ export function SiteHeader({ lang }: { lang: Locale }) {
         if (e.key === "Escape") {
           setOpenOn(null);
           setDropdown(null);
+          setSearchOn(null);
         }
       }}
     >
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-2 sm:px-6">
         <Link href={href(lang, "/")} className="flex min-h-11 items-center gap-2 whitespace-nowrap text-lg font-bold text-emerald-800">
           <LogoMark className="h-7 w-7" />
-          {t.siteName}
+          {/* On the narrowest phones the header's four buttons leave no room for the name. */}
+          <span className="max-[399px]:sr-only">{t.siteName}</span>
         </Link>
 
         <div className="flex items-center gap-1 sm:gap-2">
@@ -188,6 +193,20 @@ export function SiteHeader({ lang }: { lang: Locale }) {
               })}
             </ul>
           </nav>
+          <button
+            type="button"
+            className="flex h-11 w-11 items-center justify-center rounded-full text-stone-700 transition-colors hover:bg-stone-200"
+            aria-expanded={searchOpen}
+            aria-controls="site-search"
+            aria-label={searchOpen ? t.nav.closeSearch : t.nav.search}
+            onClick={() => {
+              setSearchOn(searchOpen ? null : pathname);
+              // The box is only un-hidden on the next render, so focus it after that.
+              if (!searchOpen) requestAnimationFrame(() => searchRef.current?.focus());
+            }}
+          >
+            {searchOpen ? <CloseIcon /> : <SearchIcon />}
+          </button>
           {languageLink}
           <ThemeToggle lang={lang} />
           <button
@@ -201,6 +220,24 @@ export function SiteHeader({ lang }: { lang: Locale }) {
             {menuOpen ? <CloseIcon /> : <MenuIcon />}
           </button>
         </div>
+      </div>
+
+      {/* A plain GET form to the browse page, which already reads ?q=, so the header needs no index. */}
+      <div id="site-search" hidden={!searchOpen} className="border-t border-stone-200">
+        <form action={href(lang, "/dinosaurs")} role="search" className="mx-auto flex max-w-6xl gap-2 px-4 py-3 sm:px-6">
+          <input
+            type="search"
+            name="q"
+            required
+            ref={searchRef}
+            aria-label={t.hero.searchLabel}
+            placeholder={t.hero.searchPlaceholder}
+            className="min-h-11 flex-1 rounded-lg border border-stone-300 bg-stone-50 px-3 text-base sm:text-sm"
+          />
+          <button type="submit" className="min-h-11 rounded-lg bg-emerald-700 px-4 text-sm font-semibold text-stone-50 hover:bg-emerald-800">
+            {t.hero.searchButton}
+          </button>
+        </form>
       </div>
 
       <nav id="mobile-nav" aria-label={t.nav.label} hidden={!menuOpen} className="border-t border-stone-200 lg:hidden">
