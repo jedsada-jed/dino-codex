@@ -1,5 +1,6 @@
 import popularityData from "@/data/popularity.json";
-import { displayName, getAllDinosaurs, PERIODS, type PeriodKey } from "@/lib/dinosaurs";
+import formationsData from "@/data/formations.json";
+import { displayName, getAllDinosaurs, getPeriod, PERIODS, type PeriodKey } from "@/lib/dinosaurs";
 import { getCoverImage } from "@/lib/ai-images";
 import { getSizeIndex } from "@/lib/sizes";
 import type { Locale } from "@/lib/i18n";
@@ -22,7 +23,15 @@ export interface QuizItem {
   lengthM: number | null;
   thailand: boolean;
   ageRangeMa: [number, number];
+  /** The formation with the most finds, for the hard level's "same formation" question. */
+  formation: string | null;
 }
+
+export type QuizLevel = "easy" | "hard";
+
+/** The hard level adds genera with at least this many fossil occurrences: known to fans, not to everyone. */
+const HARD_MIN_OCCURRENCES = 10;
+const formations = formationsData as unknown as Record<string, [string, number][]>;
 
 function singlePeriod(d: Dinosaur): PeriodKey | null {
   const [oldest, youngest] = d.ageRangeMa;
@@ -31,16 +40,17 @@ function singlePeriod(d: Dinosaur): PeriodKey | null {
 
 /**
  * Dinosaurs people are likely to have heard of (the popularity ranking), plus every Thai
- * dinosaur — a pool of obscure genera would make the quiz a guessing game. Only ones with an
- * image, since the picture is half the fun.
+ * dinosaur — a pool of obscure genera would make the quiz a guessing game. The hard level adds
+ * genera with a solid fossil record. Only ones with an image, since the picture is half the fun.
  */
-export function getQuizPool(lang: Locale): QuizItem[] {
+export function getQuizPool(lang: Locale, level: QuizLevel = "easy"): QuizItem[] {
   const popular = new Set((popularityData as PopularityData).items.map((i) => i.slug));
   const lengths = new Map(getSizeIndex(lang).map((s) => [s.slug, s.lengthM]));
   const pool: QuizItem[] = [];
   for (const d of getAllDinosaurs()) {
     const thailand = d.countries.includes("TH");
-    if (!popular.has(d.slug) && !thailand) continue;
+    const wellKnown = level === "hard" && d.occurrenceCount >= HARD_MIN_OCCURRENCES && getPeriod(d) !== "unknown";
+    if (!popular.has(d.slug) && !thailand && !wellKnown) continue;
     const cover = getCoverImage(d);
     const thumbnail = cover.image?.localLarge ?? cover.image?.localSmall;
     if (!thumbnail) continue;
@@ -56,6 +66,7 @@ export function getQuizPool(lang: Locale): QuizItem[] {
       lengthM: lengths.get(d.slug) ?? null,
       thailand,
       ageRangeMa: d.ageRangeMa,
+      formation: formations[d.slug]?.[0]?.[0] ?? null,
     });
   }
   return pool;

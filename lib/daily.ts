@@ -3,7 +3,7 @@ import { getQuizPool, type QuizItem } from "@/lib/quiz";
 import type { Locale } from "@/lib/i18n";
 
 /** A quiz-pool dinosaur plus one fun fact, when there's a hand-written write-up in this language. */
-export interface DailyItem extends Omit<QuizItem, "ageRangeMa" | "thailand"> {
+export interface DailyItem extends Omit<QuizItem, "ageRangeMa" | "thailand" | "formation"> {
   fact: string | null;
 }
 

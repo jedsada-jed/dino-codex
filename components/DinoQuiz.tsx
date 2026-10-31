@@ -3,14 +3,18 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import type { QuizItem } from "@/lib/quiz";
+import type { QuizItem, QuizLevel } from "@/lib/quiz";
 import { DIET_LABELS, PERIOD_LABELS } from "@/lib/labels";
 import { getDictionary } from "@/lib/dictionaries";
 import { formatNumber, href, type Locale } from "@/lib/i18n";
 import { AiBadge } from "@/components/AiImageDisclosure";
 
-const ROUND_KINDS = ["image", "image", "image", "period", "period", "diet", "diet", "longer", "longer", "thailand"] as const;
-type Kind = (typeof ROUND_KINDS)[number];
+const ROUND_KINDS = {
+  easy: ["image", "image", "image", "period", "period", "diet", "diet", "longer", "longer", "thailand"],
+  hard: ["image", "image", "period", "diet", "longer", "longer", "thailand", "together", "together", "together"],
+} as const;
+type Kind = (typeof ROUND_KINDS)[QuizLevel][number];
+const ROUND_LENGTH = ROUND_KINDS.easy.length;
 /** "Which is longer?" only asks about pairs at least this far apart, so estimates can't flip the answer. */
 const MIN_LENGTH_RATIO = 1.3;
 
@@ -37,10 +41,15 @@ function shuffle<T>(list: T[]): T[] {
 
 const pick = <T,>(list: T[]): T | undefined => list[Math.floor(Math.random() * list.length)];
 
-function buildRound(pool: QuizItem[], lang: Locale): Question[] {
+function buildRound(pool: QuizItem[], lang: Locale, level: QuizLevel): Question[] {
   const t = getDictionary(lang).quiz;
   const label = (d: QuizItem) => d.localName ?? d.name;
-  const dinoOption = (d: QuizItem) => ({ id: d.slug, label: label(d), sub: d.localName ? d.name : undefined });
+  // The hard pool has many genera without a Thai name. Leading every option with its scientific
+  // name keeps a lone Thai name from giving away the "found in Thailand" answer.
+  const dinoOption = (d: QuizItem) =>
+    level === "hard"
+      ? { id: d.slug, label: d.name, sub: d.localName ?? undefined }
+      : { id: d.slug, label: label(d), sub: d.localName ? d.name : undefined };
   // Each dinosaur is the subject of at most one question per round.
   const used = new Set<string>();
   const fresh = (filter: (d: QuizItem) => boolean) => pool.filter((d) => !used.has(d.slug) && filter(d));
@@ -120,14 +129,30 @@ function buildRound(pool: QuizItem[], lang: Locale): Question[] {
         links: [subject],
       };
     },
+    together: () => {
+      const subject = pick(fresh((d) => d.formation !== null && pool.some((o) => o.slug !== d.slug && o.formation === d.formation)));
+      if (!subject?.formation) return null;
+      const mate = pick(pool.filter((d) => d.slug !== subject.slug && d.formation === subject.formation));
+      const others = shuffle(pool.filter((d) => d.formation !== null && d.formation !== subject.formation)).slice(0, 3);
+      if (!mate || others.length < 3) return null;
+      take(subject);
+      return {
+        kind: "together",
+        prompt: t.qTogether(label(subject)),
+        options: shuffle([mate, ...others]).map(dinoOption),
+        answer: mate.slug,
+        explain: t.explainTogether(label(subject), label(mate), subject.formation),
+        links: [subject, mate],
+      };
+    },
   };
 
-  return shuffle([...ROUND_KINDS])
+  return shuffle([...ROUND_KINDS[level]])
     .map((kind) => make[kind]() ?? make.image())
     .filter((q): q is Question => q !== null);
 }
 
-export function DinoQuiz({ pool, lang }: { pool: QuizItem[]; lang: Locale }) {
+export function DinoQuiz({ pools, lang }: { pools: Record<QuizLevel, QuizItem[]>; lang: Locale }) {
   const t = getDictionary(lang).quiz;
   // Questions are random, so they're only built on click: building them during render would
   // differ between the static HTML and the browser.
@@ -137,8 +162,11 @@ export function DinoQuiz({ pool, lang }: { pool: QuizItem[]; lang: Locale }) {
   const [score, setScore] = useState(0);
   const [shared, setShared] = useState(false);
 
-  const start = () => {
-    setRound(buildRound(pool, lang));
+  const [level, setLevel] = useState<QuizLevel>("easy");
+
+  const start = (chosen: QuizLevel = level) => {
+    setLevel(chosen);
+    setRound(buildRound(pools[chosen], lang, chosen));
     setIndex(0);
     setPicked(null);
     setScore(0);
@@ -151,14 +179,24 @@ export function DinoQuiz({ pool, lang }: { pool: QuizItem[]; lang: Locale }) {
         <p className="text-5xl" aria-hidden="true">
           🦖❓
         </p>
-        <p className="mx-auto mt-4 max-w-md text-stone-700">{t.intro(ROUND_KINDS.length)}</p>
-        <button
-          type="button"
-          onClick={start}
-          className="mt-6 min-h-11 rounded-full bg-emerald-700 px-8 font-semibold text-stone-50 transition-colors hover:bg-emerald-800"
-        >
-          {t.start}
-        </button>
+        <p className="mx-auto mt-4 max-w-md text-stone-700">{t.intro(ROUND_LENGTH)}</p>
+        <div className="mt-6 flex flex-wrap justify-center gap-3">
+          <button
+            type="button"
+            onClick={() => start("easy")}
+            className="min-h-11 rounded-full bg-emerald-700 px-8 font-semibold text-stone-50 transition-colors hover:bg-emerald-800"
+          >
+            {t.startEasy}
+          </button>
+          <button
+            type="button"
+            onClick={() => start("hard")}
+            className="min-h-11 rounded-full border-2 border-emerald-700 px-8 font-semibold text-emerald-700 transition-colors hover:bg-emerald-50"
+          >
+            {t.startHard}
+          </button>
+        </div>
+        <p className="mx-auto mt-3 max-w-md text-sm text-stone-500">{t.hardNote}</p>
       </div>
     );
   }
@@ -189,7 +227,7 @@ export function DinoQuiz({ pool, lang }: { pool: QuizItem[]; lang: Locale }) {
         <div className="mt-6 flex flex-wrap justify-center gap-3">
           <button
             type="button"
-            onClick={start}
+            onClick={() => start()}
             className="min-h-11 rounded-full bg-emerald-700 px-6 font-semibold text-stone-50 transition-colors hover:bg-emerald-800"
           >
             {t.playAgain}

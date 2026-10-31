@@ -27,7 +27,7 @@ export default async function QuizPage({ params }: PageProps<"/[lang]/quiz">) {
       <h1 className="text-2xl font-bold text-stone-900">{t.title}</h1>
       <p className="mt-2 text-stone-600">{t.lead}</p>
       <div className="mt-6">
-        <DinoQuiz pool={getQuizPool(lang)} lang={lang} />
+        <DinoQuiz pools={{ easy: getQuizPool(lang, "easy"), hard: getQuizPool(lang, "hard") }} lang={lang} />
       </div>
     </div>
   );
