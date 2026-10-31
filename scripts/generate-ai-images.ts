@@ -110,6 +110,9 @@ const GENUS_GROUPS: Record<string, string> = {
   phuwiangvenator: "Megaraptora",
   psittacosaurus: "Psittacosauridae",
   iguanodon: "Iguanodontia",
+  ceratosaurus: "Ceratosauridae",
+  patagotitan: "Titanosauria",
+  dreadnoughtus: "Titanosauria",
   ratchasimasaurus: "Iguanodontia",
   siamodon: "Iguanodontia",
   siamraptor: "Carcharodontosauridae",
@@ -124,8 +127,10 @@ const GENUS_GROUPS: Record<string, string> = {
 const FRAGMENTARY = new Set([
   "irritator", // skull only
   "isanosaurus",
+  "megalosaurus", // isolated bones, no skull
   "kinnareemimus",
   "nagatitan",
+  "troodon", // the type is a tooth; bodies come from Stenonychosaurus-like specimens
   "phuwiangvenator",
   "ratchasimasaurus",
   "siamodon",
@@ -149,6 +154,7 @@ const DROMAEOSAUR_SIZES: Record<string, { prompt: string; check: string }> = {
   velociraptor: { prompt: "about 2 meters long including the tail and about 50 cm tall at the hip", check: "ประมาณ 2 เมตรรวมหาง" },
   deinonychus: { prompt: "about 3.4 meters long including the tail, the size of a large wolf", check: "ประมาณ 3.4 เมตรรวมหาง" },
   utahraptor: { prompt: "about 6 meters long, heavily built and robust with thick legs", check: "ใหญ่ราว 6 เมตร ตัวหนาบึกบึน" },
+  microraptor: { prompt: "tiny, about 80 cm long including the tail, the size of a crow", check: "เล็กราว 80 ซม. รวมหาง ขนาดอีกา" },
 };
 
 /**
@@ -168,6 +174,17 @@ const CERATOPSID_HEADS: Record<string, Rule[]> = {
   styracosaurus: [
     r("horns", "one long, straight horn on the nose and only small horns or knobs above the eyes", "เขายาวตรง 1 อันบนจมูก เหนือตามีเพียงเขาเล็กหรือปุ่ม", true),
     r("frill", "a short frill with four to six long spikes radiating backward from its top edge", "แผงคอสั้น มีหนามยาว 4–6 อันแผ่ออกไปด้านหลังจากขอบบน", true),
+  ],
+};
+
+/** Head crests per hadrosaurid genus, for the same reason as CERATOPSID_HEADS. */
+const HADROSAURID_HEADS: Record<string, Rule[]> = {
+  parasaurolophus: [
+    r("crest", "a long, hollow, tube-shaped crest curving backward from the top of the head well past the neck", "หงอนเป็นท่อกลวงยาวโค้งไปด้านหลังเลยคอ", true),
+  ],
+  edmontosaurus: [
+    r("crest", "NO bony crest on the head, only a low, fleshy comb on top of the skull, and a long, low head", "ไม่มีหงอนกระดูก มีเพียงหงอนเนื้อต่ำบนหัว หัวยาวต่ำ", true),
+    r("size", "a large animal about 12 meters long", "ตัวใหญ่ยาวราว 12 เมตร"),
   ],
 };
 
@@ -193,6 +210,12 @@ const GROUP_RULES: Record<string, (d: Dinosaur) => Rule[]> = {
         "เห็นกรงเล็บรูปเคียวที่นิ้วเท้าที่ 2 ยกพ้นพื้น ขนาดสมส่วน",
       ),
       r("feathers", `body covered in short feathers, ${size.prompt}`, `ลำตัวมีขนปกคลุม ขนาด${size.check}`),
+      ...(d.slug === "microraptor"
+        ? [
+            r("hindwings", "long flight feathers on the hind legs forming a second pair of wings, in addition to the wings on the arms", "ขาหลังมีขนบินยาวเป็นปีกคู่ที่สอง นอกจากปีกที่แขน", true),
+            r("color", "glossy black plumage with a blue iridescent sheen, like a crow", "ขนสีดำเงาเหลือบน้ำเงินแบบอีกา"),
+          ]
+        : []),
     ];
   },
   Spinosauridae: (d) => {
@@ -228,12 +251,56 @@ const GROUP_RULES: Record<string, (d: Dinosaur) => Rule[]> = {
     const size =
       d.slug === "siamraptor"
         ? { prompt: "a large animal about 8 meters long", check: "ยาวราว 8 เมตร" }
-        : { prompt: "a huge animal about 12–13 meters long", check: "ตัวใหญ่ยาว 12–13 เมตร" };
+        : d.slug === "acrocanthosaurus"
+          ? { prompt: "a huge animal about 11–12 meters long", check: "ตัวใหญ่ยาว 11–12 เมตร" }
+          : { prompt: "a huge animal about 12–13 meters long", check: "ตัวใหญ่ยาว 12–13 เมตร" };
     return [
+      ...(d.slug === "acrocanthosaurus"
+        ? [r("ridge", "a tall, thick ridge of muscle running along the neck, back and hips over its long neural spines, NOT a thin sail", "มีสันกล้ามเนื้อหนาสูงตามคอ หลัง และสะโพก ไม่ใช่ใบเรือบาง", true)]
+        : []),
       r("skull", "a long, low, narrow skull with blade-like teeth, NOT the broad deep skull of Tyrannosaurus", "กะโหลกยาว ต่ำ แคบ ไม่กว้างลึกแบบ T. rex", true),
       r("build", `${size.prompt}, short arms with three clawed fingers, powerful hind legs, skin of small scales`, `${size.check} แขนสั้นมี 3 นิ้ว ผิวเกล็ดเล็ก`),
     ];
   },
+  Nanotyrannidae: () => [
+    r("skull", "a long, low, slender skull with small bony crests in front of the eyes, NOT the deep, massive skull of Tyrannosaurus", "กะโหลกยาว ต่ำ เพรียว ไม่ลึกใหญ่แบบ T. rex", true),
+    r("build", "a slender, mid-sized predator about 5 meters long with long running legs and relatively large arms with two big clawed fingers", "นักล่าขนาดกลางรูปร่างเพรียวยาวราว 5 เมตร ขายาว แขนค่อนข้างใหญ่มีนิ้วใหญ่ 2 นิ้ว"),
+  ],
+  Proceratosauridae: () => [
+    r("feathers", "the whole body covered in long, shaggy, hair-like filament feathers", "ทั้งตัวปกคลุมด้วยขนเส้นยาวฟูคล้ายขนสัตว์", true),
+    r("crest", "a tall, thin bony crest along the midline of the top of the snout", "มีหงอนกระดูกบางสูงตามแนวกลางบนจมูก", true),
+    r("build", "a large predator about 9–10 meters long with long arms ending in three clawed fingers", "นักล่าตัวใหญ่ยาวราว 9–10 เมตร แขนยาวมี 3 นิ้วพร้อมกรงเล็บ"),
+  ],
+  Megalosauridae: () => [
+    r("build", "a large, heavily built predator about 6 meters long with a long, low skull and strong arms with three clawed fingers, skin of small scales", "นักล่าตัวใหญ่ล่ำสันยาวราว 6 เมตร กะโหลกยาวต่ำ แขนแข็งแรงมี 3 นิ้ว ผิวเกล็ดเล็ก", true),
+  ],
+  Compsognathidae: () => [
+    r("size", "a tiny, slender predator about 1 meter long including its very long tail, the size of a chicken, with long thin legs", "นักล่าตัวเล็กเพรียวยาวราว 1 เมตรรวมหางที่ยาวมาก ขนาดไก่ ขายาวเรียว", true),
+    r("details", "a small, narrow, pointed head, short arms with two large clawed fingers, body covered in short, fuzzy, filament-like feathers as in its close relatives", "หัวเล็กแหลมแคบ แขนสั้นมีนิ้วใหญ่ 2 นิ้ว ลำตัวมีขนเส้นสั้นฟู"),
+  ],
+  Ceratosauridae: () => [
+    r("horns", "a tall, blade-like horn on the midline of the snout and a smaller horn above each eye", "มีเขาแบนสูงกลางจมูก และเขาเล็กเหนือตาแต่ละข้าง", true),
+    r("osteoderms", "a single row of small bony scutes running down the middle of the neck, back and tail", "มีแผ่นกระดูกเล็กเรียง 1 แถวกลางคอ หลัง และหาง"),
+    r("build", "about 6 meters long, deep jaws, short arms with four fingers, skin of small scales", "ยาวราว 6 เมตร ขากรรไกรลึก แขนสั้นมี 4 นิ้ว ผิวเกล็ดเล็ก"),
+  ],
+  Troodontidae: () => [
+    r("build", "a slender, long-legged, lightly built predator about 2.5 meters long with a narrow head and large forward-facing eyes", "นักล่ารูปร่างเพรียว ขายาว ยาวราว 2.5 เมตร หัวแคบ ตาโตหันไปข้างหน้า", true),
+    r("feathers", "fully feathered, with wing-like feathers on the arms and a long feathered tail", "มีขนทั้งตัว แขนมีขนคล้ายปีก หางยาวมีขน"),
+    r("sickle-claw", "an enlarged, curved claw on the second toe, held off the ground", "กรงเล็บโค้งใหญ่ที่นิ้วเท้าที่ 2 ยกพ้นพื้น"),
+  ],
+  Deinocheiridae: () => [
+    r("hump", "a huge, bulky body about 11 meters long with a tall sail-like hump along the back over the hips", "ตัวใหญ่หนาราว 11 เมตร มีโหนกคล้ายใบเรือบนหลังเหนือสะโพก", true),
+    r("bill", "a long, toothless, wide duck-like bill and a deep lower jaw", "ปากยาวกว้างไม่มีฟันคล้ายปากเป็ด ขากรรไกรล่างลึก", true),
+    r("arms", "enormous arms about 2.4 meters long with three blunt, curved claws on each hand", "แขนใหญ่มากยาวราว 2.4 เมตร มือมีกรงเล็บทู่ 3 นิ้ว"),
+    r("feathers", "body covered in feathers, with a fan of feathers at the tip of the tail", "ลำตัวมีขนปกคลุม ปลายหางมีพัดขน"),
+  ],
+  // Herrerasaurus is an early saurischian outside Theropoda in the dataset, so it gets the theropod basics here.
+  Herrerasauridae: () => [
+    r("pose", "bipedal with the back held roughly horizontal and the tail held straight out behind for balance, never dragging on the ground. NOT standing upright like a kangaroo", "ยืนสองขา หลังขนานพื้น หางยื่นตรงไม่ลากพื้น", true),
+    r("lips", "mouth closed with all teeth fully hidden behind scaly lips, like a monitor lizard. NO visible teeth", "ปากปิด มีริมฝีปากปิดฟันจนมองไม่เห็นฟัน", true),
+    r("build", "a predator about 6 meters long with a long, narrow, low skull, long hind legs and a long tail, skin of small scales", "นักล่ายาวราว 6 เมตร กะโหลกยาวแคบต่ำ ขาหลังยาว หางยาว ผิวเกล็ดเล็ก"),
+    r("arms", "arms less than half as long as the legs, with three large curved claws on each hand", "แขนยาวไม่ถึงครึ่งของขา มือมีกรงเล็บโค้งใหญ่ 3 นิ้ว"),
+  ],
   Metriacanthosauridae: () => [
     r("skull", "a long, fairly narrow skull of an allosaur-like predator, NOT a tyrannosaur despite its name", "กะโหลกยาวแบบอัลโลซอร์ ไม่ใช่ไทแรนโนซอร์แม้จะมีชื่อคล้าย", true),
     r("build", "medium-sized, about 6–7 meters long, three-fingered arms, skin of small scales", "ขนาดกลางยาวราว 6–7 เมตร แขนมี 3 นิ้ว ผิวเกล็ดเล็ก"),
@@ -300,8 +367,20 @@ const GROUP_RULES: Record<string, (d: Dinosaur) => Rule[]> = {
     r("head", "a broad triangular head with short pyramid-shaped horns pointing backward and sideways from the back corners, small beak", "หัวกว้างสามเหลี่ยม มีเขาสั้นที่มุมหลังหัว จะงอยปากเล็ก"),
     r("legs", "short, sturdy legs held under the body, walking on four legs", "ขาสั้นแข็งแรงอยู่ใต้ลำตัว เดินสี่ขา"),
   ],
-  Hadrosauridae: () => [
-    r("crest", "a long, hollow, tube-shaped crest curving backward from the top of the head well past the neck", "หงอนเป็นท่อกลวงยาวโค้งไปด้านหลังเลยคอ", true),
+  Nodosauridae: (d) => [
+    r("armor", "a wide, low body covered on top and sides by many closely spaced rows of small bony armor plates", "ลำตัวกว้างเตี้ย หลังและข้างลำตัวมีแผ่นเกราะเล็กเรียงชิดกันหลายแถว", true),
+    r("tail", "a straight, tapering tail with NO tail club", "หางตรงเรียวลง ไม่มีตะบองที่ปลายหาง"),
+    // The Suncor specimen kept its shoulder spines in place and pigment in its skin.
+    ...(d.slug === "borealopelta"
+      ? [
+          r("spines", "a pair of long spines sticking out forward and sideways from the shoulders like the horns of a bull", "มีหนามยาว 1 คู่ยื่นจากไหล่คล้ายเขาวัว", true),
+          r("color", "reddish-brown on the back, paler on the belly and sides (countershading)", "สีน้ำตาลแดงด้านบน ท้องและข้างลำตัวสีอ่อนกว่า"),
+        ]
+      : []),
+    r("legs", "short, sturdy legs, walking on four legs, a small narrow head with a beak", "ขาสั้นแข็งแรง เดินสี่ขา หัวเล็กแคบมีจะงอยปาก"),
+  ],
+  Hadrosauridae: (d) => [
+    ...(HADROSAURID_HEADS[d.slug] ?? []),
     r("beak", "a broad, flat, duck-like toothless beak", "ปากแบนกว้างแบบปากเป็ด"),
     r("posture", "walking on all fours with the front hands forming small hoof-like pads, tail held straight out off the ground", "เดินสี่ขา มือหน้าเป็นแป้นคล้ายกีบ หางยื่นตรงไม่ลากพื้น"),
     r("skin", "skin of small pebbly scales", "ผิวเป็นเกล็ดเล็กคล้ายกรวด"),
@@ -364,16 +443,20 @@ const GROUP_RULES: Record<string, (d: Dinosaur) => Rule[]> = {
     r("head", "an early relative of duck-billed dinosaurs with a broad beak and NO head crest", "ญาติรุ่นแรกของไดโนเสาร์ปากเป็ด ปากกว้าง ไม่มีหงอน", true),
     r("build", "about 6 meters long, walks on four legs or two, tail held straight out", "ยาวราว 6 เมตร เดินได้ทั้งสี่ขาและสองขา หางยื่นตรง"),
   ],
-  Titanosauria: () => [
-    r("scale", "an enormous sauropod about 35 meters long, one of the largest land animals ever, with a broad, wide body", "ไดโนเสาร์คอยาวขนาดมหึมาราว 35 เมตร ลำตัวกว้าง", true),
+  Titanosauria: (d) => [
+    d.slug === "dreadnoughtus"
+      ? r("scale", "a huge sauropod about 26 meters long with a broad, wide body", "ไดโนเสาร์คอยาวขนาดใหญ่มากราว 26 เมตร ลำตัวกว้าง", true)
+      : d.slug === "patagotitan"
+        ? r("scale", "an enormous sauropod about 31 meters long, one of the largest land animals ever, with a broad, wide body", "ไดโนเสาร์คอยาวขนาดมหึมาราว 31 เมตร ลำตัวกว้าง", true)
+        : r("scale", "an enormous sauropod about 35 meters long, one of the largest land animals ever, with a broad, wide body", "ไดโนเสาร์คอยาวขนาดมหึมาราว 35 เมตร ลำตัวกว้าง", true),
     r("neck", "a long neck held roughly horizontal or slightly raised", "คอยาวยื่นแนวราบหรือชูขึ้นเล็กน้อย"),
     r("legs", "pillar-like legs; front feet are columns without claws", "ขาเป็นเสา เท้าหน้าไม่มีกรงเล็บ"),
   ],
 };
 
 /** Theropod groups whose posture or anatomy the generic theropod rules get wrong. */
-const NO_LIPS = new Set(["Spinosauridae", "Therizinosauridae", "Archaeopterygidae", "Ornithomimosauria"]);
-const NO_THREE_TOE_RULE = new Set(["Dromaeosauridae", "Therizinosauridae"]);
+const NO_LIPS = new Set(["Spinosauridae", "Therizinosauridae", "Archaeopterygidae", "Ornithomimosauria", "Deinocheiridae"]);
+const NO_THREE_TOE_RULE = new Set(["Dromaeosauridae", "Therizinosauridae", "Troodontidae"]);
 
 /** Reconstruction guidance that reflects current consensus for each group. */
 export function anatomyRules(d: Dinosaur): Rule[] {
@@ -451,6 +534,17 @@ const AGE_OVERRIDES: Record<string, string> = {
   psittacosaurus: "the Early Cretaceous (about 125–113 million years ago)",
   // PBDB still lumps in species from the Late Jurassic to the Maastrichtian; I. bernissartensis is Barremian–early Aptian.
   iguanodon: "the Barremian to early Aptian ages of the Early Cretaceous (about 126–122 million years ago)",
+  carcharodontosaurus: "the Cenomanian age of the Late Cretaceous (about 100–94 million years ago)",
+  nanotyrannus: "the end of the Maastrichtian, at the very end of the Cretaceous (about 67–66 million years ago)",
+  megalosaurus: "the Bathonian age of the Middle Jurassic (about 166 million years ago)",
+  compsognathus: "the Tithonian age of the Late Jurassic (about 150 million years ago)",
+  ceratosaurus: "the Late Jurassic, Kimmeridgian–Tithonian (about 153–148 million years ago)",
+  patagotitan: "the latest Albian age of the Early Cretaceous (about 102 million years ago)",
+  edmontosaurus: "the late Campanian to the end of the Maastrichtian (about 73–66 million years ago)",
+  herrerasaurus: "the Carnian age of the Late Triassic (about 231 million years ago)",
+  acrocanthosaurus: "the Aptian–Albian ages of the Early Cretaceous (about 113–110 million years ago)",
+  tarbosaurus: "the Maastrichtian age of the Late Cretaceous (about 70 million years ago)",
+  deinocheirus: "the Maastrichtian age of the Late Cretaceous (about 70 million years ago)",
   baryonyx: "the Barremian age of the Early Cretaceous (about 130–125 million years ago)",
   irritator: "the Albian age of the Early Cretaceous (about 113–110 million years ago)",
   apatosaurus: "the Late Jurassic, late Kimmeridgian to early Tithonian (about 152–151 million years ago)",
@@ -487,6 +581,12 @@ const MORRISON =
   "a semi-arid Late Jurassic floodplain like the Morrison Formation of western North America, with conifers, cycads, ginkgoes, tree ferns and ferns along a river, no grass and no flowering plants";
 const WEALDEN =
   "an Early Cretaceous river floodplain in western Europe, like the Wealden of England and the Bernissart clays of Belgium, with conifers, cycads, tree ferns and ferns, no grass and no flowering plants";
+const SOLNHOFEN =
+  "a warm, semi-arid Late Jurassic island in the Solnhofen archipelago of southern Germany, with low conifer shrubs and cycads near a shallow turquoise lagoon, no grass and no flowering plants";
+const NEMEGT =
+  "a humid Late Cretaceous river floodplain forest like the Nemegt Formation of Mongolia, with conifers and broadleaf flowering trees, no grass";
+const DINOSAUR_PARK =
+  "a Late Cretaceous coastal floodplain like the Dinosaur Park Formation of Alberta, with conifers, ferns and early flowering plants by a river, no grass";
 const HELL_CREEK =
   "a humid latest-Cretaceous floodplain forest like the Hell Creek Formation of North America, with conifers, ferns and early flowering trees and shrubs, no grass";
 
@@ -504,17 +604,16 @@ const HABITAT_OVERRIDES: Record<string, string> = {
   triceratops: HELL_CREEK,
   ankylosaurus: HELL_CREEK,
   pachycephalosaurus: HELL_CREEK,
-  archaeopteryx:
-    "a warm, semi-arid Late Jurassic island in the Solnhofen archipelago of southern Germany, with low conifer shrubs and cycads near a shallow turquoise lagoon, no grass and no flowering plants",
+  archaeopteryx: SOLNHOFEN,
   giganotosaurus:
     "an Early Cretaceous river floodplain in Patagonia, Argentina, like the Candeleros Formation, with Araucaria conifers and ferns, no grass",
   argentinosaurus: "a Cretaceous floodplain in Patagonia, Argentina, with tall Araucaria conifers and ferns, no grass",
   carnotaurus: "a Late Cretaceous coastal plain in Patagonia, Argentina, like the La Colonia Formation, with conifers, ferns and early flowering plants near a tidal estuary, no grass",
-  therizinosaurus: "a humid Late Cretaceous river floodplain forest like the Nemegt Formation of Mongolia, with conifers and broadleaf flowering trees, no grass",
+  therizinosaurus: NEMEGT,
   dilophosaurus: "an Early Jurassic river floodplain like the Kayenta Formation of Arizona, with conifers, cycads and ferns, no grass and no flowering plants",
   deinonychus: "an Early Cretaceous floodplain like the Cloverly Formation of Montana, with conifers, cycads, tree ferns and ferns, no grass",
   utahraptor: "an Early Cretaceous semi-arid plain like the Cedar Mountain Formation of Utah, with conifers, cycads and ferns, no grass and no flowering plants",
-  parasaurolophus: "a Late Cretaceous coastal floodplain like the Dinosaur Park Formation of Alberta, with conifers, ferns and early flowering plants by a river, no grass",
+  parasaurolophus: DINOSAUR_PARK,
   isanosaurus: NAM_PHONG,
   minimocursor: PHU_KRADUNG,
   uragasaurus: PHU_KRADUNG,
@@ -535,6 +634,31 @@ const HABITAT_OVERRIDES: Record<string, string> = {
   irritator:
     "the shore of an Early Cretaceous coastal lagoon in northeastern Brazil, like the Romualdo Formation, with fish in the shallow water and conifers and ferns on the bank, no grass",
   apatosaurus: MORRISON,
+  carcharodontosaurus:
+    "a wide Late Cretaceous river system in North Africa, like the Kem Kem beds of Morocco, on a sandy riverbank with ferns and conifers, no grass",
+  nanotyrannus: HELL_CREEK,
+  megalosaurus:
+    "a warm Middle Jurassic coastal plain in southern England, like the Taynton Limestone of Oxfordshire, with conifers, cycads and ferns near a shallow sea, no grass and no flowering plants",
+  yutyrannus:
+    "a cool, temperate Early Cretaceous forest by a lake, like the Yixian Formation of Liaoning, China, with conifers, ginkgoes and ferns, no grass",
+  compsognathus: SOLNHOFEN,
+  ceratosaurus: MORRISON,
+  patagotitan:
+    "an Early Cretaceous river floodplain in Patagonia, Argentina, like the Cerro Barcino Formation, with Araucaria conifers and ferns, no grass",
+  edmontosaurus: HELL_CREEK,
+  herrerasaurus:
+    "a humid Late Triassic river floodplain like the Ischigualasto Formation of Argentina, with conifers, seed ferns, horsetails and ferns, no grass and no flowering plants",
+  troodon: DINOSAUR_PARK,
+  microraptor:
+    "an Early Cretaceous forest by a lake in Liaoning, China, like the Jiufotang Formation, with conifers, ginkgoes and ferns, no grass",
+  acrocanthosaurus:
+    "an Early Cretaceous coastal river plain like the Antlers Formation of Oklahoma, with conifers, cycads and ferns, no grass",
+  tarbosaurus: NEMEGT,
+  deinocheirus: NEMEGT,
+  suchomimus:
+    "a vast Early Cretaceous river floodplain in Niger, like the Elrhaz Formation, with conifers, ferns and horsetails along a river, no grass",
+  borealopelta:
+    "a coastal Early Cretaceous conifer forest near the sea in what is now Alberta, Canada, with ferns and cycads on the ground, no grass",
 };
 
 function habitat(d: Dinosaur): string {
@@ -707,8 +831,8 @@ async function main() {
     const summary = await wikipediaSummary(title);
     const { prompt, checklist } = buildPrompt(d, summary?.text ?? null);
     const untranslated = checklist.filter((c) => !textEn.labels[c.label]).map((c) => c.label);
-    if (groupOf(d) === "Ceratopsidae" && !CERATOPSID_HEADS[slug]) {
-      const message = `[${slug}] no horn or frill rule yet: add one to CERATOPSID_HEADS`;
+    if ((groupOf(d) === "Ceratopsidae" && !CERATOPSID_HEADS[slug]) || (groupOf(d) === "Hadrosauridae" && !HADROSAURID_HEADS[slug])) {
+      const message = `[${slug}] no head rule yet: add one to CERATOPSID_HEADS or HADROSAURID_HEADS`;
       if (!dryRun) throw new Error(message);
       console.warn(message);
     }
