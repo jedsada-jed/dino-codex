@@ -7,16 +7,19 @@
  * page gets the same checklist; look at each image and record a review before it goes live (the
  * page only shows pages whose review passed).
  *
- * Needs OPENAI_API_KEY in .env.local (never committed).
+ * Needs in .env.local (never committed) the key for the chosen model: OPENAI_API_KEY for gpt-image-*
+ * (the default), or AGENT_PLATFORM_API_KEY for gemini-*-image* via Google's Gemini Enterprise Agent
+ * Platform (formerly Vertex AI).
  *
  * Run with: npm run gen:coloring -- tyrannosaurus triceratops
  * Preview prompts without generating: add --dry-run
+ * Pick a model: add --model=gemini-2.5-flash-image
  */
 import { existsSync } from "node:fs";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import sharp from "sharp";
-import { anatomyRules, generateOpenAi, groupOf } from "./generate-ai-images";
+import { anatomyRules, generateAgentPlatform, generateOpenAi, groupOf } from "./generate-ai-images";
 import type { Dinosaur } from "../types/dinosaur";
 import type { ColoringData, ColoringPage } from "../types/coloring";
 
@@ -25,6 +28,7 @@ const DATA_PATH = path.join(ROOT, "data", "dinosaurs.json");
 const OUTPUT_DATA = path.join(ROOT, "data", "coloring.json");
 const OUTPUT_DIR = path.join(ROOT, "public", "coloring");
 const MODEL = process.argv.find((a) => a.startsWith("--model="))?.slice("--model=".length) ?? "gpt-image-2";
+const IS_AGENT_PLATFORM = MODEL.startsWith("gemini-");
 const THUMB_WIDTH = 480;
 
 if (existsSync(path.join(ROOT, ".env.local"))) process.loadEnvFile(path.join(ROOT, ".env.local"));
@@ -53,8 +57,9 @@ async function main() {
   const dryRun = process.argv.includes("--dry-run");
   const slugs = process.argv.slice(2).filter((a) => !a.startsWith("--"));
   if (slugs.length === 0) throw new Error("Pass dinosaur slugs, e.g. npm run gen:coloring -- tyrannosaurus");
-  const key = process.env.OPENAI_API_KEY;
-  if (!key && !dryRun) throw new Error("Set OPENAI_API_KEY in .env.local");
+  const keyName = IS_AGENT_PLATFORM ? "AGENT_PLATFORM_API_KEY" : "OPENAI_API_KEY";
+  const key = process.env[keyName];
+  if (!key && !dryRun) throw new Error(`Set ${keyName} in .env.local`);
 
   const dinosaurs = JSON.parse(await readFile(DATA_PATH, "utf8")) as Dinosaur[];
   await mkdir(OUTPUT_DIR, { recursive: true });
@@ -66,7 +71,7 @@ async function main() {
     console.log(`\n[${slug}] ${prompt}\n`);
     if (dryRun) continue;
 
-    const png = await generateOpenAi(prompt, key!, MODEL);
+    const png = IS_AGENT_PLATFORM ? await generateAgentPlatform(prompt, key!, MODEL) : await generateOpenAi(prompt, key!, MODEL);
     // Grayscale and stretch contrast so off-white paper tones print as white. Line art needs only a
     // few grays, so a 16-colour palette halves the file without visible change.
     const clean = await sharp(png).grayscale().normalise().png({ palette: true, colors: 16, compressionLevel: 9 }).toBuffer();

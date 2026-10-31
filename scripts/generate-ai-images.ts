@@ -1,5 +1,6 @@
 /**
- * Generates AI paleoart for selected dinosaurs (Cloudflare Workers AI or OpenAI) and records the
+ * Generates AI paleoart for selected dinosaurs (Cloudflare Workers AI, OpenAI or Google's Gemini
+ * Enterprise Agent Platform) and records the
  * prompt and model next to each image (data/ai-images.json), so the site can disclose
  * exactly how every AI image was made.
  *
@@ -13,11 +14,17 @@
  *   CLOUDFLARE_ACCOUNT_ID   – optional, defaults to the account in wrangler.jsonc
  *   CLOUDFLARE_AI_TOKEN     – API token with the "Workers AI" permission (FLUX models)
  *   OPENAI_API_KEY          – only for OpenAI models (gpt-image-*)
+ *   AGENT_PLATFORM_API_KEY  – only for Gemini image models (gemini-*-image*), an API key for Google's
+ *                             Gemini Enterprise Agent Platform (formerly Vertex AI) with the
+ *                             Agent Platform API (aiplatform.googleapis.com) enabled
+ *   AGENT_PLATFORM_PROJECT  – with AGENT_PLATFORM_API_KEY: the Google Cloud project number or ID.
+ *                             Without it the key's default region is used, which may not offer
+ *                             image models (asia-southeast1 didn't); with it, the global endpoint.
  *
  * Run with: npm run gen:ai-images -- tyrannosaurus velociraptor
  * Preview prompts without generating (no token or quota needed): add --dry-run
  * Replace a dinosaur's existing AI images instead of adding another: add --replace
- * Pick a model (default FLUX.2 [dev] on Workers AI): add --model=gpt-image-2
+ * Pick a model (default FLUX.2 [dev] on Workers AI): add --model=gpt-image-2 or --model=gemini-2.5-flash-image
  *
  * Every image gets a checklist built from the same rules as its prompt. After looking at
  * the image, record a review (see AiImageReview) so the site can show its accuracy score.
@@ -46,16 +53,20 @@ const MODEL =
   process.env.AI_IMAGE_MODEL ??
   "@cf/black-forest-labs/flux-2-dev";
 const IS_OPENAI = MODEL.startsWith("gpt-image");
+const IS_AGENT_PLATFORM = MODEL.startsWith("gemini-");
 const MODEL_LABELS: Record<string, string> = {
   "@cf/black-forest-labs/flux-2-dev": "FLUX.2 [dev] โดย Black Forest Labs (ผ่าน Cloudflare Workers AI)",
   "@cf/black-forest-labs/flux-1-schnell": "FLUX.1 [schnell] โดย Black Forest Labs (ผ่าน Cloudflare Workers AI)",
   "gpt-image-2": "GPT Image 2 โดย OpenAI",
   "gpt-image-2.5-flare": "GPT Image 2.5 Flare โดย OpenAI",
   "gpt-image-2.5-sunburst": "GPT Image 2.5 Sunburst โดย OpenAI",
+  "gemini-2.5-flash-image": "Gemini 2.5 Flash Image โดย Google (ผ่าน Gemini Enterprise Agent Platform)",
 };
 /** OpenAI's standard landscape size; cards crop it to 4:3. */
 const OPENAI_SIZE = "1536x1024";
 const OPENAI_QUALITY = "medium";
+/** Gemini image models take an aspect ratio rather than pixel sizes; 3:2 matches OpenAI's 1536×1024. */
+const AGENT_PLATFORM_ASPECT = "3:2";
 const WIKI_UA = "dino-wiki/0.1 (Thai dinosaur encyclopedia; AI image prompt builder)";
 
 if (existsSync(path.join(ROOT, ".env.local"))) process.loadEnvFile(path.join(ROOT, ".env.local"));
@@ -534,6 +545,37 @@ export async function generateOpenAi(prompt: string, apiKey: string, model = MOD
   return Buffer.from(b64, "base64");
 }
 
+/**
+ * Gemini image models on Google's Gemini Enterprise Agent Platform (Vertex AI until 2026; the
+ * endpoint kept its aiplatform.googleapis.com name), called with an API key. Image models live on
+ * the global endpoint, so the project is named in the URL when AGENT_PLATFORM_PROJECT is set.
+ */
+export async function generateAgentPlatform(prompt: string, apiKey: string, model = MODEL): Promise<Buffer> {
+  const project = process.env.AGENT_PLATFORM_PROJECT;
+  const base = project
+    ? `https://aiplatform.googleapis.com/v1/projects/${project}/locations/global/publishers/google/models/${model}`
+    : `https://aiplatform.googleapis.com/v1/publishers/google/models/${model}`;
+  const url = `${base}:generateContent`;
+  const res = await fetch(url, {
+    method: "POST",
+    headers: { "x-goog-api-key": apiKey, "Content-Type": "application/json" },
+    body: JSON.stringify({
+      contents: [{ role: "user", parts: [{ text: prompt }] }],
+      generationConfig: { responseModalities: ["IMAGE"], imageConfig: { aspectRatio: AGENT_PLATFORM_ASPECT } },
+    }),
+  });
+  const json = (await res.json()) as {
+    candidates?: { content?: { parts?: { inlineData?: { data?: string } }[] }; finishReason?: string }[];
+    error?: { message: string };
+  };
+  const b64 = json.candidates?.[0]?.content?.parts?.find((part) => part.inlineData?.data)?.inlineData?.data;
+  if (!res.ok || !b64) {
+    const reason = json.error?.message ?? json.candidates?.[0]?.finishReason ?? JSON.stringify(json).slice(0, 500);
+    throw new Error(`Agent Platform ${res.status}: ${reason}`);
+  }
+  return Buffer.from(b64, "base64");
+}
+
 async function generateWorkersAi(prompt: string, account: string, token: string): Promise<Buffer> {
   const url = `https://api.cloudflare.com/client/v4/accounts/${account}/ai/run/${MODEL}`;
   const isMultipart = MODEL.includes("flux-2");
@@ -562,17 +604,27 @@ async function main() {
   const replace = process.argv.includes("--replace");
   const slugs = process.argv.slice(2).filter((a) => !a.startsWith("--"));
   if (slugs.length === 0) throw new Error("Pass dinosaur slugs, e.g. npm run gen:ai-images -- tyrannosaurus");
-  const token = IS_OPENAI ? process.env.OPENAI_API_KEY : process.env.CLOUDFLARE_AI_TOKEN;
+  const token = IS_OPENAI
+    ? process.env.OPENAI_API_KEY
+    : IS_AGENT_PLATFORM
+      ? process.env.AGENT_PLATFORM_API_KEY
+      : process.env.CLOUDFLARE_AI_TOKEN;
   if (!token && !dryRun) {
     throw new Error(
       IS_OPENAI
         ? "Set OPENAI_API_KEY in .env.local"
-        : "Set CLOUDFLARE_AI_TOKEN in .env.local (API token with Workers AI permission)",
+        : IS_AGENT_PLATFORM
+          ? "Set AGENT_PLATFORM_API_KEY in .env.local (API key with the Agent Platform API enabled)"
+          : "Set CLOUDFLARE_AI_TOKEN in .env.local (API token with Workers AI permission)",
     );
   }
-  const account = IS_OPENAI ? "" : await accountId();
+  const account = IS_OPENAI || IS_AGENT_PLATFORM ? "" : await accountId();
   const generate = (prompt: string) =>
-    IS_OPENAI ? generateOpenAi(prompt, token!) : generateWorkersAi(prompt, account, token!);
+    IS_OPENAI
+      ? generateOpenAi(prompt, token!)
+      : IS_AGENT_PLATFORM
+        ? generateAgentPlatform(prompt, token!)
+        : generateWorkersAi(prompt, account, token!);
 
   const dinosaurs = JSON.parse(await readFile(DATA_PATH, "utf8")) as Dinosaur[];
   const textEn = JSON.parse(await readFile(TEXT_EN_PATH, "utf8")) as { labels: Record<string, string> };
