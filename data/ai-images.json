@@ -4191,5 +4191,1058 @@
         ]
       }
     }
+  ],
+  "ceratosaurus": [
+    {
+      "localSmall": "/images/ai/ceratosaurus-1-330.webp",
+      "localLarge": "/images/ai/ceratosaurus-1-960.webp",
+      "width": 1536,
+      "height": 1024,
+      "model": "gpt-image-2",
+      "modelLabel": "GPT Image 2 โดย OpenAI",
+      "prompt": "Scientifically accurate paleoart of Ceratosaurus, a carnivore Ceratosauridae dinosaur from the Late Jurassic, Kimmeridgian–Tithonian (about 153–148 million years ago). Bipedal with the back held roughly horizontal and the tail held straight out behind for balance, never dragging on the ground. NOT standing upright like a kangaroo. Mouth closed with all teeth fully hidden behind scaly lips, like a monitor lizard. NO visible teeth. Hands held tucked in near the chest with the palms facing inward toward each other, like clapping, claws curving inward and forward. NOT hanging down, NOT palms-down, NOT claws pointing at the ground. A tall, blade-like horn on the midline of the snout and a smaller horn above each eye. Reference: Ceratosaurus is a genus of carnivorous theropod dinosaur that lived during the Late Jurassic period in North America and Europe. The genus was first described in 1884 by American paleontologist Othniel Charles Marsh based on a nearly complete skeleton discovered in Garden Park, Colorado, in rocks belonging to the Morrison Formation. The type species is Ceratosaurus nasicornis. Anatomy: three main weight-bearing toes on each foot; a single row of small bony scutes running down the middle of the neck, back and tail; about 6 meters long, deep jaws, short arms with four fingers, skin of small scales. Full body in side view, whole animal visible, standing in a semi-arid Late Jurassic floodplain like the Morrison Formation of western North America, with conifers, cycads, ginkgoes, tree ferns and ferns along a river, no grass and no flowering plants. Natural history museum illustration style, realistic textures and natural daylight, muted natural colors. No text, no labels, no humans, no modern objects.",
+      "checklist": [
+        {
+          "id": "pose",
+          "label": "ยืนสองขา หลังขนานพื้น หางยื่นตรงไม่ลากพื้น"
+        },
+        {
+          "id": "lips",
+          "label": "ปากปิด มีริมฝีปากปิดฟันจนมองไม่เห็นฟัน"
+        },
+        {
+          "id": "hands",
+          "label": "ฝ่ามือหันเข้าหากัน ไม่คว่ำลงหรือห้อยลง"
+        },
+        {
+          "id": "feet",
+          "label": "เท้ามีนิ้วรับน้ำหนัก 3 นิ้ว"
+        },
+        {
+          "id": "horns",
+          "label": "มีเขาแบนสูงกลางจมูก และเขาเล็กเหนือตาแต่ละข้าง"
+        },
+        {
+          "id": "osteoderms",
+          "label": "มีแผ่นกระดูกเล็กเรียง 1 แถวกลางคอ หลัง และหาง"
+        },
+        {
+          "id": "build",
+          "label": "ยาวราว 6 เมตร ขากรรไกรลึก แขนสั้นมี 4 นิ้ว ผิวเกล็ดเล็ก"
+        },
+        {
+          "id": "composition",
+          "label": "เห็นทั้งตัวในมุมด้านข้าง"
+        },
+        {
+          "id": "habitat",
+          "label": "ฉากตรงกับยุคและแหล่งที่พบฟอสซิล"
+        },
+        {
+          "id": "clean",
+          "label": "ไม่มีตัวหนังสือ คน หรือวัตถุสมัยใหม่"
+        }
+      ],
+      "promptSources": [
+        {
+          "label": "Wikipedia (en)",
+          "url": "https://en.wikipedia.org/wiki/Ceratosaurus"
+        },
+        {
+          "label": "Paleobiology Database",
+          "url": "https://paleobiodb.org/classic/basicTaxonInfo?taxon_no=38600"
+        }
+      ],
+      "createdAt": "2026-10-31T03:56:38.802Z",
+      "review": {
+        "reviewer": "Claude Opus 5.5 (ตรวจจากภาพทีละข้อ)",
+        "reviewedAt": "2026-10-31T04:01:41.475Z",
+        "results": [
+          {
+            "id": "pose",
+            "pass": true
+          },
+          {
+            "id": "lips",
+            "pass": true
+          },
+          {
+            "id": "hands",
+            "pass": true,
+            "note": "มือพับแนบอก กรงเล็บงอเข้า"
+          },
+          {
+            "id": "feet",
+            "pass": true
+          },
+          {
+            "id": "horns",
+            "pass": true
+          },
+          {
+            "id": "osteoderms",
+            "pass": true
+          },
+          {
+            "id": "build",
+            "pass": true,
+            "note": "เห็นนิ้วมือหลายนิ้วแต่นับไม่ชัด"
+          },
+          {
+            "id": "composition",
+            "pass": true
+          },
+          {
+            "id": "habitat",
+            "pass": true
+          },
+          {
+            "id": "clean",
+            "pass": true
+          }
+        ]
+      }
+    }
+  ],
+  "patagotitan": [
+    {
+      "localSmall": "/images/ai/patagotitan-1-330.webp",
+      "localLarge": "/images/ai/patagotitan-1-960.webp",
+      "width": 1536,
+      "height": 1024,
+      "model": "gpt-image-2",
+      "modelLabel": "GPT Image 2 โดย OpenAI",
+      "prompt": "Scientifically accurate paleoart of Patagotitan, a herbivore Titanosauria dinosaur from the latest Albian age of the Early Cretaceous (about 102 million years ago). An enormous sauropod about 31 meters long, one of the largest land animals ever, with a broad, wide body. Reference: Patagotitan is a genus of titanosaurian sauropod dinosaur from the Early Cretaceous Cerro Barcino Formation in Chubut Province, Patagonia, Argentina. The genus contains a single species known from at least six young adult individuals, Patagotitan mayorum, which was first announced in 2014 and then named in 2017 by José Carballido and colleagues. Originally thought to be the largest known titanosaur and land animal overall, preliminary studies and press releases suggested that Patagotitan had an estimated length of 37 m (121 ft) and an estimated weight of 69 tonnes. Anatomy: a long neck held roughly horizontal or slightly raised; pillar-like legs; front feet are columns without claws. Full body in side view, whole animal visible, standing in an Early Cretaceous river floodplain in Patagonia, Argentina, like the Cerro Barcino Formation, with Araucaria conifers and ferns, no grass. Natural history museum illustration style, realistic textures and natural daylight, muted natural colors. No text, no labels, no humans, no modern objects.",
+      "checklist": [
+        {
+          "id": "scale",
+          "label": "ไดโนเสาร์คอยาวขนาดมหึมาราว 31 เมตร ลำตัวกว้าง"
+        },
+        {
+          "id": "neck",
+          "label": "คอยาวยื่นแนวราบหรือชูขึ้นเล็กน้อย"
+        },
+        {
+          "id": "legs",
+          "label": "ขาเป็นเสา เท้าหน้าไม่มีกรงเล็บ"
+        },
+        {
+          "id": "composition",
+          "label": "เห็นทั้งตัวในมุมด้านข้าง"
+        },
+        {
+          "id": "habitat",
+          "label": "ฉากตรงกับยุคและแหล่งที่พบฟอสซิล"
+        },
+        {
+          "id": "clean",
+          "label": "ไม่มีตัวหนังสือ คน หรือวัตถุสมัยใหม่"
+        }
+      ],
+      "promptSources": [
+        {
+          "label": "Wikipedia (en)",
+          "url": "https://en.wikipedia.org/wiki/Patagotitan"
+        },
+        {
+          "label": "Paleobiology Database",
+          "url": "https://paleobiodb.org/classic/basicTaxonInfo?taxon_no=358623"
+        }
+      ],
+      "createdAt": "2026-10-31T03:57:09.799Z",
+      "review": {
+        "reviewer": "Claude Opus 5.5 (ตรวจจากภาพทีละข้อ)",
+        "reviewedAt": "2026-10-31T04:01:41.481Z",
+        "results": [
+          {
+            "id": "scale",
+            "pass": true
+          },
+          {
+            "id": "neck",
+            "pass": false,
+            "note": "ชูคอขึ้นราว 30–40 องศา สูงกว่า \"ชูขึ้นเล็กน้อย\""
+          },
+          {
+            "id": "legs",
+            "pass": true
+          },
+          {
+            "id": "composition",
+            "pass": true
+          },
+          {
+            "id": "habitat",
+            "pass": true
+          },
+          {
+            "id": "clean",
+            "pass": true
+          }
+        ]
+      }
+    }
+  ],
+  "edmontosaurus": [
+    {
+      "localSmall": "/images/ai/edmontosaurus-1-330.webp",
+      "localLarge": "/images/ai/edmontosaurus-1-960.webp",
+      "width": 1536,
+      "height": 1024,
+      "model": "gpt-image-2",
+      "modelLabel": "GPT Image 2 โดย OpenAI",
+      "prompt": "Scientifically accurate paleoart of Edmontosaurus, a herbivore Hadrosauridae dinosaur from the late Campanian to the end of the Maastrichtian (about 73–66 million years ago). NO bony crest on the head, only a low, fleshy comb on top of the skull, and a long, low head. Reference: Edmontosaurus, often colloquially and historically known as Anatosaurus or Anatotitan, is a genus of hadrosaurid (duck-billed) dinosaur. It contains two known species: Edmontosaurus regalis and Edmontosaurus annectens. Fossils of E. regalis have been found in rocks of western North America that date from the late Campanian age of the Cretaceous period 73 million years ago, while those of E. annectens were found in the same geographic region from rocks dated to the end of the Maastrichtian age, 66 million years ago. Anatomy: a large animal about 12 meters long; a broad, flat, duck-like toothless beak; walking on all fours with the front hands forming small hoof-like pads, tail held straight out off the ground; skin of small pebbly scales. Full body in side view, whole animal visible, standing in a humid latest-Cretaceous floodplain forest like the Hell Creek Formation of North America, with conifers, ferns and early flowering trees and shrubs, no grass. Natural history museum illustration style, realistic textures and natural daylight, muted natural colors. No text, no labels, no humans, no modern objects.",
+      "checklist": [
+        {
+          "id": "crest",
+          "label": "ไม่มีหงอนกระดูก มีเพียงหงอนเนื้อต่ำบนหัว หัวยาวต่ำ"
+        },
+        {
+          "id": "size",
+          "label": "ตัวใหญ่ยาวราว 12 เมตร"
+        },
+        {
+          "id": "beak",
+          "label": "ปากแบนกว้างแบบปากเป็ด"
+        },
+        {
+          "id": "posture",
+          "label": "เดินสี่ขา มือหน้าเป็นแป้นคล้ายกีบ หางยื่นตรงไม่ลากพื้น"
+        },
+        {
+          "id": "skin",
+          "label": "ผิวเป็นเกล็ดเล็กคล้ายกรวด"
+        },
+        {
+          "id": "composition",
+          "label": "เห็นทั้งตัวในมุมด้านข้าง"
+        },
+        {
+          "id": "habitat",
+          "label": "ฉากตรงกับยุคและแหล่งที่พบฟอสซิล"
+        },
+        {
+          "id": "clean",
+          "label": "ไม่มีตัวหนังสือ คน หรือวัตถุสมัยใหม่"
+        }
+      ],
+      "promptSources": [
+        {
+          "label": "Wikipedia (en)",
+          "url": "https://en.wikipedia.org/wiki/Edmontosaurus"
+        },
+        {
+          "label": "Paleobiology Database",
+          "url": "https://paleobiodb.org/classic/basicTaxonInfo?taxon_no=38761"
+        }
+      ],
+      "createdAt": "2026-10-31T03:57:43.738Z",
+      "review": {
+        "reviewer": "Claude Opus 5.5 (ตรวจจากภาพทีละข้อ)",
+        "reviewedAt": "2026-10-31T04:01:41.481Z",
+        "results": [
+          {
+            "id": "crest",
+            "pass": true,
+            "note": "ไม่มีหงอนกระดูก มีหงอนเนื้อสีแดงต่ำบนหัว"
+          },
+          {
+            "id": "size",
+            "pass": true
+          },
+          {
+            "id": "beak",
+            "pass": true
+          },
+          {
+            "id": "posture",
+            "pass": true
+          },
+          {
+            "id": "skin",
+            "pass": true
+          },
+          {
+            "id": "composition",
+            "pass": true
+          },
+          {
+            "id": "habitat",
+            "pass": true
+          },
+          {
+            "id": "clean",
+            "pass": true
+          }
+        ]
+      }
+    }
+  ],
+  "herrerasaurus": [
+    {
+      "localSmall": "/images/ai/herrerasaurus-1-330.webp",
+      "localLarge": "/images/ai/herrerasaurus-1-960.webp",
+      "width": 1536,
+      "height": 1024,
+      "model": "gpt-image-2",
+      "modelLabel": "GPT Image 2 โดย OpenAI",
+      "prompt": "Scientifically accurate paleoart of Herrerasaurus, a Herrerasauridae dinosaur from the Carnian age of the Late Triassic (about 231 million years ago). Bipedal with the back held roughly horizontal and the tail held straight out behind for balance, never dragging on the ground. NOT standing upright like a kangaroo. Mouth closed with all teeth fully hidden behind scaly lips, like a monitor lizard. NO visible teeth. Reference: Herrerasaurus is likely a genus of saurischian dinosaur from the Late Triassic period. Measuring 6 m (20 ft) long and weighing around 350 kg (770 lb), this genus was one of the earliest dinosaurs from the fossil record. Its name means \"Herrera's lizard\", after the rancher who discovered the first specimen in 1958 in South America. Anatomy: a predator about 6 meters long with a long, narrow, low skull, long hind legs and a long tail, skin of small scales; arms less than half as long as the legs, with three large curved claws on each hand. Full body in side view, whole animal visible, standing in a humid Late Triassic river floodplain like the Ischigualasto Formation of Argentina, with conifers, seed ferns, horsetails and ferns, no grass and no flowering plants. Natural history museum illustration style, realistic textures and natural daylight, muted natural colors. No text, no labels, no humans, no modern objects.",
+      "checklist": [
+        {
+          "id": "pose",
+          "label": "ยืนสองขา หลังขนานพื้น หางยื่นตรงไม่ลากพื้น"
+        },
+        {
+          "id": "lips",
+          "label": "ปากปิด มีริมฝีปากปิดฟันจนมองไม่เห็นฟัน"
+        },
+        {
+          "id": "build",
+          "label": "นักล่ายาวราว 6 เมตร กะโหลกยาวแคบต่ำ ขาหลังยาว หางยาว ผิวเกล็ดเล็ก"
+        },
+        {
+          "id": "arms",
+          "label": "แขนยาวไม่ถึงครึ่งของขา มือมีกรงเล็บโค้งใหญ่ 3 นิ้ว"
+        },
+        {
+          "id": "composition",
+          "label": "เห็นทั้งตัวในมุมด้านข้าง"
+        },
+        {
+          "id": "habitat",
+          "label": "ฉากตรงกับยุคและแหล่งที่พบฟอสซิล"
+        },
+        {
+          "id": "clean",
+          "label": "ไม่มีตัวหนังสือ คน หรือวัตถุสมัยใหม่"
+        }
+      ],
+      "promptSources": [
+        {
+          "label": "Wikipedia (en)",
+          "url": "https://en.wikipedia.org/wiki/Herrerasaurus"
+        },
+        {
+          "label": "Paleobiology Database",
+          "url": "https://paleobiodb.org/classic/basicTaxonInfo?taxon_no=38511"
+        }
+      ],
+      "createdAt": "2026-10-31T03:58:15.329Z",
+      "review": {
+        "reviewer": "Claude Opus 5.5 (ตรวจจากภาพทีละข้อ)",
+        "reviewedAt": "2026-10-31T04:01:41.481Z",
+        "results": [
+          {
+            "id": "pose",
+            "pass": true
+          },
+          {
+            "id": "lips",
+            "pass": true
+          },
+          {
+            "id": "build",
+            "pass": true
+          },
+          {
+            "id": "arms",
+            "pass": true,
+            "note": "มือมีกรงเล็บโค้งใหญ่ แต่ห้อยลงพื้น"
+          },
+          {
+            "id": "composition",
+            "pass": true
+          },
+          {
+            "id": "habitat",
+            "pass": true
+          },
+          {
+            "id": "clean",
+            "pass": true
+          }
+        ]
+      }
+    }
+  ],
+  "troodon": [
+    {
+      "localSmall": "/images/ai/troodon-1-330.webp",
+      "localLarge": "/images/ai/troodon-1-960.webp",
+      "width": 1536,
+      "height": 1024,
+      "model": "gpt-image-2",
+      "modelLabel": "GPT Image 2 โดย OpenAI",
+      "prompt": "Scientifically accurate paleoart of Troodon, a omnivore Troodontidae dinosaur from Campanian–Maastrichtian times (83.6–66 million years ago). Bipedal with the back held roughly horizontal and the tail held straight out behind for balance, never dragging on the ground. NOT standing upright like a kangaroo. Mouth closed with all teeth fully hidden behind scaly lips, like a monitor lizard. NO visible teeth. Hands held tucked in near the chest with the palms facing inward toward each other, like clapping, claws curving inward and forward. NOT hanging down, NOT palms-down, NOT claws pointing at the ground. A slender, long-legged, lightly built predator about 2.5 meters long with a narrow head and large forward-facing eyes. Reference: Troodon is a controversial genus of relatively small, bird-like theropod dinosaurs definitively known from the Campanian age of the Late Cretaceous period. It includes at least one species, Troodon formosus, known from Montana. Discovered in October 1855, T. formosus was among the first dinosaurs found in North America, although it was thought to be a lizard until 1877. Anatomy: fully feathered, with wing-like feathers on the arms and a long feathered tail; an enlarged, curved claw on the second toe, held off the ground. Full body in side view, whole animal visible, standing in a Late Cretaceous coastal floodplain like the Dinosaur Park Formation of Alberta, with conifers, ferns and early flowering plants by a river, no grass. Natural history museum illustration style, realistic textures and natural daylight, muted natural colors. No text, no labels, no humans, no modern objects.",
+      "checklist": [
+        {
+          "id": "pose",
+          "label": "ยืนสองขา หลังขนานพื้น หางยื่นตรงไม่ลากพื้น"
+        },
+        {
+          "id": "lips",
+          "label": "ปากปิด มีริมฝีปากปิดฟันจนมองไม่เห็นฟัน"
+        },
+        {
+          "id": "hands",
+          "label": "ฝ่ามือหันเข้าหากัน ไม่คว่ำลงหรือห้อยลง"
+        },
+        {
+          "id": "build",
+          "label": "นักล่ารูปร่างเพรียว ขายาว ยาวราว 2.5 เมตร หัวแคบ ตาโตหันไปข้างหน้า"
+        },
+        {
+          "id": "feathers",
+          "label": "มีขนทั้งตัว แขนมีขนคล้ายปีก หางยาวมีขน"
+        },
+        {
+          "id": "sickle-claw",
+          "label": "กรงเล็บโค้งใหญ่ที่นิ้วเท้าที่ 2 ยกพ้นพื้น"
+        },
+        {
+          "id": "composition",
+          "label": "เห็นทั้งตัวในมุมด้านข้าง"
+        },
+        {
+          "id": "habitat",
+          "label": "ฉากตรงกับยุคและแหล่งที่พบฟอสซิล"
+        },
+        {
+          "id": "clean",
+          "label": "ไม่มีตัวหนังสือ คน หรือวัตถุสมัยใหม่"
+        }
+      ],
+      "caveat": "ไดโนเสาร์ตัวนี้รู้จักจากซากเพียงบางส่วน ภาพนี้เติมส่วนที่ไม่พบด้วยการคาดเดาจากญาติใกล้ชิด จึงอาจต่างจากตัวจริงได้มาก",
+      "promptSources": [
+        {
+          "label": "Wikipedia (en)",
+          "url": "https://en.wikipedia.org/wiki/Troodon"
+        },
+        {
+          "label": "Paleobiology Database",
+          "url": "https://paleobiodb.org/classic/basicTaxonInfo?taxon_no=38572"
+        }
+      ],
+      "createdAt": "2026-10-31T03:58:47.463Z",
+      "review": {
+        "reviewer": "Claude Opus 5.5 (ตรวจจากภาพทีละข้อ)",
+        "reviewedAt": "2026-10-31T04:01:41.481Z",
+        "results": [
+          {
+            "id": "pose",
+            "pass": true,
+            "note": "หลังขนานพื้น คอชูขึ้นเล็กน้อย"
+          },
+          {
+            "id": "lips",
+            "pass": true
+          },
+          {
+            "id": "hands",
+            "pass": true,
+            "note": "มือพับอยู่ใต้ขนปีก กรงเล็บงอเข้า"
+          },
+          {
+            "id": "build",
+            "pass": true
+          },
+          {
+            "id": "feathers",
+            "pass": true
+          },
+          {
+            "id": "sickle-claw",
+            "pass": true
+          },
+          {
+            "id": "composition",
+            "pass": true
+          },
+          {
+            "id": "habitat",
+            "pass": true
+          },
+          {
+            "id": "clean",
+            "pass": true
+          }
+        ]
+      }
+    }
+  ],
+  "microraptor": [
+    {
+      "localSmall": "/images/ai/microraptor-1-330.webp",
+      "localLarge": "/images/ai/microraptor-1-960.webp",
+      "width": 1536,
+      "height": 1024,
+      "model": "gpt-image-2",
+      "modelLabel": "GPT Image 2 โดย OpenAI",
+      "prompt": "Scientifically accurate paleoart of Microraptor, a carnivore Dromaeosauridae dinosaur from Aptian times (121.4–113.2 million years ago). Walking with the whole body held horizontal and balanced over the hips like a seesaw, back parallel to the ground, head held low and forward at the same height as the hips, short neck curving forward rather than upward, long stiff tail extended straight back in line with the back. NOT standing upright, NOT a raised head, NOT an ostrich or kangaroo posture. Mouth closed with all teeth fully hidden behind scaly lips, like a monitor lizard. NO visible teeth. Hands held tucked in near the chest with the palms facing inward toward each other, like clapping, claws curving inward and forward. NOT hanging down, NOT palms-down, NOT claws pointing at the ground. Long flight feathers on the hind legs forming a second pair of wings, in addition to the wings on the arms. Reference: Microraptor is a genus of small, four-winged dromaeosaurid dinosaurs. Numerous well-preserved fossil specimens have been recovered from Liaoning, China. They date from the early Cretaceous Jiufotang Formation, 125 to 120 million years ago. Anatomy: a long, low, narrow snout with a slightly upturned profile, NOT a bird beak and NOT a rounded bird head; a short S-curved neck about as long as the skull, NOT a long ostrich neck; clearly visible arms folded at the sides of the body like a bird's wings, with long pennaceous feathers attached along the forearm and hand, and three separate clawed fingers visible at the end of each hand; a stiff, straight tail fringed with feathers along its sides and a fan of feathers at the tip; each foot has a clearly visible sickle-shaped claw on the second toe, retracted and held off the ground, proportionate in size and attached to the toe; body covered in short feathers, tiny, about 80 cm long including the tail, the size of a crow; glossy black plumage with a blue iridescent sheen, like a crow. Full body in side view, whole animal visible, standing in an Early Cretaceous forest by a lake in Liaoning, China, like the Jiufotang Formation, with conifers, ginkgoes and ferns, no grass. Natural history museum illustration style, realistic textures and natural daylight, muted natural colors. No text, no labels, no humans, no modern objects.",
+      "checklist": [
+        {
+          "id": "pose",
+          "label": "ลำตัวขนานพื้น หัวต่ำระดับสะโพก หางยื่นตรงแนวเดียวกับหลัง"
+        },
+        {
+          "id": "lips",
+          "label": "ปากปิด มีริมฝีปากปิดฟันจนมองไม่เห็นฟัน"
+        },
+        {
+          "id": "hands",
+          "label": "ฝ่ามือหันเข้าหากัน ไม่คว่ำลงหรือห้อยลง"
+        },
+        {
+          "id": "snout",
+          "label": "ปากยาว ต่ำ และแคบ ไม่ใช่จะงอยปากหรือหัวกลมแบบนก"
+        },
+        {
+          "id": "neck",
+          "label": "คอสั้นโค้งรูปตัว S ไม่ยาวแบบนกกระจอกเทศ"
+        },
+        {
+          "id": "arms",
+          "label": "เห็นแขนพับข้างลำตัว มีขนปีกติดที่แขน และเห็นนิ้วที่มีกรงเล็บ"
+        },
+        {
+          "id": "tail",
+          "label": "หางแข็งตรง มีขนเรียงด้านข้างและเป็นพัดที่ปลาย"
+        },
+        {
+          "id": "sickle-claw",
+          "label": "เห็นกรงเล็บรูปเคียวที่นิ้วเท้าที่ 2 ยกพ้นพื้น ขนาดสมส่วน"
+        },
+        {
+          "id": "feathers",
+          "label": "ลำตัวมีขนปกคลุม ขนาดเล็กราว 80 ซม. รวมหาง ขนาดอีกา"
+        },
+        {
+          "id": "hindwings",
+          "label": "ขาหลังมีขนบินยาวเป็นปีกคู่ที่สอง นอกจากปีกที่แขน"
+        },
+        {
+          "id": "color",
+          "label": "ขนสีดำเงาเหลือบน้ำเงินแบบอีกา"
+        },
+        {
+          "id": "composition",
+          "label": "เห็นทั้งตัวในมุมด้านข้าง"
+        },
+        {
+          "id": "habitat",
+          "label": "ฉากตรงกับยุคและแหล่งที่พบฟอสซิล"
+        },
+        {
+          "id": "clean",
+          "label": "ไม่มีตัวหนังสือ คน หรือวัตถุสมัยใหม่"
+        }
+      ],
+      "promptSources": [
+        {
+          "label": "Wikipedia (en)",
+          "url": "https://en.wikipedia.org/wiki/Microraptor"
+        },
+        {
+          "label": "Paleobiology Database",
+          "url": "https://paleobiodb.org/classic/basicTaxonInfo?taxon_no=68238"
+        }
+      ],
+      "createdAt": "2026-10-31T03:59:18.058Z",
+      "review": {
+        "reviewer": "Claude Opus 5.5 (ตรวจจากภาพทีละข้อ)",
+        "reviewedAt": "2026-10-31T04:01:41.481Z",
+        "results": [
+          {
+            "id": "pose",
+            "pass": true
+          },
+          {
+            "id": "lips",
+            "pass": true
+          },
+          {
+            "id": "hands",
+            "pass": true,
+            "note": "มือพับในปีก"
+          },
+          {
+            "id": "snout",
+            "pass": true
+          },
+          {
+            "id": "neck",
+            "pass": true
+          },
+          {
+            "id": "arms",
+            "pass": true
+          },
+          {
+            "id": "tail",
+            "pass": true
+          },
+          {
+            "id": "sickle-claw",
+            "pass": true
+          },
+          {
+            "id": "feathers",
+            "pass": true,
+            "note": "ไม่มีวัตถุเทียบขนาดในภาพ"
+          },
+          {
+            "id": "hindwings",
+            "pass": true
+          },
+          {
+            "id": "color",
+            "pass": true
+          },
+          {
+            "id": "composition",
+            "pass": true
+          },
+          {
+            "id": "habitat",
+            "pass": true
+          },
+          {
+            "id": "clean",
+            "pass": true
+          }
+        ]
+      }
+    }
+  ],
+  "acrocanthosaurus": [
+    {
+      "localSmall": "/images/ai/acrocanthosaurus-1-330.webp",
+      "localLarge": "/images/ai/acrocanthosaurus-1-960.webp",
+      "width": 1536,
+      "height": 1024,
+      "model": "gpt-image-2",
+      "modelLabel": "GPT Image 2 โดย OpenAI",
+      "prompt": "Scientifically accurate paleoart of Acrocanthosaurus, a carnivore Carcharodontosauridae dinosaur from the Aptian–Albian ages of the Early Cretaceous (about 113–110 million years ago). Bipedal with the back held roughly horizontal and the tail held straight out behind for balance, never dragging on the ground. NOT standing upright like a kangaroo. Mouth closed with all teeth fully hidden behind scaly lips, like a monitor lizard. NO visible teeth. Hands held tucked in near the chest with the palms facing inward toward each other, like clapping, claws curving inward and forward. NOT hanging down, NOT palms-down, NOT claws pointing at the ground. A tall, thick ridge of muscle running along the neck, back and hips over its long neural spines, NOT a thin sail. A long, low, narrow skull with blade-like teeth, NOT the broad deep skull of Tyrannosaurus. Reference: Acrocanthosaurus is a genus of carcharodontosaurid dinosaurs that existed in what is now North America during the Barremian and early Cenomanian stages of the Early Cretaceous and Late Cretaceous, from 125 to 99.6 million years ago. Like most dinosaur genera, Acrocanthosaurus contains only a single species, A. atokensis. It had a continent-wide range, with fossil remains known from the U.S. states of Arizona, Oklahoma, Texas, Utah, and Wyoming in the west and Maryland in the east. Anatomy: three main weight-bearing toes on each foot; a huge animal about 11–12 meters long, short arms with three clawed fingers, powerful hind legs, skin of small scales. Full body in side view, whole animal visible, standing in an Early Cretaceous coastal river plain like the Antlers Formation of Oklahoma, with conifers, cycads and ferns, no grass. Natural history museum illustration style, realistic textures and natural daylight, muted natural colors. No text, no labels, no humans, no modern objects.",
+      "checklist": [
+        {
+          "id": "pose",
+          "label": "ยืนสองขา หลังขนานพื้น หางยื่นตรงไม่ลากพื้น"
+        },
+        {
+          "id": "lips",
+          "label": "ปากปิด มีริมฝีปากปิดฟันจนมองไม่เห็นฟัน"
+        },
+        {
+          "id": "hands",
+          "label": "ฝ่ามือหันเข้าหากัน ไม่คว่ำลงหรือห้อยลง"
+        },
+        {
+          "id": "feet",
+          "label": "เท้ามีนิ้วรับน้ำหนัก 3 นิ้ว"
+        },
+        {
+          "id": "ridge",
+          "label": "มีสันกล้ามเนื้อหนาสูงตามคอ หลัง และสะโพก ไม่ใช่ใบเรือบาง"
+        },
+        {
+          "id": "skull",
+          "label": "กะโหลกยาว ต่ำ แคบ ไม่กว้างลึกแบบ T. rex"
+        },
+        {
+          "id": "build",
+          "label": "ตัวใหญ่ยาว 11–12 เมตร แขนสั้นมี 3 นิ้ว ผิวเกล็ดเล็ก"
+        },
+        {
+          "id": "composition",
+          "label": "เห็นทั้งตัวในมุมด้านข้าง"
+        },
+        {
+          "id": "habitat",
+          "label": "ฉากตรงกับยุคและแหล่งที่พบฟอสซิล"
+        },
+        {
+          "id": "clean",
+          "label": "ไม่มีตัวหนังสือ คน หรือวัตถุสมัยใหม่"
+        }
+      ],
+      "promptSources": [
+        {
+          "label": "Wikipedia (en)",
+          "url": "https://en.wikipedia.org/wiki/Acrocanthosaurus"
+        },
+        {
+          "label": "Paleobiology Database",
+          "url": "https://paleobiodb.org/classic/basicTaxonInfo?taxon_no=38597"
+        }
+      ],
+      "createdAt": "2026-10-31T03:59:48.352Z",
+      "review": {
+        "reviewer": "Claude Opus 5.5 (ตรวจจากภาพทีละข้อ)",
+        "reviewedAt": "2026-10-31T04:01:41.481Z",
+        "results": [
+          {
+            "id": "pose",
+            "pass": true
+          },
+          {
+            "id": "lips",
+            "pass": true
+          },
+          {
+            "id": "hands",
+            "pass": true
+          },
+          {
+            "id": "feet",
+            "pass": true
+          },
+          {
+            "id": "ridge",
+            "pass": true,
+            "note": "สันหลังหนาต่อเนื่องจากคอถึงหาง"
+          },
+          {
+            "id": "skull",
+            "pass": true
+          },
+          {
+            "id": "build",
+            "pass": true
+          },
+          {
+            "id": "composition",
+            "pass": true
+          },
+          {
+            "id": "habitat",
+            "pass": false,
+            "note": "มีต้นปาล์มสูง ซึ่งยังไม่มีในช่วงต้นครีเทเชียส"
+          },
+          {
+            "id": "clean",
+            "pass": true
+          }
+        ]
+      }
+    }
+  ],
+  "tarbosaurus": [
+    {
+      "localSmall": "/images/ai/tarbosaurus-1-330.webp",
+      "localLarge": "/images/ai/tarbosaurus-1-960.webp",
+      "width": 1536,
+      "height": 1024,
+      "model": "gpt-image-2",
+      "modelLabel": "GPT Image 2 โดย OpenAI",
+      "prompt": "Scientifically accurate paleoart of Tarbosaurus, a carnivore Tyrannosauridae dinosaur from the Maastrichtian age of the Late Cretaceous (about 70 million years ago). Bipedal with the back held roughly horizontal and the tail held straight out behind for balance, never dragging on the ground. NOT standing upright like a kangaroo. Mouth closed with all teeth fully hidden behind scaly lips, like a monitor lizard. NO visible teeth. Hands held tucked in near the chest with the palms facing inward toward each other, like clapping, claws curving inward and forward. NOT hanging down, NOT palms-down, NOT claws pointing at the ground. Reference: Tarbosaurus is a genus of large tyrannosaurid dinosaur that lived in Asia during the Maastrichtian age of the Late Cretaceous period. It contains the type and single species Tarbosaurus bataar, which is known from the Nemegt Formation of Mongolia, with more fragmentary remains found further afield in the Subashi Formation of China. Tarbosaurus is represented by dozens of fossil specimens, including several complete skulls and skeletons. Anatomy: three main weight-bearing toes on each foot; skin predominantly covered in small scales; massive deep skull, short two-fingered arms, powerful hind legs. Full body in side view, whole animal visible, standing in a humid Late Cretaceous river floodplain forest like the Nemegt Formation of Mongolia, with conifers and broadleaf flowering trees, no grass. Natural history museum illustration style, realistic textures and natural daylight, muted natural colors. No text, no labels, no humans, no modern objects.",
+      "checklist": [
+        {
+          "id": "pose",
+          "label": "ยืนสองขา หลังขนานพื้น หางยื่นตรงไม่ลากพื้น"
+        },
+        {
+          "id": "lips",
+          "label": "ปากปิด มีริมฝีปากปิดฟันจนมองไม่เห็นฟัน"
+        },
+        {
+          "id": "hands",
+          "label": "ฝ่ามือหันเข้าหากัน ไม่คว่ำลงหรือห้อยลง"
+        },
+        {
+          "id": "feet",
+          "label": "เท้ามีนิ้วรับน้ำหนัก 3 นิ้ว"
+        },
+        {
+          "id": "scales",
+          "label": "ผิวส่วนใหญ่เป็นเกล็ดเล็ก"
+        },
+        {
+          "id": "build",
+          "label": "กะโหลกใหญ่ลึก แขนสั้นมี 2 นิ้ว ขาหลังแข็งแรง"
+        },
+        {
+          "id": "composition",
+          "label": "เห็นทั้งตัวในมุมด้านข้าง"
+        },
+        {
+          "id": "habitat",
+          "label": "ฉากตรงกับยุคและแหล่งที่พบฟอสซิล"
+        },
+        {
+          "id": "clean",
+          "label": "ไม่มีตัวหนังสือ คน หรือวัตถุสมัยใหม่"
+        }
+      ],
+      "promptSources": [
+        {
+          "label": "Wikipedia (en)",
+          "url": "https://en.wikipedia.org/wiki/Tarbosaurus"
+        },
+        {
+          "label": "Paleobiology Database",
+          "url": "https://paleobiodb.org/classic/basicTaxonInfo?taxon_no=53224"
+        }
+      ],
+      "createdAt": "2026-10-31T04:00:22.078Z",
+      "review": {
+        "reviewer": "Claude Opus 5.5 (ตรวจจากภาพทีละข้อ)",
+        "reviewedAt": "2026-10-31T04:01:41.481Z",
+        "results": [
+          {
+            "id": "pose",
+            "pass": true,
+            "note": "ลำตัวเชิดขึ้นเล็กน้อย แต่หางยื่นตรง"
+          },
+          {
+            "id": "lips",
+            "pass": true
+          },
+          {
+            "id": "hands",
+            "pass": true
+          },
+          {
+            "id": "feet",
+            "pass": true
+          },
+          {
+            "id": "scales",
+            "pass": true
+          },
+          {
+            "id": "build",
+            "pass": true
+          },
+          {
+            "id": "composition",
+            "pass": true
+          },
+          {
+            "id": "habitat",
+            "pass": true
+          },
+          {
+            "id": "clean",
+            "pass": true
+          }
+        ]
+      }
+    }
+  ],
+  "suchomimus": [
+    {
+      "localSmall": "/images/ai/suchomimus-1-330.webp",
+      "localLarge": "/images/ai/suchomimus-1-960.webp",
+      "width": 1536,
+      "height": 1024,
+      "model": "gpt-image-2",
+      "modelLabel": "GPT Image 2 โดย OpenAI",
+      "prompt": "Scientifically accurate paleoart of Suchomimus, a carnivore Spinosauridae dinosaur from Aptian–Albian times (121.4–100.5 million years ago). Bipedal with the back held roughly horizontal and the tail held straight out behind for balance, never dragging on the ground. NOT standing upright like a kangaroo. Hands held tucked in near the chest with the palms facing inward toward each other, like clapping, claws curving inward and forward. NOT hanging down, NOT palms-down, NOT claws pointing at the ground. A long, narrow, crocodile-like snout with conical teeth and nostrils set far back near the eyes, NOT a deep tyrannosaur-like skull. Only a low ridge of skin along the back, highest over the hips, far lower than the sail of Spinosaurus. Reference: Suchomimus is a genus of large theropod dinosaur that lived in what is now Niger during the Aptian to Albian stages of the Early Cretaceous period, 112 million years ago. The only known species is S. tenerensis, originally described in 1998 by paleontologist Paul Sereno and colleagues from several fossils discovered one year earlier in the Elrhaz Formation. Although these fossils come from multiple specimens, they represent one of the most anatomically well-documented spinosaurids. Anatomy: three main weight-bearing toes on each foot; strong arms with a huge curved claw on each thumb, long sturdy hind legs, an ordinary long tail. Full body in side view, whole animal visible, standing in a vast Early Cretaceous river floodplain in Niger, like the Elrhaz Formation, with conifers, ferns and horsetails along a river, no grass. Natural history museum illustration style, realistic textures and natural daylight, muted natural colors. No text, no labels, no humans, no modern objects.",
+      "checklist": [
+        {
+          "id": "pose",
+          "label": "ยืนสองขา หลังขนานพื้น หางยื่นตรงไม่ลากพื้น"
+        },
+        {
+          "id": "hands",
+          "label": "ฝ่ามือหันเข้าหากัน ไม่คว่ำลงหรือห้อยลง"
+        },
+        {
+          "id": "feet",
+          "label": "เท้ามีนิ้วรับน้ำหนัก 3 นิ้ว"
+        },
+        {
+          "id": "snout",
+          "label": "ปากยาวแคบแบบจระเข้ ฟันทรงกรวย รูจมูกอยู่ค่อนไปทางตา"
+        },
+        {
+          "id": "back",
+          "label": "มีสันหนังต่ำบนหลัง สูงสุดที่สะโพก ไม่ใช่ใบเรือสูงแบบสไปโนซอรัส"
+        },
+        {
+          "id": "limbs",
+          "label": "แขนแข็งแรงมีกรงเล็บนิ้วโป้งโค้งใหญ่มาก ขาหลังยาวแข็งแรง หางยาวปกติ"
+        },
+        {
+          "id": "composition",
+          "label": "เห็นทั้งตัวในมุมด้านข้าง"
+        },
+        {
+          "id": "habitat",
+          "label": "ฉากตรงกับยุคและแหล่งที่พบฟอสซิล"
+        },
+        {
+          "id": "clean",
+          "label": "ไม่มีตัวหนังสือ คน หรือวัตถุสมัยใหม่"
+        }
+      ],
+      "promptSources": [
+        {
+          "label": "Wikipedia (en)",
+          "url": "https://en.wikipedia.org/wiki/Suchomimus"
+        },
+        {
+          "label": "Paleobiology Database",
+          "url": "https://paleobiodb.org/classic/basicTaxonInfo?taxon_no=53367"
+        }
+      ],
+      "createdAt": "2026-10-31T04:00:53.359Z",
+      "review": {
+        "reviewer": "Claude Opus 5.5 (ตรวจจากภาพทีละข้อ)",
+        "reviewedAt": "2026-10-31T04:01:41.481Z",
+        "results": [
+          {
+            "id": "pose",
+            "pass": true
+          },
+          {
+            "id": "hands",
+            "pass": false,
+            "note": "มือคว่ำเฉียงลง กรงเล็บชี้ลงไปข้างหน้า"
+          },
+          {
+            "id": "feet",
+            "pass": true
+          },
+          {
+            "id": "snout",
+            "pass": true
+          },
+          {
+            "id": "back",
+            "pass": true
+          },
+          {
+            "id": "limbs",
+            "pass": false,
+            "note": "กรงเล็บนิ้วโป้งไม่ใหญ่เด่นกว่านิ้วอื่น"
+          },
+          {
+            "id": "composition",
+            "pass": true
+          },
+          {
+            "id": "habitat",
+            "pass": true
+          },
+          {
+            "id": "clean",
+            "pass": true
+          }
+        ]
+      }
+    }
+  ],
+  "deinocheirus": [
+    {
+      "localSmall": "/images/ai/deinocheirus-1-330.webp",
+      "localLarge": "/images/ai/deinocheirus-1-960.webp",
+      "width": 1536,
+      "height": 1024,
+      "model": "gpt-image-2",
+      "modelLabel": "GPT Image 2 โดย OpenAI",
+      "prompt": "Scientifically accurate paleoart of Deinocheirus, a omnivore Deinocheiridae dinosaur from the Maastrichtian age of the Late Cretaceous (about 70 million years ago). Bipedal with the back held roughly horizontal and the tail held straight out behind for balance, never dragging on the ground. NOT standing upright like a kangaroo. Hands held tucked in near the chest with the palms facing inward toward each other, like clapping, claws curving inward and forward. NOT hanging down, NOT palms-down, NOT claws pointing at the ground. A huge, bulky body about 11 meters long with a tall sail-like hump along the back over the hips. A long, toothless, wide duck-like bill and a deep lower jaw. Reference: Deinocheirus is a genus of large ornithomimosaur that lived during the Late Cretaceous around 70 million years ago. In 1965, a pair of large arms, shoulder girdles, and a few other bones of a new dinosaur were first discovered in the Nemegt Formation of Mongolia. In 1970, this specimen became the holotype of the only species within the genus, Deinocheirus mirificus; the genus name is Greek for \"horrible hand\". No further remains were discovered for almost fifty years, and its nature remained a mystery. Anatomy: three main weight-bearing toes on each foot; enormous arms about 2.4 meters long with three blunt, curved claws on each hand; body covered in feathers, with a fan of feathers at the tip of the tail. Full body in side view, whole animal visible, standing in a humid Late Cretaceous river floodplain forest like the Nemegt Formation of Mongolia, with conifers and broadleaf flowering trees, no grass. Natural history museum illustration style, realistic textures and natural daylight, muted natural colors. No text, no labels, no humans, no modern objects.",
+      "checklist": [
+        {
+          "id": "pose",
+          "label": "ยืนสองขา หลังขนานพื้น หางยื่นตรงไม่ลากพื้น"
+        },
+        {
+          "id": "hands",
+          "label": "ฝ่ามือหันเข้าหากัน ไม่คว่ำลงหรือห้อยลง"
+        },
+        {
+          "id": "feet",
+          "label": "เท้ามีนิ้วรับน้ำหนัก 3 นิ้ว"
+        },
+        {
+          "id": "hump",
+          "label": "ตัวใหญ่หนาราว 11 เมตร มีโหนกคล้ายใบเรือบนหลังเหนือสะโพก"
+        },
+        {
+          "id": "bill",
+          "label": "ปากยาวกว้างไม่มีฟันคล้ายปากเป็ด ขากรรไกรล่างลึก"
+        },
+        {
+          "id": "arms",
+          "label": "แขนใหญ่มากยาวราว 2.4 เมตร มือมีกรงเล็บทู่ 3 นิ้ว"
+        },
+        {
+          "id": "feathers",
+          "label": "ลำตัวมีขนปกคลุม ปลายหางมีพัดขน"
+        },
+        {
+          "id": "composition",
+          "label": "เห็นทั้งตัวในมุมด้านข้าง"
+        },
+        {
+          "id": "habitat",
+          "label": "ฉากตรงกับยุคและแหล่งที่พบฟอสซิล"
+        },
+        {
+          "id": "clean",
+          "label": "ไม่มีตัวหนังสือ คน หรือวัตถุสมัยใหม่"
+        }
+      ],
+      "promptSources": [
+        {
+          "label": "Wikipedia (en)",
+          "url": "https://en.wikipedia.org/wiki/Deinocheirus"
+        },
+        {
+          "label": "Paleobiology Database",
+          "url": "https://paleobiodb.org/classic/basicTaxonInfo?taxon_no=38551"
+        }
+      ],
+      "createdAt": "2026-10-31T04:01:24.203Z",
+      "review": {
+        "reviewer": "Claude Opus 5.5 (ตรวจจากภาพทีละข้อ)",
+        "reviewedAt": "2026-10-31T04:01:41.481Z",
+        "results": [
+          {
+            "id": "pose",
+            "pass": true,
+            "note": "หลังขนานพื้น คอโค้งชูขึ้น"
+          },
+          {
+            "id": "hands",
+            "pass": true
+          },
+          {
+            "id": "feet",
+            "pass": true
+          },
+          {
+            "id": "hump",
+            "pass": true
+          },
+          {
+            "id": "bill",
+            "pass": true
+          },
+          {
+            "id": "arms",
+            "pass": false,
+            "note": "แขนใหญ่ยาว แต่กรงเล็บแหลมโค้ง ไม่ทู่"
+          },
+          {
+            "id": "feathers",
+            "pass": true
+          },
+          {
+            "id": "composition",
+            "pass": true
+          },
+          {
+            "id": "habitat",
+            "pass": true
+          },
+          {
+            "id": "clean",
+            "pass": true
+          }
+        ]
+      }
+    }
   ]
 }

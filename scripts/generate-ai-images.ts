@@ -110,6 +110,7 @@ const GENUS_GROUPS: Record<string, string> = {
   phuwiangvenator: "Megaraptora",
   psittacosaurus: "Psittacosauridae",
   iguanodon: "Iguanodontia",
+  aquilops: "Neoceratopsia",
   ceratosaurus: "Ceratosauridae",
   patagotitan: "Titanosauria",
   dreadnoughtus: "Titanosauria",
@@ -127,6 +128,8 @@ const GENUS_GROUPS: Record<string, string> = {
 const FRAGMENTARY = new Set([
   "irritator", // skull only
   "isanosaurus",
+  "aquilops", // one small skull
+  "maip", // an incomplete, disarticulated skeleton
   "megalosaurus", // isolated bones, no skull
   "kinnareemimus",
   "nagatitan",
@@ -188,6 +191,14 @@ const HADROSAURID_HEADS: Record<string, Rule[]> = {
   ],
 };
 
+function megaraptorRules(d: Dinosaur): Rule[] {
+  const size = d.slug === "maip" ? { prompt: "a large", check: "นักล่าตัวใหญ่", len: "9–10" } : { prompt: "a slender, lightly built", check: "นักล่ารูปร่างเพรียว", len: "6" };
+  return [
+    r("claws", "long, strong arms with an enormous curved claw on the thumb and a large claw on the first finger", "แขนยาวแข็งแรง มีกรงเล็บโค้งขนาดใหญ่มากที่นิ้วโป้งและนิ้วแรก", true),
+    r("build", `${size.prompt} predator about ${size.len} meters long with a long, narrow skull and long legs`, `${size.check}ยาวราว ${size.len} เมตร หัวยาวแคบ ขายาว`),
+  ];
+}
+
 /**
  * Rules for specific groups. Order matters within a list only for readability; rules marked
  * early are moved up in the prompt.
@@ -238,9 +249,12 @@ const GROUP_RULES: Record<string, (d: Dinosaur) => Rule[]> = {
       r("limbs", "strong arms with a huge curved claw on each thumb, long sturdy hind legs, an ordinary long tail", "แขนแข็งแรงมีกรงเล็บนิ้วโป้งโค้งใหญ่มาก ขาหลังยาวแข็งแรง หางยาวปกติ"),
     ];
   },
-  Tyrannosauridae: () => [
+  Tyrannosauridae: (d) => [
     r("scales", "skin predominantly covered in small scales", "ผิวส่วนใหญ่เป็นเกล็ดเล็ก"),
-    r("build", "massive deep skull, short two-fingered arms, powerful hind legs", "กะโหลกใหญ่ลึก แขนสั้นมี 2 นิ้ว ขาหลังแข็งแรง"),
+    // Albertosaurines were lighter than Tyrannosaurus and Tarbosaurus, with a crest in front of each eye.
+    d.slug === "albertosaurus" || d.slug === "gorgosaurus"
+      ? r("build", "a lighter, more slender build than Tyrannosaurus, about 8–9 meters long, a short bony crest in front of each eye, short two-fingered arms", "รูปร่างเพรียวกว่า T. rex ยาวราว 8–9 เมตร มีสันกระดูกสั้นหน้าตา แขนสั้นมี 2 นิ้ว")
+      : r("build", "massive deep skull, short two-fingered arms, powerful hind legs", "กะโหลกใหญ่ลึก แขนสั้นมี 2 นิ้ว ขาหลังแข็งแรง"),
   ],
   Allosauridae: () => [
     r("skull", "a long, narrow skull with a pair of small triangular horns just in front of the eyes and low ridges along the top of the snout", "กะโหลกยาวแคบ มีเขาเล็กสามเหลี่ยมหน้าตาและสันต่ำบนจมูก", true),
@@ -305,9 +319,21 @@ const GROUP_RULES: Record<string, (d: Dinosaur) => Rule[]> = {
     r("skull", "a long, fairly narrow skull of an allosaur-like predator, NOT a tyrannosaur despite its name", "กะโหลกยาวแบบอัลโลซอร์ ไม่ใช่ไทแรนโนซอร์แม้จะมีชื่อคล้าย", true),
     r("build", "medium-sized, about 6–7 meters long, three-fingered arms, skin of small scales", "ขนาดกลางยาวราว 6–7 เมตร แขนมี 3 นิ้ว ผิวเกล็ดเล็ก"),
   ],
-  Megaraptora: () => [
-    r("claws", "long, strong arms with an enormous curved claw on the thumb and a large claw on the first finger", "แขนยาวแข็งแรง มีกรงเล็บโค้งขนาดใหญ่มากที่นิ้วโป้งและนิ้วแรก", true),
-    r("build", "a slender, lightly built predator about 6 meters long with a long, narrow skull and long legs", "นักล่ารูปร่างเพรียวยาวราว 6 เมตร หัวยาวแคบ ขายาว"),
+  Megaraptora: (d) => megaraptorRules(d),
+  Megaraptoridae: (d) => megaraptorRules(d),
+  Coelophysidae: () => [
+    r("build", "a small, very slender, lightly built predator about 3 meters long with a long, narrow, pointed head and a long S-curved neck", "นักล่าตัวเล็กเพรียวมากยาวราว 3 เมตร หัวยาวแคบแหลม คอยาวโค้งรูปตัว S", true),
+    r("arms", "arms with three clawed fingers", "แขนมีนิ้วที่มีกรงเล็บ 3 นิ้ว"),
+  ],
+  Protoceratopsidae: () => [
+    r("frill", "a large head with a short, broad neck frill with NO horns or spikes on it, and only a small bump on the nose", "หัวใหญ่ แผงคอสั้นกว้างไม่มีเขาหรือหนาม มีแค่ปุ่มเล็กบนจมูก", true),
+    r("beak", "a large, hooked, parrot-like beak", "จะงอยปากใหญ่งุ้มคล้ายนกแก้ว"),
+    r("build", "a stocky, sheep-sized body about 2 meters long, walking on four legs with the elbows tucked in", "ลำตัวล่ำขนาดแกะยาวราว 2 เมตร เดินสี่ขา ศอกหุบเข้าลำตัว"),
+    r("tail", "a tall, thin, sail-like fin along the upper part of the tail", "หางมีครีบบางสูงคล้ายใบเรือด้านบน"),
+  ],
+  Neoceratopsia: () => [
+    r("size", "a tiny plant-eater about 60 cm long, the size of a rabbit, with long hind legs", "ไดโนเสาร์กินพืชตัวเล็กมากยาวราว 60 ซม. ขนาดกระต่าย ขาหลังยาว", true),
+    r("head", "a large head with a sharply hooked beak and only a small, short neck frill, NO horns", "หัวใหญ่ จะงอยปากงุ้มแหลม แผงคอเล็กสั้น ไม่มีเขา", true),
   ],
   Coelurosauria: () => [
     r("build", "a slender, lightly built, long-legged predator about 4–5 meters long with a narrow head", "นักล่ารูปร่างเพรียว ขายาว ยาวราว 4–5 เมตร หัวแคบ", true),
@@ -491,7 +517,15 @@ export function anatomyRules(d: Dinosaur): Rule[] {
         r("lips", "mouth closed with all teeth fully hidden behind scaly lips, like a monitor lizard. NO visible teeth", "ปากปิด มีริมฝีปากปิดฟันจนมองไม่เห็นฟัน", true),
       );
     }
-    rules.push(r("hands", "hands held with palms facing each other (not pronated, not palms-down, not dangling)", "ฝ่ามือหันเข้าหากัน ไม่คว่ำลงหรือห้อยลง"));
+    // Most images still drew hanging, claws-down hands, so this one is spelled out and moved up.
+    rules.push(
+      r(
+        "hands",
+        "hands held tucked in near the chest with the palms facing inward toward each other, like clapping, claws curving inward and forward. NOT hanging down, NOT palms-down, NOT claws pointing at the ground",
+        "ฝ่ามือหันเข้าหากัน ไม่คว่ำลงหรือห้อยลง",
+        true,
+      ),
+    );
     // Spinosaurus's broad, flat feet may have spread weight over the fourth toe too.
     if (!NO_THREE_TOE_RULE.has(group) && d.slug !== "spinosaurus") {
       rules.push(r("feet", "three main weight-bearing toes on each foot", "เท้ามีนิ้วรับน้ำหนัก 3 นิ้ว"));
@@ -545,6 +579,13 @@ const AGE_OVERRIDES: Record<string, string> = {
   acrocanthosaurus: "the Aptian–Albian ages of the Early Cretaceous (about 113–110 million years ago)",
   tarbosaurus: "the Maastrichtian age of the Late Cretaceous (about 70 million years ago)",
   deinocheirus: "the Maastrichtian age of the Late Cretaceous (about 70 million years ago)",
+  coelophysis: "the Late Triassic, Norian–Rhaetian (about 215–201 million years ago)",
+  protoceratops: "the Campanian age of the Late Cretaceous (about 75–71 million years ago)",
+  albertosaurus: "the early Maastrichtian age of the Late Cretaceous (about 71 million years ago)",
+  gorgosaurus: "the Campanian age of the Late Cretaceous (about 76.5–75 million years ago)",
+  styracosaurus: "the Campanian age of the Late Cretaceous (about 75.5–75 million years ago)",
+  dreadnoughtus: "the Campanian to Maastrichtian ages of the Late Cretaceous (about 76–70 million years ago)",
+  maip: "the Maastrichtian age of the Late Cretaceous (about 70 million years ago)",
   baryonyx: "the Barremian age of the Early Cretaceous (about 130–125 million years ago)",
   irritator: "the Albian age of the Early Cretaceous (about 113–110 million years ago)",
   apatosaurus: "the Late Jurassic, late Kimmeridgian to early Tithonian (about 152–151 million years ago)",
@@ -583,6 +624,9 @@ const WEALDEN =
   "an Early Cretaceous river floodplain in western Europe, like the Wealden of England and the Bernissart clays of Belgium, with conifers, cycads, tree ferns and ferns, no grass and no flowering plants";
 const SOLNHOFEN =
   "a warm, semi-arid Late Jurassic island in the Solnhofen archipelago of southern Germany, with low conifer shrubs and cycads near a shallow turquoise lagoon, no grass and no flowering plants";
+const DJADOCHTA =
+  "an arid Late Cretaceous landscape of red sand dunes with sparse low shrubs and scattered small conifers, like the Djadochta Formation of Mongolia";
+const CLOVERLY = "an Early Cretaceous floodplain like the Cloverly Formation of Montana, with conifers, cycads, tree ferns and ferns, no grass";
 const NEMEGT =
   "a humid Late Cretaceous river floodplain forest like the Nemegt Formation of Mongolia, with conifers and broadleaf flowering trees, no grass";
 const DINOSAUR_PARK =
@@ -594,8 +638,7 @@ const HELL_CREEK =
 const HABITAT_OVERRIDES: Record<string, string> = {
   spinosaurus:
     "shallow water at the edge of a wide Late Cretaceous river system in North Africa, like the Kem Kem beds of Morocco, with large fish in the water, ferns and conifers on the banks, no grass",
-  velociraptor:
-    "an arid Late Cretaceous landscape of red sand dunes with sparse low shrubs and scattered small conifers, like the Djadochta Formation of Mongolia",
+  velociraptor: DJADOCHTA,
   stegosaurus: MORRISON,
   allosaurus: MORRISON,
   brachiosaurus: MORRISON,
@@ -611,7 +654,7 @@ const HABITAT_OVERRIDES: Record<string, string> = {
   carnotaurus: "a Late Cretaceous coastal plain in Patagonia, Argentina, like the La Colonia Formation, with conifers, ferns and early flowering plants near a tidal estuary, no grass",
   therizinosaurus: NEMEGT,
   dilophosaurus: "an Early Jurassic river floodplain like the Kayenta Formation of Arizona, with conifers, cycads and ferns, no grass and no flowering plants",
-  deinonychus: "an Early Cretaceous floodplain like the Cloverly Formation of Montana, with conifers, cycads, tree ferns and ferns, no grass",
+  deinonychus: CLOVERLY,
   utahraptor: "an Early Cretaceous semi-arid plain like the Cedar Mountain Formation of Utah, with conifers, cycads and ferns, no grass and no flowering plants",
   parasaurolophus: DINOSAUR_PARK,
   isanosaurus: NAM_PHONG,
@@ -654,6 +697,17 @@ const HABITAT_OVERRIDES: Record<string, string> = {
   acrocanthosaurus:
     "an Early Cretaceous coastal river plain like the Antlers Formation of Oklahoma, with conifers, cycads and ferns, no grass",
   tarbosaurus: NEMEGT,
+  aquilops: CLOVERLY,
+  coelophysis:
+    "a Late Triassic river floodplain like the Chinle Formation of New Mexico, with tall conifers, ferns and horsetails, no grass and no flowering plants",
+  protoceratops: DJADOCHTA,
+  albertosaurus:
+    "a humid Late Cretaceous coastal floodplain like the Horseshoe Canyon Formation of Alberta, with conifers, ferns, early flowering plants and swamps, no grass",
+  gorgosaurus: DINOSAUR_PARK,
+  styracosaurus: DINOSAUR_PARK,
+  dreadnoughtus:
+    "a Late Cretaceous temperate floodplain in southern Patagonia, Argentina, like the Cerro Fortaleza Formation, with conifers and ferns, no grass",
+  maip: "a cool Late Cretaceous floodplain in southern Patagonia, Argentina, like the Chorrillo Formation, with conifers, ferns and early flowering plants, no grass",
   deinocheirus: NEMEGT,
   suchomimus:
     "a vast Early Cretaceous river floodplain in Niger, like the Elrhaz Formation, with conifers, ferns and horsetails along a river, no grass",
