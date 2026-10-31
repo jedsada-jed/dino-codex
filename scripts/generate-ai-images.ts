@@ -109,6 +109,7 @@ const GENUS_GROUPS: Record<string, string> = {
   minimocursor: "Neornithischia",
   phuwiangvenator: "Megaraptora",
   psittacosaurus: "Psittacosauridae",
+  iguanodon: "Iguanodontia",
   ratchasimasaurus: "Iguanodontia",
   siamodon: "Iguanodontia",
   siamraptor: "Carcharodontosauridae",
@@ -121,6 +122,7 @@ const GENUS_GROUPS: Record<string, string> = {
  * the site says so next to the image.
  */
 const FRAGMENTARY = new Set([
+  "irritator", // skull only
   "isanosaurus",
   "kinnareemimus",
   "nagatitan",
@@ -150,6 +152,26 @@ const DROMAEOSAUR_SIZES: Record<string, { prompt: string; check: string }> = {
 };
 
 /**
+ * Horns and frill per ceratopsid genus: they differ too much to share (centrosaurines like
+ * Achelousaurus had bosses instead of brow horns), so a genus without an entry gets neither rule
+ * and main() warns until one is added.
+ */
+const CERATOPSID_HEADS: Record<string, Rule[]> = {
+  triceratops: [
+    r("horns", "two long brow horns above the eyes and one short horn on the nose", "เขายาว 2 อันเหนือตา และเขาสั้น 1 อันบนจมูก", true),
+    r("frill", "a solid bony frill without holes, edged with small triangular bony points", "แผงคอกระดูกทึบ ไม่มีรู ขอบมีปุ่มสามเหลี่ยม", true),
+  ],
+  achelousaurus: [
+    r("horns", "NO long horns: rough, rounded bony bosses on the nose and above each eye instead", "ไม่มีเขายาว มีปุ่มกระดูกขรุขระบนจมูกและเหนือตาแทน", true),
+    r("frill", "a short frill with one pair of long spikes on its top edge, curving outward to the sides", "แผงคอสั้น มีหนามยาว 1 คู่ที่ขอบบนโค้งออกด้านข้าง", true),
+  ],
+  styracosaurus: [
+    r("horns", "one long, straight horn on the nose and only small horns or knobs above the eyes", "เขายาวตรง 1 อันบนจมูก เหนือตามีเพียงเขาเล็กหรือปุ่ม", true),
+    r("frill", "a short frill with four to six long spikes radiating backward from its top edge", "แผงคอสั้น มีหนามยาว 4–6 อันแผ่ออกไปด้านหลังจากขอบบน", true),
+  ],
+};
+
+/**
  * Rules for specific groups. Order matters within a list only for readability; rules marked
  * early are moved up in the prompt.
  */
@@ -173,12 +195,26 @@ const GROUP_RULES: Record<string, (d: Dinosaur) => Rule[]> = {
       r("feathers", `body covered in short feathers, ${size.prompt}`, `ลำตัวมีขนปกคลุม ขนาด${size.check}`),
     ];
   },
-  Spinosauridae: () => [
-    r("snout", "a long, narrow, crocodile-like snout with conical teeth and nostrils set far back near the eyes, NOT a deep tyrannosaur-like skull", "ปากยาวแคบแบบจระเข้ ฟันทรงกรวย รูจมูกอยู่ค่อนไปทางตา", true),
-    r("sail", "a tall sail along the back formed by elongated neural spines covered in skin", "มีใบเรือสูงบนหลังจากกระดูกสันหลังที่ยืดยาว", true),
-    r("tail", "a deep, flexible, paddle-like tail with tall thin spines forming a fin, like a giant newt's tail", "หางแบนลึกเป็นครีบคล้ายพาย"),
-    r("limbs", "robust arms with a large curved thumb claw, relatively short hind legs with broad, flat feet", "แขนแข็งแรงมีกรงเล็บนิ้วโป้งใหญ่ ขาหลังค่อนข้างสั้น เท้ากว้างแบน"),
-  ],
+  Spinosauridae: (d) => {
+    const snout = r("snout", "a long, narrow, crocodile-like snout with conical teeth and nostrils set far back near the eyes, NOT a deep tyrannosaur-like skull", "ปากยาวแคบแบบจระเข้ ฟันทรงกรวย รูจมูกอยู่ค่อนไปทางตา", true);
+    // The tall sail, paddle tail and short legs are Spinosaurus's own; baryonychines had at most
+    // a low ridge (Suchomimus's was highest over the hips) and ordinary theropod legs.
+    if (d.slug === "spinosaurus") {
+      return [
+        snout,
+        r("sail", "a tall sail along the back formed by elongated neural spines covered in skin", "มีใบเรือสูงบนหลังจากกระดูกสันหลังที่ยืดยาว", true),
+        r("tail", "a deep, flexible, paddle-like tail with tall thin spines forming a fin, like a giant newt's tail", "หางแบนลึกเป็นครีบคล้ายพาย"),
+        r("limbs", "robust arms with a large curved thumb claw, relatively short hind legs with broad, flat feet", "แขนแข็งแรงมีกรงเล็บนิ้วโป้งใหญ่ ขาหลังค่อนข้างสั้น เท้ากว้างแบน"),
+      ];
+    }
+    return [
+      snout,
+      d.slug === "suchomimus"
+        ? r("back", "only a low ridge of skin along the back, highest over the hips, far lower than the sail of Spinosaurus", "มีสันหนังต่ำบนหลัง สูงสุดที่สะโพก ไม่ใช่ใบเรือสูงแบบสไปโนซอรัส", true)
+        : r("back", "NO sail on the back, at most a low ridge or hump along the middle of the back", "ไม่มีใบเรือบนหลัง อย่างมากมีแค่สันหรือโหนกต่ำ", true),
+      r("limbs", "strong arms with a huge curved claw on each thumb, long sturdy hind legs, an ordinary long tail", "แขนแข็งแรงมีกรงเล็บนิ้วโป้งโค้งใหญ่มาก ขาหลังยาวแข็งแรง หางยาวปกติ"),
+    ];
+  },
   Tyrannosauridae: () => [
     r("scales", "skin predominantly covered in small scales", "ผิวส่วนใหญ่เป็นเกล็ดเล็ก"),
     r("build", "massive deep skull, short two-fingered arms, powerful hind legs", "กะโหลกใหญ่ลึก แขนสั้นมี 2 นิ้ว ขาหลังแข็งแรง"),
@@ -248,9 +284,8 @@ const GROUP_RULES: Record<string, (d: Dinosaur) => Rule[]> = {
     r("spikes", "four long bony spikes at the end of the tail pointing outward and backward", "หนามยาว 4 อันที่ปลายหาง ชี้ออกด้านข้างและด้านหลัง"),
     r("head", "a small, narrow head with a toothless beak at the front", "หัวเล็กแคบ มีจะงอยปากด้านหน้า"),
   ],
-  Ceratopsidae: () => [
-    r("horns", "two long brow horns above the eyes and one short horn on the nose", "เขายาว 2 อันเหนือตา และเขาสั้น 1 อันบนจมูก", true),
-    r("frill", "a solid bony frill without holes, edged with small triangular bony points", "แผงคอกระดูกทึบ ไม่มีรู ขอบมีปุ่มสามเหลี่ยม", true),
+  Ceratopsidae: (d) => [
+    ...(CERATOPSID_HEADS[d.slug] ?? []),
     r("beak", "a large, hooked, parrot-like beak", "จะงอยปากใหญ่งุ้มคล้ายนกแก้ว"),
     r(
       "posture",
@@ -286,7 +321,8 @@ const GROUP_RULES: Record<string, (d: Dinosaur) => Rule[]> = {
     r("neck", "a very long neck held roughly horizontal, extending forward rather than straight up", "คอยาวมากยื่นไปข้างหน้าแนวราบ ไม่ชูตั้งตรง", true),
     r("tail", "an extremely long, whip-like tail held off the ground", "หางยาวมากเรียวเหมือนแส้ ไม่ลากพื้น", true),
     r("legs", "pillar-like legs with the front legs slightly shorter than the hind legs, front feet with a single thumb claw", "ขาเป็นเสา ขาหน้าสั้นกว่าขาหลังเล็กน้อย เท้าหน้ามีกรงเล็บเดียว"),
-    d.slug === "brontosaurus"
+    // Apatosaurines had much stouter necks and legs than Diplodocus.
+    d.slug === "brontosaurus" || d.slug === "apatosaurus"
       ? r("build", "a deep, heavily built body and a thick, robust neck", "ลำตัวลึกหนา คอหนาแข็งแรง")
       : r("build", "a slender body and a long, low head", "ลำตัวเพรียว หัวยาวต่ำ"),
   ],
@@ -317,8 +353,10 @@ const GROUP_RULES: Record<string, (d: Dinosaur) => Rule[]> = {
     r("build", "a small two-legged dinosaur about 1.5–2 meters long, short arms", "เดินสองขา ตัวเล็กยาวราว 1.5–2 เมตร แขนสั้น"),
     r("quills", "a row of long bristle-like quills along the top of the tail", "มีขนแข็งยาวเรียงเป็นแถวบนหาง"),
   ],
-  Iguanodontia: () => [
-    r("build", "a medium-sized, bulky iguanodontian plant-eater that walks on four legs, with a long tail held off the ground", "ไดโนเสาร์กินพืชกลุ่มอิกัวโนดอน ตัวหนา เดินสี่ขา หางไม่ลากพื้น", true),
+  Iguanodontia: (d) => [
+    d.slug === "iguanodon"
+      ? r("build", "a large, bulky plant-eater about 10 meters long, walking on four legs with the hind legs much longer than the arms, a long tail held off the ground", "ไดโนเสาร์กินพืชตัวใหญ่ราว 10 เมตร ตัวหนา เดินสี่ขา ขาหลังยาวกว่าแขนมาก หางไม่ลากพื้น", true)
+      : r("build", "a medium-sized, bulky iguanodontian plant-eater that walks on four legs, with a long tail held off the ground", "ไดโนเสาร์กินพืชกลุ่มอิกัวโนดอน ตัวหนา เดินสี่ขา หางไม่ลากพื้น", true),
     r("head", "a long head with a toothless beak at the front", "หัวยาว ปลายปากเป็นจะงอย"),
     r("thumb", "a conical spike on each thumb", "นิ้วโป้งมีหนามรูปกรวย"),
   ],
@@ -335,7 +373,7 @@ const GROUP_RULES: Record<string, (d: Dinosaur) => Rule[]> = {
 
 /** Theropod groups whose posture or anatomy the generic theropod rules get wrong. */
 const NO_LIPS = new Set(["Spinosauridae", "Therizinosauridae", "Archaeopterygidae", "Ornithomimosauria"]);
-const NO_THREE_TOE_RULE = new Set(["Dromaeosauridae", "Spinosauridae", "Therizinosauridae"]);
+const NO_THREE_TOE_RULE = new Set(["Dromaeosauridae", "Therizinosauridae"]);
 
 /** Reconstruction guidance that reflects current consensus for each group. */
 export function anatomyRules(d: Dinosaur): Rule[] {
@@ -371,7 +409,8 @@ export function anatomyRules(d: Dinosaur): Rule[] {
       );
     }
     rules.push(r("hands", "hands held with palms facing each other (not pronated, not palms-down, not dangling)", "ฝ่ามือหันเข้าหากัน ไม่คว่ำลงหรือห้อยลง"));
-    if (!NO_THREE_TOE_RULE.has(group)) {
+    // Spinosaurus's broad, flat feet may have spread weight over the fourth toe too.
+    if (!NO_THREE_TOE_RULE.has(group) && d.slug !== "spinosaurus") {
       rules.push(r("feet", "three main weight-bearing toes on each foot", "เท้ามีนิ้วรับน้ำหนัก 3 นิ้ว"));
     }
   }
@@ -410,7 +449,29 @@ const AGE_OVERRIDES: Record<string, string> = {
   isanosaurus: "the Early Jurassic, Sinemurian–Pliensbachian (about 195–185 million years ago)",
   mamenchisaurus: "the Late Jurassic (about 160–145 million years ago)",
   psittacosaurus: "the Early Cretaceous (about 125–113 million years ago)",
+  // PBDB still lumps in species from the Late Jurassic to the Maastrichtian; I. bernissartensis is Barremian–early Aptian.
+  iguanodon: "the Barremian to early Aptian ages of the Early Cretaceous (about 126–122 million years ago)",
+  baryonyx: "the Barremian age of the Early Cretaceous (about 130–125 million years ago)",
+  irritator: "the Albian age of the Early Cretaceous (about 113–110 million years ago)",
+  apatosaurus: "the Late Jurassic, late Kimmeridgian to early Tithonian (about 152–151 million years ago)",
 };
+
+/** Midpoint of the genus's age in Ma, taken from its override when there is one. */
+function ageMidMa(d: Dinosaur): number {
+  const override = AGE_OVERRIDES[d.slug];
+  if (!override) return (d.ageRangeMa[0] + d.ageRangeMa[1]) / 2;
+  const match = override.match(/about ([\d.]+)(?:–([\d.]+))? million years ago/);
+  if (!match) throw new Error(`AGE_OVERRIDES.${d.slug} needs "about X–Y million years ago"`);
+  return (Number(match[1]) + Number(match[2] ?? match[1])) / 2;
+}
+
+function ageText(d: Dinosaur): string {
+  if (AGE_OVERRIDES[d.slug]) return AGE_OVERRIDES[d.slug];
+  const ma = `${d.ageRangeMa[0]}–${d.ageRangeMa[1]} million years ago`;
+  // Some genera have no interval names in PBDB, only the Ma range.
+  if (!d.earlyInterval) return `about ${ma}`;
+  return `${d.earlyInterval}${d.lateInterval ? `–${d.lateInterval}` : ""} times (${ma})`;
+}
 
 // Khorat Group formations of northeastern Thailand.
 const NAM_PHONG =
@@ -424,6 +485,8 @@ const KHOK_KRUAT =
 
 const MORRISON =
   "a semi-arid Late Jurassic floodplain like the Morrison Formation of western North America, with conifers, cycads, ginkgoes, tree ferns and ferns along a river, no grass and no flowering plants";
+const WEALDEN =
+  "an Early Cretaceous river floodplain in western Europe, like the Wealden of England and the Bernissart clays of Belgium, with conifers, cycads, tree ferns and ferns, no grass and no flowering plants";
 const HELL_CREEK =
   "a humid latest-Cretaceous floodplain forest like the Hell Creek Formation of North America, with conifers, ferns and early flowering trees and shrubs, no grass";
 
@@ -467,13 +530,19 @@ const HABITAT_OVERRIDES: Record<string, string> = {
   ratchasimasaurus: KHOK_KRUAT,
   siamodon: KHOK_KRUAT,
   psittacosaurus: KHOK_KRUAT,
+  iguanodon: WEALDEN,
+  baryonyx: WEALDEN,
+  irritator:
+    "the shore of an Early Cretaceous coastal lagoon in northeastern Brazil, like the Romualdo Formation, with fish in the shallow water and conifers and ferns on the bank, no grass",
+  apatosaurus: MORRISON,
 };
 
 function habitat(d: Dinosaur): string {
   if (HABITAT_OVERRIDES[d.slug]) return HABITAT_OVERRIDES[d.slug];
-  const mid = (d.ageRangeMa[0] + d.ageRangeMa[1]) / 2;
+  const mid = ageMidMa(d);
   if (mid >= 201.4) return "a Triassic landscape with conifers, cycads and ferns, no grass and no flowering plants";
   if (mid >= 145) return "a Jurassic landscape with conifers, cycads, ginkgoes and ferns, no grass and no flowering plants";
+  if (mid >= 100.5) return "an Early Cretaceous landscape with conifers, cycads, ferns and rare early flowering plants, no grass";
   return "a Late Cretaceous landscape with conifers, ferns and early flowering plants, no grass lawns";
 }
 
@@ -518,10 +587,7 @@ function buildPrompt(d: Dinosaur, summary: string | null): { prompt: string; che
   const prompt = [
     `Scientifically accurate paleoart of ${d.name}, a ${d.diet === "unknown" ? "" : `${d.diet} `}${groupOf(
       d,
-    )} dinosaur from ${
-      AGE_OVERRIDES[d.slug] ??
-      `${d.earlyInterval ?? ""}${d.lateInterval ? `–${d.lateInterval}` : ""} times (${d.ageRangeMa[0]}–${d.ageRangeMa[1]} million years ago)`
-    }.`,
+    )} dinosaur from ${ageText(d)}.`,
     ...early.map((r) => `${r.prompt[0].toUpperCase()}${r.prompt.slice(1)}.`),
     ...(summary ? [`Reference: ${summary}`] : []),
     ...(rest.length ? [`Anatomy: ${rest.map((r) => r.prompt).join("; ")}.`] : []),
@@ -641,6 +707,11 @@ async function main() {
     const summary = await wikipediaSummary(title);
     const { prompt, checklist } = buildPrompt(d, summary?.text ?? null);
     const untranslated = checklist.filter((c) => !textEn.labels[c.label]).map((c) => c.label);
+    if (groupOf(d) === "Ceratopsidae" && !CERATOPSID_HEADS[slug]) {
+      const message = `[${slug}] no horn or frill rule yet: add one to CERATOPSID_HEADS`;
+      if (!dryRun) throw new Error(message);
+      console.warn(message);
+    }
     if (untranslated.length) {
       console.warn(`[${slug}] add English for these checklist items to data/ai-image-text-en.json:\n  ${untranslated.join("\n  ")}`);
     }

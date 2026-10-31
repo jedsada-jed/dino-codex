@@ -101,7 +101,15 @@
     "ญาติรุ่นแรกของไดโนเสาร์ปากเป็ด ปากกว้าง ไม่มีหงอน": "Early relative of duck-billed dinosaurs, broad beak, no crest",
     "ยาวราว 6 เมตร เดินได้ทั้งสี่ขาและสองขา หางยื่นตรง": "About 6 m long, walks on four or two legs, tail held straight out",
     "นักล่ารูปร่างเพรียว ขายาว ยาวราว 4–5 เมตร หัวแคบ": "Slender long-legged predator about 4–5 m long with a narrow head",
-    "ลำตัวมีขนเส้นเล็กปกคลุม": "Body covered in simple filament-like feathers"
+    "ลำตัวมีขนเส้นเล็กปกคลุม": "Body covered in simple filament-like feathers",
+    "ไม่มีใบเรือบนหลัง อย่างมากมีแค่สันหรือโหนกต่ำ": "No sail on the back, at most a low ridge or hump",
+    "มีสันหนังต่ำบนหลัง สูงสุดที่สะโพก ไม่ใช่ใบเรือสูงแบบสไปโนซอรัส": "Low skin ridge on the back, highest over the hips, not a tall Spinosaurus sail",
+    "แขนแข็งแรงมีกรงเล็บนิ้วโป้งโค้งใหญ่มาก ขาหลังยาวแข็งแรง หางยาวปกติ": "Strong arms with a huge curved thumb claw, long sturdy hind legs, an ordinary long tail",
+    "ไม่มีเขายาว มีปุ่มกระดูกขรุขระบนจมูกและเหนือตาแทน": "No long horns: rough bony bosses on the nose and above the eyes instead",
+    "แผงคอสั้น มีหนามยาว 1 คู่ที่ขอบบนโค้งออกด้านข้าง": "Short frill with one pair of long spikes on the top edge, curving outward",
+    "เขายาวตรง 1 อันบนจมูก เหนือตามีเพียงเขาเล็กหรือปุ่ม": "One long straight nose horn, only small horns or knobs above the eyes",
+    "แผงคอสั้น มีหนามยาว 4–6 อันแผ่ออกไปด้านหลังจากขอบบน": "Short frill with four to six long spikes radiating back from the top edge",
+    "ไดโนเสาร์กินพืชตัวใหญ่ราว 10 เมตร ตัวหนา เดินสี่ขา ขาหลังยาวกว่าแขนมาก หางไม่ลากพื้น": "Large bulky plant-eater about 10 m long, on four legs, hind legs much longer than the arms, tail off the ground"
   },
   "notes": {
     "เห็นฟันชัดตลอดแนวปาก": "Teeth clearly visible along the whole jaw",
