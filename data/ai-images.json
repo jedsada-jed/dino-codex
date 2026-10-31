@@ -5244,5 +5244,857 @@
         ]
       }
     }
+  ],
+  "aquilops": [
+    {
+      "localSmall": "/images/ai/aquilops-1-330.webp",
+      "localLarge": "/images/ai/aquilops-1-960.webp",
+      "width": 1536,
+      "height": 1024,
+      "model": "gpt-image-2",
+      "modelLabel": "GPT Image 2 โดย OpenAI",
+      "prompt": "Scientifically accurate paleoart of Aquilops, a herbivore Neoceratopsia dinosaur from Albian times (110.1–100.5 million years ago). A tiny plant-eater about 60 cm long, the size of a rabbit, with long hind legs. A large head with a sharply hooked beak and only a small, short neck frill, NO horns. Reference: Aquilops is a genus of ceratopsian dinosaur that lived in North America during the Early Cretaceous, about 109-98 million years ago. The only known specimen, a skull of a subadult, was found in 1997 in the Cloverly Formation of Carbon County, southern Montana, and became the basis of the new genus and species Aquilops americanus in 2014. The genus name is derived from the Latin and Greek words for \"eagle\" and \"face\", in reference to the dinosaur's hooked beak, and the specific name refers to North America, since it was the first early neoceratopsian found there. The holotype specimen consists of a partial skull and lower jaws of a probably subadult individual. Full body in side view, whole animal visible, standing in an Early Cretaceous floodplain like the Cloverly Formation of Montana, with conifers, cycads, tree ferns and ferns, no grass. Natural history museum illustration style, realistic textures and natural daylight, muted natural colors. No text, no labels, no humans, no modern objects.",
+      "checklist": [
+        {
+          "id": "size",
+          "label": "ไดโนเสาร์กินพืชตัวเล็กมากยาวราว 60 ซม. ขนาดกระต่าย ขาหลังยาว"
+        },
+        {
+          "id": "head",
+          "label": "หัวใหญ่ จะงอยปากงุ้มแหลม แผงคอเล็กสั้น ไม่มีเขา"
+        },
+        {
+          "id": "composition",
+          "label": "เห็นทั้งตัวในมุมด้านข้าง"
+        },
+        {
+          "id": "habitat",
+          "label": "ฉากตรงกับยุคและแหล่งที่พบฟอสซิล"
+        },
+        {
+          "id": "clean",
+          "label": "ไม่มีตัวหนังสือ คน หรือวัตถุสมัยใหม่"
+        }
+      ],
+      "caveat": "ไดโนเสาร์ตัวนี้รู้จักจากซากเพียงบางส่วน ภาพนี้เติมส่วนที่ไม่พบด้วยการคาดเดาจากญาติใกล้ชิด จึงอาจต่างจากตัวจริงได้มาก",
+      "promptSources": [
+        {
+          "label": "Wikipedia (en)",
+          "url": "https://en.wikipedia.org/wiki/Aquilops"
+        },
+        {
+          "label": "Paleobiology Database",
+          "url": "https://paleobiodb.org/classic/basicTaxonInfo?taxon_no=310995"
+        }
+      ],
+      "createdAt": "2026-10-31T04:05:23.198Z",
+      "review": {
+        "reviewer": "Claude Opus 5.5 (ตรวจจากภาพทีละข้อ)",
+        "reviewedAt": "2026-10-31T04:09:45.661Z",
+        "results": [
+          {
+            "id": "size",
+            "pass": false,
+            "note": "ขาหน้ายาวพอๆ กับขาหลัง ไม่เห็นขาหลังยาวเด่น และไม่มีสิ่งเทียบขนาด"
+          },
+          {
+            "id": "head",
+            "pass": true
+          },
+          {
+            "id": "composition",
+            "pass": true
+          },
+          {
+            "id": "habitat",
+            "pass": true
+          },
+          {
+            "id": "clean",
+            "pass": true
+          }
+        ]
+      }
+    }
+  ],
+  "albertosaurus": [
+    {
+      "localSmall": "/images/ai/albertosaurus-1-330.webp",
+      "localLarge": "/images/ai/albertosaurus-1-960.webp",
+      "width": 1536,
+      "height": 1024,
+      "model": "gpt-image-2",
+      "modelLabel": "GPT Image 2 โดย OpenAI",
+      "prompt": "Scientifically accurate paleoart of Albertosaurus, a carnivore Tyrannosauridae dinosaur from the early Maastrichtian age of the Late Cretaceous (about 71 million years ago). Bipedal with the back held roughly horizontal and the tail held straight out behind for balance, never dragging on the ground. NOT standing upright like a kangaroo. Mouth closed with all teeth fully hidden behind scaly lips, like a monitor lizard. NO visible teeth. Hands held tucked in near the chest with the palms facing inward toward each other, like clapping, claws curving inward and forward. NOT hanging down, NOT palms-down, NOT claws pointing at the ground. Reference: Albertosaurus is a genus of large tyrannosaurid dinosaur that lived in northwestern North America during the Latest Campanian to middle Maastrichtian age of the Late Cretaceous period, about 71 million years ago. The type species, A. sarcophagus, was apparently restricted in range to the modern-day Canadian province of Alberta, after which the genus is named, although an indeterminate species has been discovered in the Corral de Enmedio and Packard Formations of Mexico. Scientists disagree on the content of the genus and some recognize Gorgosaurus libratus as a second species. Anatomy: three main weight-bearing toes on each foot; skin predominantly covered in small scales; a lighter, more slender build than Tyrannosaurus, about 8–9 meters long, a short bony crest in front of each eye, short two-fingered arms. Full body in side view, whole animal visible, standing in a humid Late Cretaceous coastal floodplain like the Horseshoe Canyon Formation of Alberta, with conifers, ferns, early flowering plants and swamps, no grass. Natural history museum illustration style, realistic textures and natural daylight, muted natural colors. No text, no labels, no humans, no modern objects.",
+      "checklist": [
+        {
+          "id": "pose",
+          "label": "ยืนสองขา หลังขนานพื้น หางยื่นตรงไม่ลากพื้น"
+        },
+        {
+          "id": "lips",
+          "label": "ปากปิด มีริมฝีปากปิดฟันจนมองไม่เห็นฟัน"
+        },
+        {
+          "id": "hands",
+          "label": "ฝ่ามือหันเข้าหากัน ไม่คว่ำลงหรือห้อยลง"
+        },
+        {
+          "id": "feet",
+          "label": "เท้ามีนิ้วรับน้ำหนัก 3 นิ้ว"
+        },
+        {
+          "id": "scales",
+          "label": "ผิวส่วนใหญ่เป็นเกล็ดเล็ก"
+        },
+        {
+          "id": "build",
+          "label": "รูปร่างเพรียวกว่า T. rex ยาวราว 8–9 เมตร มีสันกระดูกสั้นหน้าตา แขนสั้นมี 2 นิ้ว"
+        },
+        {
+          "id": "composition",
+          "label": "เห็นทั้งตัวในมุมด้านข้าง"
+        },
+        {
+          "id": "habitat",
+          "label": "ฉากตรงกับยุคและแหล่งที่พบฟอสซิล"
+        },
+        {
+          "id": "clean",
+          "label": "ไม่มีตัวหนังสือ คน หรือวัตถุสมัยใหม่"
+        }
+      ],
+      "promptSources": [
+        {
+          "label": "Wikipedia (en)",
+          "url": "https://en.wikipedia.org/wiki/Albertosaurus"
+        },
+        {
+          "label": "Paleobiology Database",
+          "url": "https://paleobiodb.org/classic/basicTaxonInfo?taxon_no=38607"
+        }
+      ],
+      "createdAt": "2026-10-31T04:05:53.668Z",
+      "review": {
+        "reviewer": "Claude Opus 5.5 (ตรวจจากภาพทีละข้อ)",
+        "reviewedAt": "2026-10-31T04:09:45.667Z",
+        "results": [
+          {
+            "id": "pose",
+            "pass": true
+          },
+          {
+            "id": "lips",
+            "pass": true
+          },
+          {
+            "id": "hands",
+            "pass": false,
+            "note": "มือห้อยลง กรงเล็บชี้ลงพื้น"
+          },
+          {
+            "id": "feet",
+            "pass": true
+          },
+          {
+            "id": "scales",
+            "pass": true
+          },
+          {
+            "id": "build",
+            "pass": true,
+            "note": "มีสันเล็กหน้าตา รูปร่างเพรียวกว่า T. rex"
+          },
+          {
+            "id": "composition",
+            "pass": true
+          },
+          {
+            "id": "habitat",
+            "pass": true
+          },
+          {
+            "id": "clean",
+            "pass": true
+          }
+        ]
+      }
+    }
+  ],
+  "styracosaurus": [
+    {
+      "localSmall": "/images/ai/styracosaurus-1-330.webp",
+      "localLarge": "/images/ai/styracosaurus-1-960.webp",
+      "width": 1536,
+      "height": 1024,
+      "model": "gpt-image-2",
+      "modelLabel": "GPT Image 2 โดย OpenAI",
+      "prompt": "Scientifically accurate paleoart of Styracosaurus, a herbivore Ceratopsidae dinosaur from the Campanian age of the Late Cretaceous (about 75.5–75 million years ago). One long, straight horn on the nose and only small horns or knobs above the eyes. A short frill with four to six long spikes radiating backward from its top edge. Reference: Styracosaurus is an extinct genus of herbivorous dinosaur from the Late Cretaceous of North America. It had four to six long parietal spikes extending from its neck frill, a smaller jugal horn on each of its cheeks, and a single horn protruding from its nose, which may have been up to 60 centimeters long and 15 centimeters wide. The function or functions of the horns and frills have been debated for many years. Anatomy: a large, hooked, parrot-like beak; quadrupedal with pillar-like hind legs; front legs semi-erect with the elbows slightly out and the fingers pointing forward and outward, NOT palms-down; skin of large rounded scales, some with small conical bumps. Full body in side view, whole animal visible, standing in a Late Cretaceous coastal floodplain like the Dinosaur Park Formation of Alberta, with conifers, ferns and early flowering plants by a river, no grass. Natural history museum illustration style, realistic textures and natural daylight, muted natural colors. No text, no labels, no humans, no modern objects.",
+      "checklist": [
+        {
+          "id": "horns",
+          "label": "เขายาวตรง 1 อันบนจมูก เหนือตามีเพียงเขาเล็กหรือปุ่ม"
+        },
+        {
+          "id": "frill",
+          "label": "แผงคอสั้น มีหนามยาว 4–6 อันแผ่ออกไปด้านหลังจากขอบบน"
+        },
+        {
+          "id": "beak",
+          "label": "จะงอยปากใหญ่งุ้มคล้ายนกแก้ว"
+        },
+        {
+          "id": "posture",
+          "label": "เดินสี่ขา ขาหน้ากางศอกเล็กน้อย นิ้วชี้ไปด้านหน้าและออกด้านข้าง"
+        },
+        {
+          "id": "skin",
+          "label": "ผิวเป็นเกล็ดกลมใหญ่ บางเกล็ดมีปุ่มเล็ก"
+        },
+        {
+          "id": "composition",
+          "label": "เห็นทั้งตัวในมุมด้านข้าง"
+        },
+        {
+          "id": "habitat",
+          "label": "ฉากตรงกับยุคและแหล่งที่พบฟอสซิล"
+        },
+        {
+          "id": "clean",
+          "label": "ไม่มีตัวหนังสือ คน หรือวัตถุสมัยใหม่"
+        }
+      ],
+      "promptSources": [
+        {
+          "label": "Wikipedia (en)",
+          "url": "https://en.wikipedia.org/wiki/Styracosaurus"
+        },
+        {
+          "label": "Paleobiology Database",
+          "url": "https://paleobiodb.org/classic/basicTaxonInfo?taxon_no=38860"
+        }
+      ],
+      "createdAt": "2026-10-31T04:06:24.388Z",
+      "review": {
+        "reviewer": "Claude Opus 5.5 (ตรวจจากภาพทีละข้อ)",
+        "reviewedAt": "2026-10-31T04:09:45.667Z",
+        "results": [
+          {
+            "id": "horns",
+            "pass": true,
+            "note": "เขาจมูกยาวชี้ไปข้างหน้าเฉียงขึ้น เหนือตามีปุ่มเล็ก"
+          },
+          {
+            "id": "frill",
+            "pass": true
+          },
+          {
+            "id": "beak",
+            "pass": true
+          },
+          {
+            "id": "posture",
+            "pass": true
+          },
+          {
+            "id": "skin",
+            "pass": true
+          },
+          {
+            "id": "composition",
+            "pass": true
+          },
+          {
+            "id": "habitat",
+            "pass": true
+          },
+          {
+            "id": "clean",
+            "pass": true
+          }
+        ]
+      }
+    }
+  ],
+  "coelophysis": [
+    {
+      "localSmall": "/images/ai/coelophysis-1-330.webp",
+      "localLarge": "/images/ai/coelophysis-1-960.webp",
+      "width": 1536,
+      "height": 1024,
+      "model": "gpt-image-2",
+      "modelLabel": "GPT Image 2 โดย OpenAI",
+      "prompt": "Scientifically accurate paleoart of Coelophysis, a carnivore Coelophysidae dinosaur from the Late Triassic, Norian–Rhaetian (about 215–201 million years ago). Bipedal with the back held roughly horizontal and the tail held straight out behind for balance, never dragging on the ground. NOT standing upright like a kangaroo. Mouth closed with all teeth fully hidden behind scaly lips, like a monitor lizard. NO visible teeth. Hands held tucked in near the chest with the palms facing inward toward each other, like clapping, claws curving inward and forward. NOT hanging down, NOT palms-down, NOT claws pointing at the ground. A small, very slender, lightly built predator about 3 meters long with a long, narrow, pointed head and a long S-curved neck. Reference: Coelophysis is an extinct genus of coelophysid theropod dinosaurs that lived approximately 215 to 201.4 million years ago during the late Triassic period from the middle Norian to Rhaetian age in what is now the southwestern United States. Megapnosaurus was once considered to be a species within this genus, but this interpretation has been challenged and the genus Megapnosaurus is now considered valid. Anatomy: three main weight-bearing toes on each foot; arms with three clawed fingers. Full body in side view, whole animal visible, standing in a Late Triassic river floodplain like the Chinle Formation of New Mexico, with tall conifers, ferns and horsetails, no grass and no flowering plants. Natural history museum illustration style, realistic textures and natural daylight, muted natural colors. No text, no labels, no humans, no modern objects.",
+      "checklist": [
+        {
+          "id": "pose",
+          "label": "ยืนสองขา หลังขนานพื้น หางยื่นตรงไม่ลากพื้น"
+        },
+        {
+          "id": "lips",
+          "label": "ปากปิด มีริมฝีปากปิดฟันจนมองไม่เห็นฟัน"
+        },
+        {
+          "id": "hands",
+          "label": "ฝ่ามือหันเข้าหากัน ไม่คว่ำลงหรือห้อยลง"
+        },
+        {
+          "id": "feet",
+          "label": "เท้ามีนิ้วรับน้ำหนัก 3 นิ้ว"
+        },
+        {
+          "id": "build",
+          "label": "นักล่าตัวเล็กเพรียวมากยาวราว 3 เมตร หัวยาวแคบแหลม คอยาวโค้งรูปตัว S"
+        },
+        {
+          "id": "arms",
+          "label": "แขนมีนิ้วที่มีกรงเล็บ 3 นิ้ว"
+        },
+        {
+          "id": "composition",
+          "label": "เห็นทั้งตัวในมุมด้านข้าง"
+        },
+        {
+          "id": "habitat",
+          "label": "ฉากตรงกับยุคและแหล่งที่พบฟอสซิล"
+        },
+        {
+          "id": "clean",
+          "label": "ไม่มีตัวหนังสือ คน หรือวัตถุสมัยใหม่"
+        }
+      ],
+      "promptSources": [
+        {
+          "label": "Wikipedia (en)",
+          "url": "https://en.wikipedia.org/wiki/Coelophysis"
+        },
+        {
+          "label": "Paleobiology Database",
+          "url": "https://paleobiodb.org/classic/basicTaxonInfo?taxon_no=38520"
+        }
+      ],
+      "createdAt": "2026-10-31T04:06:53.788Z",
+      "review": {
+        "reviewer": "Claude Opus 5.5 (ตรวจจากภาพทีละข้อ)",
+        "reviewedAt": "2026-10-31T04:09:45.667Z",
+        "results": [
+          {
+            "id": "pose",
+            "pass": true,
+            "note": "หลังขนานพื้น คอยาวชูขึ้น"
+          },
+          {
+            "id": "lips",
+            "pass": true
+          },
+          {
+            "id": "hands",
+            "pass": true,
+            "note": "มือยกไปข้างหน้า นิ้วงอขึ้น ไม่ห้อย"
+          },
+          {
+            "id": "feet",
+            "pass": true
+          },
+          {
+            "id": "build",
+            "pass": true
+          },
+          {
+            "id": "arms",
+            "pass": true
+          },
+          {
+            "id": "composition",
+            "pass": true
+          },
+          {
+            "id": "habitat",
+            "pass": true
+          },
+          {
+            "id": "clean",
+            "pass": true
+          }
+        ]
+      }
+    }
+  ],
+  "dreadnoughtus": [
+    {
+      "localSmall": "/images/ai/dreadnoughtus-1-330.webp",
+      "localLarge": "/images/ai/dreadnoughtus-1-960.webp",
+      "width": 1536,
+      "height": 1024,
+      "model": "gpt-image-2",
+      "modelLabel": "GPT Image 2 โดย OpenAI",
+      "prompt": "Scientifically accurate paleoart of Dreadnoughtus, a herbivore Titanosauria dinosaur from the Campanian to Maastrichtian ages of the Late Cretaceous (about 76–70 million years ago). A huge sauropod about 26 meters long with a broad, wide body. Reference: Dreadnoughtus is a genus of titanosaurian sauropod dinosaur containing a single species, Dreadnoughtus schrani. It is known from two partial skeletons discovered in Upper Cretaceous rocks of the Cerro Fortaleza Formation in Santa Cruz Province, Argentina. It is one of the largest terrestrial vertebrates known from reasonably complete remains, with the immature type specimen measuring 26 metres (85 ft) in total body length and weighing up to 48–49 metric tons. Anatomy: a long neck held roughly horizontal or slightly raised; pillar-like legs; front feet are columns without claws. Full body in side view, whole animal visible, standing in a Late Cretaceous temperate floodplain in southern Patagonia, Argentina, like the Cerro Fortaleza Formation, with conifers and ferns, no grass. Natural history museum illustration style, realistic textures and natural daylight, muted natural colors. No text, no labels, no humans, no modern objects.",
+      "checklist": [
+        {
+          "id": "scale",
+          "label": "ไดโนเสาร์คอยาวขนาดใหญ่มากราว 26 เมตร ลำตัวกว้าง"
+        },
+        {
+          "id": "neck",
+          "label": "คอยาวยื่นแนวราบหรือชูขึ้นเล็กน้อย"
+        },
+        {
+          "id": "legs",
+          "label": "ขาเป็นเสา เท้าหน้าไม่มีกรงเล็บ"
+        },
+        {
+          "id": "composition",
+          "label": "เห็นทั้งตัวในมุมด้านข้าง"
+        },
+        {
+          "id": "habitat",
+          "label": "ฉากตรงกับยุคและแหล่งที่พบฟอสซิล"
+        },
+        {
+          "id": "clean",
+          "label": "ไม่มีตัวหนังสือ คน หรือวัตถุสมัยใหม่"
+        }
+      ],
+      "promptSources": [
+        {
+          "label": "Wikipedia (en)",
+          "url": "https://en.wikipedia.org/wiki/Dreadnoughtus"
+        },
+        {
+          "label": "Paleobiology Database",
+          "url": "https://paleobiodb.org/classic/basicTaxonInfo?taxon_no=304823"
+        }
+      ],
+      "createdAt": "2026-10-31T04:07:22.386Z",
+      "review": {
+        "reviewer": "Claude Opus 5.5 (ตรวจจากภาพทีละข้อ)",
+        "reviewedAt": "2026-10-31T04:09:45.667Z",
+        "results": [
+          {
+            "id": "scale",
+            "pass": true
+          },
+          {
+            "id": "neck",
+            "pass": true
+          },
+          {
+            "id": "legs",
+            "pass": true
+          },
+          {
+            "id": "composition",
+            "pass": true
+          },
+          {
+            "id": "habitat",
+            "pass": true
+          },
+          {
+            "id": "clean",
+            "pass": true
+          }
+        ]
+      }
+    }
+  ],
+  "irritator": [
+    {
+      "localSmall": "/images/ai/irritator-1-330.webp",
+      "localLarge": "/images/ai/irritator-1-960.webp",
+      "width": 1536,
+      "height": 1024,
+      "model": "gpt-image-2",
+      "modelLabel": "GPT Image 2 โดย OpenAI",
+      "prompt": "Scientifically accurate paleoart of Irritator, a carnivore Spinosauridae dinosaur from the Albian age of the Early Cretaceous (about 113–110 million years ago). Bipedal with the back held roughly horizontal and the tail held straight out behind for balance, never dragging on the ground. NOT standing upright like a kangaroo. Hands held tucked in near the chest with the palms facing inward toward each other, like clapping, claws curving inward and forward. NOT hanging down, NOT palms-down, NOT claws pointing at the ground. A long, narrow, crocodile-like snout with conical teeth and nostrils set far back near the eyes, NOT a deep tyrannosaur-like skull. NO sail on the back, at most a low ridge or hump along the middle of the back. Reference: Irritator is a genus of spinosaurid dinosaur that lived in what is now Brazil during the Albian stage of the Early Cretaceous Period, about 113 to 110 million years ago. It is known from a nearly complete skull found in the Romualdo Formation of the Araripe Basin. Fossil dealers had acquired this skull and sold it to the State Museum of Natural History Stuttgart. Anatomy: three main weight-bearing toes on each foot; strong arms with a huge curved claw on each thumb, long sturdy hind legs, an ordinary long tail. Full body in side view, whole animal visible, standing in the shore of an Early Cretaceous coastal lagoon in northeastern Brazil, like the Romualdo Formation, with fish in the shallow water and conifers and ferns on the bank, no grass. Natural history museum illustration style, realistic textures and natural daylight, muted natural colors. No text, no labels, no humans, no modern objects.",
+      "checklist": [
+        {
+          "id": "pose",
+          "label": "ยืนสองขา หลังขนานพื้น หางยื่นตรงไม่ลากพื้น"
+        },
+        {
+          "id": "hands",
+          "label": "ฝ่ามือหันเข้าหากัน ไม่คว่ำลงหรือห้อยลง"
+        },
+        {
+          "id": "feet",
+          "label": "เท้ามีนิ้วรับน้ำหนัก 3 นิ้ว"
+        },
+        {
+          "id": "snout",
+          "label": "ปากยาวแคบแบบจระเข้ ฟันทรงกรวย รูจมูกอยู่ค่อนไปทางตา"
+        },
+        {
+          "id": "back",
+          "label": "ไม่มีใบเรือบนหลัง อย่างมากมีแค่สันหรือโหนกต่ำ"
+        },
+        {
+          "id": "limbs",
+          "label": "แขนแข็งแรงมีกรงเล็บนิ้วโป้งโค้งใหญ่มาก ขาหลังยาวแข็งแรง หางยาวปกติ"
+        },
+        {
+          "id": "composition",
+          "label": "เห็นทั้งตัวในมุมด้านข้าง"
+        },
+        {
+          "id": "habitat",
+          "label": "ฉากตรงกับยุคและแหล่งที่พบฟอสซิล"
+        },
+        {
+          "id": "clean",
+          "label": "ไม่มีตัวหนังสือ คน หรือวัตถุสมัยใหม่"
+        }
+      ],
+      "caveat": "ไดโนเสาร์ตัวนี้รู้จักจากซากเพียงบางส่วน ภาพนี้เติมส่วนที่ไม่พบด้วยการคาดเดาจากญาติใกล้ชิด จึงอาจต่างจากตัวจริงได้มาก",
+      "promptSources": [
+        {
+          "label": "Wikipedia (en)",
+          "url": "https://en.wikipedia.org/wiki/Irritator"
+        },
+        {
+          "label": "Paleobiology Database",
+          "url": "https://paleobiodb.org/classic/basicTaxonInfo?taxon_no=64272"
+        }
+      ],
+      "createdAt": "2026-10-31T04:07:55.231Z",
+      "review": {
+        "reviewer": "Claude Opus 5.5 (ตรวจจากภาพทีละข้อ)",
+        "reviewedAt": "2026-10-31T04:09:45.667Z",
+        "results": [
+          {
+            "id": "pose",
+            "pass": true
+          },
+          {
+            "id": "hands",
+            "pass": false,
+            "note": "มือคว่ำลง กรงเล็บชี้ลงไปข้างหน้า"
+          },
+          {
+            "id": "feet",
+            "pass": true
+          },
+          {
+            "id": "snout",
+            "pass": true
+          },
+          {
+            "id": "back",
+            "pass": true
+          },
+          {
+            "id": "limbs",
+            "pass": true
+          },
+          {
+            "id": "composition",
+            "pass": true
+          },
+          {
+            "id": "habitat",
+            "pass": true
+          },
+          {
+            "id": "clean",
+            "pass": true
+          }
+        ]
+      }
+    }
+  ],
+  "protoceratops": [
+    {
+      "localSmall": "/images/ai/protoceratops-1-330.webp",
+      "localLarge": "/images/ai/protoceratops-1-960.webp",
+      "width": 1536,
+      "height": 1024,
+      "model": "gpt-image-2",
+      "modelLabel": "GPT Image 2 โดย OpenAI",
+      "prompt": "Scientifically accurate paleoart of Protoceratops, a herbivore Protoceratopsidae dinosaur from the Campanian age of the Late Cretaceous (about 75–71 million years ago). A large head with a short, broad neck frill with NO horns or spikes on it, and only a small bump on the nose. Reference: Protoceratops is a genus of small protoceratopsid dinosaurs that lived in Asia during the Late Cretaceous, around 75 to 71 million years ago. The genus Protoceratops includes two species: P. andrewsi and the larger P. hellenikorhinus. The former was described in 1923 with fossils from the Mongolian Djadokhta Formation, and the latter in 2001 with fossils from the Chinese Bayan Mandahu Formation. Anatomy: a large, hooked, parrot-like beak; a stocky, sheep-sized body about 2 meters long, walking on four legs with the elbows tucked in; a tall, thin, sail-like fin along the upper part of the tail. Full body in side view, whole animal visible, standing in an arid Late Cretaceous landscape of red sand dunes with sparse low shrubs and scattered small conifers, like the Djadochta Formation of Mongolia. Natural history museum illustration style, realistic textures and natural daylight, muted natural colors. No text, no labels, no humans, no modern objects.",
+      "checklist": [
+        {
+          "id": "frill",
+          "label": "หัวใหญ่ แผงคอสั้นกว้างไม่มีเขาหรือหนาม มีแค่ปุ่มเล็กบนจมูก"
+        },
+        {
+          "id": "beak",
+          "label": "จะงอยปากใหญ่งุ้มคล้ายนกแก้ว"
+        },
+        {
+          "id": "build",
+          "label": "ลำตัวล่ำขนาดแกะยาวราว 2 เมตร เดินสี่ขา ศอกหุบเข้าลำตัว"
+        },
+        {
+          "id": "tail",
+          "label": "หางมีครีบบางสูงคล้ายใบเรือด้านบน"
+        },
+        {
+          "id": "composition",
+          "label": "เห็นทั้งตัวในมุมด้านข้าง"
+        },
+        {
+          "id": "habitat",
+          "label": "ฉากตรงกับยุคและแหล่งที่พบฟอสซิล"
+        },
+        {
+          "id": "clean",
+          "label": "ไม่มีตัวหนังสือ คน หรือวัตถุสมัยใหม่"
+        }
+      ],
+      "promptSources": [
+        {
+          "label": "Wikipedia (en)",
+          "url": "https://en.wikipedia.org/wiki/Protoceratops"
+        },
+        {
+          "label": "Paleobiology Database",
+          "url": "https://paleobiodb.org/classic/basicTaxonInfo?taxon_no=38848"
+        }
+      ],
+      "createdAt": "2026-10-31T04:08:25.211Z",
+      "review": {
+        "reviewer": "Claude Opus 5.5 (ตรวจจากภาพทีละข้อ)",
+        "reviewedAt": "2026-10-31T04:09:45.667Z",
+        "results": [
+          {
+            "id": "frill",
+            "pass": true,
+            "note": "แผงคอไม่มีเขา ปุ่มบนจมูกเล็กมาก"
+          },
+          {
+            "id": "beak",
+            "pass": true
+          },
+          {
+            "id": "build",
+            "pass": true
+          },
+          {
+            "id": "tail",
+            "pass": true
+          },
+          {
+            "id": "composition",
+            "pass": true
+          },
+          {
+            "id": "habitat",
+            "pass": true
+          },
+          {
+            "id": "clean",
+            "pass": true
+          }
+        ]
+      }
+    }
+  ],
+  "maip": [
+    {
+      "localSmall": "/images/ai/maip-1-330.webp",
+      "localLarge": "/images/ai/maip-1-960.webp",
+      "width": 1536,
+      "height": 1024,
+      "model": "gpt-image-2",
+      "modelLabel": "GPT Image 2 โดย OpenAI",
+      "prompt": "Scientifically accurate paleoart of Maip, a carnivore Megaraptoridae dinosaur from the Maastrichtian age of the Late Cretaceous (about 70 million years ago). Bipedal with the back held roughly horizontal and the tail held straight out behind for balance, never dragging on the ground. NOT standing upright like a kangaroo. Mouth closed with all teeth fully hidden behind scaly lips, like a monitor lizard. NO visible teeth. Hands held tucked in near the chest with the palms facing inward toward each other, like clapping, claws curving inward and forward. NOT hanging down, NOT palms-down, NOT claws pointing at the ground. Long, strong arms with an enormous curved claw on the thumb and a large claw on the first finger. Reference: Maip is a genus of large megaraptorid theropod dinosaur from the Late Cretaceous (Maastrichtian) Chorrillo Formation of Santa Cruz, Argentina. The genus contains a single species, M. macrothorax, known from an incomplete, disarticulated skeleton. Maip may represent the largest megaraptorid known from South America, and possibly the world. Anatomy: three main weight-bearing toes on each foot; a large predator about 9–10 meters long with a long, narrow skull and long legs. Full body in side view, whole animal visible, standing in a cool Late Cretaceous floodplain in southern Patagonia, Argentina, like the Chorrillo Formation, with conifers, ferns and early flowering plants, no grass. Natural history museum illustration style, realistic textures and natural daylight, muted natural colors. No text, no labels, no humans, no modern objects.",
+      "checklist": [
+        {
+          "id": "pose",
+          "label": "ยืนสองขา หลังขนานพื้น หางยื่นตรงไม่ลากพื้น"
+        },
+        {
+          "id": "lips",
+          "label": "ปากปิด มีริมฝีปากปิดฟันจนมองไม่เห็นฟัน"
+        },
+        {
+          "id": "hands",
+          "label": "ฝ่ามือหันเข้าหากัน ไม่คว่ำลงหรือห้อยลง"
+        },
+        {
+          "id": "feet",
+          "label": "เท้ามีนิ้วรับน้ำหนัก 3 นิ้ว"
+        },
+        {
+          "id": "claws",
+          "label": "แขนยาวแข็งแรง มีกรงเล็บโค้งขนาดใหญ่มากที่นิ้วโป้งและนิ้วแรก"
+        },
+        {
+          "id": "build",
+          "label": "นักล่าตัวใหญ่ยาวราว 9–10 เมตร หัวยาวแคบ ขายาว"
+        },
+        {
+          "id": "composition",
+          "label": "เห็นทั้งตัวในมุมด้านข้าง"
+        },
+        {
+          "id": "habitat",
+          "label": "ฉากตรงกับยุคและแหล่งที่พบฟอสซิล"
+        },
+        {
+          "id": "clean",
+          "label": "ไม่มีตัวหนังสือ คน หรือวัตถุสมัยใหม่"
+        }
+      ],
+      "caveat": "ไดโนเสาร์ตัวนี้รู้จักจากซากเพียงบางส่วน ภาพนี้เติมส่วนที่ไม่พบด้วยการคาดเดาจากญาติใกล้ชิด จึงอาจต่างจากตัวจริงได้มาก",
+      "promptSources": [
+        {
+          "label": "Wikipedia (en)",
+          "url": "https://en.wikipedia.org/wiki/Maip"
+        },
+        {
+          "label": "Paleobiology Database",
+          "url": "https://paleobiodb.org/classic/basicTaxonInfo?taxon_no=455622"
+        }
+      ],
+      "createdAt": "2026-10-31T04:08:59.460Z",
+      "review": {
+        "reviewer": "Claude Opus 5.5 (ตรวจจากภาพทีละข้อ)",
+        "reviewedAt": "2026-10-31T04:09:45.667Z",
+        "results": [
+          {
+            "id": "pose",
+            "pass": true
+          },
+          {
+            "id": "lips",
+            "pass": true
+          },
+          {
+            "id": "hands",
+            "pass": true,
+            "note": "มือพับแนบอก กรงเล็บงอเข้า"
+          },
+          {
+            "id": "feet",
+            "pass": true
+          },
+          {
+            "id": "claws",
+            "pass": true
+          },
+          {
+            "id": "build",
+            "pass": true
+          },
+          {
+            "id": "composition",
+            "pass": true
+          },
+          {
+            "id": "habitat",
+            "pass": true
+          },
+          {
+            "id": "clean",
+            "pass": true
+          }
+        ]
+      }
+    }
+  ],
+  "gorgosaurus": [
+    {
+      "localSmall": "/images/ai/gorgosaurus-1-330.webp",
+      "localLarge": "/images/ai/gorgosaurus-1-960.webp",
+      "width": 1536,
+      "height": 1024,
+      "model": "gpt-image-2",
+      "modelLabel": "GPT Image 2 โดย OpenAI",
+      "prompt": "Scientifically accurate paleoart of Gorgosaurus, a carnivore Tyrannosauridae dinosaur from the Campanian age of the Late Cretaceous (about 76.5–75 million years ago). Bipedal with the back held roughly horizontal and the tail held straight out behind for balance, never dragging on the ground. NOT standing upright like a kangaroo. Mouth closed with all teeth fully hidden behind scaly lips, like a monitor lizard. NO visible teeth. Hands held tucked in near the chest with the palms facing inward toward each other, like clapping, claws curving inward and forward. NOT hanging down, NOT palms-down, NOT claws pointing at the ground. Reference: Gorgosaurus is a genus of tyrannosaurid theropod dinosaur that lived in western North America during the Late Cretaceous Period (Campanian), between about 76.5 and 73 million years ago. Fossil remains have been found in Western Canada as well as the U.S. state of Montana. Paleontologists recognize only the type species, G. libratus, although other species have been erroneously referred to the genus. Anatomy: three main weight-bearing toes on each foot; skin predominantly covered in small scales; a lighter, more slender build than Tyrannosaurus, about 8–9 meters long, a short bony crest in front of each eye, short two-fingered arms. Full body in side view, whole animal visible, standing in a Late Cretaceous coastal floodplain like the Dinosaur Park Formation of Alberta, with conifers, ferns and early flowering plants by a river, no grass. Natural history museum illustration style, realistic textures and natural daylight, muted natural colors. No text, no labels, no humans, no modern objects.",
+      "checklist": [
+        {
+          "id": "pose",
+          "label": "ยืนสองขา หลังขนานพื้น หางยื่นตรงไม่ลากพื้น"
+        },
+        {
+          "id": "lips",
+          "label": "ปากปิด มีริมฝีปากปิดฟันจนมองไม่เห็นฟัน"
+        },
+        {
+          "id": "hands",
+          "label": "ฝ่ามือหันเข้าหากัน ไม่คว่ำลงหรือห้อยลง"
+        },
+        {
+          "id": "feet",
+          "label": "เท้ามีนิ้วรับน้ำหนัก 3 นิ้ว"
+        },
+        {
+          "id": "scales",
+          "label": "ผิวส่วนใหญ่เป็นเกล็ดเล็ก"
+        },
+        {
+          "id": "build",
+          "label": "รูปร่างเพรียวกว่า T. rex ยาวราว 8–9 เมตร มีสันกระดูกสั้นหน้าตา แขนสั้นมี 2 นิ้ว"
+        },
+        {
+          "id": "composition",
+          "label": "เห็นทั้งตัวในมุมด้านข้าง"
+        },
+        {
+          "id": "habitat",
+          "label": "ฉากตรงกับยุคและแหล่งที่พบฟอสซิล"
+        },
+        {
+          "id": "clean",
+          "label": "ไม่มีตัวหนังสือ คน หรือวัตถุสมัยใหม่"
+        }
+      ],
+      "promptSources": [
+        {
+          "label": "Wikipedia (en)",
+          "url": "https://en.wikipedia.org/wiki/Gorgosaurus"
+        },
+        {
+          "label": "Paleobiology Database",
+          "url": "https://paleobiodb.org/classic/basicTaxonInfo?taxon_no=53193"
+        }
+      ],
+      "createdAt": "2026-10-31T04:09:30.286Z",
+      "review": {
+        "reviewer": "Claude Opus 5.5 (ตรวจจากภาพทีละข้อ)",
+        "reviewedAt": "2026-10-31T04:09:45.667Z",
+        "results": [
+          {
+            "id": "pose",
+            "pass": true
+          },
+          {
+            "id": "lips",
+            "pass": true
+          },
+          {
+            "id": "hands",
+            "pass": true,
+            "note": "มือยกไปข้างหน้า กรงเล็บงอ ไม่ห้อยลง"
+          },
+          {
+            "id": "feet",
+            "pass": true
+          },
+          {
+            "id": "scales",
+            "pass": true
+          },
+          {
+            "id": "build",
+            "pass": true,
+            "note": "มีสันสีแดงเล็กหน้าตา"
+          },
+          {
+            "id": "composition",
+            "pass": true
+          },
+          {
+            "id": "habitat",
+            "pass": true
+          },
+          {
+            "id": "clean",
+            "pass": true
+          }
+        ]
+      }
+    }
   ]
 }
