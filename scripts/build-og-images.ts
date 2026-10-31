@@ -1,6 +1,6 @@
 /**
- * Makes 1200×630 JPEG share images (Open Graph) into public/og/ before each build: one per dinosaur
- * from its cover image, plus a default for every other page.
+ * Makes 1200×630 JPEG share images (Open Graph) into public/og/ before each build: one per popular or
+ * Thai dinosaur (see hasOwnShareImage) from its cover image, plus a default for every other page.
  *
  * The site's images are WebP, which some apps don't show in link previews (LinkedIn doesn't, and
  * Facebook's support has been patchy); JPEG works everywhere. They're generated rather than
@@ -15,12 +15,12 @@
  * Runs automatically as `prebuild`; on its own: npm run build:og
  */
 import { existsSync, statSync } from "node:fs";
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 import sharp from "sharp";
 import { getAllDinosaurs, getDinosaurBySlug } from "@/lib/dinosaurs";
 import { getCoverImage } from "@/lib/ai-images";
-import { OG_DEFAULT_DINOSAUR, ogImagePath } from "@/lib/og";
+import { hasOwnShareImage, OG_DEFAULT_DINOSAUR, ogImagePath } from "@/lib/og";
 
 const PUBLIC = path.join(__dirname, "..", "public");
 const WIDTH = 1200;
@@ -55,6 +55,7 @@ async function main() {
   const fallbackSrc = fallback && coverOf(fallback);
   if (fallbackSrc) jobs.push([path.join(PUBLIC, fallbackSrc), path.join(PUBLIC, ogImagePath(null))]);
   for (const d of getAllDinosaurs()) {
+    if (!hasOwnShareImage(d.slug)) continue;
     const src = coverOf(d);
     if (src) jobs.push([path.join(PUBLIC, src), path.join(PUBLIC, ogImagePath(d.slug))]);
   }
@@ -68,6 +69,10 @@ async function main() {
     }
     await render(source, target);
     made++;
+  }
+  // JPEGs left from genera no longer in the set would still count against the deploy file limit.
+  for (const key of Object.keys(previous)) {
+    if (!(key in sources)) await rm(path.join(PUBLIC, key), { force: true });
   }
   await writeFile(MANIFEST, `${JSON.stringify({ version: VERSION, sources })}\n`);
   console.log(`Share images: ${made} made, ${kept} already up to date`);
