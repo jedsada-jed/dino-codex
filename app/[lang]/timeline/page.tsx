@@ -8,6 +8,7 @@ import { getDictionary } from "@/lib/dictionaries";
 import { formatNumber, href, isLocale, languageAlternates } from "@/lib/i18n";
 import { DinosaurCard } from "@/components/DinosaurCard";
 import { PaleoMaps } from "@/components/PaleoMaps";
+import { openGraphFor } from "@/lib/og";
 
 export async function generateMetadata({ params }: PageProps<"/[lang]/timeline">): Promise<Metadata> {
   const { lang } = await params;
@@ -17,7 +18,7 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/timeline">
     title: t.title,
     description: t.description,
     alternates: { canonical: href(lang, "/timeline"), languages: languageAlternates("/timeline") },
-    openGraph: { title: t.title, description: t.description },
+    openGraph: openGraphFor(lang, { title: t.title, description: t.description }),
   };
 }
 

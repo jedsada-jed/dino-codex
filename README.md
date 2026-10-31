@@ -67,6 +67,10 @@ npm run build:paleo-maps
 This writes `data/paleo-maps.json`: coastlines at 220, 170, 100 and 66 million years ago, plus
 where Khon Kaen was at each time. The page credits the model under each set of maps.
 
+Share images for link previews (1200×630 JPEG, `public/og/`) are made from each dinosaur's cover by
+`npm run build:og`, which runs automatically before every `npm run build`. They are not committed;
+the deploy workflow caches the folder so only changed covers are redone.
+
 ## Development
 
 ```bash

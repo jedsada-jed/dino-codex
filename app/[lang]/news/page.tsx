@@ -4,6 +4,7 @@ import { getAllNews } from "@/lib/news";
 import { getDictionary } from "@/lib/dictionaries";
 import { href } from "@/lib/i18n";
 import { NewsBrowser } from "@/components/NewsBrowser";
+import { openGraphFor } from "@/lib/og";
 
 // News items are written in Thai, so this page only exists at /th/news.
 export function generateStaticParams() {
@@ -17,7 +18,7 @@ export const metadata: Metadata = {
   title: t.title,
   description: t.description,
   alternates: { canonical: href("th", "/news") },
-  openGraph: { title: t.title, description: t.description },
+  openGraph: openGraphFor("th", { title: t.title, description: t.description }),
 };
 
 export default async function NewsPage({ params }: PageProps<"/[lang]/news">) {

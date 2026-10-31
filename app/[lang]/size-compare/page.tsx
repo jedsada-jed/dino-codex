@@ -5,6 +5,7 @@ import { getPopularDinosaurs } from "@/lib/popularity";
 import { getDictionary } from "@/lib/dictionaries";
 import { formatNumber, href, isLocale, languageAlternates } from "@/lib/i18n";
 import { SizeCompare } from "@/components/SizeCompare";
+import { openGraphFor } from "@/lib/og";
 
 const DEFAULTS = ["tyrannosaurus", "phuwiangosaurus", "velociraptor"];
 
@@ -16,7 +17,7 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/size-compa
     title: t.title,
     description: t.description,
     alternates: { canonical: href(lang, "/size-compare"), languages: languageAlternates("/size-compare") },
-    openGraph: { title: t.title, description: t.description },
+    openGraph: openGraphFor(lang, { title: t.title, description: t.description }),
   };
 }
 

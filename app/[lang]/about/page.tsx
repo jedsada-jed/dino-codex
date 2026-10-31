@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { getMeta } from "@/lib/dinosaurs";
 import { formatDate, formatNumber, href, isLocale, languageAlternates, type Locale } from "@/lib/i18n";
 import { AUTHOR } from "@/lib/author";
+import { openGraphFor } from "@/lib/og";
 
 /** Page-specific prose, kept here rather than in the shared dictionary. */
 const COPY = {
@@ -64,7 +65,7 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/about">): 
     title: c.title,
     description: c.description,
     alternates: { canonical: href(lang, "/about"), languages: languageAlternates("/about") },
-    openGraph: { title: c.title, description: c.description },
+    openGraph: openGraphFor(lang, { title: c.title, description: c.description }),
   };
 }
 

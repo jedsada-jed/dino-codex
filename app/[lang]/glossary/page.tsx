@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { GLOSSARY, GLOSSARY_CATEGORIES } from "@/lib/glossary";
 import { getDictionary } from "@/lib/dictionaries";
 import { href, isLocale, languageAlternates } from "@/lib/i18n";
+import { openGraphFor } from "@/lib/og";
 
 export async function generateMetadata({ params }: PageProps<"/[lang]/glossary">): Promise<Metadata> {
   const { lang } = await params;
@@ -13,7 +14,7 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/glossary">
     title: t.title,
     description: t.description,
     alternates: { canonical: href(lang, "/glossary"), languages: languageAlternates("/glossary") },
-    openGraph: { title: t.title, description: t.description },
+    openGraph: openGraphFor(lang, { title: t.title, description: t.description }),
   };
 }
 

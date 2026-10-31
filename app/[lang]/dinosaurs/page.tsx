@@ -4,6 +4,7 @@ import { getBrowseIndex } from "@/lib/dinosaurs";
 import { getDictionary } from "@/lib/dictionaries";
 import { formatNumber, href, isLocale, languageAlternates } from "@/lib/i18n";
 import { DinosaurBrowser } from "@/components/DinosaurBrowser";
+import { openGraphFor } from "@/lib/og";
 
 export async function generateMetadata({ params }: PageProps<"/[lang]/dinosaurs">): Promise<Metadata> {
   const { lang } = await params;
@@ -13,7 +14,7 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/dinosaurs"
     title: t.title,
     description: t.description,
     alternates: { canonical: href(lang, "/dinosaurs"), languages: languageAlternates("/dinosaurs") },
-    openGraph: { title: t.title, description: t.description },
+    openGraph: openGraphFor(lang, { title: t.title, description: t.description }),
   };
 }
 

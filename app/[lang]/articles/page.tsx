@@ -6,6 +6,7 @@ import { getDictionary } from "@/lib/dictionaries";
 import { href, isLocale, languageAlternates } from "@/lib/i18n";
 import { ArrowRightIcon } from "@/components/Icons";
 import { ArticleThumbnail } from "@/components/ArticleFigure";
+import { openGraphFor } from "@/lib/og";
 
 export async function generateMetadata({ params }: PageProps<"/[lang]/articles">): Promise<Metadata> {
   const { lang } = await params;
@@ -15,7 +16,7 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/articles">
     title: t.title,
     description: t.description,
     alternates: { canonical: href(lang, "/articles"), languages: languageAlternates("/articles") },
-    openGraph: { title: t.title, description: t.description },
+    openGraph: openGraphFor(lang, { title: t.title, description: t.description }),
   };
 }
 

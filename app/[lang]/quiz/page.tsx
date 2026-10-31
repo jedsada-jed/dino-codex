@@ -4,6 +4,7 @@ import { getQuizPool } from "@/lib/quiz";
 import { getDictionary } from "@/lib/dictionaries";
 import { href, isLocale, languageAlternates } from "@/lib/i18n";
 import { DinoQuiz } from "@/components/DinoQuiz";
+import { openGraphFor } from "@/lib/og";
 
 export async function generateMetadata({ params }: PageProps<"/[lang]/quiz">): Promise<Metadata> {
   const { lang } = await params;
@@ -13,7 +14,7 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/quiz">): P
     title: t.title,
     description: t.description,
     alternates: { canonical: href(lang, "/quiz"), languages: languageAlternates("/quiz") },
-    openGraph: { title: t.title, description: t.description },
+    openGraph: openGraphFor(lang, { title: t.title, description: t.description }),
   };
 }
 

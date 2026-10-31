@@ -22,6 +22,14 @@ jobs:
 
       - run: npm ci
 
+      # Share images (public/og/) are generated before the build and not committed; keeping them
+      # between runs means only dinosaurs whose cover changed are redone.
+      - uses: actions/cache@v4
+        with:
+          path: public/og
+          key: og-${{ hashFiles('data/ai-images.json', 'data/dinosaurs.json', 'scripts/build-og-images.ts') }}
+          restore-keys: og-
+
       - run: npm run build
 
       - name: Deploy with Wrangler

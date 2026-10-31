@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { getColoringPages } from "@/lib/coloring";
 import { getDictionary } from "@/lib/dictionaries";
 import { href, isLocale, languageAlternates } from "@/lib/i18n";
+import { openGraphFor } from "@/lib/og";
 
 export async function generateMetadata({ params }: PageProps<"/[lang]/coloring">): Promise<Metadata> {
   const { lang } = await params;
@@ -14,7 +15,7 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/coloring">
     title: t.title,
     description: t.description,
     alternates: { canonical: href(lang, "/coloring"), languages: languageAlternates("/coloring") },
-    openGraph: { title: t.title, description: t.description },
+    openGraph: openGraphFor(lang, { title: t.title, description: t.description }),
   };
 }
 

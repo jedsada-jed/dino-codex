@@ -4,6 +4,7 @@ import { getCountryStats, WORLD_MAP } from "@/lib/fossil-map";
 import { getDictionary } from "@/lib/dictionaries";
 import { formatNumber, href, isLocale, languageAlternates } from "@/lib/i18n";
 import { FossilMap } from "@/components/FossilMap";
+import { openGraphFor } from "@/lib/og";
 
 export async function generateMetadata({ params }: PageProps<"/[lang]/map">): Promise<Metadata> {
   const { lang } = await params;
@@ -13,7 +14,7 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/map">): Pr
     title: t.title,
     description: t.description,
     alternates: { canonical: href(lang, "/map"), languages: languageAlternates("/map") },
-    openGraph: { title: t.title, description: t.description },
+    openGraph: openGraphFor(lang, { title: t.title, description: t.description }),
   };
 }
 

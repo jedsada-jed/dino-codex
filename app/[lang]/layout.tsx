@@ -10,6 +10,7 @@ import { LOCALES, href, isLocale } from "@/lib/i18n";
 import { AUTHOR } from "@/lib/author";
 import { CLOUDFLARE_ANALYTICS_TOKEN } from "@/lib/analytics";
 import "../globals.css";
+import { openGraphFor } from "@/lib/og";
 
 const THEME_INIT_SCRIPT = `
 try {
@@ -42,13 +43,7 @@ export async function generateMetadata({ params }: LayoutProps<"/[lang]">): Prom
     description: t.siteDescription,
     authors: [{ name: AUTHOR.name, url: AUTHOR.url }],
     creator: AUTHOR.name,
-    openGraph: {
-      siteName: t.siteName,
-      description: t.siteDescription,
-      locale: lang === "th" ? "th_TH" : "en_US",
-      type: "website",
-      images: ["/images/dinos/tyrannosaurus-960.webp"],
-    },
+    openGraph: openGraphFor(lang, {}),
     twitter: { card: "summary_large_image" },
   };
 }

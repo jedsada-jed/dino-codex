@@ -5,6 +5,7 @@ import { ArticleFigure, hasArticleFigure } from "@/components/ArticleFigure";
 import { getAllArticles, getArticleBySlug } from "@/lib/articles";
 import { getDictionary } from "@/lib/dictionaries";
 import { href, isLocale, languageAlternates } from "@/lib/i18n";
+import { openGraphFor } from "@/lib/og";
 
 export function generateStaticParams() {
   return getAllArticles("th").map((a) => ({ slug: a.slug }));
@@ -20,7 +21,7 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/articles/[
     title: article.title,
     description: article.summary,
     alternates: { canonical: href(lang, path), languages: languageAlternates(path) },
-    openGraph: { title: article.title, description: article.summary, type: "article" },
+    openGraph: openGraphFor(lang, { title: article.title, description: article.summary, type: "article" }),
   };
 }
 

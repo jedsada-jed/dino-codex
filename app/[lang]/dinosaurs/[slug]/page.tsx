@@ -10,6 +10,7 @@ import { aiImageScore, getAiImages, getCoverImage } from "@/lib/ai-images";
 import { hasSize } from "@/lib/sizes";
 import { getContemporaries } from "@/lib/contemporaries";
 import { DinosaurCard } from "@/components/DinosaurCard";
+import { openGraphFor } from "@/lib/og";
 
 export function generateStaticParams() {
   return getAllSlugs().map((slug) => ({ slug }));
@@ -34,7 +35,7 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/dinosaurs/
     title,
     description,
     alternates: { canonical: href(lang, path), languages: languageAlternates(path) },
-    openGraph: { title, description, images: image ? [{ url: image }] : undefined },
+    openGraph: openGraphFor(lang, { title, description, slug: image ? dinosaur.slug : null }),
   };
 }
 

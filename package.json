@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "prebuild": "tsx scripts/build-og-images.ts",
     "build": "next build",
+    "build:og": "tsx scripts/build-og-images.ts",
     "start": "next start",
     "lint": "eslint",
     "fetch:dinosaurs": "tsx scripts/fetch-dinosaurs.ts",
